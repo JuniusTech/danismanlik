@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const expressAsyncHandler = require("express-async-handler");
 const Lawyer = require("../models/lawyerModel.js");
-const { lawToken } = require("../util.js");
+const { generateToken } = require("../util.js");
 
 const getLawyers = expressAsyncHandler(async (req, res) => {
   const lawyers = await Lawyer.find({});
@@ -52,7 +52,7 @@ const signin = expressAsyncHandler(async (req, res) => {
   const lawyer = await Lawyer.findOne({ email: req.body.email });
   if (lawyer) {
     if (bcrypt.compareSync(req.body.password, lawyer.password)) {
-      const token = lawToken(lawyer);
+      const token = generateToken(lawyer);
       res.cookie("jwt", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24,
@@ -97,7 +97,7 @@ const signup = expressAsyncHandler(async (req, res) => {
     infoText: lawyer.infoText,
     perData: lawyer.perData,
     isAdmin: lawyer.isAdmin,
-    token: lawToken(lawyer),
+    token: generateToken(lawyer),
   });
 });
 

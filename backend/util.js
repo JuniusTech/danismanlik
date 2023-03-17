@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+
 const generateToken = (user) => {
   return jwt.sign(
     {
@@ -13,19 +14,21 @@ const generateToken = (user) => {
     }
   );
 };
-const lawToken = (lawyer) => {
-  return jwt.sign(
-    {
-      _id: lawyer._id,
-      name: lawyer.name,
-      email: lawyer.email,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "30d",
-    }
-  );
-};
+
+// const lawToken = (lawyer) => {
+//   return jwt.sign(
+//     {
+//       _id: lawyer._id,
+//       name: lawyer.name,
+//       email: lawyer.email,
+//       isAdmin: lawyer.isAdmin,
+//     },
+//     process.env.JWT_SECRET,
+//     {
+//       expiresIn: "30d",
+//     }
+//   );
+// };
 const isAuth = (req, res, next) => {
   // const authorization = req.headers.authorization;
   const token = req.cookies.jwt;
@@ -78,7 +81,6 @@ const isLawyerAdmin = (req, res, next) => {
 
 module.exports = {
   generateToken,
-  lawToken,
   isLawyer,
   isAuth,
   isAdmin,
