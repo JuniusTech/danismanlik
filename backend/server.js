@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/userRoute");
 const branchRouter = require("./routes/branchRoute");
 const lawyerRouter = require("./routes/lawyerRoute");
+const mongoSanitize = require("express-mongo-sanitize");
 
 dotenv.config();
 
@@ -22,6 +23,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
 
 app.use("/api/users", userRouter);
 app.use("/api/branchs", branchRouter);

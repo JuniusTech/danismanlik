@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const expressAsyncHandler = require("express-async-handler");
-const Lawyer = require("../models/lawyerModel.js");
+const { Lawyer, validate } = require("../models/lawyerModel.js");
 const { generateToken } = require("../util.js");
 
 const getLawyers = expressAsyncHandler(async (req, res) => {
@@ -73,6 +73,8 @@ const signin = expressAsyncHandler(async (req, res) => {
 });
 
 const signup = expressAsyncHandler(async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send({ message: error.details[0].message });
   const newLawyer = new Lawyer({
     name: req.body.name,
     surname: req.body.surname,

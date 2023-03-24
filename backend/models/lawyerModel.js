@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-
+const joi = require("joi");
+const passwordComplexity = require("joi-password-complexity");
 const lawyerSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -21,4 +22,21 @@ const lawyerSchema = new mongoose.Schema(
 );
 
 const Lawyer = mongoose.model("Lawyer", lawyerSchema);
-module.exports = Lawyer;
+
+const validate = (data) => {
+  const schema = joi.object({
+    name: joi.string().trim().min(3).max(10).required(),
+    surname: joi.string().trim().min(3).max(10).required(),
+    email: joi.string().email().trim().min(5).max(30).required(),
+    phone: joi.string().trim().min(13).max(20).required(),
+    barNo: joi.number().required(),
+    branch: joi.string().required(),
+    memberAg: joi.boolean().required(),
+    infoText: joi.boolean().required(),
+    perData: joi.boolean().required(),
+    password: passwordComplexity(),
+  });
+  return schema.validate(data);
+};
+
+module.exports = { Lawyer, validate };
