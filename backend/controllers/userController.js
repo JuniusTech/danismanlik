@@ -149,7 +149,10 @@ const verifyUserAccount = expressAsyncHandler(async (req, res) => {
 
   user.verified = true;
   await user.save();
-  await Token.findOneAndDelete(req.params.token);
+  await Token.findOneAndDelete({
+    userId: user._id,
+    token: req.params.token,
+  });
 
   res.status(200).json({ message: "Your account verified" });
 });
