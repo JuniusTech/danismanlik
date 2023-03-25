@@ -22,6 +22,5 @@ module.exports = async (userEmail, subject, htmlTemplate) => {
     // console.log("Emai Sent:" + info.response);
   } catch (error) {
     console.log(error);
-    throw new Error("Internal Server Error (nodemailer)");
   }
 };
