@@ -7,6 +7,7 @@ const branchRouter = require("./routes/branchRoute");
 const lawyerRouter = require("./routes/lawyerRoute");
 const mongoSanitize = require("express-mongo-sanitize");
 const passwordResetRouter = require("./routes/passwordResetRoute");
+const lawPassResetRouter = require("./routes/lawPassResetRoute");
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use("/api/users", userRouter);
 app.use("/api/branchs", branchRouter);
 app.use("/api/lawyers", lawyerRouter);
 app.use("/api/password-reset", passwordResetRouter);
+app.use("/api/law-password-reset", lawPassResetRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
