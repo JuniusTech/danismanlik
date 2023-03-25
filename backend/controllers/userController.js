@@ -73,7 +73,7 @@ const signin = expressAsyncHandler(async (req, res) => {
       });
       await verToken.save();
     }
-    const link = `http://localhost:5000/api/users/${user._id}/verify/${verToken.token}`;
+    const link = `${process.env.BASE_URL}/api/users/${user._id}/verify/${verToken.token}`;
 
     const htmlTemplate = `
   <div>
@@ -118,7 +118,7 @@ const signup = expressAsyncHandler(async (req, res) => {
   });
   await verToken.save();
 
-  const link = `http://localhost:5000/api/users/${user._id}/verify/${verToken.token}`;
+  const link = `${process.env.BASE_URL}/api/users/${user._id}/verify/${verToken.token}`;
 
   const htmlTemplate = `
   <div>
