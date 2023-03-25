@@ -13,7 +13,8 @@ const lawyerSchema = new mongoose.Schema(
     memberAg: { type: Boolean, required: true },
     infoText: { type: Boolean, required: true },
     perData: { type: Boolean, required: true },
-    isAdmin: { type: Boolean, default: false, required: true },
+    verified: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
     token: { type: String },
   },
   {

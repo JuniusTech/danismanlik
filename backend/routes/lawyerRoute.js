@@ -6,6 +6,7 @@ const {
   deleteLawyer,
   signin,
   signup,
+  verifyLawyerAccount,
 } = require("../controllers/lawyerController");
 const { isLawyerAdmin, isLawyer } = require("../util.js");
 
@@ -17,5 +18,6 @@ lawyerRouter.put("/:id", isLawyer, updateLawyer);
 lawyerRouter.delete("/:id", isLawyer, isLawyerAdmin, deleteLawyer);
 lawyerRouter.post("/signin", signin);
 lawyerRouter.post("/signup", signup);
+lawyerRouter.get("/:lawyerId/verify/:token", verifyLawyerAccount);
 
 module.exports = lawyerRouter;
