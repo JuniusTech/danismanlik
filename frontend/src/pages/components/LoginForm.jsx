@@ -7,19 +7,13 @@ import usePasswordToggle from './usePasswordToggle'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-    faUser,
-    faEnvelope,
-    faLock,
     faEye,
     faEyeSlash,
 
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
-    faUser,
-    faEnvelope,
-    faLock,
-    faEye,
+   faEye,
     faEyeSlash,
 
 );
@@ -52,6 +46,7 @@ function LoginForm() {
     const handleClick = () =>  {
          setisOpen(false)
     }
+  
 
     return (
         //handleChange fonksiyonu ile formdaki değişiklikleri yakalayabilir, formik.values kullanarak formun değerlerine erişebilirsiniz.
@@ -110,8 +105,9 @@ function LoginForm() {
                             <Field
                                 className='checkbox'
                                 type="checkbox"
-                                id='checkbox'
-                                name='checkbox'
+                                id='rememberme'
+                                name='rememberme'
+                               
 
                             />
                             <label className='label2' htmlFor='checkbox'>Beni hatırla</label>
