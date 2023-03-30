@@ -8,6 +8,7 @@ const lawyerRouter = require("./routes/lawyerRoute");
 const mongoSanitize = require("express-mongo-sanitize");
 const passwordResetRouter = require("./routes/passwordResetRoute");
 const lawPassResetRouter = require("./routes/lawPassResetRoute");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ mongoose
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
