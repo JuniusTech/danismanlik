@@ -6,6 +6,8 @@ const SearchPage = () => {
 
 
         <div>SearchPage</div>
+
+
     )
 }
 
