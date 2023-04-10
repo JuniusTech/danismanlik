@@ -40,6 +40,7 @@ const lawyerSchema = new mongoose.Schema(
     verified: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
     isTick: { type: Boolean, default: false },
+    rating: { type: Number },
     numReviews: { type: Number },
     reviews: [reviewSchema],
     dates: [dateSchema],
