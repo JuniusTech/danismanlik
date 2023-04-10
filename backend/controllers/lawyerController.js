@@ -11,6 +11,57 @@ const getLawyers = expressAsyncHandler(async (req, res) => {
   res.send(lawyers);
 });
 
+const lmt = 12;
+const searchLawyers = expressAsyncHandler(async (req, res) => {
+  const limit = req.query.limit || lmt;
+  const page = req.query.page || 1;
+  const branch = req.query.branch || "";
+  const isTick = req.query.isTick || "";
+  const rating = req.query.rating || "";
+  const order = req.query.order || "";
+
+  const branchFilter = branch && branch !== "all" ? { branch } : {};
+  const tickFilter = isTick && isTick !== "all" ? { isTick } : {};
+
+  const ratingFilter =
+    rating && rating !== "all"
+      ? {
+          rating: {
+            $gte: Number(rating),
+          },
+        }
+      : {};
+
+  const sortOrder =
+    order === "featured"
+      ? { featured: -1 }
+      : order === "toprated"
+      ? { rating: -1 }
+      : order === "newest"
+      ? { createdAt: -1 }
+      : { _id: -1 };
+
+  const lawyers = await Lawyer.find({
+    ...branchFilter,
+    ...tickFilter,
+    ...ratingFilter,
+  })
+    .sort(sortOrder)
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
+  const countLawyers = await Lawyer.countDocuments({
+    ...branchFilter,
+    ...tickFilter,
+    ...ratingFilter,
+  });
+  res.send({
+    countLawyers,
+    page,
+    pages: Math.ceil(countLawyers / limit),
+    lawyers,
+  });
+});
+
 const getLawyer = expressAsyncHandler(async (req, res) => {
   const lawyer = await Lawyer.findById(req.params.id);
   if (lawyer) {
@@ -33,6 +84,7 @@ const updateLawyer = expressAsyncHandler(async (req, res) => {
     lawyer.infoText = Boolean(req.body.infoText);
     lawyer.perData = Boolean(req.body.perData);
     lawyer.isAdmin = Boolean(req.body.isAdmin);
+    lawyer.isTick = Boolean(req.body.isTick);
     const updatedLawyer = await lawyer.save();
     res.send({ message: "Lawyer Updated", lawyer: updatedLawyer });
   } else {
@@ -168,6 +220,56 @@ const verifyLawyerAccount = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ message: "Your account verified" });
 });
 
+const createReview = expressAsyncHandler(async (req, res) => {
+  const lawyerId = req.params.id;
+  const lawyer = await Lawyer.findById(lawyerId);
+  if (lawyer) {
+    if (lawyer.reviews.find((x) => x.name === req.user.name)) {
+      return res
+        .status(400)
+        .send({ message: "You already submitted a review" });
+    }
+    const review = {
+      name: req.user.name,
+      rating: Number(req.body.rating),
+      comment: req.body.comment,
+    };
+    lawyer.reviews.push(review);
+    lawyer.numReviews = lawyer.reviews.length;
+    lawyer.rating =
+      lawyer.reviews.reduce((a, c) => c.rating + a, 0) / lawyer.reviews.length;
+    const updatedProduct = await lawyer.save();
+    res.status(201).send({
+      message: "Review Created",
+      review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+      numReviews: lawyer.numReviews,
+      rating: lawyer.rating,
+    });
+  } else {
+    res.status(404).send({ message: "Lawyer Not Found" });
+  }
+});
+const createDate = expressAsyncHandler(async (req, res) => {
+  const lawyerId = req.params.id;
+  const lawyer = await Lawyer.findById(lawyerId);
+  if (lawyer) {
+    const date = {
+      day: req.body.day,
+      hour: req.body.hour,
+      name: req.user.name,
+      email: req.user.email,
+    };
+    lawyer.dates.push(date);
+    const updatedProduct = await lawyer.save();
+    res.status(201).send({
+      message: "Review Created",
+      date: updatedProduct.dates[updatedProduct.reviews.length - 1],
+    });
+  } else {
+    res.status(404).send({ message: "Lawyer Not Found" });
+  }
+});
+
 module.exports = {
   signup,
   signin,
@@ -175,5 +277,8 @@ module.exports = {
   updateLawyer,
   getLawyer,
   getLawyers,
+  searchLawyers,
   verifyLawyerAccount,
+  createReview,
+  createDate,
 };
