@@ -6,6 +6,7 @@ const {
   deleteUser,
   signin,
   signup,
+  verifyUserAccount,
 } = require("../controllers/userController");
 const { isAuth, isAdmin } = require("../util.js");
 
@@ -17,5 +18,6 @@ userRouter.put("/:id", isAuth, updateUser);
 userRouter.delete("/:id", isAuth, isAdmin, deleteUser);
 userRouter.post("/signin", signin);
 userRouter.post("/signup", signup);
+userRouter.get("/:userId/verify/:token", verifyUserAccount);
 
 module.exports = userRouter;
