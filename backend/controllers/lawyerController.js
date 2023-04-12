@@ -249,26 +249,6 @@ const createReview = expressAsyncHandler(async (req, res) => {
     res.status(404).send({ message: "Lawyer Not Found" });
   }
 });
-const createDate = expressAsyncHandler(async (req, res) => {
-  const lawyerId = req.params.id;
-  const lawyer = await Lawyer.findById(lawyerId);
-  if (lawyer) {
-    const date = {
-      day: req.body.day,
-      hour: req.body.hour,
-      name: req.user.name,
-      email: req.user.email,
-    };
-    lawyer.dates.push(date);
-    const updatedProduct = await lawyer.save();
-    res.status(201).send({
-      message: "Review Created",
-      date: updatedProduct.dates[updatedProduct.reviews.length - 1],
-    });
-  } else {
-    res.status(404).send({ message: "Lawyer Not Found" });
-  }
-});
 
 module.exports = {
   signup,
@@ -280,5 +260,4 @@ module.exports = {
   searchLawyers,
   verifyLawyerAccount,
   createReview,
-  createDate,
 };

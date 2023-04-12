@@ -12,17 +12,7 @@ const reviewSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const dateSchema = new mongoose.Schema(
-  {
-    day: { type: String, required: true },
-    hour: { type: String, required: true },
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  }
-);
+
 const lawyerSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -43,7 +33,7 @@ const lawyerSchema = new mongoose.Schema(
     rating: { type: Number },
     numReviews: { type: Number },
     reviews: [reviewSchema],
-    dates: [dateSchema],
+    dates: [Object],
     token: { type: String },
   },
   {
