@@ -1,10 +1,16 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
+import Header from "../components/Header";
+import HeaderCards from "../components/HeaderCards";
 
 const HomePage = () => {
-  return <div className="App">
-    <Navbar/>
-    <Header/>
-  </div>;
-}
+  return (
+    <div>
+      <Navbar />
+      <Header />
+      <HeaderCards />
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;
