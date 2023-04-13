@@ -251,9 +251,17 @@ const SearchPage = ({ reting }) => {
             }
             role="button"
             aria-pressed="true"
-            onClick={() => {
-              navigate(getFilterUrl({ isTick: true }));
-            }}
+            onClick={
+              toggle.btn3
+                ? () => {
+                    navigate(getFilterUrl({ isTick: true }));
+                    setToggle({ btn3: false });
+                  }
+                : () => {
+                    navigate(getFilterUrl({ isTick: "all" }));
+                    setToggle({ btn3: true });
+                  }
+            }
           >
             Teyit Edilmiş
           </Button>
