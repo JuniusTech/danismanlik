@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, ListGroup, Table } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,9 +9,30 @@ import logo from '../assets/Group 4.svg';
 import image from '../assets/bg.jpg';
 import axios from 'axios';
 import "../css/searchcss.css"
+import { useLocation } from 'react-router-dom'
 
 
-const SearchPage = ({ rating }) => {
+const SearchPage = ({ reting }) => {
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const branch = sp.get("branch") || "all";
+  const query = sp.get("query") || "all";
+  const page = sp.get("page") || 1;
+  const order = sp.get("order") || "newest";
+  const isTick = sp.get("isTick") || "all";
+  const rating = sp.get("rating") || "all";
+
+  const getFilterUrl = (filter, skipPathname) => {
+    const filterPage = filter.page || page;
+    const filterBranch = filter.branch || branch;
+    const filterQuery = filter.query || query;
+    const filterRating = filter.rating || rating;
+    const filterIsTick = filter.isTick || isTick;
+    const sortOrder = filter.order || order;
+    return `${skipPathname ? "" : "/search?"
+      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+  };
+
   const [toggle, setToggle] = useState({
     btn1: false,
     btn2: false,
@@ -19,13 +40,13 @@ const SearchPage = ({ rating }) => {
     btn4: false,
   })
 
-  const getStarRating = (rating) => {
+  const getStarReting = (reting) => {
     let filledStars = '';
     let emptyStars = '';
-    for (let i = 0; i < rating; i++) {
+    for (let i = 0; i < reting; i++) {
       filledStars += '★';
     }
-    for (let i = 0; i < 5 - rating; i++) {
+    for (let i = 0; i < 5 - reting; i++) {
       emptyStars += '☆';
     }
     return filledStars + emptyStars;
@@ -47,6 +68,7 @@ const SearchPage = ({ rating }) => {
   const [input, setInput] = useState({})
   const [title, setTitle] = useState({})
   const [lawyers, setLawyers] = useState([]);
+  const [branchs, setBranchs] = useState([])
 
   const handleInput = (e) => {
     const { value, name } = e.target
@@ -58,7 +80,7 @@ const SearchPage = ({ rating }) => {
     setTitle(input)
     setInput({})
 
-    axios.get('https://danis.onrender.com/api/lawyers')
+    axios.get('https://danis.onrender.com/api/lawyers/search?branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}')
       .then((response) => {
         setLawyers(response.data);
         console.log(response.data.length);
@@ -69,6 +91,16 @@ const SearchPage = ({ rating }) => {
 
       })
   }
+  useEffect(() => {
+    axios.get('https://danis.onrender.com/api/branchs')
+      .then((response) => {
+        setBranchs(response.data);
+        console.log(response.data)
+      }).catch((error) => {
+        console.log(error);
+
+      })
+  }, [branch, query, rating, order])
 
   const [readMore, setReadMore] = useState(false);
   const linkName = readMore ? 'Daha Az Gör ' : 'Daha Fazla Gör  '
@@ -95,102 +127,27 @@ const SearchPage = ({ rating }) => {
                 <img src={logo} alt="" />
               </div>
 
-              <div className='d-flex '>
-                <select className='select' value={input?.city || ""} name="city" onChange={handleInput} title="Konum Seç" id="navbarScrollingDropdown">
-                  <option selected hidden>Konum Seç</option>
-                  <option href="34">İstanbul</option>
-                  <option href="06">Ankara</option>
-                  <option href="35">İzmir</option>
-                  <NavDropdown.Divider />
-                  <option href="1">Adana</option>
-                  <option href="2">Adıyaman</option>
-                  <option href="3">Afyonkarahisar</option>
-                  <option href="4">Ağrı</option>
-                  <option href="5">Amasya</option>
-                  <option href="7">Antalya</option>
-                  <option href="8">Artvin</option>
-                  <option href="9">Aydın</option>
-                  <option href="10">Balıkesir</option>
-                  <option href="11">Bilecik</option>
-                  <option href="12">Bingöl</option>
-                  <option href="13">Bitlis</option>
-                  <option href="14">Bolu</option>
-                  <option href="15">Burdur</option>
-                  <option href="16">Bursa</option>
-                  <option href="17">Çanakkale</option>
-                  <option href="18">Çankırı</option>
-                  <option href="19">Çorum</option>
-                  <option href="20">Denizli</option>
-                  <option href="21">Diyarbakır</option>
-                  <option href="22">Edirne</option>
-                  <option href="23">Elazığ</option>
-                  <option href="24">Erzincan</option>
-                  <option href="25">Erzurum</option>
-                  <option href="26">Eskişehir</option>
-                  <option href="27">Gaziantep</option>
-                  <option href="28">Giresun</option>
-                  <option href="29">Gümüşhane</option>
-                  <option href="30">Hakkâri</option>
-                  <option href="31">Hatay</option>
-                  <option href="32">Isparta</option>
-                  <option href="33">Mersin</option>
-                  <option href="36">Kars</option>
-                  <option href="37">Kastamonu</option>
-                  <option href="38">Kayseri</option>
-                  <option href="39">Kırklareli</option>
-                  <option href="40">Kırşehir</option>
-                  <option href="41">Kocaeli</option>
-                  <option href="42">Konya</option>
-                  <option href="43">Kütahya</option>
-                  <option href="44">Malatya</option>
-                  <option href="45">Manisa</option>
-                  <option href="46">Kahramanmaraş</option>
-                  <option href="47">Mardin</option>
-                  <option href="48">Muğla</option>
-                  <option href="49">Muş</option>
-                  <option href="50">Nevşehir</option>
-                  <option href="51">Niğde</option>
-                  <option href="52">Ordu</option>
-                  <option href="53">Rize</option>
-                  <option href="54">Sakarya</option>
-                  <option href="55">Samsun</option>
-                  <option href="56">Siirt</option>
-                  <option href="57">Sinop</option>
-                  <option href="58">Sivas</option>
-                  <option href="59">Tekirdağ</option>
-                  <option href="60">Tokat</option>
-                  <option href="61">Trabzon</option>
-                  <option href="62">Tunceli</option>
-                  <option href="63">Şanlıurfa</option>
-                  <option href="64">Uşak</option>
-                  <option href="65">Van</option>
-                  <option href="66">Yozgat</option>
-                  <option href="67">Zonguldak</option>
-                  <option href="68">Aksaray</option>
-                  <option href="69">Bayburt</option>
-                  <option href="70">Karaman</option>
-                  <option href="71">Kırıkkale</option>
-                  <option href="72">Batman</option>
-                  <option href="73">Şırnak</option>
-                  <option href="74">Bartın</option>
-                  <option href="75">Ardahan</option>
-                  <option href="76">Iğdır</option>
-                  <option href="77">Yalova</option>
-                  <option href="78">Karabük</option>
-                  <option href="79">Kilis</option>
-                  <option href="80">Osmaniye</option>
-                  <option href="81">Düzce</option>
+              <div className='d-flex justify-content-center'>
+                <select className='select' value={branch} name="branch" onChange={handleInput} title="Branş Seç" id="navbarScrollingDropdown">
+                  <option selected >Branş Seç</option>
+                  {
+                    branchs?.sort((a, b) => a.title.localeCompare(b.title)).map((item) =>
+                      <option value={item.title}>{item.title}</option>
+                    )
+                  }
+
+
                 </select>
 
-                <Form onSubmit={handleSubmit} className="d-flex w-100 ">
+                <Form onSubmit={handleSubmit} className="d-flex w-100 search-form ">
                   <input
                     type="search"
                     placeholder="Örnek: Boşanmak İstiyorum"
-                    className="ms-2 sach-bar select"
+                    className="ms-2 search-select"
                     aria-label="Search"
-                    id='branch'
-                    name='branch'
-                    value={input?.branch || ""}
+                    id='branchs'
+                    name='branchs'
+                    value={input?.branchs || ""}
                     onChange={handleInput}
 
                   />
@@ -236,7 +193,7 @@ const SearchPage = ({ rating }) => {
           <Button className="btn btn-light btn-outline-warning rounded-5 mx-2" role="button" aria-pressed="true" onClick={() => handleClick("btn4")} >Daha Fazla Filtre <span className="btn rounded-5 active counter">{counter}</span></Button>
         </div>
         <div className='w-50 m-5'>
-          <h2 className='mb-4'> {Object.keys(title).length ? `${title?.branch}, ${title?.city}` : ""} </h2>
+          <h2 className='mb-4'> {Object.keys(title).length ? `${title?.branch} Avukatı` : ""} </h2>
           <p>Aramanızla eşleşen {lawyers.length} icra avukatı mevcut. Listelenen avukatlar Online Görüşmeye Uygundur ve Baro Kaydı kontrol edilmiştir.</p>
 
         </div>
@@ -269,12 +226,12 @@ const SearchPage = ({ rating }) => {
                               <div className='mx-2 text-success'> <i className="fa-solid fa-circle-check"></i> <span>büroda görüşmeye uygun</span>  </div>
 
                             </div>
-                            <p className='m-2'>{user.branch} avukatı, İstanbul</p>
+                            <p className='m-2'>{user.branchs} avukatı, İstanbul</p>
                             <p className='mx-2'>15 Yıllık Deneyim</p>
                             <p className='m-2 star'>
 
 
-                              {getStarRating(user.rating)}
+                              {getStarReting(user.reting)}
 
                               <span>12 yorum</span>
                             </p>
