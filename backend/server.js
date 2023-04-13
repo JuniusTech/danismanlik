@@ -9,6 +9,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const passwordResetRouter = require("./routes/passwordResetRoute");
 const lawPassResetRouter = require("./routes/lawPassResetRoute");
 const cors = require("cors");
+const dateRouter = require("./routes/dateRoute");
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(
 app.use("/api/users", userRouter);
 app.use("/api/branchs", branchRouter);
 app.use("/api/lawyers", lawyerRouter);
+app.use("/api/dates", dateRouter);
 app.use("/api/password-reset", passwordResetRouter);
 app.use("/api/law-password-reset", lawPassResetRouter);
 

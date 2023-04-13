@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const sendEmail = require("../sendEmail");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // send password link
 
