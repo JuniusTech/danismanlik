@@ -396,6 +396,7 @@ const SearchPage = ({ rating }) => {
             })
           }
 
+
         </div >
       </div >
     </>
