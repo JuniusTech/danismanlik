@@ -24,7 +24,7 @@
     }
 
 
-.search-input {
+.home-search-input {
     width: 488px;
     height: 58px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -35,7 +35,7 @@
     padding: 1rem;
 }
 
-.button {
+.home-button {
     width: 120px;
     height: 58px;
     background: #A97900 0% 0% no-repeat padding-box;

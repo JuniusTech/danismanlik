@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react'
 import { Button, ListGroup, Table } from 'react-bootstrap'
 import Container from 'react-bootstrap/Container';
@@ -6,9 +5,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from './Group 4.svg';
-import image from './bg.jpg';
+import logo from '../assets/Group 4.svg';
+import image from '../assets/bg.jpg';
 import axios from 'axios';
+import "../css/searchcss.css"
 
 
 const SearchPage = ({ rating }) => {
@@ -186,7 +186,7 @@ const SearchPage = ({ rating }) => {
                   <input
                     type="search"
                     placeholder="Örnek: Boşanmak İstiyorum"
-                    className="ms-2 search-bar select"
+                    className="ms-2 sach-bar select"
                     aria-label="Search"
                     id='branch'
                     name='branch'
@@ -194,11 +194,11 @@ const SearchPage = ({ rating }) => {
                     onChange={handleInput}
 
                   />
-                  <Button type='submit' variant='outline-light' className='button ms-0' >Avukat Ara</Button>
+                  <Button type='submit' variant='outline-light' className='button2 ms-0' >Avukat Ara</Button>
                 </Form>
               </div>
               <div className='d-flex ml-auto p-2 '>
-                <Button className='button' variant='outline-light'>Avukat mısınız?</Button>
+                <Button className='button2' variant='outline-light'>Avukat mısınız?</Button>
                 <NavDropdown className='border border-2 border-dark rounded-2 ms-3 kayıt' title="KAYIT OL" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
