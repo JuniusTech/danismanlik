@@ -144,7 +144,7 @@ const SearchPage = ({ reting }) => {
                   title="Branş Seç"
                   id="navbarScrollingDropdown"
                 >
-                  <option defaultValue={"all"}>Branş Seç</option>
+                  <option defaultValue="all">Branş Seç</option>
                   {branchs
                     ?.sort((a, b) => a.title.localeCompare(b.title))
                     .map((item) => (
@@ -165,7 +165,7 @@ const SearchPage = ({ reting }) => {
                   aria-label="Search"
                   id="branchs"
                   name="branchs"
-                  value={input?.branchs || ""}
+                  value={query}
                   onChange={(e) => {
                     navigate(getFilterUrl({ query: e.target.value }));
                   }}
