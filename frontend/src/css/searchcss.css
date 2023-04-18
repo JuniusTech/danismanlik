@@ -1,3 +1,7 @@
+*{
+  font-size: 1.5rem;
+}
+
 .card-container button{
   font-size: 1rem;
   padding: 0 1rem;
@@ -29,8 +33,32 @@ padding: -0.2;
 .search-form{
   width: 25rem;
   height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35rem;
+  height: 4rem;
 
+}
 
+.search-input{
+  display: flex;
+  justify-content: center;
+  width: 10rem;
+  height: 4rem;
+  border: none;
+  border-radius: 1.2rem;
+}
+
+.search-inputbutton{
+  background-color: #A97900;
+  width: 10rem;
+  height: 4rem;
+  font: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1.2rem;
+  
 }
 
 
