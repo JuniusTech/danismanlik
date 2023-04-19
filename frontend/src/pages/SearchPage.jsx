@@ -29,9 +29,8 @@ const SearchPage = ({ reting }) => {
     const filterRating = filter.rating || rating;
     const filterIsTick = filter.isTick || isTick;
     const sortOrder = filter.order || order;
-    return `${
-      skipPathname ? "" : "/search?"
-    }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${skipPathname ? "" : "/search?"
+      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   const [toggle, setToggle] = useState({
@@ -70,24 +69,19 @@ const SearchPage = ({ reting }) => {
   const [input, setInput] = useState({});
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
-  const [branchs, setBranchs] = useState([]);
+  const [branchs, setBranchs] = useState([])
 
-  // const handleInput = (e) => {
-  //   const { value, name } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const handleInput = (e) => {
+    const { value, name } = e.target
+    setInput({ ...input, [name]: value })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTitle(input);
-    setInput({});
-  };
+    setTitle(input)
+    setInput({})
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://danis.onrender.com/api/lawyers/search?branch=${branch}&query=${query}&isTick=${isTick}&order=${order}&rating=${rating}`
-      )
+    axios.get('https://danis.onrender.com/api/lawyers/search?branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}')
       .then((response) => {
         setLawyers(response.data.lawyers);
         console.log(response.data);
@@ -133,61 +127,36 @@ const SearchPage = ({ reting }) => {
                 <img src={logo} alt="" />
               </div>
 
-              <div className="d-flex justify-content-center">
-                <select
-                  className="select"
-                  value={branch}
-                  name="branch"
-                  onChange={(e) => {
-                    navigate(getFilterUrl({ branch: e.target.value }));
-                  }}
-                  title="Branş Seç"
-                  id="navbarScrollingDropdown"
-                >
-                  <option defaultValue="all">Branş Seç</option>
-                  {branchs
-                    ?.sort((a, b) => a.title.localeCompare(b.title))
-                    .map((item) => (
-                      <option key={item._id} value={item.title}>
-                        {item.title}
-                      </option>
-                    ))}
+              <div className='d-flex justify-content-center'>
+                <select className='select' value={branch} name="branch" onChange={handleInput} title="Branş Seç" id="navbarScrollingDropdown">
+                  <option selected >Branş Seç</option>
+                  {
+                    branchs?.sort((a, b) => a.title.localeCompare(b.title)).map((item) =>
+                      <option value={item.title}>{item.title}</option>
+                    )
+                  }
+
+
                 </select>
 
-                {/* <Form
-                  onSubmit={handleSubmit}
-                  className="d-flex w-100 search-form "
-                > */}
-                <input
-                  type="search"
-                  placeholder="Örnek: Boşanmak İstiyorum"
-                  className="ms-2 search-select"
-                  aria-label="Search"
-                  id="branchs"
-                  name="branchs"
-                  value={query}
-                  onChange={(e) => {
-                    navigate(getFilterUrl({ query: e.target.value }));
-                  }}
-                />
-                {/* <Button
-                    type="submit"
-                    variant="outline-light"
-                    className="button2 ms-0"
-                  >
-                    Avukat Ara
-                  </Button>
-                </Form> */}
+                <Form onSubmit={handleSubmit} className="d-flex w-100 search-form ">
+                  <input
+                    type="search"
+                    placeholder="Örnek: Boşanmak İstiyorum"
+                    className="ms-2 search-select"
+                    aria-label="Search"
+                    id='branchs'
+                    name='branchs'
+                    value={input?.branchs || ""}
+                    onChange={handleInput}
+
+                  />
+                  <Button type='submit' variant='outline-light' className='button2 ms-0' >Avukat Ara</Button>
+                </Form>
               </div>
-              <div className="d-flex ml-auto p-2 ">
-                <Button className="button2" variant="outline-light">
-                  Avukat mısınız?
-                </Button>
-                <NavDropdown
-                  className="border border-2 border-dark rounded-2 ms-3 kayıt"
-                  title="KAYIT OL"
-                  id="navbarScrollingDropdown"
-                >
+              <div className='d-flex ml-auto p-2 '>
+                <Button className='button2' variant='outline-light'>Avukat mısınız?</Button>
+                <NavDropdown className='border border-2 border-dark rounded-2 ms-3 kayıt' title="KAYIT OL" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Another action
@@ -216,64 +185,14 @@ const SearchPage = ({ reting }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="mx-4">
-        <div className="m-5 card-container">
-          <p>Filtreler :</p>
-          <Button
-            className={
-              toggle.btn1
-                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
-                : "btn btn-light btn-outline-warning rounded-5 mx-2"
-            }
-            role="button"
-            aria-pressed="true"
-            onClick={() => handleClick("btn1")}
-          >
-            Büroda Görüşmeye Uygun
-          </Button>
-          <Button
-            className={
-              toggle.btn2
-                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
-                : "btn btn-light btn-outline-warning rounded-5 mx-2"
-            }
-            role="button"
-            aria-pressed="true"
-            onClick={() => handleClick("btn2")}
-          >
-            Online Görüşmeye Uygun
-          </Button>
-          <Button
-            className={
-              toggle.btn3
-                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
-                : "btn btn-light btn-outline-warning rounded-5 mx-2"
-            }
-            role="button"
-            aria-pressed="true"
-            onClick={
-              toggle.btn3
-                ? () => {
-                    navigate(getFilterUrl({ isTick: true }));
-                    setToggle({ btn3: false });
-                  }
-                : () => {
-                    navigate(getFilterUrl({ isTick: "all" }));
-                    setToggle({ btn3: true });
-                  }
-            }
-          >
-            Teyit Edilmiş
-          </Button>
-          <Button
-            className="btn btn-light btn-outline-warning rounded-5 mx-2"
-            role="button"
-            aria-pressed="true"
-            onClick={() => handleClick("btn4")}
-          >
-            Daha Fazla Filtre{" "}
-            <span className="btn rounded-5 active counter">{counter}</span>
-          </Button>
+      <div className='mx-4'>
+
+        <div className='m-5 card-container'>
+          <p >Filtreler :</p>
+          <Button className={toggle.btn1 ? "btn btn-light btn-outline-warning rounded-5 mx-2 active" : "btn btn-light btn-outline-warning rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn1")}>Büroda Görüşmeye Uygun</Button>
+          <Button className={toggle.btn2 ? "btn btn-light btn-outline-warning rounded-5 mx-2 active" : "btn btn-light btn-outline-warning rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn2")}>Online Görüşmeye Uygun</Button>
+          <Button className={toggle.btn3 ? "btn btn-light btn-outline-warning rounded-5 mx-2 active" : "btn btn-light btn-outline-warning rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn3")}>Teyit Edilmiş</Button>
+          <Button className="btn btn-light btn-outline-warning rounded-5 mx-2" role="button" aria-pressed="true" onClick={() => handleClick("btn4")} >Daha Fazla Filtre <span className="btn rounded-5 active counter">{counter}</span></Button>
         </div>
         <div className="w-50 m-5">
           <h2 className="mb-4">
@@ -359,241 +278,117 @@ const SearchPage = ({ reting }) => {
                           <span>{user.phone}</span>{" "}
                         </div>
 
-                        <div className="right-box px-5">
-                          {" "}
-                          <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
-                          <span>Mesaj Gönder</span>{" "}
-                        </div>
+                        {readMore && extraContent}
+                        <a className="read-more-link" onClick={() => { setReadMore(!readMore) }}><h2 className='more'>{linkName}</h2></a>
 
-                        <div className="right-box px-5 ">
-                          <i className="fa-solid fa-globe  "></i>{" "}
-                          <span>Web Sitesi'ne Git</span>{" "}
+
+
+                        <div className='p-2 d-flex justify-content-around star'>
+
+                          <div><i className="fa-solid fa-tty fa-l "></i> <span>{user.phone}</span> </div>
+
+                          <div className="right-box px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
+
+                          <div className="right-box px-5 "><i className="fa-solid fa-globe  "></i> <span>Web Sitesi'ne Git</span> </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="right-box">
-                    <div className="d-flex justify-content-center p-2 ">
-                      <Button
-                        variant="outline-light"
-                        className="ms-2 rounded-2 button"
-                      >
-                        Büro
-                      </Button>
-                      <Button checked="true" className="ms-2 rounded-2 button">
-                        Online
-                      </Button>
-                    </div>
-                    <div className="justify-content-center p-2">
-                      <Table borderless="true">
-                        <thead>
-                          <tr className="tarih">
-                            <i className="fa-solid fa-caret-left fa-xl  mt-3"></i>
-                            <th>
-                              Bugün <br /> 27 Mart
-                            </th>
-                            <th>
-                              Yarın <br />
-                              28 Mart
-                            </th>
-                            <th>
-                              Çrş. <br />
-                              29 Mart
-                            </th>
-                            <th>
-                              Prş. <br />
-                              30 Mart
-                            </th>
-                            <i className="fa-solid fa-caret-right fa-xl mt-3"></i>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                10:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                10:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                10:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                10:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                11:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                11:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                11:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                11:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                12:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                12:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                12:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                12:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                13:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                13:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                13:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                13:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                14:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                14:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                14:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                14:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                15:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                15:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                15:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                15:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                16:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                16:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                16:00
-                              </Button>
-                            </td>
-                            <td>
-                              <Button className=" rounded-2 button" size="sm">
-                                16:00
-                              </Button>
-                            </td>
-                          </tr>
-                          <tr className="much">
-                            <td colSpan={6}>
-                              Daha Fazla Saat Göster
-                              <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
+                    <div className="right-box">
+                      <div className='d-flex justify-content-center p-2 '>
+                        <Button variant="outline-light" className="ms-2 rounded-2 button" >Büro</Button>
+                        <Button checked="true" className="ms-2 rounded-2 button">Online</Button>
+                      </div>
+                      <div className='justify-content-center p-2'>
+                        <Table borderless='true'>
+                          <thead>
+                            <tr className="tarih">
+                              <i className="fa-solid fa-caret-left fa-xl  mt-3"></i>
+                              <th>Bugün <br /> 27 Mart</th>
+                              <th>Yarın <br />28 Mart</th>
+                              <th>Çrş. <br />29 Mart</th>
+                              <th>Prş. <br />30 Mart</th>
+                              <i className="fa-solid fa-caret-right fa-xl mt-3"></i>
+                            </tr>
+
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
+                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
+                            </tr>
+                            <tr className="much" >
+                              <td colSpan={6}>Daha Fazla Saat Göster
+                                <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </Table>
+
+
+                      </div>
                     </div>
                   </div>
+
                 </div>
-              </div>
-              <div className="bg-warning flex-fill w-50 m-2 rounded-2">
-                <iframe
-                  className="h-100 w-100 rounded-2"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385395.55898476805!2d28.731992141023436!3d41.00550052308483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1680867444542!5m2!1str!2str"
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+                <div className='bg-warning flex-fill w-50 m-2 rounded-2'>
+                  <iframe className="h-100 w-100 rounded-2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385395.55898476805!2d28.731992141023436!3d41.00550052308483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1680867444542!5m2!1str!2str" loading="lazy"></iframe>
+
+                </div>
+              </div >
+              )
+            })
+          }
+
+
+            </div >
+      </div >
+      </>
+      );
 };
 
-export default SearchPage;
+      export default SearchPage;
