@@ -19,6 +19,32 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
   const isTick = req.query.isTick || "";
   const rating = req.query.rating || "";
   const order = req.query.order || "";
+  const query = req.query.query || "";
+  const queryFilter =
+    query && query !== "all"
+      ? {
+          $or: [
+            {
+              name: {
+                $regex: query,
+                $options: "i",
+              },
+            },
+            {
+              surname: {
+                $regex: query,
+                $options: "i",
+              },
+            },
+            {
+              branch: {
+                $regex: query,
+                $options: "i",
+              },
+            },
+          ],
+        }
+      : {};
 
   const branchFilter = branch && branch !== "all" ? { branch } : {};
   const tickFilter = isTick && isTick !== "all" ? { isTick } : {};
@@ -45,6 +71,7 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
     ...branchFilter,
     ...tickFilter,
     ...ratingFilter,
+    ...queryFilter,
   })
     .sort(sortOrder)
     .limit(limit * 1)
@@ -53,6 +80,7 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
     ...branchFilter,
     ...tickFilter,
     ...ratingFilter,
+    ...queryFilter,
   });
   res.send({
     countLawyers,
