@@ -2,6 +2,11 @@
   font-size: 1.5rem;
 }
 
+.search-card-container{
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
 .card-container button{
   font-size: 1rem;
   padding: 0 1rem;
@@ -73,9 +78,17 @@ padding: -0.2;
   text-align: center;
 }
 
-.right-box {
+.right-box{
+  width: 50rem;
+  border-left: 1px solid #A97900;
+  margin-left: 1rem ;
+}
+
+.right-box-comment {
+  
   border-left: 2px solid #A97900;
 }
+
 
 .star {
   color: #A97900;
