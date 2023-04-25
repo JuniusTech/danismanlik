@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/style.css";
 import SearchButton from "./Search";
 
