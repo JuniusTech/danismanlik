@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.svg";
-import AvukatLoginPage from "../pages/AvukatLoginPage";
-import MuvekkilLoginPage from "../pages/MuvekkilLoginPage";
-import MuvekkilSignPage from "../pages/MuvekkilSignPage";
-import AvukatSignPage from "../pages/AvukatSignPage";
+import AvukatLoginPage from "../pages/LawyerRegister";
+import MuvekkilLoginPage from "../pages/UserRegister";
+import MuvekkilSignPage from "../pages/UserLogin";
+import AvukatSignPage from "../pages/LawyerLogin";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);

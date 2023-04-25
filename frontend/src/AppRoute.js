@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import LoginForm from "./pages/LoginForm";
-import { AvukatLoginPage } from "./pages/AvukatLoginPage";
 
 const AppRoute = () => {
   return (
@@ -11,7 +10,6 @@ const AppRoute = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/search" element={<SearchPage />} />
-      <Route path="/AvukatLoginPage" element={<AvukatLoginPage />} />
     </Routes>
   );
 };

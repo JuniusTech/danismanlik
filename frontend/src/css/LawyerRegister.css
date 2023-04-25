@@ -1,0 +1,64 @@
+.formDiv {
+  height: 80vh !important;
+  width: 100%;
+}
+
+label {
+  width: 100%;
+  text-align: center;
+}
+
+.form-control {
+  margin-left: -3% !important;
+}
+
+.custom-select {
+  margin-top: 7%;
+  margin-left: 7% !important;
+  margin-bottom: 13%;
+  height: 3rem;
+}
+.custom-select branş {
+  margin-top: 1rem !important;
+  width: 6rem !important;
+  width: 5rem !important;
+}
+.telDiv {
+  gap: 1rem;
+}
+
+span {
+  color: orange;
+}
+
+input-group-text radio {
+  margin-left: 5px;
+}
+
+.loginPageButtons {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 2rem;
+}
+
+.loginPageButtons button {
+  padding: 5px;
+  border-radius: 4px;
+  width: 25%;
+}
+.loginPagebtn1 {
+  border: 1px solid black;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+.loginPagebtn2 {
+  border: none;
+  background-color: orange;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+p {
+  text-align: center;
+}

@@ -1,0 +1,10 @@
+.signInPage {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+
+.signInContent {
+  width: 120%;
+  margin-left: -10%;
+}
