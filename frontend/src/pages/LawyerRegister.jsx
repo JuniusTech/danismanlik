@@ -97,6 +97,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             </select>
             <label htmlFor="">Şifre Tekrar*</label>
             <input
+              id="password2"
               type="password"
               class="form-control"
               value={password2}
@@ -104,7 +105,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             />
           </div>
         </div>
-        {/* //! gap verilecek ---------------------------------------------------------*/}
+
         <div class="input-group-text radio">
           <input
             type="radio"

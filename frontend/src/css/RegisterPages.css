@@ -65,3 +65,7 @@ span {
 p {
   text-align: center;
 }
+
+#password2 {
+  margin-top: 8px;
+}
