@@ -9,8 +9,6 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   const [surName, setSurName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [barNo, setBarNo] = useState("");
   const [phoneRegion, setPhoneRegion] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
@@ -18,13 +16,24 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   const [branch, setBranch] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
+    console.log(
+      name,
+      surName,
+      email,
+      password,
+      barNo,
+      phoneRegion,
+      branch,
+      password2,
+      phone
+    );
   };
 
   return (
     <Modal show={show} onHide={handleClose} animation={false} centered>
-      <form className="formDiv">
+      <form className="formDiv" onSubmit={submitHandler}>
         <div class="row">
           <div class="col">
             <label htmlFor="">Ad*</label>
@@ -33,6 +42,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               class="form-control"
               value={name}
               placeholder="Ad*"
+              onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="">E-posta*</label>
             <input
@@ -40,6 +50,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               value={email}
               class="form-control"
               placeholder="E-Posta*"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="">Baro Sicil Numarası*</label>
             <input
@@ -47,6 +58,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               class="form-control"
               placeholder="Baro Sicil Numarası"
               value={barNo}
+              onChange={(e) => setBarNo(e.target.value)}
             />
             <label htmlFor="">Şifre*</label>
             <input
@@ -54,6 +66,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               class="form-control"
               value={password}
               placeholder="Şifre"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div class="col">
@@ -63,13 +76,15 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               class="form-control"
               value={surName}
               placeholder="Soyad"
+              onChange={(e) => setSurName(e.target.value)}
             />
             <label htmlFor="">Tel*</label>
             <div className="telDiv d-flex ">
               <select
                 value={phoneRegion}
                 class="custom-select"
-                id="inputGroupSelect01"
+                id="inputGroupSelect02"
+                onChange={(e) => setPhoneRegion(e.target.value)}
               >
                 <option selected>+90</option>
                 <option value="1">+91</option>
@@ -81,14 +96,15 @@ const AvukatLoginPage = ({ show, handleClose }) => {
                 class="form-control"
                 value={phoneNo}
                 placeholder=""
+                onChange={(e) => setPhoneNo(e.target.value)}
               />
             </div>
 
-            {/* //! With 100% olmuyor ---------------------------------------------------------*/}
             <select
               id="inputGroupSelect01"
               className="custom-select brans w-100"
               value={branch}
+              onChange={(e) => setBranch(e.target.value)}
             >
               <option selected>Lütfen Branş Seçiniz:</option>
               <option value="1">İcra</option>
@@ -102,6 +118,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               class="form-control"
               value={password2}
               placeholder="Şifre"
+              onChange={(e) => setPassword2(e.target.value)}
             />
           </div>
         </div>
@@ -137,7 +154,9 @@ const AvukatLoginPage = ({ show, handleClose }) => {
           </label>
         </div>
         <div className="loginPageButtons">
-          <button className="loginPagebtn1">İptal Et</button>
+          <button className="loginPagebtn1" type="submit">
+            İptal Et
+          </button>
           <button className="loginPagebtn2">Kayıt Ol</button>
         </div>
         <p>

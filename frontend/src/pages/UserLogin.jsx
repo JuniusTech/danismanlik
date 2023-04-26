@@ -10,6 +10,7 @@ const AvukatSignPage = ({ show, handleClose }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log(email, password);
   };
 
   return (
@@ -28,6 +29,7 @@ const AvukatSignPage = ({ show, handleClose }) => {
             className="fs-4"
             type="email"
             required
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-posta"
           />
@@ -38,6 +40,7 @@ const AvukatSignPage = ({ show, handleClose }) => {
             className="fs-4"
             type="password"
             required
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Şifre"
           />

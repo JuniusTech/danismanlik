@@ -47,12 +47,12 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <LawyerRegister
+        <UserRegister
           show={show}
           handleClose={handleClose}
           onHide={() => setShow(false)}
         />
-        <LawyerLogin
+        <UserLogin
           show={show2}
           handleClose={handleClose2}
           onHide={() => setShow2(false)}
