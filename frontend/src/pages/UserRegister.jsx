@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import "../css/LawyerRegister.css";
+import "../css/RegisterPages.css";
 
 const AvukatLoginPage = ({ show, handleClose }) => {
   const [name, setName] = useState("");
@@ -14,13 +14,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   };
 
   return (
-    <Modal
-      show={show}
-      className=" xxx"
-      onHide={handleClose}
-      animation={false}
-      centered
-    >
+    <Modal show={show} onHide={handleClose} animation={false} centered>
       <form className="formDiv">
         <div class="row">
           <div class="col">
@@ -37,7 +31,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             <input type="text" class="form-control" placeholder="Soyad" />
             <label htmlFor="">Tel*</label>
             <div className="telDiv d-flex ">
-              <select class="custom-select" id="inputGroupSelect01">
+              <select class="custom-select " id="inputGroupSelect01">
                 <option selected>+90</option>
                 <option value="1">+91</option>
                 <option value="2">+92</option>
@@ -60,7 +54,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             <span>Üyelik Sözleşmesi'ni</span> okudum ve kabul ediyorum.
           </label>
         </div>
-        <div class="input-group-text radio">
+        <div class="input-group-text  radio">
           <input
             type="radio"
             aria-label="Radio button for following text input"

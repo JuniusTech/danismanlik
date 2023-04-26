@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.svg";
-import AvukatLoginPage from "../pages/LawyerRegister";
-import MuvekkilLoginPage from "../pages/UserRegister";
-import MuvekkilSignPage from "../pages/UserLogin";
-import AvukatSignPage from "../pages/LawyerLogin";
+import LawyerRegister from "../pages/LawyerRegister";
+import UserRegister from "../pages/UserRegister";
+import UserLogin from "../pages/UserLogin";
+import LawyerLogin from "../pages/LawyerLogin";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -47,12 +47,12 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <MuvekkilLoginPage
+        <LawyerRegister
           show={show}
           handleClose={handleClose}
           onHide={() => setShow(false)}
         />
-        <MuvekkilSignPage
+        <LawyerLogin
           show={show2}
           handleClose={handleClose2}
           onHide={() => setShow2(false)}

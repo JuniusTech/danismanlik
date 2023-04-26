@@ -1,6 +1,7 @@
 .formDiv {
   height: 80vh !important;
   width: 100%;
+  overflow: scroll;
 }
 
 label {
@@ -18,23 +19,25 @@ label {
   margin-bottom: 13%;
   height: 3rem;
 }
-.custom-select branş {
+.custom-select brans {
   margin-top: 1rem !important;
-  width: 6rem !important;
-  width: 5rem !important;
+  width: 20rem !important;
+  height: 2rem;
+  padding: 0 1rem;
+  margin-top: 3px;
 }
+
 .telDiv {
   gap: 1rem;
+  height: 24.5%;
 }
 
 span {
   color: orange;
 }
-
-input-group-text radio {
-  margin-left: 5px;
+.labelText {
+  margin-left: 2rem;
 }
-
 .loginPageButtons {
   display: flex;
   justify-content: center;
