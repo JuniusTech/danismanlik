@@ -62,6 +62,8 @@ const SearchPage = ({ reting }) => {
       [btnIndex]: !toggle[btnIndex],
     }).filter((val) => val).length;
     setCounter(numClicked);
+
+
   };
 
   const toggleCount = Object.values(toggle).filter((val) => val).length;
@@ -117,7 +119,81 @@ const SearchPage = ({ reting }) => {
       quo sint, libero commodi officia aliquam! Maxime.
     </p>
   );
+
+  const [moreHour, setMoreHour] = useState(false);
+  const linkHour = moreHour ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster";
+  const caretIcon = moreHour ? (
+    <i className="fa-solid fa-caret-up fa-xl mx-2"></i>
+  ) : (
+    <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+  );
+  const [hours, setHours] = useState([
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+  ]);
+
   console.log(lawyers);
+
+  const today = new Date();
+  const firstDay = new Date(today);
+  firstDay.setDate(today.getDate());
+  const lastDay = new Date(today);
+  lastDay.setDate(firstDay.getDate() + 3);
+
+  const days = ["", "", "", ""];
+  const [dateRange, setDateRange] = useState([firstDay, lastDay]);
+
+  {/*   const handlePrevWeek = () => {
+    const firstDay = new Date(dateRange[0]);
+    firstDay.setDate(firstDay.getDate() - 4);
+
+    const today = new Date();
+    if (firstDay < today + 1) {
+      firstDay = firstDay.setDate(today.getDate());
+    }
+    const lastDay = new Date(dateRange[0]);
+    lastDay.setDate(lastDay.getDate() - 1);
+    if (lastDay < today) {
+      lastDay = new Date(today.getTime() - 1);
+    }
+    setDateRange([firstDay, lastDay]);
+  }; */}
+  const handlePrevWeek = () => {
+    const today = new Date();
+    const firstDay = new Date(dateRange[0]);
+    firstDay.setDate(firstDay.getDate() - 4);
+
+    if (firstDay < today) {
+      const lastDay = new Date(dateRange[0]);
+      lastDay.setDate(lastDay.getDate() - 1);
+      if (lastDay < today) {
+        lastDay = new Date(today.getTime() - 1);
+      }
+      setDateRange([firstDay, lastDay]);
+    }
+  };
+
+  console.log(firstDay)
+
+  const handleNextWeek = () => {
+    const firstDay = new Date(dateRange[1]);
+    firstDay.setDate(firstDay.getDate() + 1);
+    const lastDay = new Date(firstDay);
+    lastDay.setDate(lastDay.getDate() + 3);
+    setDateRange([firstDay, lastDay]);
+  };
+
+  // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
+
+
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -259,7 +335,7 @@ const SearchPage = ({ reting }) => {
                           <p className="m-2 star">
                             {getStarReting(user.rating)}
 
-                            <span>12 yorum</span>
+                            <span>{user.reviews.length} yorum</span>
                           </p>
                         </div>
                         <button className="like">
@@ -290,7 +366,7 @@ const SearchPage = ({ reting }) => {
                         <div className="p-2 d-flex justify-content-around star">
                           <div className='p-2 d-flex justify-content-around star'>
 
-                            <div><i className="fa-solid fa-tty fa-l "></i> <span>{user.phone}</span> </div>
+                            <div><i className="fa-solid fa-tty fa-l"></i> <span className="px-2">{user.phone}</span> </div>
 
                             <div className="right-box-comment px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
 
@@ -309,68 +385,82 @@ const SearchPage = ({ reting }) => {
                         <Table borderless='true'>
                           <thead>
                             <tr className="tarih">
-                              <i className="fa-solid fa-caret-left fa-xl  mt-3"></i>
-                              <th>Bugün <br /> 27 Mart</th>
-                              <th>Yarın <br />28 Mart</th>
-                              <th>Çrş. <br />29 Mart</th>
-                              <th>Prş. <br />30 Mart</th>
-                              <i className="fa-solid fa-caret-right fa-xl mt-3"></i>
+                              <td>
+                                <button className="rounded-5 mt-3 search-caret" onClick={handlePrevWeek} disabled={new Date(dateRange[0]) < new Date()} >
+                                  <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
+                                </button>
+
+                              </td>
+                              {days.map((day, index) => {
+                                const currentDate = new Date(dateRange[0]);
+                                currentDate.setDate(dateRange[0].getDate() + index);
+                                const dayOfMonth = currentDate.getDate();
+                                const month = currentDate.toLocaleString("default", {
+                                  month: "short",
+                                });
+                                const dayOfWeek = currentDate.toLocaleString("default", {
+                                  weekday: "short",
+                                });
+                                let label = "";
+                                if (dayOfMonth === today.getDate()) {
+                                  label = "Bugün";
+                                } else if (dayOfMonth === today.getDate() + 1) {
+                                  label = "Yarın";
+                                } else {
+                                  label = dayOfWeek;
+                                }
+
+                                return (
+                                  <th key={day} className="text-center">
+                                    {label} <br />
+                                    {dayOfMonth} {month}
+                                  </th>
+                                );
+                              })}
+                              <td>
+                                <button className="rounded-5 mt-3 search-caret" onClick={handleNextWeek}>
+                                  <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
+                                </button>
+                              </td>
+
                             </tr>
 
                           </thead>
                           <tbody>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                            </tr>
+                            {hours.map((hour) => (
+                              <tr key={hour}>
+                                <td></td>
+                                {days.map((day) => (
+                                  <td >
+                                    <button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+
                             <tr className="much" >
-                              <td colSpan={6}>Daha Fazla Saat Göster
-                                <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+                              <td onClick={() => {
+                                setMoreHour(!moreHour);
+
+                                if (moreHour) {
+                                  setHours(hours.slice(0, 6));
+                                } else {
+                                  setHours([
+                                    "09:00",
+                                    "10:00",
+                                    "11:00",
+                                    "12:00",
+                                    "13:00",
+                                    "14:00",
+                                    "15:00",
+                                    "16:00",
+                                    "17:00",
+                                    "18:00",
+                                  ]);
+                                }
+                              }} colSpan={6}>
+                                {linkHour}
+                                {caretIcon}
                               </td>
                             </tr>
                           </tbody>
@@ -391,7 +481,7 @@ const SearchPage = ({ reting }) => {
 
 
         </div >
-      </div>
+      </div >
     </>
   );
 };
