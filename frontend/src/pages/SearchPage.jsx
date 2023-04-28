@@ -33,6 +33,7 @@ const SearchPage = ({ reting }) => {
       }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
+
   const [toggle, setToggle] = useState({
     btn1: false,
     btn2: false,
@@ -61,27 +62,34 @@ const SearchPage = ({ reting }) => {
       [btnIndex]: !toggle[btnIndex],
     }).filter((val) => val).length;
     setCounter(numClicked);
+
+
   };
 
   const toggleCount = Object.values(toggle).filter((val) => val).length;
-  console.log(toggle);
+
 
   const [input, setInput] = useState({});
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
   const [branchs, setBranchs] = useState([])
 
-  const handleInput = (e) => {
-    const { value, name } = e.target
-    setInput({ ...input, [name]: value })
-  }
+  // const handleInput = (e) => {
+  //   const { value, name } = e.target
+  //   setInput({ ...input, [name]: value })
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTitle(input)
     setInput({})
+  };
 
-    axios.get('https://danis.onrender.com/api/lawyers/search?branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}')
+  useEffect(() => {
+    axios
+      .get(
+        `https://danis.onrender.com/api/lawyers/search?branch=${branch}&query=${query}&isTick=${isTick}&order=${order}&rating=${rating}`
+      )
       .then((response) => {
         setLawyers(response.data.lawyers);
         console.log(response.data);
@@ -111,7 +119,81 @@ const SearchPage = ({ reting }) => {
       quo sint, libero commodi officia aliquam! Maxime.
     </p>
   );
+
+  const [moreHour, setMoreHour] = useState(false);
+  const linkHour = moreHour ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster";
+  const caretIcon = moreHour ? (
+    <i className="fa-solid fa-caret-up fa-xl mx-2"></i>
+  ) : (
+    <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+  );
+  const [hours, setHours] = useState([
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+  ]);
+
   console.log(lawyers);
+
+  const today = new Date();
+  const firstDay = new Date(today);
+  firstDay.setDate(today.getDate());
+  const lastDay = new Date(today);
+  lastDay.setDate(firstDay.getDate() + 3);
+
+  const days = ["", "", "", ""];
+  const [dateRange, setDateRange] = useState([firstDay, lastDay]);
+
+  {/*   const handlePrevWeek = () => {
+    const firstDay = new Date(dateRange[0]);
+    firstDay.setDate(firstDay.getDate() - 4);
+
+    const today = new Date();
+    if (firstDay < today + 1) {
+      firstDay = firstDay.setDate(today.getDate());
+    }
+    const lastDay = new Date(dateRange[0]);
+    lastDay.setDate(lastDay.getDate() - 1);
+    if (lastDay < today) {
+      lastDay = new Date(today.getTime() - 1);
+    }
+    setDateRange([firstDay, lastDay]);
+  }; */}
+  const handlePrevWeek = () => {
+    const today = new Date();
+    const firstDay = new Date(dateRange[0]);
+    firstDay.setDate(firstDay.getDate() - 4);
+
+    if (firstDay < today) {
+      const lastDay = new Date(dateRange[0]);
+      lastDay.setDate(lastDay.getDate() - 1);
+      if (lastDay < today) {
+        lastDay = new Date(today.getTime() - 1);
+      }
+      setDateRange([firstDay, lastDay]);
+    }
+  };
+
+  console.log(firstDay)
+
+  const handleNextWeek = () => {
+    const firstDay = new Date(dateRange[1]);
+    firstDay.setDate(firstDay.getDate() + 1);
+    const lastDay = new Date(firstDay);
+    lastDay.setDate(lastDay.getDate() + 3);
+    setDateRange([firstDay, lastDay]);
+  };
+
+  // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
+
+
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -128,34 +210,42 @@ const SearchPage = ({ reting }) => {
               </div>
 
               <div className='d-flex justify-content-center'>
-                <select className='select' value={branch} name="branch" onChange={handleInput} title="Branş Seç" id="navbarScrollingDropdown">
-                  <option selected >Branş Seç</option>
-                  {
-                    branchs?.sort((a, b) => a.title.localeCompare(b.title)).map((item) =>
-                      <option value={item.title}>{item.title}</option>
-                    )
-                  }
-
-
+                <select className='search-select' value={branch} name="branch"
+                  onChange={(e) => {
+                    navigate(getFilterUrl({ branch: e.target.value }));
+                  }} title="Branş Seç" id="navbarScrollingDropdown">
+                  <option defaultValue="all">Branş Seç</option>
+                  {branchs
+                    ?.sort((a, b) => a.title.localeCompare(b.title))
+                    .map((item) => (
+                      <option key={item._id} value={item.title}>
+                        {item.title}
+                      </option>
+                    ))}
                 </select>
 
-                <Form onSubmit={handleSubmit} className="d-flex w-100 search-form ">
+                <Form
+                  onSubmit={handleSubmit}
+                  className="d-flex w-100 search-form "
+                >
                   <input
                     type="search"
-                    placeholder="Örnek: Boşanmak İstiyorum"
-                    className="ms-2 search-select"
+                    placeholder="İsme göre ara"
+                    className="w-75 search-select-input"
                     aria-label="Search"
                     id='branchs'
                     name='branchs'
-                    value={input?.branchs || ""}
-                    onChange={handleInput}
-
+                    value={query}
+                    onChange={(e) => {
+                      navigate(getFilterUrl({ query: e.target.value }));
+                    }}
                   />
-                  <Button type='submit' variant='outline-light' className='button2 ms-0' >Avukat Ara</Button>
+                  <button type='submit' variant='outline-light' className='search-inputbutton w-25 ' >Avukat Ara
+                  </button>
                 </Form>
               </div>
               <div className='d-flex ml-auto p-2 '>
-                <Button className='button2' variant='outline-light'>Avukat mısınız?</Button>
+                <button className='search-inputbutton' variant='outline-light'>Avukat mısınız?</button>
                 <NavDropdown className='border border-2 border-dark rounded-2 ms-3 kayıt' title="KAYIT OL" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
@@ -184,10 +274,10 @@ const SearchPage = ({ reting }) => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
-      <div className='mx-4'>
+      </Navbar >
+      <div className='search-card-container '>
 
-        <div className='m-5 card-container'>
+        <div className='mx-5 '>
           <p >Filtreler :</p>
           <Button className={toggle.btn1 ? "btn btn-light btn-outline-warning rounded-5 mx-2 active" : "btn btn-light btn-outline-warning rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn1")}>Büroda Görüşmeye Uygun</Button>
           <Button className={toggle.btn2 ? "btn btn-light btn-outline-warning rounded-5 mx-2 active" : "btn btn-light btn-outline-warning rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn2")}>Online Görüşmeye Uygun</Button>
@@ -208,93 +298,86 @@ const SearchPage = ({ reting }) => {
         <div>
           {lawyers?.map((user) => (
             <div key={user._id} className=" d-flex justfiy-content-around m-5 ">
-              <div className="border border-warning flex-fill m-2 p-2 rounded-4 ">
-                <div className="d-flex ">
-                  <div className="w-75">
-                    <div className="d-flex w-100 ">
-                      <div className="h-100">
-                        <img width="150rem" src={image} alt="image" />
+              <div className="border border-warning w-75 m-2 p-2 rounded-4 ">
+                <div className="d-flex  ">
+                  <div className=" d-flex ">
+                    <div className="w-100 ">
+                      <div className="d-flex w-100 ">
+                        <div className="h-100">
+                          <img width="150rem" src={image} alt="image" />
+                        </div>
+
+                        <div className="flex-fill m-2 ">
+                          <div className="flex-grow-1 mx-2 ">
+                            <span>
+                              {" "}
+                              <b>
+                                {user.name} {user.surname}{" "}
+                              </b>{" "}
+                            </span>
+
+                            <i class="fa-solid fa-clipboard-check mx-2 text-warning"></i>
+                          </div>
+                          <div className="d-flex">
+                            <div className="mx-2 text-success">
+                              {" "}
+                              <i className="fa-solid fa-circle-check"></i>{" "}
+                              <span>online görüşmeye uygun</span>{" "}
+                            </div>
+                            <div className="mx-2 text-success">
+                              {" "}
+                              <i className="fa-solid fa-circle-check"></i>{" "}
+                              <span>büroda görüşmeye uygun</span>{" "}
+                            </div>
+                          </div>
+                          <p className="m-2">{user.branch} avukatı, İstanbul</p>
+                          <p className="mx-2">15 Yıllık Deneyim</p>
+                          <p className="m-2 star">
+                            {getStarReting(user.rating)}
+
+                            <span>{user.reviews.length} yorum</span>
+                          </p>
+                        </div>
+                        <button className="like">
+                          <i className="fa-regular fa-heart fa-2xl"></i>
+                        </button>
                       </div>
-
-                      <div className="dflex flex-fill m-2 ">
-                        <div className="flex-grow-1 mx-2 ">
-                          <span>
-                            {" "}
-                            <b>
-                              {user.name} {user.surname}{" "}
-                            </b>{" "}
-                          </span>
-
-                          <i class="fa-solid fa-clipboard-check mx-2 text-warning"></i>
-                        </div>
-                        <div className="d-flex">
-                          <div className="mx-2 text-success">
-                            {" "}
-                            <i className="fa-solid fa-circle-check"></i>{" "}
-                            <span>online görüşmeye uygun</span>{" "}
-                          </div>
-                          <div className="mx-2 text-success">
-                            {" "}
-                            <i className="fa-solid fa-circle-check"></i>{" "}
-                            <span>büroda görüşmeye uygun</span>{" "}
-                          </div>
-                        </div>
-                        <p className="m-2">{user.branchs} avukatı, İstanbul</p>
-                        <p className="mx-2">15 Yıllık Deneyim</p>
-                        <p className="m-2 star">
-                          {getStarReting(user.reting)}
-
-                          <span>12 yorum</span>
+                      <div className="mt-2 ">
+                        <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
+                        <h5 className="star">Bio</h5>
+                        <p className="extra-content">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          Qui, consectetur nequeab porro quasi culpa nulla rerum
+                          quis minus voluptatibus sed hic ad quo sint, libero
+                          commodi officia aliquam! Maxime. Lorem ipsum dolor sit
+                          amet consectetur adipisicing elit.{" "}
                         </p>
-                      </div>
-                      <button className="like">
-                        <i className="fa-regular fa-heart fa-2xl"></i>
-                      </button>
-                    </div>
-                    <div className="mt-2 ">
-                      <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
-                      <h5 className="star">Bio</h5>
-                      <p className="extra-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Qui, consectetur nequeab porro quasi culpa nulla rerum
-                        quis minus voluptatibus sed hic ad quo sint, libero
-                        commodi officia aliquam! Maxime. Lorem ipsum dolor sit
-                        amet consectetur adipisicing elit.{" "}
-                      </p>
 
-                      {readMore && extraContent}
-                      {/* <a
+                        {readMore && extraContent}
+                        <a
                           className="read-more-link"
                           onClick={() => {
                             setReadMore(!readMore);
                           }}
                         >
                           <h2 className="more">{linkName}</h2>
-                        </a> */}
+                        </a>
 
-                      <div className="p-2 d-flex justify-content-around star">
-                        <div>
-                          <i className="fa-solid fa-tty fa-l "></i>{" "}
-                          <span>{user.phone}</span>{" "}
-                        </div>
+                        <div className="p-2 d-flex justify-content-around star">
+                          <div className='p-2 d-flex justify-content-around star'>
 
-                        {readMore && extraContent}
-                        <a className="read-more-link" onClick={() => { setReadMore(!readMore) }}><h2 className='more'>{linkName}</h2></a>
+                            <div><i className="fa-solid fa-tty fa-l"></i> <span className="px-2">{user.phone}</span> </div>
 
+                            <div className="right-box-comment px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
 
-
-                        <div className='p-2 d-flex justify-content-around star'>
-
-                          <div><i className="fa-solid fa-tty fa-l "></i> <span>{user.phone}</span> </div>
-
-                          <div className="right-box px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
-
-                          <div className="right-box px-5 "><i className="fa-solid fa-globe  "></i> <span>Web Sitesi'ne Git</span> </div>
+                            <div className="right-box-comment px-5 "><i className="fa-solid fa-globe  "></i> <span>Web Sitesi'ne Git</span> </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                     <div className="right-box">
-                      <div className='d-flex justify-content-center p-2 '>
+                      <div className='d-flex  p-2 '>
                         <Button variant="outline-light" className="ms-2 rounded-2 button" >Büro</Button>
                         <Button checked="true" className="ms-2 rounded-2 button">Online</Button>
                       </div>
@@ -302,68 +385,82 @@ const SearchPage = ({ reting }) => {
                         <Table borderless='true'>
                           <thead>
                             <tr className="tarih">
-                              <i className="fa-solid fa-caret-left fa-xl  mt-3"></i>
-                              <th>Bugün <br /> 27 Mart</th>
-                              <th>Yarın <br />28 Mart</th>
-                              <th>Çrş. <br />29 Mart</th>
-                              <th>Prş. <br />30 Mart</th>
-                              <i className="fa-solid fa-caret-right fa-xl mt-3"></i>
+                              <td>
+                                <button className="rounded-5 mt-3 search-caret" onClick={handlePrevWeek} disabled={new Date(dateRange[0]) < new Date()} >
+                                  <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
+                                </button>
+
+                              </td>
+                              {days.map((day, index) => {
+                                const currentDate = new Date(dateRange[0]);
+                                currentDate.setDate(dateRange[0].getDate() + index);
+                                const dayOfMonth = currentDate.getDate();
+                                const month = currentDate.toLocaleString("default", {
+                                  month: "short",
+                                });
+                                const dayOfWeek = currentDate.toLocaleString("default", {
+                                  weekday: "short",
+                                });
+                                let label = "";
+                                if (dayOfMonth === today.getDate()) {
+                                  label = "Bugün";
+                                } else if (dayOfMonth === today.getDate() + 1) {
+                                  label = "Yarın";
+                                } else {
+                                  label = dayOfWeek;
+                                }
+
+                                return (
+                                  <th key={day} className="text-center">
+                                    {label} <br />
+                                    {dayOfMonth} {month}
+                                  </th>
+                                );
+                              })}
+                              <td>
+                                <button className="rounded-5 mt-3 search-caret" onClick={handleNextWeek}>
+                                  <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
+                                </button>
+                              </td>
+
                             </tr>
 
                           </thead>
                           <tbody>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">10:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">11:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">12:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">13:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">14:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">15:00</Button></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                              <td><Button className=" rounded-2 button" size="sm">16:00</Button></td>
-                            </tr>
+                            {hours.map((hour) => (
+                              <tr key={hour}>
+                                <td></td>
+                                {days.map((day) => (
+                                  <td >
+                                    <button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+
                             <tr className="much" >
-                              <td colSpan={6}>Daha Fazla Saat Göster
-                                <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+                              <td onClick={() => {
+                                setMoreHour(!moreHour);
+
+                                if (moreHour) {
+                                  setHours(hours.slice(0, 6));
+                                } else {
+                                  setHours([
+                                    "09:00",
+                                    "10:00",
+                                    "11:00",
+                                    "12:00",
+                                    "13:00",
+                                    "14:00",
+                                    "15:00",
+                                    "16:00",
+                                    "17:00",
+                                    "18:00",
+                                  ]);
+                                }
+                              }} colSpan={6}>
+                                {linkHour}
+                                {caretIcon}
                               </td>
                             </tr>
                           </tbody>
@@ -375,20 +472,18 @@ const SearchPage = ({ reting }) => {
                   </div>
 
                 </div>
-                <div className='bg-warning flex-fill w-50 m-2 rounded-2'>
-                  <iframe className="h-100 w-100 rounded-2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385395.55898476805!2d28.731992141023436!3d41.00550052308483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1680867444542!5m2!1str!2str" loading="lazy"></iframe>
 
-                </div>
               </div >
-              )
-            })
+
+            </div >
+          ))
           }
 
 
-            </div >
+        </div >
       </div >
-      </>
-      );
+    </>
+  );
 };
 
-      export default SearchPage;
+export default SearchPage;
