@@ -1,27 +1,25 @@
-*{
+* {
   font-size: 1.5rem;
 }
 
-.search-card-container{
+.search-card-container {
   margin-left: 10rem;
   margin-right: 10rem;
 }
 
-.card-container button{
+.card-container button {
   font-size: 1rem;
   padding: 0 1rem;
 }
 
-.active{
+.active {
   background-color: brown !important;
   color: yellow !important;
 }
 
-
-
-.counter{
-font-size: 0.7rem;
-padding: -0.2;
+.counter {
+  font-size: 0.7rem;
+  padding: -0.2;
 }
 
 .button2 {
@@ -32,10 +30,9 @@ padding: -0.2;
   font-weight: bold;
   margin-left: 0;
   size: 1px;
-  
 }
 
-.search-form{
+.search-form {
   width: 25rem;
   height: 4rem;
   display: flex;
@@ -43,10 +40,9 @@ padding: -0.2;
   align-items: center;
   width: 35rem;
   height: 4rem;
-
 }
 
-.search-input{
+.search-input {
   display: flex;
   justify-content: center;
   width: 10rem;
@@ -55,17 +51,15 @@ padding: -0.2;
   border-radius: 1.2rem;
 }
 
-.search-inputbutton{
-  background-color: #A97900;
+.search-inputbutton {
+  background-color: #a97900;
   width: 10rem;
   height: 4rem;
   font: white;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 1.2rem;
-  
 }
-
 
 .like {
   width: 3rem !important ;
@@ -78,20 +72,18 @@ padding: -0.2;
   text-align: center;
 }
 
-.right-box{
+.right-box {
   width: 50rem;
-  border-left: 1px solid #A97900;
-  margin-left: 1rem ;
+  border-left: 1px solid #a97900;
+  margin-left: 1rem;
 }
 
 .right-box-comment {
-  
-  border-left: 2px solid #A97900;
+  border-left: 2px solid #a97900;
 }
 
-
 .star {
-  color: #A97900;
+  color: #a97900;
 }
 .time {
   size: 2rem;
@@ -101,28 +93,21 @@ padding: -0.2;
   cursor: pointer;
   font-size: 1rem;
   text-align: center;
-  color: #A97900;
-  
+  color: #a97900;
 }
 .search-caret {
   border: none;
-  color: #A97900;
-  
+  color: #a97900;
 }
 
-.read-more-link{
-  
-  color: #A97900;
+.read-more-link {
+  color: #a97900;
   cursor: pointer;
   margin-left: 10rem;
   background-color: #61dafb;
-  
-  
-  
 }
-.extra-content{
+.extra-content {
   font-weight: 500;
-  
 }
 
 .more {
@@ -130,14 +115,13 @@ padding: -0.2;
   justify-content: end;
   font-size: 1.5rem;
   margin-right: 1rem;
-  
 }
 
 .search-select {
   width: 25rem;
   justify-content: center;
   border-radius: 0.5rem;
-  border:#f4f3ef;
+  border: #f4f3ef;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.081);
 }
 
@@ -145,18 +129,16 @@ padding: -0.2;
   border: red;
   border-radius: 50px;
   border-width: 20px;
-  
 }
 
-.search-hoursbutton{
-  background-color: #A97900;
+.search-hoursbutton {
+  background-color: #a97900;
   width: 6rem;
   height: 2.2rem;
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
   border-radius: 1.2rem;
-  
 }
 .selected {
   background-color: white;
