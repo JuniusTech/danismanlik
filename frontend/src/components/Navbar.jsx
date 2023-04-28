@@ -12,7 +12,7 @@ const Navbar = () => {
 
           <div className="d-flex text-black align-items-center">
             <button
-              className="ms-2 btn btn-outline-light"
+              className="home-button text-white"
               style={{ backgroundColor: "#A97900" }}
             >
               Avukat misiniz?
