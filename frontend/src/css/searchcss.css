@@ -3,8 +3,17 @@
 }
 
 .search-card-container{
-  margin-left: 10rem;
+  margin: auto;
+  width: 100rem;
+  margin-left: 35rem;
   margin-right: 10rem;
+}
+
+.search-card-lawyer{
+  width: 100rem;
+  border: 1px solid #a97900;
+  padding:  1rem 0 0 1rem;
+  
 }
 
 .card-container button{
@@ -13,16 +22,11 @@
 }
 
 .active{
-  background-color: brown !important;
-  color: yellow !important;
+  background-color:#a97900 !important;
+  color: white !important;
+  border: none;
 }
 
-
-
-.counter{
-font-size: 0.7rem;
-padding: -0.2;
-}
 
 .button2 {
   width: 25rem;
@@ -43,16 +47,15 @@ padding: -0.2;
   align-items: center;
   width: 35rem;
   height: 4rem;
-
+border-radius: 1rem;
 }
 
-.search-input{
+.search-select-input {
   display: flex;
   justify-content: center;
   width: 10rem;
   height: 4rem;
-  border: none;
-  border-radius: 1.2rem;
+ border: none;
 }
 
 .search-inputbutton{
@@ -110,16 +113,6 @@ padding: -0.2;
   
 }
 
-.read-more-link{
-  
-  color: #A97900;
-  cursor: pointer;
-  margin-left: 10rem;
-  background-color: #61dafb;
-  
-  
-  
-}
 .extra-content{
   font-weight: 500;
   
@@ -128,6 +121,8 @@ padding: -0.2;
 .more {
   display: flex;
   justify-content: end;
+   color: #A97900;
+  cursor: pointer;
   font-size: 1.5rem;
   margin-right: 1rem;
   
