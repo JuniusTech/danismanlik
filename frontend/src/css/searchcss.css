@@ -47,8 +47,7 @@
   justify-content: center;
   width: 10rem;
   height: 4rem;
-  border: none;
-  border-radius: 1.2rem;
+ border: none;
 }
 
 .search-inputbutton {
@@ -113,6 +112,8 @@
 .more {
   display: flex;
   justify-content: end;
+   color: #A97900;
+  cursor: pointer;
   font-size: 1.5rem;
   margin-right: 1rem;
 }
