@@ -3,7 +3,7 @@ import { Button, ListGroup, Table } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import Navbar from "../components/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/Group 4.svg";
 import image from "../assets/bg.jpg";
@@ -16,7 +16,7 @@ const SearchPage = ({ reting }) => {
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category=Shirts
   const branch = sp.get("branch") || "all";
-  const query = sp.get("query") || "all";
+  const [query, setQuery] = useState(sp.get("query") || "");
   const page = sp.get("page") || 1;
   const order = sp.get("order") || "newest";
   const isTick = sp.get("isTick") || "all";
@@ -53,7 +53,7 @@ const SearchPage = ({ reting }) => {
     return filledStars + emptyStars;
   };
 
-  const [counter, setCounter] = useState(0);
+
 
   const handleClick = (btnIndex) => {
     setToggle({ ...toggle, [btnIndex]: !toggle[btnIndex] });
@@ -61,25 +61,40 @@ const SearchPage = ({ reting }) => {
       ...toggle,
       [btnIndex]: !toggle[btnIndex],
     }).filter((val) => val).length;
+<<<<<<< HEAD
+    ;
+
+
+=======
     setCounter(numClicked);
+>>>>>>> master
   };
 
   const toggleCount = Object.values(toggle).filter((val) => val).length;
 
+<<<<<<< HEAD
+  const [input, setInput] = useState("");
+=======
   const [input, setInput] = useState({});
+>>>>>>> master
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
   const [branchs, setBranchs] = useState([]);
 
-  // const handleInput = (e) => {
-  //   const { value, name } = e.target
-  //   setInput({ ...input, [name]: value })
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
+    navigate(
+      getFilterUrl({
+        query: input,
+        page: 1,
+      })
+    );
+    setQuery(input);
+=======
     setTitle(input);
     setInput({});
+>>>>>>> master
   };
 
   useEffect(() => {
@@ -180,7 +195,10 @@ const SearchPage = ({ reting }) => {
     }
   };
 
+<<<<<<< HEAD
+=======
   console.log(firstDay);
+>>>>>>> master
 
   const handleNextWeek = () => {
     const firstDay = new Date(dateRange[1]);
@@ -190,10 +208,55 @@ const SearchPage = ({ reting }) => {
     setDateRange([firstDay, lastDay]);
   };
 
+
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
 
   return (
     <>
+<<<<<<< HEAD
+      <Navbar />
+      <div className='search-card-container '>
+        <div className='d-flex justify-content-center w-75 m-auto pb-4'>
+          <select className='search-select' value={branch} name="branch"
+            onChange={(e) => {
+              navigate(getFilterUrl({ branch: e.target.value }));
+            }} title="Branş Seç" id="navbarScrollingDropdown">
+            <option defaultValue="all">Branş Seç</option>
+            {branchs
+              ?.sort((a, b) => a.title.localeCompare(b.title))
+              .map((item) => (
+                <option key={item._id} value={item.title}>
+                  {item.title}
+                </option>
+              ))}
+          </select>
+
+          <Form
+            onSubmit={handleSubmit}
+            className="d-flex w-75 search-form "
+          >
+            <input
+              type="search"
+              placeholder="İsme göre ara"
+              className="w-75 search-select-input"
+              aria-label="Search"
+              id='branchs'
+              name='branchs'
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+            />
+            <button type='submit' variant='outline-light' className='search-inputbutton border-0 text-white w-25 ' >Avukat Ara
+            </button>
+          </Form>
+        </div>
+        <div className='mx-5 '>
+          <p >Filtreler :</p>
+          <button className={toggle.btn1 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2 rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn1")}>En Yeniler</button>
+          <Button className={toggle.btn2 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn2")}>Teyit Edilmiş</Button>
+          <Button className={toggle.btn3 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn3")}>Puana Göre Sırala</Button>
+=======
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -338,8 +401,9 @@ const SearchPage = ({ reting }) => {
             Daha Fazla Filtre{" "}
             <span className="btn rounded-5 active counter">{counter}</span>
           </Button>
+>>>>>>> master
         </div>
-        <div className="w-50 m-5">
+        <div className="mx-5">
           <h2 className="mb-4">
             {" "}
             {Object.keys(title).length ? `${title?.branch} Avukatı` : ""}{" "}
@@ -350,10 +414,10 @@ const SearchPage = ({ reting }) => {
             edilmiştir.
           </p>
         </div>
-        <div>
+        <div className="w-100">
           {lawyers?.map((user) => (
             <div key={user._id} className=" d-flex justfiy-content-around m-5 ">
-              <div className="border border-warning w-75 m-2 p-2 rounded-4 ">
+              <div className="search-card-lawyer rounded-4 ">
                 <div className="d-flex  ">
                   <div className=" d-flex ">
                     <div className="w-100 ">
@@ -370,10 +434,13 @@ const SearchPage = ({ reting }) => {
                                 {user.name} {user.surname}{" "}
                               </b>{" "}
                             </span>
-
-                            <i class="fa-solid fa-clipboard-check mx-2 text-warning"></i>
+                            {user.isTick ? (
+                              <i class="fa-solid fa-circle-check mx-2 text-warning"></i>
+                            ) : (
+                              ""
+                            )}
                           </div>
-                          <div className="d-flex">
+                          { /* <div className="d-flex">
                             <div className="mx-2 text-success">
                               {" "}
                               <i className="fa-solid fa-circle-check"></i>{" "}
@@ -384,7 +451,7 @@ const SearchPage = ({ reting }) => {
                               <i className="fa-solid fa-circle-check"></i>{" "}
                               <span>büroda görüşmeye uygun</span>{" "}
                             </div>
-                          </div>
+                          </div> */}
                           <p className="m-2">{user.branch} avukatı, İstanbul</p>
                           <p className="mx-2">15 Yıllık Deneyim</p>
                           <p className="m-2 star">
@@ -401,22 +468,25 @@ const SearchPage = ({ reting }) => {
                         <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
                         <h5 className="star">Bio</h5>
                         <p className="extra-content">
+<<<<<<< HEAD
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          Qui, consectetur nequeab porro quasi culpa nulla rerum
+                          quis minus voluptatibus sed hic ad quo sint, libero
+                          commodi officia aliquam! Maxime. Lorem ipsum dolor sit
+                          amet consectetur adipisicing elit.
+=======
                           Lorem ipsum dolor sit amet consectetur adipisicing
                           elit. Qui, consectetur nequeab porro quasi culpa nulla
                           rerum quis minus voluptatibus sed hic ad quo sint,
                           libero commodi officia aliquam! Maxime. Lorem ipsum
                           dolor sit amet consectetur adipisicing elit.{" "}
+>>>>>>> master
                         </p>
-
                         {readMore && extraContent}
-                        <a
-                          className="read-more-link"
-                          onClick={() => {
-                            setReadMore(!readMore);
-                          }}
-                        >
-                          <h2 className="more">{linkName}</h2>
-                        </a>
+                        <h2 className="more" onClick={() => {
+                          setReadMore(!readMore);
+                        }}>{linkName}</h2>
+
 
                         <div className="p-2 d-flex justify-content-around star">
                           <div className="p-2 d-flex justify-content-around star">
@@ -441,6 +511,10 @@ const SearchPage = ({ reting }) => {
                     </div>
 
                     <div className="right-box">
+<<<<<<< HEAD
+                      <div className='justify-content-center p-2'>
+                        <Table borderless='true'>
+=======
                       <div className="d-flex  p-2 ">
                         <Button
                           variant="outline-light"
@@ -457,6 +531,7 @@ const SearchPage = ({ reting }) => {
                       </div>
                       <div className="justify-content-center p-2">
                         <Table borderless="true">
+>>>>>>> master
                           <thead>
                             <tr className="tarih">
                               <td>
@@ -534,6 +609,25 @@ const SearchPage = ({ reting }) => {
                                 onClick={() => {
                                   setMoreHour(!moreHour);
 
+<<<<<<< HEAD
+                                if (!moreHour) {
+                                  setHours(hours.slice(0, 6));
+                                } else {
+                                  setHours([
+                                    "09:00",
+                                    "10:00",
+                                    "11:00",
+                                    "12:00",
+                                    "13:00",
+                                    "14:00",
+                                    "15:00",
+                                    "16:00",
+                                    "17:00",
+                                    "18:00",
+                                  ]);
+                                }
+                              }} colSpan={6}>
+=======
                                   if (moreHour) {
                                     setHours(hours.slice(0, 6));
                                   } else {
@@ -553,6 +647,7 @@ const SearchPage = ({ reting }) => {
                                 }}
                                 colSpan={6}
                               >
+>>>>>>> master
                                 {linkHour}
                                 {caretIcon}
                               </td>
