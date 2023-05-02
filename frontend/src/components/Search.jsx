@@ -19,11 +19,14 @@ const Search = () => {
 
   return (
     <div>
-      <form className='search' >
-
-        <select className='search-select' value={branch} name="branch"
-          onChange={(e) => setBranch(e.target.value)
-          } title="Branş Seç" id="navbarScrollingDropdown">
+      <form className='search-form' >
+        <select className='search-select'
+          value={branch}
+          name="branch"
+          onChange={(e) => setBranch(e.target.value)}
+          title="Branş Seç"
+          id="navbarScrollingDropdown"
+        >
           <option defaultValue="all">Branş Seç</option>
           {branchs
             ?.sort((a, b) => a.title.localeCompare(b.title))
@@ -33,7 +36,9 @@ const Search = () => {
               </option>
             ))}
         </select>
-        <button className='home-button text-white' type='submit' onClick={() => navigate(`/search?branch=${branch}&query=all&price=all&rating=all&order=newest&page=1`)}>Avukat Ara</button>
+        <button
+          className='home-button text-white'
+          type='submit' onClick={() => navigate(`/search?branch=${branch}&query=all&price=all&rating=all&order=newest&page=1`)}>Avukat Ara</button>
       </form>
     </div>
   )
