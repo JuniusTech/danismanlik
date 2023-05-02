@@ -8,6 +8,7 @@ const lawyerRouter = require("./routes/lawyerRoute");
 const mongoSanitize = require("express-mongo-sanitize");
 const passwordResetRouter = require("./routes/passwordResetRoute");
 const lawPassResetRouter = require("./routes/lawPassResetRoute");
+const session = require("express-session");
 const cors = require("cors");
 const dateRouter = require("./routes/dateRoute");
 
@@ -24,10 +25,29 @@ mongoose
 
 const app = express();
 
+app.use(
+  session({
+    secret: "somethingsecretgoeshere",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
+app.use(
+  cookieParser({
+    origin: process.env.FRONTEND_BASE_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use(
   mongoSanitize({
