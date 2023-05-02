@@ -29,10 +29,10 @@ const SearchPage = ({ reting }) => {
     const filterRating = filter.rating || rating;
     const filterIsTick = filter.isTick || isTick;
     const sortOrder = filter.order || order;
-    return `${skipPathname ? "" : "/search?"
-      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${
+      skipPathname ? "" : "/search?"
+    }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
-
 
   const [toggle, setToggle] = useState({
     btn1: false,
@@ -61,20 +61,29 @@ const SearchPage = ({ reting }) => {
       ...toggle,
       [btnIndex]: !toggle[btnIndex],
     }).filter((val) => val).length;
+<<<<<<< HEAD
     ;
 
 
+=======
+    setCounter(numClicked);
+>>>>>>> master
   };
 
   const toggleCount = Object.values(toggle).filter((val) => val).length;
 
+<<<<<<< HEAD
   const [input, setInput] = useState("");
+=======
+  const [input, setInput] = useState({});
+>>>>>>> master
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
-  const [branchs, setBranchs] = useState([])
+  const [branchs, setBranchs] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     navigate(
       getFilterUrl({
         query: input,
@@ -82,6 +91,10 @@ const SearchPage = ({ reting }) => {
       })
     );
     setQuery(input);
+=======
+    setTitle(input);
+    setInput({});
+>>>>>>> master
   };
 
   useEffect(() => {
@@ -150,7 +163,8 @@ const SearchPage = ({ reting }) => {
   const days = ["", "", "", ""];
   const [dateRange, setDateRange] = useState([firstDay, lastDay]);
 
-  {/*   const handlePrevWeek = () => {
+  {
+    /*   const handlePrevWeek = () => {
     const firstDay = new Date(dateRange[0]);
     firstDay.setDate(firstDay.getDate() - 4);
 
@@ -164,7 +178,8 @@ const SearchPage = ({ reting }) => {
       lastDay = new Date(today.getTime() - 1);
     }
     setDateRange([firstDay, lastDay]);
-  }; */}
+  }; */
+  }
   const handlePrevWeek = () => {
     const today = new Date();
     const firstDay = new Date(dateRange[0]);
@@ -180,6 +195,10 @@ const SearchPage = ({ reting }) => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  console.log(firstDay);
+>>>>>>> master
 
   const handleNextWeek = () => {
     const firstDay = new Date(dateRange[1]);
@@ -192,9 +211,9 @@ const SearchPage = ({ reting }) => {
 
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
 
-
   return (
     <>
+<<<<<<< HEAD
       <Navbar />
       <div className='search-card-container '>
         <div className='d-flex justify-content-center w-75 m-auto pb-4'>
@@ -237,6 +256,152 @@ const SearchPage = ({ reting }) => {
           <button className={toggle.btn1 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2 rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn1")}>En Yeniler</button>
           <Button className={toggle.btn2 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn2")}>Teyit Edilmiş</Button>
           <Button className={toggle.btn3 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn3")}>Puana Göre Sırala</Button>
+=======
+      <Navbar bg="light" expand="lg">
+        <Container fluid>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0 d-flex justify-content-around align-items-center w-100"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+              <div>
+                <img src={logo} alt="" />
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <select
+                  className="search-select"
+                  value={branch}
+                  name="branch"
+                  onChange={(e) => {
+                    navigate(getFilterUrl({ branch: e.target.value }));
+                  }}
+                  title="Branş Seç"
+                  id="navbarScrollingDropdown"
+                >
+                  <option defaultValue="all">Branş Seç</option>
+                  {branchs
+                    ?.sort((a, b) => a.title.localeCompare(b.title))
+                    .map((item) => (
+                      <option key={item._id} value={item.title}>
+                        {item.title}
+                      </option>
+                    ))}
+                </select>
+
+                <Form
+                  onSubmit={handleSubmit}
+                  className="d-flex w-100 search-form "
+                >
+                  <input
+                    type="search"
+                    placeholder="İsme göre ara"
+                    className="w-75 search-select-input"
+                    aria-label="Search"
+                    id="branchs"
+                    name="branchs"
+                    value={query}
+                    onChange={(e) => {
+                      navigate(getFilterUrl({ query: e.target.value }));
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    variant="outline-light"
+                    className="search-inputbutton w-25 "
+                  >
+                    Avukat Ara
+                  </button>
+                </Form>
+              </div>
+              <div className="d-flex ml-auto p-2 ">
+                <button className="search-inputbutton" variant="outline-light">
+                  Avukat mısınız?
+                </button>
+                <NavDropdown
+                  className="border border-2 border-dark rounded-2 ms-3 kayıt"
+                  title="KAYIT OL"
+                  id="navbarScrollingDropdown"
+                >
+                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action5">
+                    Something else here
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown
+                  className="border border-2 border-dark rounded-2 ms-3 "
+                  title="GİRİŞ YAP"
+                  id="navbarScrollingDropdown"
+                >
+                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action5">
+                    Something else here
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </div>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <div className="search-card-container ">
+        <div className="mx-5 ">
+          <p>Filtreler :</p>
+          <Button
+            className={
+              toggle.btn1
+                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
+                : "btn btn-light btn-outline-warning rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleClick("btn1")}
+          >
+            Büroda Görüşmeye Uygun
+          </Button>
+          <Button
+            className={
+              toggle.btn2
+                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
+                : "btn btn-light btn-outline-warning rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleClick("btn2")}
+          >
+            Online Görüşmeye Uygun
+          </Button>
+          <Button
+            className={
+              toggle.btn3
+                ? "btn btn-light btn-outline-warning rounded-5 mx-2 active"
+                : "btn btn-light btn-outline-warning rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleClick("btn3")}
+          >
+            Teyit Edilmiş
+          </Button>
+          <Button
+            className="btn btn-light btn-outline-warning rounded-5 mx-2"
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleClick("btn4")}
+          >
+            Daha Fazla Filtre{" "}
+            <span className="btn rounded-5 active counter">{counter}</span>
+          </Button>
+>>>>>>> master
         </div>
         <div className="mx-5">
           <h2 className="mb-4">
@@ -303,11 +468,19 @@ const SearchPage = ({ reting }) => {
                         <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
                         <h5 className="star">Bio</h5>
                         <p className="extra-content">
+<<<<<<< HEAD
                           Lorem ipsum dolor sit amet consectetur adipisicing elit.
                           Qui, consectetur nequeab porro quasi culpa nulla rerum
                           quis minus voluptatibus sed hic ad quo sint, libero
                           commodi officia aliquam! Maxime. Lorem ipsum dolor sit
                           amet consectetur adipisicing elit.
+=======
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Qui, consectetur nequeab porro quasi culpa nulla
+                          rerum quis minus voluptatibus sed hic ad quo sint,
+                          libero commodi officia aliquam! Maxime. Lorem ipsum
+                          dolor sit amet consectetur adipisicing elit.{" "}
+>>>>>>> master
                         </p>
                         {readMore && extraContent}
                         <h2 className="more" onClick={() => {
@@ -316,39 +489,78 @@ const SearchPage = ({ reting }) => {
 
 
                         <div className="p-2 d-flex justify-content-around star">
-                          <div className='p-2 d-flex justify-content-around star'>
+                          <div className="p-2 d-flex justify-content-around star">
+                            <div>
+                              <i className="fa-solid fa-tty fa-l"></i>{" "}
+                              <span className="px-2">{user.phone}</span>{" "}
+                            </div>
 
-                            <div><i className="fa-solid fa-tty fa-l"></i> <span className="px-2">{user.phone}</span> </div>
+                            <div className="right-box-comment px-5">
+                              {" "}
+                              <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
+                              <span>Mesaj Gönder</span>{" "}
+                            </div>
 
-                            <div className="right-box-comment px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
-
-                            <div className="right-box-comment px-5 "><i className="fa-solid fa-globe  "></i> <span>Web Sitesi'ne Git</span> </div>
+                            <div className="right-box-comment px-5 ">
+                              <i className="fa-solid fa-globe  "></i>{" "}
+                              <span>Web Sitesi'ne Git</span>{" "}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="right-box">
+<<<<<<< HEAD
                       <div className='justify-content-center p-2'>
                         <Table borderless='true'>
+=======
+                      <div className="d-flex  p-2 ">
+                        <Button
+                          variant="outline-light"
+                          className="ms-2 rounded-2 button"
+                        >
+                          Büro
+                        </Button>
+                        <Button
+                          checked="true"
+                          className="ms-2 rounded-2 button"
+                        >
+                          Online
+                        </Button>
+                      </div>
+                      <div className="justify-content-center p-2">
+                        <Table borderless="true">
+>>>>>>> master
                           <thead>
                             <tr className="tarih">
                               <td>
-                                <button className="rounded-5 mt-3 search-caret" onClick={handlePrevWeek} disabled={new Date(dateRange[0]) < new Date()} >
-                                  <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
+                                <button
+                                  className="rounded-5 mt-3 search-caret"
+                                  onClick={handlePrevWeek}
+                                  disabled={new Date(dateRange[0]) < new Date()}
+                                >
+                                  <i className="fa-solid fa-caret-left fa-sm mx-2"></i>
                                 </button>
-
                               </td>
                               {days.map((day, index) => {
                                 const currentDate = new Date(dateRange[0]);
-                                currentDate.setDate(dateRange[0].getDate() + index);
+                                currentDate.setDate(
+                                  dateRange[0].getDate() + index
+                                );
                                 const dayOfMonth = currentDate.getDate();
-                                const month = currentDate.toLocaleString("default", {
-                                  month: "short",
-                                });
-                                const dayOfWeek = currentDate.toLocaleString("default", {
-                                  weekday: "short",
-                                });
+                                const month = currentDate.toLocaleString(
+                                  "default",
+                                  {
+                                    month: "short",
+                                  }
+                                );
+                                const dayOfWeek = currentDate.toLocaleString(
+                                  "default",
+                                  {
+                                    weekday: "short",
+                                  }
+                                );
                                 let label = "";
                                 if (dayOfMonth === today.getDate()) {
                                   label = "Bugün";
@@ -366,30 +578,38 @@ const SearchPage = ({ reting }) => {
                                 );
                               })}
                               <td>
-                                <button className="rounded-5 mt-3 search-caret" onClick={handleNextWeek}>
-                                  <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
+                                <button
+                                  className="rounded-5 mt-3 search-caret"
+                                  onClick={handleNextWeek}
+                                >
+                                  <i className="fa-solid fa-caret-right fa-sm mx-2"></i>
                                 </button>
                               </td>
-
                             </tr>
-
                           </thead>
                           <tbody>
                             {hours.map((hour) => (
                               <tr key={hour}>
                                 <td></td>
                                 {days.map((day) => (
-                                  <td >
-                                    <button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>
+                                  <td>
+                                    <button
+                                      className="search-hoursbutton {selected} rounded-2"
+                                      size="sm"
+                                    >
+                                      {hour}
+                                    </button>
                                   </td>
                                 ))}
                               </tr>
                             ))}
 
-                            <tr className="much" >
-                              <td onClick={() => {
-                                setMoreHour(!moreHour);
+                            <tr className="much">
+                              <td
+                                onClick={() => {
+                                  setMoreHour(!moreHour);
 
+<<<<<<< HEAD
                                 if (!moreHour) {
                                   setHours(hours.slice(0, 6));
                                 } else {
@@ -407,29 +627,42 @@ const SearchPage = ({ reting }) => {
                                   ]);
                                 }
                               }} colSpan={6}>
+=======
+                                  if (moreHour) {
+                                    setHours(hours.slice(0, 6));
+                                  } else {
+                                    setHours([
+                                      "09:00",
+                                      "10:00",
+                                      "11:00",
+                                      "12:00",
+                                      "13:00",
+                                      "14:00",
+                                      "15:00",
+                                      "16:00",
+                                      "17:00",
+                                      "18:00",
+                                    ]);
+                                  }
+                                }}
+                                colSpan={6}
+                              >
+>>>>>>> master
                                 {linkHour}
                                 {caretIcon}
                               </td>
                             </tr>
                           </tbody>
                         </Table>
-
-
                       </div>
                     </div>
                   </div>
-
                 </div>
-
-              </div >
-
-            </div >
-          ))
-          }
-
-
-        </div >
-      </div >
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
