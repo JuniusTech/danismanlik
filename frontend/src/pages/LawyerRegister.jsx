@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 
 import "../css/RegisterPages.css";
@@ -13,11 +13,38 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   const [phoneRegion, setPhoneRegion] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const phone = `${phoneRegion} + ${phoneNo}`;
-  const [branch, setBranch] = useState("");
+  const [branch, setBranch] = useState([]);
   const [password2, setPassword2] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("https://danis.onrender.com/api/branchs")
+      .then((response) => {
+        setBranch(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const data = {
+      name: "ali",
+    };
+    // axios
+    //   .post("https://danis.onrender.com/api/users/signup", data)
+    //   .then((response) => {
+    //     alert("İşlem Başarılı " + response.status);
+    //     console.log("işlem başarılı");
+    //   });
+
+    fetch("https://danis.onrender.com/api/users/signup", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then(console.log("işlem başarılı"));
+
     console.log(
       name,
       surName,
@@ -101,16 +128,23 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             </div>
 
             <select
-              id="inputGroupSelect01"
               className="custom-select brans w-100"
               value={branch}
+              name="branch"
               onChange={(e) => setBranch(e.target.value)}
+              title="Branş Seç"
+              id="navbarScrollingDropdown"
             >
-              <option selected>Lütfen Branş Seçiniz:</option>
-              <option value="1">İcra</option>
-              <option value="2">Boşanma</option>
-              <option value="3">AğırCeza</option>
+              <option defaultValue="all">Branş Seç</option>
+              {branch
+                ?.sort((a, b) => a.title.localeCompare(b.title))
+                .map((item) => (
+                  <option key={item._id} value={item.title}>
+                    {item.title}
+                  </option>
+                ))}
             </select>
+
             <label htmlFor="">Şifre Tekrar*</label>
             <input
               id="password2"
