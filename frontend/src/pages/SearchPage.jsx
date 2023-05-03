@@ -139,6 +139,7 @@ const SearchPage = ({ reting }) => {
     "11:00",
     "12:00",
     "13:00",
+    "14:00"
 
   ]);
 
@@ -171,6 +172,8 @@ const SearchPage = ({ reting }) => {
     setDateRange([firstDay, lastDay]);
   };
 
+
+
   const handleNextWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[1]);
     firstDay.setDate(firstDay.getDate() + 1);
@@ -178,7 +181,8 @@ const SearchPage = ({ reting }) => {
     lastDay.setDate(lastDay.getDate() + 3);
     setDateRange([firstDay, lastDay]);
   };
-  console.log(lawyers)
+
+
 
 
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
@@ -317,18 +321,14 @@ const SearchPage = ({ reting }) => {
                           <thead>
                             <tr className="tarih">
                               <td>
-                                {/* <button
+                                <button
                                   id={`handlePrevWeek-${user._id}`}
                                   className="rounded-5 mt-3 search-caret"
                                   onClick={() => {
                                     handlePrevWeek(user._id);
                                   }} disabled={new Date(dateRange[0]) < new Date()} >
                                   <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
-                                </button> */}
-                                <button className="rounded-5 mt-3 search-caret" onClick={handlePrevWeek} disabled={new Date(dateRange[0]) < new Date()} >
-                                  <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
                                 </button>
-
                               </td>
                               {days.map((day, index) => {
                                 const currentDate = new Date(dateRange[0]);
@@ -357,15 +357,12 @@ const SearchPage = ({ reting }) => {
                                 );
                               })}
                               <td>
-                                {/*    <button
+                                <button
                                   id={`handleNextWeek-${user._id}`}
                                   className="rounded-5 mt-3 search-caret"
                                   onClick={() => {
                                     handleNextWeek(user._id);
                                   }}>
-                                  <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
-                                </button> */}
-                                <button className="rounded-5 mt-3 search-caret" onClick={handleNextWeek}>
                                   <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
                                 </button>
                               </td>
@@ -374,6 +371,7 @@ const SearchPage = ({ reting }) => {
 
                           </thead>
                           <tbody>
+                            { }
                             {hours.map((hour) => (
                               <tr key={hour}>
                                 <td></td>
