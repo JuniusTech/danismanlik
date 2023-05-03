@@ -65,6 +65,8 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
       ? { rating: -1 }
       : order === "newest"
       ? { createdAt: -1 }
+      : order === "barNo"
+      ? { barNo: -1 }
       : { _id: -1 };
 
   const lawyers = await Lawyer.find({

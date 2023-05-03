@@ -1,14 +1,14 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
-  const [branchs, setBranchs] = useState([])
-  const [branch, setBranch] = useState("")
+  const [branchs, setBranchs] = useState([]);
+  const [branch, setBranch] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("https://danis.onrender.com/api/branchs")
+      .get(`${process.env.REACT_APP_BASE_URI}/api/branchs`)
       .then((response) => {
         setBranchs(response.data);
       })
@@ -19,8 +19,9 @@ const Search = () => {
 
   return (
     <div>
-      <form className='search-form' >
-        <select className='search-select'
+      <form className="search-form">
+        <select
+          className="search-select"
           value={branch}
           name="branch"
           onChange={(e) => setBranch(e.target.value)}
@@ -37,11 +38,19 @@ const Search = () => {
             ))}
         </select>
         <button
-          className='home-button text-white'
-          type='submit' onClick={() => navigate(`/search?branch=${branch}&query=all&price=all&rating=all&order=newest&page=1`)}>Avukat Ara</button>
+          className="home-button text-white"
+          type="submit"
+          onClick={() =>
+            navigate(
+              `/search?branch=${branch}&query=all&price=all&rating=all&order=newest&page=1`
+            )
+          }
+        >
+          Avukat Ara
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
