@@ -110,14 +110,20 @@ const SearchPage = ({ reting }) => {
   }, [branch, query, rating, order]);
 
   const [readMore, setReadMore] = useState(false);
-  const linkName = readMore ? "Daha Az Gör " : "Daha Fazla Gör  ";
+
   const extraContent = (
     <p className="extra-content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur
-      nequeab porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad
-      quo sint, libero commodi officia aliquam! Maxime.
+
     </p>
   );
+  const [lawyerStates, setLawyerStates] = useState({});
+
+  const handleReadMoreClick = (lawyerId) => {
+    setLawyerStates(prevStates => ({
+      ...prevStates,
+      [lawyerId]: !prevStates[lawyerId]
+    }));
+  };
 
   const [moreHour, setMoreHour] = useState(false);
   const linkHour = moreHour ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster";
@@ -126,20 +132,19 @@ const SearchPage = ({ reting }) => {
   ) : (
     <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
   );
+
   const [hours, setHours] = useState([
     "09:00",
     "10:00",
     "11:00",
     "12:00",
     "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
+
   ]);
 
-  console.log(lawyers);
+  const handleMoreHour = (lawyerId) => {
+    setMoreHour(!moreHour);
+  };
 
   const today = new Date();
   const firstDay = new Date(today);
@@ -150,7 +155,7 @@ const SearchPage = ({ reting }) => {
   const days = ["", "", "", ""];
   const [dateRange, setDateRange] = useState([firstDay, lastDay]);
 
-  {/*   const handlePrevWeek = () => {
+  const handlePrevWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[0]);
     firstDay.setDate(firstDay.getDate() - 4);
 
@@ -164,30 +169,16 @@ const SearchPage = ({ reting }) => {
       lastDay = new Date(today.getTime() - 1);
     }
     setDateRange([firstDay, lastDay]);
-  }; */}
-  const handlePrevWeek = () => {
-    const today = new Date();
-    const firstDay = new Date(dateRange[0]);
-    firstDay.setDate(firstDay.getDate() - 4);
-
-    if (firstDay < today) {
-      const lastDay = new Date(dateRange[0]);
-      lastDay.setDate(lastDay.getDate() - 1);
-      if (lastDay < today) {
-        lastDay = new Date(today.getTime() - 1);
-      }
-      setDateRange([firstDay, lastDay]);
-    }
   };
 
-
-  const handleNextWeek = () => {
+  const handleNextWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[1]);
     firstDay.setDate(firstDay.getDate() + 1);
     const lastDay = new Date(firstDay);
     lastDay.setDate(lastDay.getDate() + 3);
     setDateRange([firstDay, lastDay]);
   };
+  console.log(lawyers)
 
 
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
@@ -251,14 +242,14 @@ const SearchPage = ({ reting }) => {
         </div>
         <div className="w-100">
           {lawyers?.map((user) => (
-            <div key={user._id} className=" d-flex justfiy-content-around m-5 ">
+            <div key={user._id} className="d-flex justfiy-content-around m-5 ">
               <div className="search-card-lawyer rounded-4 ">
                 <div className="d-flex  ">
                   <div className=" d-flex ">
                     <div className="w-100 ">
                       <div className="d-flex w-100 ">
                         <div className="h-100">
-                          <img width="150rem" src={image} alt="image" />
+                          <img width="150rem" src={image} alt="profilepict" />
                         </div>
 
                         <div className="flex-fill m-2 ">
@@ -275,18 +266,6 @@ const SearchPage = ({ reting }) => {
                               ""
                             )}
                           </div>
-                          { /* <div className="d-flex">
-                            <div className="mx-2 text-success">
-                              {" "}
-                              <i className="fa-solid fa-circle-check"></i>{" "}
-                              <span>online görüşmeye uygun</span>{" "}
-                            </div>
-                            <div className="mx-2 text-success">
-                              {" "}
-                              <i className="fa-solid fa-circle-check"></i>{" "}
-                              <span>büroda görüşmeye uygun</span>{" "}
-                            </div>
-                          </div> */}
                           <p className="m-2">{user.branch} avukatı, İstanbul</p>
                           <p className="mx-2">15 Yıllık Deneyim</p>
                           <p className="m-2 star">
@@ -310,10 +289,14 @@ const SearchPage = ({ reting }) => {
                           amet consectetur adipisicing elit.
                         </p>
                         {readMore && extraContent}
-                        <h2 className="more" onClick={() => {
-                          setReadMore(!readMore);
-                        }}>{linkName}</h2>
-
+                        {lawyerStates[user._id] && (
+                          <p className="extra-content">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur
+                            nequeab porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad
+                            quo sint, libero commodi officia aliquam! Maxime.
+                          </p>
+                        )}
+                        <h2 id={user._id} className="more" onClick={() => handleReadMoreClick(user._id)}>{lawyerStates[user._id] ? "Daha Az Gör" : "Daha Fazla Gör"}</h2>
 
                         <div className="p-2 d-flex justify-content-around star">
                           <div className='p-2 d-flex justify-content-around star'>
@@ -334,6 +317,14 @@ const SearchPage = ({ reting }) => {
                           <thead>
                             <tr className="tarih">
                               <td>
+                                {/* <button
+                                  id={`handlePrevWeek-${user._id}`}
+                                  className="rounded-5 mt-3 search-caret"
+                                  onClick={() => {
+                                    handlePrevWeek(user._id);
+                                  }} disabled={new Date(dateRange[0]) < new Date()} >
+                                  <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
+                                </button> */}
                                 <button className="rounded-5 mt-3 search-caret" onClick={handlePrevWeek} disabled={new Date(dateRange[0]) < new Date()} >
                                   <i className="fa-solid fa-caret-left fa-sm mx-2" ></i>
                                 </button>
@@ -366,6 +357,14 @@ const SearchPage = ({ reting }) => {
                                 );
                               })}
                               <td>
+                                {/*    <button
+                                  id={`handleNextWeek-${user._id}`}
+                                  className="rounded-5 mt-3 search-caret"
+                                  onClick={() => {
+                                    handleNextWeek(user._id);
+                                  }}>
+                                  <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
+                                </button> */}
                                 <button className="rounded-5 mt-3 search-caret" onClick={handleNextWeek}>
                                   <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
                                 </button>
@@ -387,10 +386,10 @@ const SearchPage = ({ reting }) => {
                             ))}
 
                             <tr className="much" >
-                              <td onClick={() => {
+                              <td id={`handleMoreHour-${user._id}`} onClick={() => {
+                                handleMoreHour(user._id);
                                 setMoreHour(!moreHour);
-
-                                if (!moreHour) {
+                                if (moreHour) {
                                   setHours(hours.slice(0, 6));
                                 } else {
                                   setHours([
