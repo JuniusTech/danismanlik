@@ -13,14 +13,18 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   const [phoneRegion, setPhoneRegion] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const phone = `${phoneRegion} + ${phoneNo}`;
-  const [branch, setBranch] = useState([]);
+  const [branch, setBranch] = useState("");
+  const [branches, setBranches] = useState([]);
   const [password2, setPassword2] = useState("");
+  const [infoText, setInfoText] = useState(false);
+  const [memberAg, setMemberAg] = useState(false);
+  const [perData, setPerData] = useState(false);
 
   useEffect(() => {
     axios
       .get("https://danis.onrender.com/api/branchs")
       .then((response) => {
-        setBranch(response.data);
+        setBranches(response.data);
         console.log(response.data);
       })
       .catch((error) => {
@@ -28,22 +32,31 @@ const AvukatLoginPage = ({ show, handleClose }) => {
       });
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    const data = {
-      name: "ali",
-    };
-    // axios
-    //   .post("https://danis.onrender.com/api/users/signup", data)
-    //   .then((response) => {
-    //     alert("İşlem Başarılı " + response.status);
-    //     console.log("işlem başarılı");
-    //   });
+    try {
+      const { data } = await axios.post(
+        "https://danis.onrender.com/api/lawyers/signup",
+        {
+          name,
+          surName,
+          email,
+          password,
+          barNo,
+          branch,
+          phone,
+          infoText,
+          memberAg,
+          perData,
+        }
+      );
+      console.log(data, "gönderme başarılı");
+    } catch (error) {}
 
-    fetch("https://danis.onrender.com/api/users/signup", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }).then(console.log("işlem başarılı"));
+    // fetch("https://danis.onrender.com/api/users/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    // }).then(console.log("işlem başarılı"));
 
     console.log(
       name,
@@ -54,7 +67,10 @@ const AvukatLoginPage = ({ show, handleClose }) => {
       phoneRegion,
       branch,
       password2,
-      phone
+      phone,
+      infoText,
+      perData,
+      memberAg
     );
   };
 
@@ -136,7 +152,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
               id="navbarScrollingDropdown"
             >
               <option defaultValue="all">Branş Seç</option>
-              {branch
+              {branches
                 ?.sort((a, b) => a.title.localeCompare(b.title))
                 .map((item) => (
                   <option key={item._id} value={item.title}>
@@ -159,6 +175,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
 
         <div class="input-group-text radio">
           <input
+            onClick={() => setMemberAg(!memberAg)}
             type="radio"
             aria-label="Radio button for following text input"
           />
@@ -168,6 +185,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
         </div>
         <div class="input-group-text radio">
           <input
+            onClick={() => setInfoText(!infoText)}
             type="radio"
             aria-label="Radio button for following text input"
           />
@@ -177,6 +195,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
         </div>
         <div class="input-group-text  radio">
           <input
+            onClick={() => setPerData(!perData)}
             type="radio"
             aria-label="Radio button for following text input"
           />

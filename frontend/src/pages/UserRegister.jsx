@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "../css/RegisterPages.css";
+import axios from "axios";
 
 const AvukatLoginPage = ({ show, handleClose }) => {
   const [name, setName] = useState("");
@@ -11,25 +12,33 @@ const AvukatLoginPage = ({ show, handleClose }) => {
   const [phoneNo, setPhoneNo] = useState("");
   const phone = `${phoneRegion} + ${phoneNo}`;
   const [password2, setPassword2] = useState("");
+  const [infoText, setInfoText] = useState(false);
+  const [memberAg, setMemberAg] = useState(false);
+  const [perData, setPerData] = useState(false);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(
-      name,
-      surName,
-      email,
-      password,
-
-      phoneRegion,
-
-      password2,
-      phone
-    );
+    try {
+      const { data } = await axios.post(
+        "https://danis.onrender.com/api/users/signup",
+        {
+          name,
+          surName,
+          email,
+          password,
+          phone,
+          infoText,
+          memberAg,
+          perData,
+        }
+      );
+      console.log(data, "gönderme başarılı");
+    } catch (error) {}
   };
 
   return (
     <Modal show={show} onHide={handleClose} animation={false} centered>
-      <form className="formDiv">
+      <form className="formDiv" onSubmit={submitHandler}>
         <div class="row">
           <div class="col">
             <label htmlFor="">Ad*</label>
@@ -99,9 +108,10 @@ const AvukatLoginPage = ({ show, handleClose }) => {
             />
           </div>
         </div>
-        {/* //! gap verilecek ---------------------------------------------------------*/}
+
         <div class="input-group-text radio">
           <input
+            onClick={() => setMemberAg(!memberAg)}
             type="radio"
             aria-label="Radio button for following text input"
           />
@@ -111,6 +121,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
         </div>
         <div class="input-group-text  radio">
           <input
+            onClick={() => setInfoText(!infoText)}
             type="radio"
             aria-label="Radio button for following text input"
           />
@@ -120,6 +131,7 @@ const AvukatLoginPage = ({ show, handleClose }) => {
         </div>
         <div class="input-group-text  radio">
           <input
+            onClick={() => setPerData(!perData)}
             type="radio"
             aria-label="Radio button for following text input"
           />
@@ -142,7 +154,9 @@ const AvukatLoginPage = ({ show, handleClose }) => {
         </div>
         <div className="loginPageButtons">
           <button className="loginPagebtn1">İptal Et</button>
-          <button className="loginPagebtn2">Kayıt Ol</button>
+          <button className="loginPagebtn2" type="submit">
+            Kayıt Ol
+          </button>
         </div>
         <p>
           Zaten üye misin? Hemen <span>giriş yap!</span>{" "}

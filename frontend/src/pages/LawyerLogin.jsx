@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../css/LoginPages.css";
+import axios from "axios";
 
 const AvukatSignPage = ({ show, handleClose }) => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,16 @@ const AvukatSignPage = ({ show, handleClose }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "https://danis.onrender.com/api/lawyers/signin",
+        {
+          email,
+          password,
+        }
+      );
+      console.log(data, "gönderme başarılı");
+    } catch (error) {}
     console.log(email, password);
   };
 
