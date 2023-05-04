@@ -33,7 +33,6 @@ const SearchPage = ({ reting }) => {
       }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
-
   const [toggle, setToggle] = useState({
     btn1: false,
     btn2: false,
@@ -53,17 +52,12 @@ const SearchPage = ({ reting }) => {
     return filledStars + emptyStars;
   };
 
-
-
   const handleClick = (btnIndex) => {
     setToggle({ ...toggle, [btnIndex]: !toggle[btnIndex] });
     const numClicked = Object.values({
       ...toggle,
       [btnIndex]: !toggle[btnIndex],
     }).filter((val) => val).length;
-    ;
-
-
   };
 
   const toggleCount = Object.values(toggle).filter((val) => val).length;
@@ -71,7 +65,7 @@ const SearchPage = ({ reting }) => {
   const [input, setInput] = useState("");
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
-  const [branchs, setBranchs] = useState([])
+  const [branchs, setBranchs] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +81,7 @@ const SearchPage = ({ reting }) => {
   useEffect(() => {
     axios
       .get(
-        `https://danis.onrender.com/api/lawyers/search?branch=${branch}&query=${query}&isTick=${isTick}&order=${order}&rating=${rating}`
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/search?branch=${branch}&query=${query}&isTick=${isTick}&order=${order}&rating=${rating}`
       )
       .then((response) => {
         setLawyers(response.data.lawyers);
@@ -100,7 +94,7 @@ const SearchPage = ({ reting }) => {
 
   useEffect(() => {
     axios
-      .get("https://danis.onrender.com/api/branchs")
+      .get(`${process.env.REACT_APP_BASE_URI}/api/branchs`)
       .then((response) => {
         setBranchs(response.data);
       })
@@ -110,16 +104,12 @@ const SearchPage = ({ reting }) => {
   }, [branch, query, rating, order]);
 
   const [readMore, setReadMore] = useState(false);
-
-  const extraContent = (
-    <p className="extra-content"></p>
-  );
   const [lawyerStates, setLawyerStates] = useState({});
 
   const handleReadMoreClick = (lawyerId) => {
-    setLawyerStates(prevStates => ({
+    setLawyerStates((prevStates) => ({
       ...prevStates,
-      [lawyerId]: !prevStates[lawyerId]
+      [lawyerId]: !prevStates[lawyerId],
     }));
   };
 
@@ -180,6 +170,24 @@ const SearchPage = ({ reting }) => {
     setDateRange([firstDay, lastDay]);
   };
 
+  const handleTick = () => {
+    if (toggle.btn2 === false) {
+      navigate(getFilterUrl({ isTick: true }));
+      toggle.btn2 = true;
+    } else {
+      navigate(getFilterUrl({ isTick: "all" }));
+      toggle.btn2 = false;
+    }
+  };
+  const handleRated = () => {
+    if (toggle.btn3 === false) {
+      navigate(getFilterUrl({ order: "toprated" }));
+      toggle.btn3 = true;
+    } else {
+      navigate(getFilterUrl({ order: "newest" }));
+      toggle.btn3 = false;
+    }
+  };
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
 
   const [selectedDates, setSelectedDates] = useState(true)
@@ -188,12 +196,18 @@ const SearchPage = ({ reting }) => {
   return (
     <>
       <Navbar />
-      <div className='search-card-container '>
-        <div className='d-flex justify-content-center w-75 m-auto pb-4'>
-          <select className='search-select' value={branch} name="branch"
+      <div className="search-card-container ">
+        <div className="d-flex justify-content-center w-75 m-auto pb-4">
+          <select
+            className="search-select"
+            value={branch}
+            name="branch"
             onChange={(e) => {
               navigate(getFilterUrl({ branch: e.target.value }));
-            }} title="Branş Seç" id="navbarScrollingDropdown">
+            }}
+            title="Branş Seç"
+            id="navbarScrollingDropdown"
+          >
             <option defaultValue="all">Branş Seç</option>
             {branchs
               ?.sort((a, b) => a.title.localeCompare(b.title))
@@ -204,31 +218,66 @@ const SearchPage = ({ reting }) => {
               ))}
           </select>
 
-          <Form
-            onSubmit={handleSubmit}
-            className="d-flex w-75 search-form "
-          >
+          <Form onSubmit={handleSubmit} className="d-flex w-75 search-form ">
             <input
               type="search"
               placeholder="İsme göre ara"
               className="search-select-input"
               aria-label="Search"
-              id='branchs'
-              name='branchs'
+              id="branchs"
+              name="branchs"
               value={input}
               onChange={(e) => {
                 setInput(e.target.value);
               }}
             />
-            <button type='submit' variant='outline-light' className='search-inputbutton border-0 text-white w-25 ' >Avukat Ara
+            <button
+              type="submit"
+              variant="outline-light"
+              className="search-inputbutton border-0 text-white w-25 "
+            >
+              Avukat Ara
             </button>
           </Form>
         </div>
-        <div className='mx-5 '>
-          <p >Filtreler :</p>
-          <button className={toggle.btn1 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2 rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn1")}>En Yeniler</button>
-          <Button className={toggle.btn2 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn2")}>Teyit Edilmiş</Button>
-          <Button className={toggle.btn3 ? "btn btn-light rounded-5 mx-2 active" : "btn btn-light border border-2  rounded-5 mx-2"} role="button" aria-pressed="true" onClick={() => handleClick("btn3")}>Puana Göre Sırala</Button>
+        <div className="mx-5 ">
+          <p>Filtreler :</p>
+          <Button
+            className={
+              toggle.btn1
+                ? "btn btn-light rounded-5 mx-2 active"
+                : "btn btn-light border border-2 rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleNew()}
+          >
+            En Yeniler
+          </Button>
+          <Button
+            className={
+              toggle.btn2
+                ? "btn btn-light rounded-5 mx-2 active"
+                : "btn btn-light border border-2  rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleTick()}
+          >
+            Teyit Edilmiş
+          </Button>
+          <Button
+            className={
+              toggle.btn3
+                ? "btn btn-light rounded-5 mx-2 active"
+                : "btn btn-light border border-2  rounded-5 mx-2"
+            }
+            role="button"
+            aria-pressed="true"
+            onClick={() => handleRated()}
+          >
+            Puana Göre Sırala
+          </Button>
         </div>
         <div className="mx-5">
           <h2 className="mb-4">
@@ -283,38 +332,56 @@ const SearchPage = ({ reting }) => {
                         <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
                         <h5 className="star">Bio</h5>
                         <p className="extra-content">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Qui, consectetur nequeab porro quasi culpa nulla rerum
-                          quis minus voluptatibus sed hic ad quo sint, libero
-                          commodi officia aliquam! Maxime. Lorem ipsum dolor sit
-                          amet consectetur adipisicing elit.
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Qui, consectetur nequeab porro quasi culpa nulla
+                          rerum quis minus voluptatibus sed hic ad quo sint,
+                          libero commodi officia aliquam! Maxime. Lorem ipsum
+                          dolor sit amet consectetur adipisicing elit.
                         </p>
                         {readMore && extraContent}
                         {lawyerStates[user._id] && (
                           <p className="extra-content">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur
-                            nequeab porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad
-                            quo sint, libero commodi officia aliquam! Maxime.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Qui, consectetur nequeab porro quasi culpa
+                            nulla rerum quis minus voluptatibus sed hic ad quo
+                            sint, libero commodi officia aliquam! Maxime.
                           </p>
                         )}
-                        <h2 id={user._id} className="more" onClick={() => handleReadMoreClick(user._id)}>{lawyerStates[user._id] ? "Daha Az Gör" : "Daha Fazla Gör"}</h2>
+                        <h2
+                          id={user._id}
+                          className="more"
+                          onClick={() => handleReadMoreClick(user._id)}
+                        >
+                          {lawyerStates[user._id]
+                            ? "Daha Az Gör"
+                            : "Daha Fazla Gör"}
+                        </h2>
 
                         <div className="p-2 d-flex justify-content-around star">
-                          <div className='p-2 d-flex justify-content-around star'>
+                          <div className="p-2 d-flex justify-content-around star">
+                            <div>
+                              <i className="fa-solid fa-tty fa-l"></i>{" "}
+                              <span className="px-2">{user.phone}</span>{" "}
+                            </div>
 
-                            <div><i className="fa-solid fa-tty fa-l"></i> <span className="px-2">{user.phone}</span> </div>
+                            <div className="right-box-comment px-5">
+                              {" "}
+                              <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
+                              <span>Mesaj Gönder</span>{" "}
+                            </div>
 
-                            <div className="right-box-comment px-5"> <i className=" fa-sharp fa-solid fa-comments "></i> <span>Mesaj Gönder</span> </div>
-
-                            <div className="right-box-comment px-5 "><i className="fa-solid fa-globe  "></i> <span>Web Sitesi'ne Git</span> </div>
+                            <div className="right-box-comment px-5 ">
+                              <i className="fa-solid fa-globe  "></i>{" "}
+                              <span>Web Sitesi'ne Git</span>{" "}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="right-box">
-                      <div className='justify-content-center p-2'>
-                        <Table borderless='true'>
+                      <div className="justify-content-center p-2">
+                        <Table borderless="true">
                           <thead>
                             <tr className="tarih">
                               <td>
@@ -329,14 +396,22 @@ const SearchPage = ({ reting }) => {
                               </td>
                               {days.map((day, index) => {
                                 const currentDate = new Date(dateRange[0]);
-                                currentDate.setDate(dateRange[0].getDate() + index);
+                                currentDate.setDate(
+                                  dateRange[0].getDate() + index
+                                );
                                 const dayOfMonth = currentDate.getDate();
-                                const month = currentDate.toLocaleString("default", {
-                                  month: "short",
-                                });
-                                const dayOfWeek = currentDate.toLocaleString("default", {
-                                  weekday: "short",
-                                });
+                                const month = currentDate.toLocaleString(
+                                  "default",
+                                  {
+                                    month: "short",
+                                  }
+                                );
+                                const dayOfWeek = currentDate.toLocaleString(
+                                  "default",
+                                  {
+                                    weekday: "short",
+                                  }
+                                );
                                 let label = "";
                                 if (dayOfMonth === today.getDate()) {
                                   label = "Bugün";
@@ -363,7 +438,6 @@ const SearchPage = ({ reting }) => {
                                   <i className="fa-solid fa-caret-right fa-sm mx-2" ></i>
                                 </button>
                               </td>
-
                             </tr>
                           </thead>
                           <tbody>
@@ -381,50 +455,46 @@ const SearchPage = ({ reting }) => {
                               </tr>
                             ))}
 
-                            <tr className="much" >
-                              <td id={`handleMoreHour-${user._id}`} onClick={() => {
-                                handleMoreHour(user._id);
-                                setMoreHour(!moreHour);
-                                if (moreHour) {
-                                  setHours(hours.slice(0, 6));
-                                } else {
-                                  setHours([
-                                    "09:00",
-                                    "10:00",
-                                    "11:00",
-                                    "12:00",
-                                    "13:00",
-                                    "14:00",
-                                    "15:00",
-                                    "16:00",
-                                    "17:00",
-                                    "18:00",
-                                  ]);
-                                }
-                              }} colSpan={6}>
+                            <tr className="much">
+                              <td
+                                id={`handleMoreHour-${user._id}`}
+                                onClick={() => {
+                                  handleMoreHour(user._id);
+                                  setMoreHour(!moreHour);
+                                  if (moreHour) {
+                                    setHours(hours.slice(0, 6));
+                                  } else {
+                                    setHours([
+                                      "09:00",
+                                      "10:00",
+                                      "11:00",
+                                      "12:00",
+                                      "13:00",
+                                      "14:00",
+                                      "15:00",
+                                      "16:00",
+                                      "17:00",
+                                      "18:00",
+                                    ]);
+                                  }
+                                }}
+                                colSpan={6}
+                              >
                                 {linkHour}
                                 {caretIcon}
                               </td>
                             </tr>
                           </tbody>
                         </Table>
-
-
                       </div>
                     </div>
                   </div>
-
                 </div>
-
-              </div >
-
-            </div >
-          ))
-          }
-
-
-        </div >
-      </div >
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
