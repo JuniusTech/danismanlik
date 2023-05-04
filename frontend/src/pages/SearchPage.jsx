@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, ListGroup, Table } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import { Button, Table } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "../components/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import logo from "../assets/Group 4.svg";
 import image from "../assets/bg.jpg";
 import axios from "axios";
 import "../css/searchcss.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const SearchPage = ({ reting }) => {
   const navigate = useNavigate();
@@ -67,6 +63,7 @@ const SearchPage = ({ reting }) => {
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
   const [branchs, setBranchs] = useState([]);
+  const [pages, setPages] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,16 +79,16 @@ const SearchPage = ({ reting }) => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URI}/api/lawyers/search?branch=${branch}&query=${query}&isTick=${isTick}&order=${order}&rating=${rating}`
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/search?${page}&query=${query}&branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}`
       )
       .then((response) => {
         setLawyers(response.data.lawyers);
-        console.log(response.data);
+        setPages(response.data.pages);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [branch, query, isTick, order, rating]);
+  }, [page, branch, query, isTick, order, rating]);
 
   useEffect(() => {
     axios
@@ -168,7 +165,6 @@ const SearchPage = ({ reting }) => {
     lastDay.setDate(lastDay.getDate() + 3);
     setDateRange([firstDay, lastDay]);
   };
-  console.log(lawyers);
 
   const handleNew = () => {
     if (toggle.btn1 === false) {
@@ -318,7 +314,7 @@ const SearchPage = ({ reting }) => {
                               </b>{" "}
                             </span>
                             {user.isTick ? (
-                              <i class="fa-solid fa-circle-check mx-2 text-warning"></i>
+                              <i className="fa-solid fa-circle-check mx-2 text-warning"></i>
                             ) : (
                               ""
                             )}
@@ -436,7 +432,7 @@ const SearchPage = ({ reting }) => {
                                 }
 
                                 return (
-                                  <th key={day} className="text-center">
+                                  <th key={index} className="text-center">
                                     {label} <br />
                                     {dayOfMonth} {month}
                                   </th>
@@ -461,11 +457,11 @@ const SearchPage = ({ reting }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {hours.map((hour) => (
-                              <tr key={hour}>
+                            {hours.map((hour, index) => (
+                              <tr key={index}>
                                 <td></td>
-                                {days.map((day) => (
-                                  <td>
+                                {days.map((day, index) => (
+                                  <td key={index}>
                                     <button
                                       className="search-hoursbutton {selected} rounded-2"
                                       size="sm"
@@ -514,6 +510,22 @@ const SearchPage = ({ reting }) => {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+        <div className="text-center ">
+          {[...Array(pages).keys()].map((x) => (
+            <Link
+              key={x + 1}
+              className="mx-1"
+              to={getFilterUrl({ page: x + 1 })}
+            >
+              <Button
+                className={Number(page) === x + 1 ? "text-bold" : ""}
+                variant="light"
+              >
+                {x + 1}
+              </Button>
+            </Link>
           ))}
         </div>
       </div>
