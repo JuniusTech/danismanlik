@@ -121,13 +121,9 @@ const SearchPage = ({ reting }) => {
     <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
   );
 
-  const [hours, setHours] = useState([
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-  ]);
+  const [hours, setHours] = useState([...Array(5).keys()].map(i => `${i+9}:00`));
+
+  
 
   const handleMoreHour = (lawyerId) => {
     setMoreHour(!moreHour);
@@ -139,7 +135,16 @@ const SearchPage = ({ reting }) => {
   const lastDay = new Date(today);
   lastDay.setDate(firstDay.getDate() + 3);
 
-  const days = ["", "", "", ""];
+  const days=[] ;
+  for (let i = 0; i < 4; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString()}`;
+    console.log("formattedDate",formattedDate);
+    days.push(formattedDate);
+  }
+
+
   const [dateRange, setDateRange] = useState([firstDay, lastDay]);
 
   const handlePrevWeek = (lawyerId) => {
@@ -195,6 +200,12 @@ const SearchPage = ({ reting }) => {
     }
   };
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
+
+  function isAvailable(lawyer, day, hour) {
+    return lawyer.dates.some(date => date.day === day && "12:00" === hour);  //! "12:00" yerine date.hour yazılacak. Fakat veri tabanına saatler el ile 12:00 yerine 12.00 yazılmış. Bu yüzden saatlerin hepsi false dönüyor.
+  }
+
+
 
   return (
     <>
@@ -463,7 +474,7 @@ const SearchPage = ({ reting }) => {
                                 {days.map((day, index) => (
                                   <td key={index}>
                                     <button
-                                      className="search-hoursbutton {selected} rounded-2"
+                                     className={isAvailable(user, day, hour) ?"search-hoursbutton selected rounded-2":"search-hoursbutton  rounded-2"}
                                       size="sm"
                                     >
                                       {hour}
@@ -482,18 +493,7 @@ const SearchPage = ({ reting }) => {
                                   if (moreHour) {
                                     setHours(hours.slice(0, 6));
                                   } else {
-                                    setHours([
-                                      "09:00",
-                                      "10:00",
-                                      "11:00",
-                                      "12:00",
-                                      "13:00",
-                                      "14:00",
-                                      "15:00",
-                                      "16:00",
-                                      "17:00",
-                                      "18:00",
-                                    ]);
+                                    setHours([...Array(10).keys()].map(i => `${i+9}:00`));
                                   }
                                 }}
                                 colSpan={6}
