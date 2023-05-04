@@ -44,8 +44,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35rem;
-  height: 4rem;
   border-radius: 1rem;
 }
 
@@ -54,7 +52,7 @@
   justify-content: center;
   width: 10rem;
   height: 4rem;
- border: none;
+  border: none;
 }
 
 .search-inputbutton {

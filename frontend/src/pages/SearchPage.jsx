@@ -112,9 +112,7 @@ const SearchPage = ({ reting }) => {
   const [readMore, setReadMore] = useState(false);
 
   const extraContent = (
-    <p className="extra-content">
-
-    </p>
+    <p className="extra-content"></p>
   );
   const [lawyerStates, setLawyerStates] = useState({});
 
@@ -182,11 +180,10 @@ const SearchPage = ({ reting }) => {
     setDateRange([firstDay, lastDay]);
   };
 
-
-
-
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
 
+  const [selectedDates, setSelectedDates] = useState(true)
+  console.log(lawyers[0])
 
   return (
     <>
@@ -214,7 +211,7 @@ const SearchPage = ({ reting }) => {
             <input
               type="search"
               placeholder="İsme göre ara"
-              className="w-75 search-select-input"
+              className="search-select-input"
               aria-label="Search"
               id='branchs'
               name='branchs'
@@ -368,7 +365,6 @@ const SearchPage = ({ reting }) => {
                               </td>
 
                             </tr>
-
                           </thead>
                           <tbody>
                             { }
@@ -376,8 +372,10 @@ const SearchPage = ({ reting }) => {
                               <tr key={hour}>
                                 <td></td>
                                 {days.map((day) => (
-                                  <td >
-                                    <button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>
+                                  <td >{
+                                    selectedDates ? (<button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>) :
+
+                                      (<button className="search-hoursbutton selected rounded-2" size="sm">{hour}</button>)}
                                   </td>
                                 ))}
                               </tr>
