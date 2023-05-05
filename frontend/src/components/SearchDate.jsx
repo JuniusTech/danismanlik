@@ -84,7 +84,7 @@ const SearchDate = (user) => {
 
     };
     function isAvailable(lawyers, day, hour, month) {
-        return lawyers.dates.some((date) => date.day === day && date.month === month && date.hour === hour); //! "12:00" yerine date.hour yazılacak. Fakat veri tabanına saatler el ile 12:00 yerine 12.00 yazılmış. Bu yüzden saatlerin hepsi false dönüyor. 
+        return lawyers.dates?.some((date) => date.day === day && date.hour === hour);
     }
     console.log(firstDay)
 
@@ -165,11 +165,8 @@ const SearchDate = (user) => {
                                             <button
                                                 key={user._id}
                                                 id={user._id}
-                                                className={
-                                                    "search-hoursbutton rounded-2"
-                                                }
-                                                size="sm"
-                                            >
+                                                className={isAvailable(user, day, toggleHours) ? "search-hoursbutton selected rounded-2" : "search-hoursbutton rounded-2"}
+                                                size="sm">
                                                 {toggleHours}
 
                                             </button>

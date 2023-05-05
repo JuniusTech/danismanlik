@@ -163,11 +163,11 @@ const SearchPage = ({ reting }) => {
               ))}
           </select>
 
-          <Form onSubmit={handleSubmit} className="d-flex w-75 search-form ">
+          <Form onSubmit={handleSubmit} className="d-flex search-form ">
             <input
               type="search"
               placeholder="İsme göre ara"
-              className="w-75 search-select-input"
+              className=" search-select-input"
               aria-label="Search"
               id="branchs"
               name="branchs"
@@ -179,7 +179,7 @@ const SearchPage = ({ reting }) => {
             <button
               type="submit"
               variant="outline-light"
-              className="search-inputbutton border-0 text-white w-25 "
+              className="search-inputbutton border-0 text-white  "
             >
               Avukat Ara
             </button>
@@ -283,9 +283,7 @@ const SearchPage = ({ reting }) => {
                         <p className="extra-content">
                           Lorem ipsum dolor sit amet consectetur adipisicing
                           elit. Qui, consectetur nequeab porro quasi culpa nulla
-                          rerum quis minus voluptatibus sed hic ad quo sint,
-                          libero commodi officia aliquam! Maxime. Lorem ipsum
-                          dolor sit amet consectetur adipisicing elit.
+                          rerum quis minus voluptatibus sed hic ad quo
                         </p>
                         {readMore && extraContent}
                         {lawyerStates[user._id] && (
