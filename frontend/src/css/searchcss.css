@@ -20,7 +20,7 @@
   padding: 0 1rem;
 }
 
-.active {
+.search-active {
   background-color: brown !important;
   color: yellow !important;
    border: none;
@@ -50,7 +50,7 @@
 .search-select-input {
   display: flex;
   justify-content: center;
-  width: 10rem;
+  width: 35rem;
   height: 4rem;
   border: none;
 }

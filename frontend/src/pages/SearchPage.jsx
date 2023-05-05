@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, ListGroup, Table } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import { Button, Table } from "react-bootstrap";
+
 import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "../components/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import logo from "../assets/Group 4.svg";
 import image from "../assets/bg.jpg";
 import axios from "axios";
 import "../css/searchcss.css";
@@ -52,16 +49,6 @@ const SearchPage = ({ reting }) => {
     return filledStars + emptyStars;
   };
 
-  const handleClick = (btnIndex) => {
-    setToggle({ ...toggle, [btnIndex]: !toggle[btnIndex] });
-    const numClicked = Object.values({
-      ...toggle,
-      [btnIndex]: !toggle[btnIndex],
-    }).filter((val) => val).length;
-  };
-
-  const toggleCount = Object.values(toggle).filter((val) => val).length;
-
   const [input, setInput] = useState("");
   const [title, setTitle] = useState({});
   const [lawyers, setLawyers] = useState([]);
@@ -104,6 +91,8 @@ const SearchPage = ({ reting }) => {
   }, [branch, query, rating, order]);
 
   const [readMore, setReadMore] = useState(false);
+
+  const extraContent = <p className="extra-content"></p>;
   const [lawyerStates, setLawyerStates] = useState({});
 
   const handleReadMoreClick = (lawyerId) => {
@@ -113,26 +102,36 @@ const SearchPage = ({ reting }) => {
     }));
   };
 
-  const [moreHour, setMoreHour] = useState(false);
-  const linkHour = moreHour ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster";
-  const caretIcon = moreHour ? (
-    <i className="fa-solid fa-caret-up fa-xl mx-2"></i>
-  ) : (
-    <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
-  );
+  const [moreHour, setMoreHour] = useState({});
 
-  const [hours, setHours] = useState([
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00"
 
-  ]);
+  const [hours, setHours] = useState([...Array(5).keys()].map(i => `${i + 9}:00`));
+  const [lawyerHours, setLawyerHours] = useState({});
 
   const handleMoreHour = (lawyerId) => {
-    setMoreHour(!moreHour);
+    setMoreHour((prevStates) => ({
+      ...prevStates,
+      [lawyerId]: !prevStates[lawyerId],
+    }));
+    if (moreHour[lawyerId]) {
+      setLawyerHours((prevStates) => ({
+        ...prevStates,
+        [lawyerId]: hours.slice(0, 6),
+      }));
+    } else {
+      setLawyerHours((prevStates) => ({
+        ...prevStates,
+        [lawyerId]: [...Array(10).keys()].map(i => `${i + 9}:00`),
+      }));
+    }
+  };
+
+  const toggleHours = (showMore) => {
+    if (showMore) {
+      setHours([...Array(10).keys()].map(i => `${i + 9}:00`));
+    } else {
+      setHours([...Array(5).keys()].map(i => `${i + 9}:00`));
+    }
   };
 
   const today = new Date();
@@ -141,7 +140,14 @@ const SearchPage = ({ reting }) => {
   const lastDay = new Date(today);
   lastDay.setDate(firstDay.getDate() + 3);
 
-  const days = ["", "", "", ""];
+  const days = [];
+  for (let i = 0; i < 4; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString()}`;
+    console.log("formattedDate", formattedDate);
+    days.push(formattedDate);
+  }
   const [dateRange, setDateRange] = useState([firstDay, lastDay]);
 
   const handlePrevWeek = (lawyerId) => {
@@ -170,6 +176,16 @@ const SearchPage = ({ reting }) => {
     setDateRange([firstDay, lastDay]);
   };
 
+  const handleNew = () => {
+    if (toggle.btn1 === false) {
+      navigate(getFilterUrl({ order: "newest" }));
+      toggle.btn1 = true;
+    } else {
+      navigate(getFilterUrl({ order: "barNo" }));
+      toggle.btn1 = false;
+    }
+  };
+
   const handleTick = () => {
     if (toggle.btn2 === false) {
       navigate(getFilterUrl({ isTick: true }));
@@ -190,8 +206,9 @@ const SearchPage = ({ reting }) => {
   };
   // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
 
-  const [selectedDates, setSelectedDates] = useState(true)
-  console.log(lawyers[0])
+  function isAvailable(lawyer, day, hour, month) {
+    return lawyer.dates.some(date => date.day === day && date.month === month && date.hour === hour);  //! "12:00" yerine date.hour yazılacak. Fakat veri tabanına saatler el ile 12:00 yerine 12.00 yazılmış. Bu yüzden saatlerin hepsi false dönüyor.
+  }
 
   return (
     <>
@@ -245,7 +262,7 @@ const SearchPage = ({ reting }) => {
           <Button
             className={
               toggle.btn1
-                ? "btn btn-light rounded-5 mx-2 active"
+                ? "btn btn-light rounded-5 mx-2 search-active"
                 : "btn btn-light border border-2 rounded-5 mx-2"
             }
             role="button"
@@ -257,7 +274,7 @@ const SearchPage = ({ reting }) => {
           <Button
             className={
               toggle.btn2
-                ? "btn btn-light rounded-5 mx-2 active"
+                ? "btn btn-light rounded-5 mx-2 search-active"
                 : "btn btn-light border border-2  rounded-5 mx-2"
             }
             role="button"
@@ -269,7 +286,7 @@ const SearchPage = ({ reting }) => {
           <Button
             className={
               toggle.btn3
-                ? "btn btn-light rounded-5 mx-2 active"
+                ? "btn btn-light rounded-5 mx-2 search-active"
                 : "btn btn-light border border-2  rounded-5 mx-2"
             }
             role="button"
@@ -386,7 +403,7 @@ const SearchPage = ({ reting }) => {
                             <tr className="tarih">
                               <td>
                                 <button
-                                  id={`handlePrevWeek-${user._id}`}
+                                  id={user._id}
                                   className="rounded-5 mt-3 search-caret"
                                   onClick={() => {
                                     handlePrevWeek(user._id);
@@ -413,9 +430,15 @@ const SearchPage = ({ reting }) => {
                                   }
                                 );
                                 let label = "";
-                                if (dayOfMonth === today.getDate()) {
+                                if (dayOfMonth === today.getDate() && month === today.toLocaleString("default",
+                                  {
+                                    month: "short",
+                                  })) {
                                   label = "Bugün";
-                                } else if (dayOfMonth === today.getDate() + 1) {
+                                } else if (dayOfMonth === today.getDate() + 1 && month === today.toLocaleString("default",
+                                  {
+                                    month: "short",
+                                  })) {
                                   label = "Yarın";
                                 } else {
                                   label = dayOfWeek;
@@ -430,7 +453,7 @@ const SearchPage = ({ reting }) => {
                               })}
                               <td>
                                 <button
-                                  id={`handleNextWeek-${user._id}`}
+                                  id={user._id}
                                   className="rounded-5 mt-3 search-caret"
                                   onClick={() => {
                                     handleNextWeek(user._id);
@@ -441,15 +464,19 @@ const SearchPage = ({ reting }) => {
                             </tr>
                           </thead>
                           <tbody>
+                            {/*  // ! saatler sabit. hafta ilerleyince ilerlemiyor */}
                             { }
-                            {hours.map((hour) => (
-                              <tr key={hour}>
+                            {hours.map((toggleHours) => (
+                              <tr key={user._id}>
                                 <td></td>
                                 {days.map((day) => (
-                                  <td >{
-                                    selectedDates ? (<button className="search-hoursbutton {selected} rounded-2" size="sm">{hour}</button>) :
-
-                                      (<button className="search-hoursbutton selected rounded-2" size="sm">{hour}</button>)}
+                                  <td >
+                                    <button
+                                      id={user._id}
+                                      className={isAvailable(user, day, toggleHours) ? "search-hoursbutton selected rounded-2" : "search-hoursbutton rounded-2"}
+                                      size="sm">
+                                      {toggleHours}
+                                    </button>
                                   </td>
                                 ))}
                               </tr>
@@ -457,33 +484,22 @@ const SearchPage = ({ reting }) => {
 
                             <tr className="much">
                               <td
-                                id={`handleMoreHour-${user._id}`}
+                                id={user._id}
                                 onClick={() => {
                                   handleMoreHour(user._id);
-                                  setMoreHour(!moreHour);
-                                  if (moreHour) {
-                                    setHours(hours.slice(0, 6));
-                                  } else {
-                                    setHours([
-                                      "09:00",
-                                      "10:00",
-                                      "11:00",
-                                      "12:00",
-                                      "13:00",
-                                      "14:00",
-                                      "15:00",
-                                      "16:00",
-                                      "17:00",
-                                      "18:00",
-                                    ]);
-                                  }
+                                  toggleHours(!moreHour[user._id]);
                                 }}
                                 colSpan={6}
                               >
-                                {linkHour}
-                                {caretIcon}
+                                {moreHour[user._id] ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster"}
+                                {moreHour[user._id] ? (
+                                  <i className="fa-solid fa-caret-up fa-xl mx-2"></i>
+                                ) : (
+                                  <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
+                                )}
                               </td>
                             </tr>
+
                           </tbody>
                         </Table>
                       </div>
