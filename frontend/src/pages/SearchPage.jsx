@@ -325,7 +325,7 @@ const SearchPage = ({ reting }) => {
                         </div>
                       </div>
                     </div>
-                    <SearchDate />
+                    <SearchDate user={user} />
 
                   </div>
                 </div>
