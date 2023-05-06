@@ -1,0 +1,27 @@
+.signInForm {
+  justify-content: space-between;
+  font-size: 1.3rem;
+  padding: 3% 7%;
+  width: 100%;
+  border-radius: 10px;
+}
+.vsc-initialized modal-open {
+  border: 3px solid red;
+}
+
+.signInForm span {
+  color: orange;
+}
+
+.signInForm button {
+  background-color: rgb(156, 103, 5) !important;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 850px) {
+  #userLoginModal {
+  }
+  .signInForm {
+  }
+}
