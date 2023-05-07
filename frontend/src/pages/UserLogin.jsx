@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../css/LoginPages.css";
 import axios from "axios";
+import { removeCookie, setCookie } from "../cookies";
+import { Store } from "../Store";
+import { toast } from "react-toastify";
+import LoadingBox from "../components/LoadingBox";
+import { getError } from "../getError";
 
-const AvukatSignPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
+const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { dispatch } = useContext(Store);
 
   const handleRegister = () => {
     setShowUserRegister(true);
@@ -16,19 +23,26 @@ const AvukatSignPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://danis.onrender.com/api/users/signin",
+        `${process.env.REACT_APP_BASE_URI}/api/users/signin`,
         {
           email,
           password,
         }
       );
-      console.log(data, "gönderme başarılı");
-    } catch (error) {
-      console.log("hata");
+      setLoading(false);
+      removeCookie("jwt");
+      setCookie("jwt", data.token);
+      toast.success("Hoşgeldiniz");
+      dispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setShowUserLogin(false);
+    } catch (err) {
+      toast.error(getError(err));
+      setLoading(false);
     }
-    console.log(email, password);
   };
 
   return (
@@ -81,7 +95,13 @@ const AvukatSignPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
             size="lg"
             className="w-75 text-justify  m-auto mb-4 bg border-0"
           >
-            Giriş yap
+            {loading ? (
+              <>
+                <LoadingBox />
+              </>
+            ) : (
+              "Giriş yap"
+            )}
           </Button>
 
           <p>
@@ -94,4 +114,4 @@ const AvukatSignPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
     </Modal>
   );
 };
-export default AvukatSignPage;
+export default UserLogin;

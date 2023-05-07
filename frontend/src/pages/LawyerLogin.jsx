@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../css/LoginPages.css";
 import axios from "axios";
+import { Store } from "../Store";
+import { removeCookie, setCookie } from "../cookies";
+import { toast } from "react-toastify";
+import LoadingBox from "../components/LoadingBox";
+import { useNavigate } from "react-router-dom";
 
 const AvukatSignPage = ({
   show,
@@ -12,7 +17,9 @@ const AvukatSignPage = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  const { dispatch } = useContext(Store);
+  const navigate = useNavigate();
   const handleRegister = () => {
     setShowLawyerRegister(true);
     setShowLawyerLogin(false);
@@ -20,17 +27,24 @@ const AvukatSignPage = ({
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://danis.onrender.com/api/lawyers/signin",
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/signin`,
         {
           email,
           password,
         }
       );
-      console.log(data, "gönderme başarılı");
+      setLoading(false);
+      removeCookie("jwt");
+      setCookie("jwt", data.token);
+      toast.success("Hoşgeldiniz");
+      dispatch({ type: "LAWYER_SIGNIN", payload: data });
+      localStorage.setItem("lawyerInfo", JSON.stringify(data));
+      setShowLawyerLogin(false);
+      navigate("/lawyer");
     } catch (error) {}
-    console.log(email, password);
   };
 
   return (
@@ -82,7 +96,13 @@ const AvukatSignPage = ({
             size="lg"
             className="w-75  m-auto mb-4  bg border-0"
           >
-            Giriş yap
+            {loading ? (
+              <>
+                <LoadingBox />
+              </>
+            ) : (
+              "Giriş yap"
+            )}
           </Button>
           <p>
             Hesabın yok mu? Hemen{" "}

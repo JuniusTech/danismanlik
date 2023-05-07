@@ -185,6 +185,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     branch: lawyer.branch,
     phone: lawyer.phone,
     isAdmin: lawyer.isAdmin,
+    token: token,
   });
   return;
 });

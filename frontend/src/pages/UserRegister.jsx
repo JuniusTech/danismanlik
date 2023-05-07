@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "../css/RegisterPages.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../getError";
+import LoadingBox from "../components/LoadingBox";
 
 const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
   const [name, setName] = useState("");
@@ -12,6 +15,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
   const [phoneNo, setPhoneNo] = useState("");
   const phone = `${phoneRegion} + ${phoneNo}`;
   const [password2, setPassword2] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [infoText, setInfoText] = useState(false);
   // const [memberAg, setMemberAg] = useState(false);
   // const [perData, setPerData] = useState(false);
@@ -23,20 +27,26 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      toast.error("Şifre eşleşmiyor");
+      return;
+    }
+    setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://danis.onrender.com/api/users/signup",
+        `${process.env.REACT_APP_BASE_URI}/api/users/signup`,
         {
           name,
-          surName,
           email,
           password,
-          phone,
         }
       );
-      console.log(data, "gönderme başarılı");
+      setLoading(false);
+      toast.success("Emailinize doğrulama linki gönderildi.");
+      setShowUserRegister(false);
     } catch (error) {
-      console.log("hata");
+      toast.error(getError(error));
+      setLoading(false);
     }
   };
 
@@ -51,8 +61,8 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
         <h1>Kayıt ol</h1>
       </div>
       <form className="UserRegisterFormDiv " onSubmit={submitHandler}>
-        <div class="row" id="registerRowDiv">
-          <div class="col">
+        <div className="row" id="registerRowDiv">
+          <div className="col">
             <label className="registerLabel" htmlFor="">
               Ad*
             </label>
@@ -86,7 +96,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
               value={password}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label className="registerLabel" htmlFor="">
               Soyad*
             </label>
@@ -134,7 +144,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
           </div>
         </div>
         {/* <div className="registerCheckBtn">
-          <div class="input-group-text radio">
+          <div className="input-group-text radio">
             <input
               onClick={() => setMemberAg(!memberAg)}
               type="radio"
@@ -144,7 +154,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
               <span>Üyelik Sözleşmesi'ni</span> okudum ve kabul ediyorum.
             </label>
           </div>
-          <div class="input-group-text  radio">
+          <div className="input-group-text  radio">
             <input
               onClick={() => setInfoText(!infoText)}
               type="radio"
@@ -154,7 +164,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
               <span>Aydınlatma Metni'ni</span> okudum ve kabul ediyorum.
             </label>
           </div>
-          <div class="input-group-text  radio">
+          <div className="input-group-text  radio">
             <input
               onClick={() => setPerData(!perData)}
               type="radio"
@@ -167,7 +177,7 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
               okudum ve kabul ediyorum.
             </label>
           </div>
-          <div class="input-group-text  radio">
+          <div className="input-group-text  radio">
             <input
               type="radio"
               aria-label="Radio button for following text input"
@@ -187,7 +197,13 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
             İptal Et
           </button>
           <button className="registerbtn2" type="submit">
-            Kayıt Ol
+            {loading ? (
+              <>
+                <LoadingBox />
+              </>
+            ) : (
+              "Kayıt ol"
+            )}
           </button>
         </div>
         <p>

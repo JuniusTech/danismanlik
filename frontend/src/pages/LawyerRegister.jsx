@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
+import { toast } from "react-toastify";
+import { getError } from "../getError";
+import LoadingBox from "../components/LoadingBox";
 
 import "../css/RegisterPages.css";
 
@@ -10,7 +13,7 @@ const AvukatLoginPage = ({
   setShowLawyerRegister,
 }) => {
   const [name, setName] = useState("");
-  const [surName, setSurName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [barNo, setBarNo] = useState("");
@@ -23,6 +26,7 @@ const AvukatLoginPage = ({
   const [infoText, setInfoText] = useState(false);
   const [memberAg, setMemberAg] = useState(false);
   const [perData, setPerData] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
     setShowLawyerLogin(true);
@@ -31,10 +35,9 @@ const AvukatLoginPage = ({
 
   useEffect(() => {
     axios
-      .get("https://danis.onrender.com/api/branchs")
+      .get(`${process.env.REACT_APP_BASE_URI}/api/branchs`)
       .then((response) => {
         setBranches(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,12 +46,17 @@ const AvukatLoginPage = ({
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      toast.error("Şifre eşleşmiyor");
+      return;
+    }
+    setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://danis.onrender.com/api/lawyers/signup",
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
         {
           name,
-          surName,
+          surname,
           email,
           password,
           barNo,
@@ -59,28 +67,13 @@ const AvukatLoginPage = ({
           perData,
         }
       );
-      console.log(data, "gönderme başarılı");
-    } catch (error) {}
-
-    // fetch("https://danis.onrender.com/api/users/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    // }).then(console.log("işlem başarılı"));
-
-    console.log(
-      name,
-      surName,
-      email,
-      password,
-      barNo,
-      phoneRegion,
-      branch,
-      password2,
-      phone,
-      infoText,
-      perData,
-      memberAg
-    );
+      setLoading(false);
+      toast.success("Emailinize doğrulama linki gönderildi.");
+      setShowLawyerRegister(false);
+    } catch (error) {
+      toast.error(getError(error));
+      setLoading(false);
+    }
   };
 
   return (
@@ -94,8 +87,8 @@ const AvukatLoginPage = ({
         <h1>Kayıt ol</h1>
       </div>
       <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
-        <div class="row" id="registerRowDiv">
-          <div class="col">
+        <div className="row" id="registerRowDiv">
+          <div className="col">
             <label className="registerLabel" htmlFor="">
               Ad*
             </label>
@@ -137,16 +130,16 @@ const AvukatLoginPage = ({
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label className="registerLabel" htmlFor="">
               Soyad*
             </label>
             <input
               className="registerFormControl"
               type="text"
-              value={surName}
+              value={surname}
               placeholder="Soyad"
-              onChange={(e) => setSurName(e.target.value)}
+              onChange={(e) => setSurname(e.target.value)}
             />
             <label className="registerLabel" htmlFor="">
               Tel*
@@ -249,7 +242,13 @@ const AvukatLoginPage = ({
             İptal Et
           </button>
           <button className="registerbtn2" type="submit">
-            Kayıt Ol
+            {loading ? (
+              <>
+                <LoadingBox />
+              </>
+            ) : (
+              "Kayıt ol"
+            )}
           </button>
         </div>
         <p>
