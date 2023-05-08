@@ -9,13 +9,14 @@ import { Store } from "../Store";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 import { getError } from "../getError";
+import { useNavigate } from "react-router-dom";
 
 const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { dispatch } = useContext(Store);
-
+  const navigate = useNavigate();
   const handleRegister = () => {
     setShowUserRegister(true);
     setShowUserLogin(false);
@@ -86,7 +87,9 @@ const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
             label="Beni hatırla"
           />
 
-          <span>Şifremi unuttum</span>
+          <span onClick={() => navigate("/forget-password")}>
+            Şifremi unuttum
+          </span>
         </div>
 
         <div className="my-5 d-flex flex-column gap-2 justify-content-center">

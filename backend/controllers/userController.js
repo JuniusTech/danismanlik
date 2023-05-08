@@ -24,6 +24,8 @@ const updateUser = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
     user.name = req.body.name || user.name;
+    user.surname = req.body.surname || user.surname;
+    user.phone = req.body.phone || user.phone;
     user.email = req.body.email || user.email;
     user.isAdmin = Boolean(req.body.isAdmin);
     const updatedUser = await user.save();
@@ -96,7 +98,9 @@ const signin = expressAsyncHandler(async (req, res) => {
   res.send({
     _id: user._id,
     name: user.name,
+    surname: user.surname,
     email: user.email,
+    phone: user.phone,
     isAdmin: user.isAdmin,
     token: token,
   });
@@ -109,6 +113,8 @@ const signup = expressAsyncHandler(async (req, res) => {
   const newUser = new User({
     name: req.body.name,
     email: req.body.email,
+    surname: req.body.surname,
+    phone: req.body.phone,
     password: bcrypt.hashSync(req.body.password),
   });
   const user = await newUser.save();
@@ -155,7 +161,9 @@ const verifyUserAccount = expressAsyncHandler(async (req, res) => {
     token: req.params.token,
   });
 
-  res.status(200).json({ message: "Your account verified" });
+  res.redirect(
+    `${process.env.FRONTEND_BASE_URL}/verify/${verToken.userId}/${verToken.token}`
+  );
 });
 
 module.exports = {

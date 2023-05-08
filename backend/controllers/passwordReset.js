@@ -63,7 +63,9 @@ const verifyPasswordLink = async (req, res) => {
     });
     if (!token) return res.status(400).send({ message: "Invalid link" });
 
-    res.status(200).send("Valid Url");
+    res.redirect(
+      `${process.env.FRONTEND_BASE_URL}/reset-password/${token.userId}/${token.token}`
+    );
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }

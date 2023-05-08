@@ -248,7 +248,9 @@ const verifyLawyerAccount = expressAsyncHandler(async (req, res) => {
     token: req.params.token,
   });
 
-  res.status(200).json({ message: "Your account verified" });
+  res.redirect(
+    `${process.env.FRONTEND_BASE_URL}/verify/${verToken.lawyerId}/${verToken.token}`
+  );
 });
 
 const createReview = expressAsyncHandler(async (req, res) => {

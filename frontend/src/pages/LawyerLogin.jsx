@@ -87,7 +87,9 @@ const AvukatSignPage = ({
             label="Beni hatırla"
           />
 
-          <span>Şifremi unuttum</span>
+          <span onClick={() => navigate("/forget-password-law")}>
+            Şifremi unuttum
+          </span>
         </div>
 
         <div className="my-5 d-flex flex-column gap-2 justify-content-center">

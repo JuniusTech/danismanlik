@@ -48,7 +48,7 @@ const validate = (data) => {
     name: joi.string().trim().min(3).max(10).required(),
     surname: joi.string().trim().min(3).max(10).required(),
     email: joi.string().email().trim().min(5).max(30).required(),
-    phone: joi.string().trim().min(13).max(20).required(),
+    phone: joi.string().trim().min(10).max(20).required(),
     barNo: joi.number().required(),
     branch: joi.string().required(),
     memberAg: joi.boolean().required(),

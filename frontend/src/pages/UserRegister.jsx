@@ -8,7 +8,7 @@ import LoadingBox from "../components/LoadingBox";
 
 const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
   const [name, setName] = useState("");
-  const [surName, setSurName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneRegion, setPhoneRegion] = useState("");
@@ -39,6 +39,8 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
           name,
           email,
           password,
+          surname,
+          phone,
         }
       );
       setLoading(false);
@@ -103,9 +105,9 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
             <input
               type="text"
               className="registerFormControl"
-              value={surName}
+              value={surname}
               placeholder="Soyad"
-              onChange={(e) => setSurName(e.target.value)}
+              onChange={(e) => setSurname(e.target.value)}
             />
             <label className="registerLabel" htmlFor="">
               Tel*
