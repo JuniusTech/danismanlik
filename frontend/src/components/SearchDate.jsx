@@ -1,8 +1,9 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Table } from "react-bootstrap";
 
-const SearchDate = (user) => {
+const SearchDate = ({ user }) => {
     const [moreHour, setMoreHour] = useState(false);
 
 
@@ -44,20 +45,40 @@ const SearchDate = (user) => {
     const lastDay = new Date(today);
     lastDay.setDate(firstDay.getDate() + 3);
 
-    const days = [];
-    for (let i = 0; i < 4; i++) {
-        const date = new Date(today);
-        date.setDate(today.getDate() + i);
-        const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
-            date.getMonth() + 1
-        )
-            .toString()
-            .padStart(2, "0")}-${date.getFullYear().toString()}`;
-        console.log("formattedDate", formattedDate);
-        days.push(formattedDate);
-    }
-
     const [dateRange, setDateRange] = useState([firstDay, lastDay]);
+
+
+    const datesDate = [0, 1, 2, 3].map((day, index) => {
+        const currentDate = new Date(dateRange[0]);
+        currentDate.setDate(
+            dateRange[0].getDate() + index
+        )
+        return `0${currentDate.getDate()}-0${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`
+    })
+
+    // const [days, setDays] = useState(datesDate)
+
+    // useEffect(() => {
+    //     setDays(datesDate)
+    // }, [datesDate])
+
+    // console.log(days)
+
+
+
+    // for (let i = 0; i < 4; i++) {
+    //     const date = new Date(today);
+    //     date.setDate(today.getDate() + i);
+    //     const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
+    //         date.getMonth() + 1
+    //     )
+    //         .toString()
+    //         .padStart(2, "0")}-${date.getFullYear().toString()}`;
+    //     console.log("formattedDate", formattedDate);
+    //     days.push(formattedDate);
+    // }
+
+
 
     const handlePrevWeek = (lawyerId) => {
         const firstDay = new Date(dateRange[0]);
@@ -83,10 +104,10 @@ const SearchDate = (user) => {
         setDateRange([firstDay, lastDay]);
 
     };
-    function isAvailable(lawyers, day, hour, month) {
-        return lawyers.dates.some((date) => date.day === day && date.month === month && date.hour === hour); //! "12:00" yerine date.hour yazılacak. Fakat veri tabanına saatler el ile 12:00 yerine 12.00 yazılmış. Bu yüzden saatlerin hepsi false dönüyor. 
+    function isAvailable(lawyers, day, hour) {
+        return lawyers.dates?.some((date) => date.day === day && date.hour === hour);
     }
-    console.log(firstDay)
+    console.log(user)
 
     return (
         <>
@@ -105,7 +126,7 @@ const SearchDate = (user) => {
                                         <i className="fa-solid fa-caret-left fa-sm mx-2"></i>
                                     </button>
                                 </td>
-                                {days.map((day, index) => {
+                                {datesDate.map((day, index) => {
                                     const currentDate = new Date(dateRange[0]);
                                     currentDate.setDate(
                                         dateRange[0].getDate() + index
@@ -158,21 +179,17 @@ const SearchDate = (user) => {
                         </thead>
                         <tbody>
                             {hours.map((toggleHours) => (
-                                <tr key={user._id}>
+                                <tr >
                                     <td></td>
-                                    {days.map((day) => (
+                                    {datesDate.map((day, index) => (
                                         <td >
                                             <button
-                                                key={user._id}
-                                                id={user._id}
-                                                className={
-                                                    "search-hoursbutton rounded-2"
-                                                }
-                                                size="sm"
-                                            >
+                                                key={index}
+                                                className={isAvailable(user, day, toggleHours) ? "search-hoursbutton selected rounded-2" : "search-hoursbutton rounded-2"}
+                                                size="sm">
                                                 {toggleHours}
-
                                             </button>
+
                                         </td>
                                     ))}
                                 </tr>
