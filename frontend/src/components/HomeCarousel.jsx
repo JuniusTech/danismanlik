@@ -61,6 +61,16 @@ const HomeCarousel = () => {
       for (let i = 0; i < branches.length; i += 3) {
         branchGroups.push(branches.slice(i, i + 3));
       }
+
+      function capitalizeWords(str) { //veri tabanından gelen verilerin ilk harflerini büyük yapmak için kullanılan fonksiyon
+        let words = str.split(' ');   
+        for (let i = 0; i < words.length; i++) {
+          let firstLetter = words[i].charAt(0);   
+          words[i] = firstLetter.toUpperCase() + words[i].substring(1);  
+        }
+        return words.join(' ');   
+      }
+      
     
       return (
 
@@ -78,9 +88,9 @@ const HomeCarousel = () => {
               <div className="d-flex justify-content-center">
                 {group.map((branch) => (
                   <div>  
-                  <div className="branch-title text-center m-5">{branch}
+                  <div className="branch-title text-center m-4">{capitalizeWords(branch)}
                   </div>
-                  <div key={branch} className="lawyer-branch-container">
+                  <div key={branch} className="lawyer-branch-container p-0">
                     
                     {/* <h2 className='text-center'>{branch}</h2> */}
                       {sortedLawyers[branch].map((user) => (
@@ -89,7 +99,7 @@ const HomeCarousel = () => {
              
                               <div className="d-flex  ">
                                
-                                  <img width="150rem" src={image} alt="profilepict" />
+                                  <img width="100rem" src={image} alt="profilepict" />
                                 </div>
              
                                 <div className="flex-fill m-2 ">
@@ -97,7 +107,7 @@ const HomeCarousel = () => {
                                     <span>
                                       {" "}
                                       <b>
-                                        {user.name} {user.surname}{" "}
+                                        {capitalizeWords(user.name)} {capitalizeWords(user.surname)}{" "}
                                       </b>{" "}
                                     </span>
                                     {user.isTick ? (
@@ -135,7 +145,7 @@ const HomeCarousel = () => {
                         )
                       }
                     >
-                      Daha Fazla {branch} Avukatı Bul
+                      Daha Fazla {capitalizeWords(branch)} Avukatı Bul
                     </button>
                   </div>
                     </div></div>
