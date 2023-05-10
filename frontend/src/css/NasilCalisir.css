@@ -1,0 +1,81 @@
+.nasilCalisir h1,
+h2 {
+  text-align: center;
+}
+
+.nasilCalisirMiddlePart {
+  display: flex;
+  font-size: 3rem;
+  text-align: center;
+  justify-content: space-evenly;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid rgb(59, 64, 206);
+  height: 85vh;
+  padding: 2rem;
+}
+
+.nasilCalisirMiddlePart h1 {
+  background-color: orange;
+  border-radius: 50%;
+  padding: 3rem;
+  margin-top: -1rem;
+  min-width: 115px;
+}
+.nasilCalisirContent {
+  border: 1px solid rgb(116, 97, 97);
+  width: 15%;
+  min-width: 160px;
+  height: 100%;
+  padding: 0 1rem 1rem 1rem;
+}
+.nasilCalisirContent div {
+  width: 100%;
+  background-color: white;
+  margin-top: -20%;
+  padding: 0 1rem 2rem 1rem;
+  box-shadow: 1px 1px 5px 3px rgb(231, 222, 222);
+}
+.nasilCalisirContent p {
+  height: 18rem;
+  font-size: 13px;
+}
+.ucgen {
+  width: 0;
+  height: 0;
+  border-top: 20px solid orange;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  margin: auto;
+  margin-top: -2.2rem;
+}
+.nasilCalisirContent svg {
+  margin: auto;
+  width: 100%;
+}
+@media only screen and (max-width: 650px) {
+  .nasilCalisirMiddlePart {
+    display: block;
+    margin: auto;
+    width: 100%;
+    padding: 0 32%;
+  }
+  .nasilCalisirContent {
+    width: 35vw;
+    height: none;
+  }
+
+  .nasilCalisirContent p {
+    height: 18rem;
+    font-size: 13px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .nasilCalisirContent p {
+    height: 18rem;
+    font-size: 15px;
+    margin-top: 2rem;
+  }
+  .nasilCalisirContent div {
+    padding-top: 2rem;
+  }
+}

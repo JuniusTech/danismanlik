@@ -5,7 +5,7 @@
 
 .modal-content {
   border-radius: 20px !important;
-  width: 75% !important;
+  width: 100% !important;
 }
 
 .registerBaslık h1 {
@@ -21,7 +21,7 @@
 }
 
 .lawyerRegisterFormDiv {
-  height: 72vh;
+  height: 70vh;
   width: 100%;
   padding: 2rem;
   overflow: auto;
