@@ -1,15 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
-import HeaderCards from "../components/HeaderCards";
+
 import HomeCarousel from "../components/HomeCarousel";
+import NasilCalisiyor from "../components/NasilCalisiyor";
 
 const HomePage = () => {
   return (
     <div>
       <Navbar />
       <Header />
-      <HeaderCards />
+
+      <NasilCalisiyor />
       <HomeCarousel />
     </div>
   );

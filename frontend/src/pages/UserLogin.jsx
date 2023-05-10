@@ -48,7 +48,7 @@ const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
 
   return (
     <Modal
-      className="px-5 w-25 m-auto"
+      className="px-5 w-50 m-auto"
       id="userLoginModal"
       show={show}
       onHide={() => setShowUserLogin(false)}

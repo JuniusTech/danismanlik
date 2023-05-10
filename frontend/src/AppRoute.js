@@ -19,6 +19,7 @@ const AppRoute = () => {
       <Route path="/forget-password" element={<UserForgetPass />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
+
       <Route
         path="/reset-password-law/:id/:token"
         element={<LawyerResetPass />}
