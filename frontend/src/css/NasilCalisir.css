@@ -1,3 +1,6 @@
+.nasilCalisir {
+  padding-top: 2rem;
+}
 .nasilCalisir h1,
 h2 {
   text-align: center;
@@ -9,8 +12,6 @@ h2 {
   text-align: center;
   justify-content: space-evenly;
   font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid rgb(59, 64, 206);
-
   padding: 2rem;
 }
 
@@ -23,6 +24,7 @@ h2 {
 }
 .nasilCalisirContent {
   border: 1px solid rgb(116, 97, 97);
+  border-radius: 7px;
   width: 15%;
   min-width: 160px;
   height: 100%;
