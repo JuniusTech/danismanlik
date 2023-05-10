@@ -134,7 +134,11 @@ const SearchPage = ({ reting }) => {
       toggle.btn3 = false;
     }
   };
-  // const selected = selected; use state kullanarak seçili saatleri üstü çizili konuma getir
+  const lawyer = (user) => {
+    navigate("/lawyercard", { state: user });
+
+    console.log(user)
+  };
 
 
 
@@ -238,11 +242,13 @@ const SearchPage = ({ reting }) => {
         <div className="w-100">
           {lawyers?.map((user) => (
             <div key={user._id} className="d-flex justfiy-content-around m-5 ">
-              <div className="search-card-lawyer rounded-4 ">
+              <div className="search-card-lawyer rounded-4  ">
                 <div className="d-flex  ">
                   <div className=" d-flex ">
                     <div className="w-100 ">
-                      <div className="d-flex w-100 ">
+                      <div className="d-flex w-100 "
+                        onClick={() => lawyer(user)}
+                      >
                         <div className="h-100">
                           <img width="150rem" src={user.isTick ?
                             image
