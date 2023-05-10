@@ -77,11 +77,6 @@ const NasilCalisiyor = () => {
           </div>
         </div>
       </div>
-      <h1>Popüler Branşlar</h1>
-      <h2>
-        Binlerce avukat arasından tercihini yap , hemen online olarak görüş veya
-        soru sor.
-      </h2>
     </div>
   );
 };
