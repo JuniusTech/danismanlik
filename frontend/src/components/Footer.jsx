@@ -17,7 +17,7 @@ export default function Footer() {
         <section className=''>
           <MDBRow>
             <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h4 className='text'>Popüler Aramalar</h4>
+              <h3 className='text'>Popüler Aramalar</h3>
 
               <ul className='list-unstyled mb-0' >
                 <li>
@@ -49,7 +49,7 @@ export default function Footer() {
             </MDBCol>
 
             <MDBCol lg='3' md='6' className='mb-4 mb-md-0' style={{ textDecoration: 'none' }}>
-              <h4 className='text'>Müvekkiller Icin</h4>
+              <h3 className='text'>Müvekkiller Icin</h3>
 
               <ul className='list-unstyled mb-0'>
                 <li>
@@ -81,7 +81,7 @@ export default function Footer() {
             </MDBCol>
 
             <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h4 className='text'>Avukatlar Icin</h4>
+              <h3 className='text'>Avukatlar Icin</h3>
 
               <ul className='list-unstyled mb-0' style={{ textDecoration: 'none' }}>
                 <li>
@@ -113,7 +113,7 @@ export default function Footer() {
             </MDBCol>
 
             <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h4 className='text'>Hakkimizda</h4>
+              <h3 className='text'>Hakkimizda</h3>
 
               <ul className='list-unstyled mb-0'>
                 <li>
