@@ -70,7 +70,7 @@ const SearchPage = ({ reting }) => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URI}/api/lawyers/search?${page}&query=${query}&branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}`
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/search?page=${page}&query=${query}&branch=${branch}&isTick=${isTick}&order=${order}&rating=${rating}`
       )
       .then((response) => {
         setLawyers(response.data.lawyers);
