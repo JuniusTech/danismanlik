@@ -4,6 +4,7 @@ import Header from "../components/Header";
 
 import HomeCarousel from "../components/HomeCarousel";
 import NasilCalisiyor from "../components/NasilCalisiyor";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
 
       <NasilCalisiyor />
       <HomeCarousel />
+      <Footer />
     </div>
   );
 };
