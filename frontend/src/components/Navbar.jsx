@@ -124,7 +124,7 @@ const Navbar = () => {
                     variant="success"
                     className="bg-light shadow-5 text-dark m-2 border-0 "
                   >
-                    {userInfo.name}
+                    {userInfo.name.toUpperCase()}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -143,7 +143,7 @@ const Navbar = () => {
                     variant="success"
                     className="bg-light shadow-5 text-dark m-2 border-0 "
                   >
-                    {lawyerInfo.name}
+                    {lawyerInfo.name.toUpperCase()}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
