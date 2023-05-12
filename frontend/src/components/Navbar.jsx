@@ -45,7 +45,12 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <div>
-            <img src={logo} alt="logo" style={{ height: "50px" }} />
+            <img
+              src={logo}
+              alt="logo"
+              style={{ height: "50px" }}
+              onClick={() => navigate("/")}
+            />
           </div>
 
           <div className="d-flex text-black align-items-center">

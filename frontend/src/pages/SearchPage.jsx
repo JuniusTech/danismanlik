@@ -3,11 +3,13 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Navbar from "../components/Navbar";
 import image from "../assets/bg.jpg";
-import avatar from "../assets/avatar.jpg"
+import avatar from "../assets/avatar.jpg";
 import axios from "axios";
 import "../css/searchcss.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import SearchDate from "../components/SearchDate";
+import { getError } from "../getError";
+import { toast } from "react-toastify";
 
 const SearchPage = ({ reting }) => {
   const navigate = useNavigate();
@@ -27,8 +29,9 @@ const SearchPage = ({ reting }) => {
     const filterRating = filter.rating || rating;
     const filterIsTick = filter.isTick || isTick;
     const sortOrder = filter.order || order;
-    return `${skipPathname ? "" : "/search?"
-      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${
+      skipPathname ? "" : "/search?"
+    }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   const [toggle, setToggle] = useState({
@@ -77,7 +80,7 @@ const SearchPage = ({ reting }) => {
         setPages(response.data.pages);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(getError(error));
       });
   }, [page, branch, query, isTick, order, rating]);
 
@@ -88,7 +91,7 @@ const SearchPage = ({ reting }) => {
         setBranchs(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(getError(error));
       });
   }, [branch, query, rating, order]);
 
@@ -103,8 +106,6 @@ const SearchPage = ({ reting }) => {
       [lawyerId]: !prevStates[lawyerId],
     }));
   };
-
-
 
   const handleNew = () => {
     if (toggle.btn1 === false) {
@@ -137,10 +138,8 @@ const SearchPage = ({ reting }) => {
   const lawyer = (user) => {
     navigate("/lawyercard", { state: user });
 
-    console.log(user)
+    console.log(user);
   };
-
-
 
   return (
     <>
@@ -246,15 +245,16 @@ const SearchPage = ({ reting }) => {
                 <div className="d-flex  ">
                   <div className=" d-flex ">
                     <div className="w-100 ">
-                      <div className="d-flex w-100 "
+                      <div
+                        className="d-flex w-100 "
                         onClick={() => lawyer(user)}
                       >
                         <div className="h-100">
-                          <img width="150rem" src={user.isTick ?
-                            image
-                            :
-                            avatar
-                          } alt="profilepict" />
+                          <img
+                            width="150rem"
+                            src={user.isTick ? image : avatar}
+                            alt="profilepict"
+                          />
                         </div>
 
                         <div className="flex-fill m-2 ">
@@ -332,7 +332,6 @@ const SearchPage = ({ reting }) => {
                       </div>
                     </div>
                     <SearchDate user={user} />
-
                   </div>
                 </div>
               </div>
@@ -355,7 +354,7 @@ const SearchPage = ({ reting }) => {
             </Link>
           ))}
         </div>
-      </div >
+      </div>
     </>
   );
 };
