@@ -16,7 +16,7 @@ h2 {
 }
 
 .nasilCalisirMiddlePart h1 {
-  background-color: orange;
+  background-color: var(--main-color);
   border-radius: 50%;
   padding: 3rem;
   margin-top: -1rem;
@@ -44,7 +44,7 @@ h2 {
 .ucgen {
   width: 0;
   height: 0;
-  border-top: 20px solid orange;
+  border-top: 20px solid var(--main-color);
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   margin: auto;
