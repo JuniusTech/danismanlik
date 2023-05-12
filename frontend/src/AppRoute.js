@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
-import LawyerHomePage from "./pages/LawyerHomePage";
+
 import EmailVerify from "./pages/EmailVerify";
 import UserForgetPass from "./pages/UserForgetPass";
 import UserResetPass from "./pages/UserResetPass";

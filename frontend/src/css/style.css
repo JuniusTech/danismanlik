@@ -3,6 +3,34 @@
     padding: 0;
 }
 
+:root {
+    --main-color: #A97900;
+    --text-color: #00242E;
+    --border-color: #00000029;
+    --white-color: #FFFFFF;
+    --green-color:  #06A900;
+  }
+
+.main_color_class{
+    color: var(--main-color);
+}
+
+.text_color_class{
+    color: var(--text-color);
+}
+
+.border_color_class{
+    border-color: var(--border-color);
+}
+
+.white_color_class{
+    color: var(--white-color);
+}
+
+.green_color_class{
+    color: var(--green-color);
+}
+
 .contain {
     background-image: url('../assets/homebg-image.png');
     height: 70vh;
