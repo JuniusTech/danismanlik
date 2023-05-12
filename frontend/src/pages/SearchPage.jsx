@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import axios from "axios";
@@ -35,7 +36,6 @@ const SearchPage = ({ reting }) => {
     btn1: false,
     btn2: false,
     btn3: false,
-    btn4: false,
   });
 
   const getStarReting = (reting) => {
@@ -135,7 +135,7 @@ const SearchPage = ({ reting }) => {
     }
   };
   const lawyer = (user) => {
-    navigate("/lawyercard", { state: user });
+    navigate("/lawyerdetail", { state: user });
 
     console.log(user)
   };
@@ -356,6 +356,7 @@ const SearchPage = ({ reting }) => {
           ))}
         </div>
       </div >
+      <Footer />
     </>
   );
 };

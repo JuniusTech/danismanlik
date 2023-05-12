@@ -8,7 +8,7 @@ import UserForgetPass from "./pages/UserForgetPass";
 import UserResetPass from "./pages/UserResetPass";
 import LawyerForgetPass from "./pages/LawyerForgetPass";
 import LawyerResetPass from "./pages/LawyerResetPass";
-import LawyerCard from "./pages/LawyerCard";
+import LawyerDetail from "./pages/LawyerDetail";
 
 const AppRoute = () => {
   return (
@@ -16,7 +16,7 @@ const AppRoute = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/lawyer" element={<LawyerHomePage />} />
-      <Route path="/lawyercard" element={<LawyerCard />} />
+      <Route path="/lawyerdetail" element={<LawyerDetail />} />
       <Route path="/verify/:id/:token" element={<EmailVerify />} />
       <Route path="/forget-password" element={<UserForgetPass />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
