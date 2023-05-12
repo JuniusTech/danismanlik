@@ -1,19 +1,17 @@
-import React from "react";
+import React,{ useContext} from "react";
 import Navbar from "../components/Navbar";
-import Header from "../components/Header";
-
-import HomeCarousel from "../components/HomeCarousel";
-import NasilCalisiyor from "../components/NasilCalisiyor";
+import UserHomePageBody from "../components/HomePageBodies/UserHomePageBody";
+import LawyerHomePageBody from "../components/HomePageBodies/LawyerHomePageBody";
 import Footer from "../components/Footer";
-
+import { Store } from "../Store";
 const HomePage = () => {
+  
+  const { state, setIsLawyer } = useContext(Store);
+  const { is_lawyer } = state;
   return (
     <div>
       <Navbar />
-      <Header />
-
-      <NasilCalisiyor />
-      <HomeCarousel />
+      {is_lawyer ? <LawyerHomePageBody /> : <UserHomePageBody />}
       <Footer />
     </div>
   );
