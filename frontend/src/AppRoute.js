@@ -15,7 +15,6 @@ const AppRoute = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<SearchPage />} />
-      <Route path="/lawyer" element={<LawyerHomePage />} />
       <Route path="/lawyerdetail" element={<LawyerDetail />} />
       <Route path="/verify/:id/:token" element={<EmailVerify />} />
       <Route path="/forget-password" element={<UserForgetPass />} />
