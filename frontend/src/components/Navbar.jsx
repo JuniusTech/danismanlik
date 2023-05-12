@@ -16,7 +16,7 @@ const Navbar = () => {
   const [showLawyerLogin, setShowLawyerLogin] = useState(false);
   const [showUserRegister, setShowUserRegister] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
-  const { state, dispatch, setIsLawyer  } = useContext(Store);
+  const { state, dispatch, setIsLawyer } = useContext(Store);
   const { userInfo, lawyerInfo, is_lawyer } = state;
   const userSignOut = () => {
     dispatch({ type: "USER_SIGNOUT" });
@@ -36,7 +36,7 @@ const Navbar = () => {
   const user = () => {
     setIsLawyer(false);
   };
-   
+
   return (
     <>
       <NB expand="lg" bg="light" variant="light">
@@ -52,7 +52,7 @@ const Navbar = () => {
                   {is_lawyer ? (
                     <div className="d-flex">
                       <ButtonMainColor onClick={() => user()}>
-                      Avukat arıyorum.
+                        Avukat arıyorum.
                       </ButtonMainColor>
                       <ButtonWhiteColor
                         onClick={() => setShowLawyerRegister(true)}
