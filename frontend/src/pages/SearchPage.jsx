@@ -331,6 +331,7 @@ const SearchPage = ({ reting }) => {
                         </div>
                       </div>
                     </div>
+                    <div className="search-left-border"></div>
                     <SearchDate user={user} />
                   </div>
                 </div>

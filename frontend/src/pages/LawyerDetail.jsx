@@ -7,6 +7,8 @@ import "../css/lawyercard.css"
 import { useLocation } from 'react-router-dom';
 import { Link } from "react-scroll";
 import Footer from '../components/Footer';
+import telephone from "../assets/telephone.svg"
+import web from "../assets/web.svg"
 
 const LawyerDetail = () => {
   const getStarReting = (reting) => {
@@ -38,11 +40,23 @@ const LawyerDetail = () => {
     }));
   };
   console.log(user)
-  const dateString = user.reviews[0].createdAt;
-  const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
-  console.log(formattedDate)
+
+  function formatDate(dateString) {
+    const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
+    return (formattedDate)
+  }
+
+  function lawyerRate(intRate) {
+    const decimalRate = intRate.tofixed(1)
+    return (decimalRate)
+
+    console.log(lawyerRate)
+  }
+
+
+
   let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState(0)
   return (
     <>
       <Navbar />
@@ -90,28 +104,28 @@ const LawyerDetail = () => {
 
 
 
-                <div className="p-2 d-flex justify-content-around star">
-                  <div className="p-2 d-flex justify-content-around star">
-                    <div>
-                      <i className="fa-solid fa-tty fa-l"></i>{" "}
+                <div className="p-2 d-flex justify-content-start star">
+                  <div className="p-2 d-flex justify-content-start star">
+                    <div className='lawyer-card-phone'>
+                      <img src={telephone} alt="" />{" "}
                       <span className="px-2">{user.phone}</span>{" "}
                     </div>
 
-                    <div className="right-box-comment px-5">
+                    <div className="right-box-comment lawyer-card-phone ">
                       {" "}
                       <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
                       <span>Mesaj Gönder</span>{" "}
                     </div>
 
-                    <div className="right-box-comment px-5 ">
-                      <i className="fa-solid fa-globe  "></i>{" "}
+                    <div className="right-box-comment lawyer-card-phone">
+                      <img src={web} alt="" />{" "}
                       <span>Web Sitesi'ne Git</span>{" "}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='navbar'>
-                <ul className="navbar-links">
+              <div className='lawyer-detail-navbar'>
+                <ul className="lawyer-detail-navbar-links">
                   {navLinks.map((item, index) => (
                     <li
                       className={isActive}
@@ -155,12 +169,12 @@ const LawyerDetail = () => {
             )}
             <h2
               id={user._id}
-              className="more"
+              className="lawyer-detail-more"
               onClick={() => handleReadMoreClick(user._id)}
             >
               {lawyerStates[user._id]
                 ? "Daha Az Gör"
-                : "Daha Fazla Gör"}
+                : "Daha Fazla..."}
             </h2>
             <ul >
               <h3>Eğitimler</h3>
@@ -253,11 +267,11 @@ const LawyerDetail = () => {
                   <>
                     <div className='d-flex justify-content-between w-100'>
                       <div className='d-flex justify-content-around w-10'>
-                        <button className="lawyer-rating-button rounded-5">{comment.name.charAt(0).toUpperCase()}</button>
+                        <button className="lawyer-rating-button rounded-circle">{comment.name.charAt(0).toUpperCase()}</button>
                       </div>
                       <div className='justify-content-around w-75' >
                         <h4>{comment.name}</h4>
-                        <h4>{formattedDate}</h4>
+                        <h4>{formatDate(comment.createdAt)}</h4>
                         <h4>{comment.comment}</h4>
                       </div>
                       <div className='d-flex justify-content-around w-10'>

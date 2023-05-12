@@ -77,8 +77,13 @@
 
 .right-box {
   width: 50rem;
-  border-left: 1px solid #a97900;
+  
   margin-left: 1rem;
+}
+
+.search-left-border {
+  margin: 2rem 1rem 2rem 1rem;
+  border-left: 1px solid #a97900;
 }
 
 .right-box-comment {
