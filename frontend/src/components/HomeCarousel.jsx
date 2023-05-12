@@ -78,8 +78,8 @@ const HomeCarousel = () => {
 
         
         <div className="my-5 ">
-        <h2 className='text-center'> Popüler Branşlar</h2>
-        <h3 className='text-center'> Binlerce avukat arasından tercihini yap,hemen online olarak görüş veya soru sor.</h3>
+        <h2 className='text-center text_color_class' > Popüler Branşlar</h2>
+        <h3 className='text-center text_color_class'> Binlerce avukat arasından tercihini yap,hemen online olarak görüş veya soru sor.</h3>
         <div className='d-flex justify-content-evenly flex-wrap'>
            <div className="lawyer-list-container">
            <Carousel interval={null} controls={true} indicators={true} prevIcon={<FontAwesomeIcon icon={faArrowAltCircleLeft} size="xl" style={{color:" black"}} />} nextIcon={<FontAwesomeIcon icon={faArrowAltCircleRight} size="xl" style={{color:" black"}} />}>
@@ -88,14 +88,14 @@ const HomeCarousel = () => {
               <div className="d-flex justify-content-center">
                 {group.map((branch) => (
                   <div>  
-                  <div className="branch-title text-center m-4">{capitalizeWords(branch)}
+                  <div className="branch-title text-center m-4 text_color_class">{capitalizeWords(branch)}
                   </div>
                   <div key={branch} className="lawyer-branch-container p-0">
                     
                     {/* <h2 className='text-center'>{branch}</h2> */}
-                      {sortedLawyers[branch].map((user) => (
+                      {sortedLawyers[branch].map((lawyer) => (
                         
-                        <div key={user._id} className="d-flex justfiy-content-around m-5 ">
+                        <div key={lawyer._id} className="d-flex justfiy-content-around m-5 ">
              
                               <div className="d-flex  ">
                                
@@ -107,23 +107,23 @@ const HomeCarousel = () => {
                                     <span>
                                       {" "}
                                       <b>
-                                        {capitalizeWords(user.name)} {capitalizeWords(user.surname)}{" "}
+                                        {capitalizeWords(lawyer.name)} {capitalizeWords(lawyer.surname)}{" "}
                                       </b>{" "}
                                     </span>
-                                    {user.isTick ? (
-                                      <i class=" fa fa-circle-check mx-2 text-warning"></i>
+                                    {lawyer.isTick ? (
+                                      <i className=" fa fa-circle-check mx-2 main_color_class "></i>
                                     ) : (
                                       ""
                                     )}
                                   </div>
-                                  <p className="m-2 star">
-                                    {getStarReting(user.rating)}
+                                  <p className="m-2 star main_color_class"  >
+                                    {getStarReting(lawyer.rating)}
              
-                                    <span>{user.reviews.length} yorum</span>
+                                    <span style={{  color: 'var(--main-color)' }}>{lawyer.reviews.length} yorum</span>
                                   </p>
-                                  <p className="m-2">Adres</p>
+                                  <p className="m-2 text_color_class">Adres</p>
                                   
-                                  <p className="m-2"><i class="fa fa-map-marker-alt me-2"></i>İstanbul</p>
+                                  <p className="m-2 text_color_class" ><i className="fa fa-map-marker-alt me-2"></i>İstanbul</p>
                                   
                                   
                                   
