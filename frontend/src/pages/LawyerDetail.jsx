@@ -18,18 +18,18 @@ import ltrght from "../assets/little-right-arrow.svg"
 
 const LawyerDetail = (lawyer) => {
   const [getLawyer, setGetLawyer] = useState([]);
-  console.log(lawyer)
+  console.log(lawyer._id)
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyer._id}`)
-  //     .then((response) => {
-  //       setGetLawyer(response.data);
-  //     })
-  //     .catch((error) => {
-  //       toast.error(getError(error));
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${user._id}`)
+      .then((response) => {
+        setGetLawyer(response.data);
+      })
+      .catch((error) => {
+        toast.error(getError(error));
+      });
+  }, []);
 
   const getStarReting = (reting) => {
     let filledStars = "";
@@ -65,14 +65,6 @@ const LawyerDetail = (lawyer) => {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
     return (formattedDate)
   }
-
-  function lawyerRate(intRate) {
-    const decimalRate = intRate.tofixed(1)
-    return (decimalRate)
-
-    console.log(lawyerRate)
-  }
-
 
 
   let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
@@ -305,7 +297,8 @@ const LawyerDetail = (lawyer) => {
                       <div className='d-flex justify-content-around w-10'>
                         <p className='m-2'>Puan:</p>
                         <p className="m-2 star">
-                          {getStarReting(user.rating.toFixed(0))}
+                          {getStarReting(comment.rating)}
+
                         </p>
                       </div>
                     </div>

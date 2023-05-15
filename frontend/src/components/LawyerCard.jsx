@@ -31,10 +31,17 @@ const LawyerCard = ({ lawyers }) => {
     const [readMore, setReadMore] = useState(false);
 
     const lawyer = (user) => {
-        navigate("/lawyerdetail", { state: user });
+        navigate("/${user._id}", { state: user });
 
-        console.log(user);
+        console.log(user._id);
     };
+
+    function lawyerRate(intRate) {
+        const decimalRate = intRate.tofixed(1)
+        return (decimalRate)
+
+        console.log(lawyerRate)
+    }
     return (
         <>
             <div className="w-100">
