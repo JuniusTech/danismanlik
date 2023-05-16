@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
@@ -9,8 +9,28 @@ import { Link } from "react-scroll";
 import Footer from '../components/Footer';
 import telephone from "../assets/telephone.svg"
 import web from "../assets/web.svg"
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { getError } from "../getError";
+import ltrght from "../assets/little-right-arrow.svg"
 
-const LawyerDetail = () => {
+
+
+const LawyerDetail = (lawyer) => {
+  const [getLawyer, setGetLawyer] = useState([]);
+  console.log(lawyer._id)
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${user._id}`)
+      .then((response) => {
+        setGetLawyer(response.data);
+      })
+      .catch((error) => {
+        toast.error(getError(error));
+      });
+  }, []);
+
   const getStarReting = (reting) => {
     let filledStars = "";
     let emptyStars = "";
@@ -46,21 +66,21 @@ const LawyerDetail = () => {
     return (formattedDate)
   }
 
-  function lawyerRate(intRate) {
-    const decimalRate = intRate.tofixed(1)
-    return (decimalRate)
-
-    console.log(lawyerRate)
-  }
-
-
 
   let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
   const [isActive, setIsActive] = useState(0)
   return (
     <>
       <Navbar />
-      <p className='mx-5'>Ana Sayfa</p>
+      <div className='mx-5 ps-5 d-flex justify-content-start align-items-center star'>
+        <div className='ms-5 ps-5 '>Ana Sayfa</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>{user.branch} avukatı</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>İstanbul</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>{user.name} {user.surname}  </div>
+      </div>
       <div className='lawyer-card-container'>
         <div>
           <div className="lawyer-card rounded-4 d-flex ">
@@ -91,7 +111,7 @@ const LawyerDetail = () => {
                   <p className="m-2">{user.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(user.rating)}
+                    {getStarReting(user.rating?.toFixed(0))}
 
                     <span>{user.reviews?.length} yorum</span>
                   </p>
@@ -105,7 +125,7 @@ const LawyerDetail = () => {
 
 
                 <div className="p-2 d-flex justify-content-start star">
-                  <div className="p-2 d-flex justify-content-start star">
+                  <div className="p-2 d-flex justify-content-start align-items-center star">
                     <div className='lawyer-card-phone'>
                       <img src={telephone} alt="" />{" "}
                       <span className="px-2">{user.phone}</span>{" "}
@@ -243,11 +263,11 @@ const LawyerDetail = () => {
               <h3>Yorumlar</h3>
               <div className='d-flex align-items-center lawyer-card-comments-body'>
                 <div className='w-10'>
-                  <button className='lawyer-rating-button'>{user.rating}.0</button>
+                  <button className='lawyer-rating-button'>{user.reviews.length === 0 ? "0" : user.rating?.toFixed(1)}</button>
                 </div>
                 <div className='p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(user.rating)}
+                    {getStarReting(user.rating?.toFixed(0))}
                   </p>
                   <p>Genel Skor</p>
                   <span>{user.reviews?.length} yorum </span>
@@ -265,8 +285,8 @@ const LawyerDetail = () => {
               <div className="lawyer-card-user-comment">
                 {user.reviews?.map((comment) => (
                   <>
-                    <div className='d-flex justify-content-between w-100'>
-                      <div className='d-flex justify-content-around w-10'>
+                    <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
+                      <div className=' justify-content-around w-10'>
                         <button className="lawyer-rating-button rounded-circle">{comment.name.charAt(0).toUpperCase()}</button>
                       </div>
                       <div className='justify-content-around w-75' >
@@ -277,7 +297,8 @@ const LawyerDetail = () => {
                       <div className='d-flex justify-content-around w-10'>
                         <p className='m-2'>Puan:</p>
                         <p className="m-2 star">
-                          {getStarReting(user.rating)}
+                          {getStarReting(comment.rating)}
+
                         </p>
                       </div>
                     </div>
