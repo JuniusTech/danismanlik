@@ -71,13 +71,14 @@
   border: none;
 }
 .tarih {
+  width: 100%;
   font-size: 0.6rem;
   text-align: center;
 }
 
 .right-box {
-  width: 50rem;
-  
+  width: 100%;
+  margin:auto;
   margin-left: 1rem;
 }
 
