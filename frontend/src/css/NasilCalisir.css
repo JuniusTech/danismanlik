@@ -86,9 +86,9 @@
   margin: auto;
   padding-top: 1rem;
 
-
   color: #ffffff;
   font: normal normal normal 81px/107px Algerian;
+}
 .nasilCalisirMiddlePart h1 {
   background-color: var(--main-color);
   border-radius: 50%;
@@ -103,7 +103,6 @@
   min-width: 160px;
   height: 100%;
   padding: 0 1rem 1rem 1rem;
-
 }
 .nasilCalisirh1 {
   top: 1032px;
