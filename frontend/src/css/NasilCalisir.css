@@ -1,20 +1,94 @@
 .nasilCalisir {
-  padding-top: 2rem;
+  margin: auto;
+  top: 766px;
+  left: 385px;
+  width: 1151px;
+  height: 713px;
+  padding-top: 2.5rem;
+  color: #00242e;
+  /* UI Properties */
+  opacity: 1;
 }
-.nasilCalisir h1,
-h2 {
-  text-align: center;
-}
-
-.nasilCalisirMiddlePart {
+.nasilCalisirContainer {
   display: flex;
-  font-size: 3rem;
-  text-align: center;
-  justify-content: space-evenly;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 2rem;
+  margin-top: 5rem;
 }
+@media screen and (max-width: 500px) {
+  .nasilCalisirContainer {
+    display: block;
+    margin-top: 5rem;
+  }
+}
+.nasilCalisirBaslik {
+  top: 766px;
+  left: 695px;
+  width: 530px;
+  height: 45px;
+  font-weight: bold;
+  color: #00242e;
+  font-size: 38px;
+  font-family: SF Pro Text;
+  margin: auto;
+}
+.nasilCalisirFirstDiv,
+.nasilCalisirSecondDiv,
+.nasilCalisirThirdDiv {
+  top: 861px;
+  left: 385px;
+  width: 269px;
+  height: 618px;
+  margin: auto;
+  border-radius: 0px 0px 10px 10px;
+  border: 2px solid #a97900;
+}
+.nasilCalisirFirstDivP,
+.nasilCalisirThirdDivP {
+  top: 861px;
+  left: 411px;
+  width: 218px;
+  height: 219px;
+  margin: auto;
+  margin-top: -2rem;
+  background: #a97900 0% 0% no-repeat padding-box;
+  border-radius: 50%;
+}
+.nasilCalisirSecondDivP {
+  top: 861px;
+  left: 411px;
+  width: 218px;
+  height: 219px;
+  margin: auto;
+  margin-top: -2rem;
+  background: #00242e 0% 0% no-repeat padding-box;
+  border-radius: 50%;
+}
+/*!  sorrrr ?? transform: matrix(-1, 0, 0, -1, 0, 0); */
 
+.nasilCalisirFirstDiv p,
+.nasilCalisirThirdDiv p {
+  top: 886px;
+  left: 496px;
+  width: 48px;
+  height: 90px;
+  text-align: center;
+  margin: auto;
+  padding-top: 1rem;
+  /*!  font-family: ;bak ??? */
+  color: #ffffff;
+  font: normal normal normal 81px/107px Algerian;
+}
+.nasilCalisirSecondDiv p {
+  top: 886px;
+  left: 496px;
+  width: 48px;
+  height: 90px;
+  text-align: center;
+  margin: auto;
+  padding-top: 1rem;
+
+
+  color: #ffffff;
+  font: normal normal normal 81px/107px Algerian;
 .nasilCalisirMiddlePart h1 {
   background-color: var(--main-color);
   border-radius: 50%;
@@ -29,55 +103,51 @@ h2 {
   min-width: 160px;
   height: 100%;
   padding: 0 1rem 1rem 1rem;
+
 }
-.nasilCalisirContent div {
-  width: 100%;
+.nasilCalisirh1 {
+  top: 1032px;
+  left: 473px;
+  width: 238px !important;
+  height: 80%;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 5px 10px #0000004d;
+  text-align: center;
+  letter-spacing: 0px;
+  font-size: 1rem !important;
+  color: black !important;
   background-color: white;
-  margin-top: -20%;
-  padding: 0 1rem 2rem 1rem;
-  box-shadow: 1px 1px 5px 3px rgb(231, 222, 222);
+  margin: auto;
+  margin-top: -10rem;
+  line-height: 1rem !important;
+  padding: 0 1rem;
 }
-.nasilCalisirContent p {
-  height: 18rem;
-  font-size: 13px;
+
+.nasilCalisirsvg1 {
+  margin-top: 85%;
+}
+.nasilCalisirsvg2 {
+  margin-top: 65%;
+}
+.nasilCalisirsvg3 {
+  margin-top: 60%;
 }
 .ucgen {
   width: 0;
   height: 0;
-  border-top: 20px solid var(--main-color);
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  margin: auto;
-  margin-top: -2.2rem;
-}
-.nasilCalisirContent svg {
-  margin: auto;
-  width: 100%;
-}
-@media only screen and (max-width: 650px) {
-  .nasilCalisirMiddlePart {
-    display: block;
-    margin: auto;
-    width: 100%;
-    padding: 0 32%;
-  }
-  .nasilCalisirContent {
-    width: 35vw;
-    height: none;
-  }
 
-  .nasilCalisirContent p {
-    height: 18rem;
-    font-size: 13px;
-  }
+  margin: auto;
+  border-top: 40px solid #a97900;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  margin-top: -9px !important;
 }
-@media only screen and (min-width: 1100px) {
-  .nasilCalisirContent p {
-    height: 18rem;
-    font-size: 15px;
-    margin-top: 2rem;
-  }
-  .nasilCalisirContent div {
-    padding-top: 2rem;
-  }
+.ucgen2 {
+  width: 0;
+  height: 0;
+  margin: auto;
+  border-top: 40px solid #00242e;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  margin-top: -9px !important;
 }
