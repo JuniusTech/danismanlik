@@ -25,6 +25,11 @@ const NasilCalisiyor = () => {
               width="63.024"
               height="63.032"
               viewBox="0 0 47.024 47.032"
+              width="70"
+              height="70"
+              fill="currentColor"
+              className="bi bi-search"
+              viewBox="0 0 16 16"
             >
               <path
                 id="Icon_awesome-search"
@@ -58,9 +63,15 @@ const NasilCalisiyor = () => {
             <svg
               className="nasilCalisirsvg2 "
               xmlns="http://www.w3.org/2000/svg"
+
               width="63.476"
               height="63.258"
               viewBox="0 0 40.476 46.258"
+              width="70"
+              height="70"
+              fill="currentColor"
+              className="bi bi-calendar-check-fill"
+              viewBox="0 0 16 16">>>>>>> master
             >
               <path
                 id="Icon_awesome-calendar-check"
@@ -87,10 +98,12 @@ const NasilCalisiyor = () => {
             </h3>
             <svg
               className="nasilCalisirsvg3 "
-              xmlns="http://www.w3.org/2000/svg"
-              width="63.6"
-              height="63.6"
-              viewBox="0 0 46.6 46.6"
+              xmlns="http://www.w3.org/2000/svg"          
+              width="70"
+              height="70"
+              fill="currentColor"
+              className="bi bi-currency-exchange"
+              viewBox="0 0 16 16"
             >
               <path
                 id="Path_26"

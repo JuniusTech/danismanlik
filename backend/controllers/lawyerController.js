@@ -11,7 +11,7 @@ const getLawyers = expressAsyncHandler(async (req, res) => {
   res.send(lawyers);
 });
 
-const lmt = 12;
+const lmt = 5;
 const searchLawyers = expressAsyncHandler(async (req, res) => {
   const limit = req.query.limit || lmt;
   const page = req.query.page || 1;

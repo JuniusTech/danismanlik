@@ -86,9 +86,24 @@
   margin: auto;
   padding-top: 1rem;
 
-  /*!  font-family: ;bak ??? */
+
   color: #ffffff;
   font: normal normal normal 81px/107px Algerian;
+.nasilCalisirMiddlePart h1 {
+  background-color: var(--main-color);
+  border-radius: 50%;
+  padding: 3rem;
+  margin-top: -1rem;
+  min-width: 115px;
+}
+.nasilCalisirContent {
+  border: 1px solid rgb(116, 97, 97);
+  border-radius: 7px;
+  width: 15%;
+  min-width: 160px;
+  height: 100%;
+  padding: 0 1rem 1rem 1rem;
+
 }
 .nasilCalisirh1 {
   top: 1032px;
@@ -120,6 +135,7 @@
 .ucgen {
   width: 0;
   height: 0;
+
   margin: auto;
   border-top: 40px solid #a97900;
   border-left: 40px solid transparent;

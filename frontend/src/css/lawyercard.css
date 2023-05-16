@@ -2,10 +2,12 @@
     display: flex;
     margin: 2rem;
     padding-bottom: 20px;
+    /* width: 90%; */
+    /* border: 2px solid red; */
 }
 
 .lawyer-card {
-  width: 70rem;
+  width: 80%;
   margin: 0 2rem 0 8rem;
   border: 1px solid #a97900;
   padding: 1rem 0 0 1rem;
@@ -17,7 +19,9 @@
     border: 1px solid #a97900;
     border-radius: 8px;
     padding: 0 rem;
-    max-height:45rem;
+    height: fit-content;
+    width: 40%;
+    margin-right:10rem;
     
 }
 
@@ -42,13 +46,98 @@
 }
 
 .lawyer-card-user-comment{
-    display: flex;
-    margin-left: 0;
-    padding-left: 0;
+   
+    justify-content: center;
+    margin-top:2rem
+}
+.lawyer-card-user-comment-each{
+  padding: 1rem;
+  border-bottom: 2px solid #a97900;
 }
 
 .lawyer-card-commentshead {
-    border-bottom: 2px solid #a97900;
+    
     margin: 8px;
     
+}
+.lawyer-card-comments-body{
+     border-bottom: 2px solid #a97900;
+}
+
+.lawyer-card-comments-box{
+    background-color: #a97900;
+}
+
+.lawyer-comment-button {
+ margin: auto;
+ margin-bottom: 2rem;
+  background-color: #a97900;
+  width: 26rem;
+  height: 2;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 1.2rem;
+}
+.lawyer-detail-navbar{
+    display: flex;
+  /* margin: auto; */
+   margin-left: -2rem;
+  margin-bottom: 0;
+  /* border: 2px solid red; */
+
+}
+
+.lawyer-detail-navbar ul{
+    display: flex;
+  margin: auto;
+  margin-left: -1rem;
+  margin-bottom: 0;
+  
+
+}
+.lawyer-detail-navbar li {
+    display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  align-items: center;
+  width: 12rem;
+  list-style: none;
+  margin-right: 5px;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  /* text-decoration: underline; */
+}
+.search-lawyer-cursor{
+  cursor: pointer;
+}
+
+
+.detail-link {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: black; 
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.lawyer-card-phone {
+  display: flex;
+  align-items: center;
+  border: 2px solid #a97900;
+  border-radius: 8px;
+  padding: 0.9rem;
+  margin: 1rem;
+  height: 3.5rem;
+}
+
+.lawyer-detail-more{
+   display: flex;
+  justify-content: start;
+  color: #a97900;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }

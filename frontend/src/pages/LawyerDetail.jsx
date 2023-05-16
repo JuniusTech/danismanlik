@@ -1,12 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import "../css/lawyercard.css"
 import { useLocation } from 'react-router-dom';
+import { Link } from "react-scroll";
+import Footer from '../components/Footer';
+import telephone from "../assets/telephone.svg"
+import web from "../assets/web.svg"
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { getError } from "../getError";
+import ltrght from "../assets/little-right-arrow.svg"
 
-const LawyerCard = () => {
+
+
+const LawyerDetail = (lawyer) => {
+  const [getLawyer, setGetLawyer] = useState([]);
+  console.log(lawyer._id)
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${user._id}`)
+      .then((response) => {
+        setGetLawyer(response.data);
+      })
+      .catch((error) => {
+        toast.error(getError(error));
+      });
+  }, []);
+
   const getStarReting = (reting) => {
     let filledStars = "";
     let emptyStars = "";
@@ -37,10 +61,26 @@ const LawyerCard = () => {
   };
   console.log(user)
 
+  function formatDate(dateString) {
+    const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
+    return (formattedDate)
+  }
+
+
+  let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
+  const [isActive, setIsActive] = useState(0)
   return (
     <>
       <Navbar />
-      <p className='mx-5'>Ana Sayfa</p>
+      <div className='mx-5 ps-5 d-flex justify-content-start align-items-center star'>
+        <div className='ms-5 ps-5 '>Ana Sayfa</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>{user.branch} avukatı</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>İstanbul</div>
+        <img className='ps-2' src={ltrght} alt="" />
+        <div className='ps-3'>{user.name} {user.surname}  </div>
+      </div>
       <div className='lawyer-card-container'>
         <div>
           <div className="lawyer-card rounded-4 d-flex ">
@@ -71,7 +111,7 @@ const LawyerCard = () => {
                   <p className="m-2">{user.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(user.rating)}
+                    {getStarReting(user.rating?.toFixed(0))}
 
                     <span>{user.reviews?.length} yorum</span>
                   </p>
@@ -84,31 +124,54 @@ const LawyerCard = () => {
 
 
 
-                <div className="p-2 d-flex justify-content-around star">
-                  <div className="p-2 d-flex justify-content-around star">
-                    <div>
-                      <i className="fa-solid fa-tty fa-l"></i>{" "}
+                <div className="p-2 d-flex justify-content-start star">
+                  <div className="p-2 d-flex justify-content-start align-items-center star">
+                    <div className='lawyer-card-phone'>
+                      <img src={telephone} alt="" />{" "}
                       <span className="px-2">{user.phone}</span>{" "}
                     </div>
 
-                    <div className="right-box-comment px-5">
+                    <div className="right-box-comment lawyer-card-phone ">
                       {" "}
                       <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
                       <span>Mesaj Gönder</span>{" "}
                     </div>
 
-                    <div className="right-box-comment px-5 ">
-                      <i className="fa-solid fa-globe  "></i>{" "}
+                    <div className="right-box-comment lawyer-card-phone">
+                      <img src={web} alt="" />{" "}
                       <span>Web Sitesi'ne Git</span>{" "}
                     </div>
                   </div>
                 </div>
               </div>
+              <div className='lawyer-detail-navbar'>
+                <ul className="lawyer-detail-navbar-links">
+                  {navLinks.map((item, index) => (
+                    <li
+                      className={isActive}
+                      key={index}
+                      onClick={() => setIsActive(index)}
+                    >
+                      <Link
+                        className="detail-link"
+                        to={item}
+                        spy={true}
+                        smooth={true}
+                        offset={-200}
+                        duration={300}
+                      >
+                        {item}
+                        <div />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
 
           </div>
-          <div className="lawyer-card rounded-4 mt-5 ">
+          <div id='Özgeçmiş' className="lawyer-card rounded-4 mt-5 ">
             <h3 >Hakkımda</h3>
             <p className="extra-content">
               Lorem ipsum dolor sit amet consectetur adipisicing
@@ -126,12 +189,12 @@ const LawyerCard = () => {
             )}
             <h2
               id={user._id}
-              className="more"
+              className="lawyer-detail-more"
               onClick={() => handleReadMoreClick(user._id)}
             >
               {lawyerStates[user._id]
                 ? "Daha Az Gör"
-                : "Daha Fazla Gör"}
+                : "Daha Fazla..."}
             </h2>
             <ul >
               <h3>Eğitimler</h3>
@@ -162,7 +225,7 @@ const LawyerCard = () => {
             </ul>
           </div>
           <div className="lawyer-card d-flex rounded-4 mt-5 ">
-            <div className='w-75'>
+            <div id="Adres" className='w-75'>
               <h3>Adres</h3>
               <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
               <p>En Yakın Uygunluk
@@ -176,7 +239,7 @@ const LawyerCard = () => {
             </div>
 
           </div>
-          <div className="lawyer-card rounded-4 mt-5 ">
+          <div id='Hizmetler' className="lawyer-card rounded-4 mt-5 ">
             <h3 >Hizmetler</h3>
 
 
@@ -194,53 +257,58 @@ const LawyerCard = () => {
 
 
           </div>
-          <div className="lawyer-card rounded-4 mt-5 ">
+          <div id='Yorumlar' className="lawyer-card rounded-4 mt-5 ">
 
             <div className="lawyer-card-commentshead">
               <h3>Yorumlar</h3>
-              <div className='d-flex align-items-center'>
-                <div>
-                  <button className='lawyer-rating-button'>{user.rating}.0</button>
+              <div className='d-flex align-items-center lawyer-card-comments-body'>
+                <div className='w-10'>
+                  <button className='lawyer-rating-button'>{user.reviews.length === 0 ? "0" : user.rating?.toFixed(1)}</button>
                 </div>
-                <div className='p-0 '>
+                <div className='p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(user.rating)}
+                    {getStarReting(user.rating?.toFixed(0))}
                   </p>
                   <p>Genel Skor</p>
                   <span>{user.reviews?.length} yorum </span>
                 </div>
-                <div>
-                  <button className='bg-secondary mx-5 d-flex align-items-center'>
+                <div className=' mx-5'>
+                  <p className='lawyer-card-comments-box mx-5 d-flex align-items-center w-100 rounded-4 m-auto '>
                     <i className="fa-solid fa-circle-check mx-2 text-warning"></i>
                     <p>
                       Tüm yorumlar moderatörlerden oluşan profesyonel bir ekip tarafından incelenir ve adil, kurallara uygun bir şekilde yayınlanır.
                     </p>
-                  </button>
+                  </p>
                 </div>
               </div>
-            </div>
-            <div className="lawyer-card-user-comment">
-              {user.reviews?.map((comment) => (
-                <>
-                  <div className='d-flex justify-content-between'>
-                    <div className='d-flex'>
-                      <button className="lawyer-rating-button rounded-5">{comment.name.charAt(0).toUpperCase()}</button>
-                    </div>
-                    <div className='d-flex'>
-                      <div>{comment.name}</div>
-                      <div>{comment.createdAt}</div>
-                      <div>{comment.comment}</div></div>
-                    <div className='d-flex'>
-                      Puan:
-                      <p className="m-2 star">
-                        {getStarReting(user.rating)}
-                      </p>
-                    </div>
-                  </div>
 
-                </>
-              ))}
+              <div className="lawyer-card-user-comment">
+                {user.reviews?.map((comment) => (
+                  <>
+                    <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
+                      <div className=' justify-content-around w-10'>
+                        <button className="lawyer-rating-button rounded-circle">{comment.name.charAt(0).toUpperCase()}</button>
+                      </div>
+                      <div className='justify-content-around w-75' >
+                        <h4>{comment.name}</h4>
+                        <h4>{formatDate(comment.createdAt)}</h4>
+                        <h4>{comment.comment}</h4>
+                      </div>
+                      <div className='d-flex justify-content-around w-10'>
+                        <p className='m-2'>Puan:</p>
+                        <p className="m-2 star">
+                          {getStarReting(comment.rating)}
+
+                        </p>
+                      </div>
+                    </div>
+
+                  </>
+                ))}
+
+              </div>
             </div>
+            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Tüm Yorumları Göster</button>
           </div>
 
         </div>
@@ -263,8 +331,9 @@ const LawyerCard = () => {
         </div>
 
       </div>
+      <Footer />
     </>
   )
 }
 
-export default LawyerCard
+export default LawyerDetail
