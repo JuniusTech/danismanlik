@@ -4,17 +4,21 @@
   padding: 3% 7%;
   width: 100%;
   border-radius: 10px;
+  color: #00242e;
+}
+.signInForm label {
+  color: #00242e;
 }
 .vsc-initialized modal-open {
   border: 3px solid red;
 }
 
 .signInForm span {
-  color: orange;
+  color: #a97900;
 }
 
 .signInForm button {
-  background-color: rgb(156, 103, 5) !important;
-  font-weight: 800;
-  font-size: 15px;
+  background-color: #a97900 !important;
+  font: normal normal normal 17px/17px SF Pro Text !important;
+  padding: 10px 0;
 }

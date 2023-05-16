@@ -6,6 +6,10 @@
 .modal-content {
   border-radius: 20px !important;
   width: 100% !important;
+  color: #00242e;
+}
+.modal-content label {
+  color: #00242e;
 }
 
 .registerBaslık h1 {
@@ -26,12 +30,15 @@
   padding: 2rem;
   overflow: auto;
   border-radius: 15px;
+  color: #00242e;
 }
+
 .UserRegisterFormDiv {
   height: 54vh;
   width: 100%;
   padding: 2rem;
   overflow: auto;
+  color: #00242e;
 }
 .UserRegisterFormDiv span {
   color: orange;
@@ -90,7 +97,7 @@
 }
 
 .registerCheckBtn span {
-  color: orange;
+  color: #a97900;
   font-size: 10px;
 }
 
@@ -99,6 +106,8 @@
   justify-content: center;
   padding: 10px;
   gap: 2rem;
+
+  font: normal normal bold 18px/21px SF Pro Text;
 }
 
 .registerButtons button {
@@ -108,15 +117,14 @@
 }
 .registerbtn1 {
   border: 1px solid black;
+
   font-size: 1.2rem;
   font-weight: 900;
 }
 .registerbtn2 {
   border: none;
-  background-color: orange;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 900;
+  background: #a97900 0% 0% no-repeat padding-box;
+  color: #f5f5f5;
 }
 .registerFormDiv p {
   text-align: center;

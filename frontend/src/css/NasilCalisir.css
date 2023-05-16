@@ -12,11 +12,17 @@
 .nasilCalisirContainer {
   display: flex;
   margin-top: 5rem;
+  position: relative;
 }
 @media screen and (max-width: 500px) {
   .nasilCalisirContainer {
     display: block;
     margin-top: 5rem;
+    position: static;
+  }
+  .nasilCalisirContainer svg {
+    position: static;
+    margin-bottom: -150%;
   }
 }
 .nasilCalisirBaslik {
@@ -30,9 +36,7 @@
   font-family: SF Pro Text;
   margin: auto;
 }
-.nasilCalisirFirstDiv,
-.nasilCalisirSecondDiv,
-.nasilCalisirThirdDiv {
+.nasilCalisirFirstDiv {
   top: 861px;
   left: 385px;
   width: 269px;
@@ -41,8 +45,7 @@
   border-radius: 0px 0px 10px 10px;
   border: 2px solid #a97900;
 }
-.nasilCalisirFirstDivP,
-.nasilCalisirThirdDivP {
+.nasilCalisirFirstDivP {
   top: 861px;
   left: 411px;
   width: 218px;
@@ -52,20 +55,10 @@
   background: #a97900 0% 0% no-repeat padding-box;
   border-radius: 50%;
 }
-.nasilCalisirSecondDivP {
-  top: 861px;
-  left: 411px;
-  width: 218px;
-  height: 219px;
-  margin: auto;
-  margin-top: -2rem;
-  background: #00242e 0% 0% no-repeat padding-box;
-  border-radius: 50%;
-}
+
 /*!  sorrrr ?? transform: matrix(-1, 0, 0, -1, 0, 0); */
 
-.nasilCalisirFirstDiv p,
-.nasilCalisirThirdDiv p {
+.nasilCalisirFirstDiv p {
   top: 886px;
   left: 496px;
   width: 48px;
@@ -123,13 +116,19 @@
 }
 
 .nasilCalisirsvg1 {
-  margin-top: 85%;
+  position: absolute;
+  bottom: 8%;
+  left: 14%;
 }
 .nasilCalisirsvg2 {
-  margin-top: 65%;
+  position: absolute;
+  bottom: 8%;
+  left: 47%;
 }
 .nasilCalisirsvg3 {
-  margin-top: 60%;
+  position: absolute;
+  bottom: 8%;
+  left: 80%;
 }
 .ucgen {
   width: 0;
