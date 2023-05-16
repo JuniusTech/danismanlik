@@ -10,6 +10,7 @@ import { removeCookie } from "../cookies";
 import { toast } from "react-toastify";
 import ButtonMainColor from "./Buttons/ButtonMainColor";
 import ButtonWhiteColor from "./Buttons/ButtonWhiteColor";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [showLawyerRegister, setShowLawyerRegister] = useState(false);
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [showUserLogin, setShowUserLogin] = useState(false);
   const { state, dispatch, setIsLawyer } = useContext(Store);
   const { userInfo, lawyerInfo, is_lawyer } = state;
+  const navigate = useNavigate();
   const userSignOut = () => {
     dispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
@@ -41,7 +43,7 @@ const Navbar = () => {
     <>
       <NB expand="lg" bg="light" variant="light">
         <Container>
-          <NB.Brand href="#">
+          <NB.Brand onClick={() => navigate("/")}>
             <img src={logo} alt="logo" style={{ height: "50px" }} />
           </NB.Brand>
           <NB.Toggle aria-controls="responsive-navbar-nav" />
