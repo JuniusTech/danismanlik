@@ -127,6 +127,13 @@
   font-size: 18px;
 }
 
+.right-box-comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid #a97900;
+}
+
 .lawyer-card-phone {
   display: flex;
   align-items: center;

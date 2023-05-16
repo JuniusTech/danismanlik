@@ -4,6 +4,8 @@ import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
 import { useNavigate } from 'react-router-dom';
+import telephone from "../assets/telephone.svg";
+import web from "../assets/web.svg"
 
 const LawyerCard = ({ lawyers }) => {
     const navigate = useNavigate();
@@ -45,7 +47,7 @@ const LawyerCard = ({ lawyers }) => {
                         <div className="search-card-lawyer rounded-4  ">
                             <div className="d-flex  ">
                                 <div className=" d-flex ">
-                                    <div className="w-100 ">
+                                    <div className='search-card-lawyer-leftbox'>
                                         <div
                                             className="d-flex w-100 search-lawyer-cursor "
                                             onClick={() => navigate(`/${lawyer._id}`)}
@@ -112,20 +114,20 @@ const LawyerCard = ({ lawyers }) => {
                                             </h2>
 
                                             <div className="p-2 d-flex justify-content-around star">
-                                                <div className="p-2 d-flex justify-content-around star">
-                                                    <div>
-                                                        <i className="fa-solid fa-tty fa-l"></i>{" "}
+                                                <div className="p-2 w-100 d-flex justify-content-around star">
+                                                    <div className='d-flex align-items-center'>
+                                                        <img src={telephone} alt="" />{" "}{" "}
                                                         <span className="px-2">{lawyer.phone}</span>{" "}
                                                     </div>
 
                                                     <div className="right-box-comment px-5">
                                                         {" "}
-                                                        <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
-                                                        <span>Mesaj Gönder</span>{" "}
+                                                        <i className=" fa-sharp fa-solid fa-comments "></i>
+                                                        <span>Mesaj </span>
                                                     </div>
 
-                                                    <div className="right-box-comment px-5 ">
-                                                        <i className="fa-solid fa-globe  "></i>{" "}
+                                                    <div className=" right-box-comment px-5 ">
+                                                        <img src={web} alt="" />{" "}
                                                         <span>Web Sitesi'ne Git</span>{" "}
                                                     </div>
                                                 </div>

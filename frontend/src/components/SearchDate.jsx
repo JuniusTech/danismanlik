@@ -111,7 +111,7 @@ const SearchDate = ({ lawyer }) => {
 
     return (
         <>
-            <div className="right-box">
+            <div className="search-card-lawyer-rightbox">
                 <div className="justify-content-center p-2">
                     <Table borderless="true">
                         <thead>

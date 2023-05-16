@@ -8,7 +8,8 @@
 }
 
 .search-card-lawyer {
-  width: 100rem;
+  width: 100%;
+  height: fit-content;
   border: 1px solid #a97900;
   padding: 1rem 0 0 1rem;
 }
@@ -76,10 +77,15 @@
   text-align: center;
 }
 
-.right-box {
+.search-card-lawyer-rightbox {
   width: 100%;
-  margin:auto;
+  /* margin:auto; */
   margin-left: 1rem;
+}
+
+.search-card-lawyer-leftbox{
+  width: auto;
+  height: fit-content;
 }
 
 .search-left-border {
@@ -87,9 +93,6 @@
   border-left: 1px solid #a97900;
 }
 
-.right-box-comment {
-  border-left: 2px solid #a97900;
-}
 
 .star {
   color: #a97900;
