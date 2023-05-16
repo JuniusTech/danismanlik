@@ -4,6 +4,8 @@ import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
 import { useNavigate } from 'react-router-dom';
+import telephone from "../assets/telephone.svg";
+import web from "../assets/web.svg"
 
 const LawyerCard = ({ lawyers }) => {
     const navigate = useNavigate();
@@ -30,30 +32,30 @@ const LawyerCard = ({ lawyers }) => {
     };
     const [readMore, setReadMore] = useState(false);
 
-    const lawyer = (user) => {
-        navigate("/${user._id}", { state: user });
+    const lawyer = (lawyer) => {
+        ;
 
-        console.log(user._id);
+        console.log(lawyer._id);
     };
 
 
     return (
         <>
             <div className="w-100">
-                {lawyers?.map((user) => (
-                    <div key={user._id} className="d-flex justfiy-content-around m-5 ">
+                {lawyers?.map((lawyer) => (
+                    <div key={lawyer._id} className="d-flex justfiy-content-around m-5 ">
                         <div className="search-card-lawyer rounded-4  ">
                             <div className="d-flex  ">
                                 <div className=" d-flex ">
-                                    <div className="w-100 ">
+                                    <div className='search-card-lawyer-leftbox'>
                                         <div
                                             className="d-flex w-100 search-lawyer-cursor "
-                                            onClick={() => lawyer(user)}
+                                            onClick={() => navigate(`/${lawyer._id}`)}
                                         >
                                             <div className="h-100">
                                                 <img
                                                     width="150rem"
-                                                    src={user.isTick ? image : avatar}
+                                                    src={lawyer.isTick ? image : avatar}
                                                     alt="profilepict"
                                                 />
                                             </div>
@@ -63,21 +65,21 @@ const LawyerCard = ({ lawyers }) => {
                                                     <span>
                                                         {" "}
                                                         <b>
-                                                            {user.name} {user.surname}{" "}
+                                                            {lawyer.name} {lawyer.surname}{" "}
                                                         </b>{" "}
                                                     </span>
-                                                    {user.isTick ? (
+                                                    {lawyer.isTick ? (
                                                         <i className="fa-solid fa-circle-check mx-2 text-warning"></i>
                                                     ) : (
                                                         ""
                                                     )}
                                                 </div>
-                                                <p className="m-2">{user.branch} avukatı, İstanbul</p>
+                                                <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
                                                 <p className="mx-2">15 Yıllık Deneyim</p>
                                                 <p className="m-2 star">
-                                                    {getStarReting(user.rating?.toFixed(0))}
+                                                    {getStarReting(lawyer.rating?.toFixed(0))}
 
-                                                    <span>{user.reviews.length} yorum</span>
+                                                    <span>{lawyer.reviews.length} yorum</span>
                                                 </p>
                                             </div>
                                             <button className="like">
@@ -93,7 +95,7 @@ const LawyerCard = ({ lawyers }) => {
                                                 rerum quis minus voluptatibus sed hic ad quo
                                             </p>
                                             {readMore && extraContent}
-                                            {lawyerStates[user._id] && (
+                                            {lawyerStates[lawyer._id] && (
                                                 <p className="extra-content">
                                                     Lorem ipsum dolor sit amet consectetur adipisicing
                                                     elit. Qui, consectetur nequeab porro quasi culpa
@@ -102,30 +104,30 @@ const LawyerCard = ({ lawyers }) => {
                                                 </p>
                                             )}
                                             <h2
-                                                id={user._id}
+                                                id={lawyer._id}
                                                 className="more"
-                                                onClick={() => handleReadMoreClick(user._id)}
+                                                onClick={() => handleReadMoreClick(lawyer._id)}
                                             >
-                                                {lawyerStates[user._id]
+                                                {lawyerStates[lawyer._id]
                                                     ? "Daha Az Gör"
                                                     : "Daha Fazla Gör"}
                                             </h2>
 
                                             <div className="p-2 d-flex justify-content-around star">
-                                                <div className="p-2 d-flex justify-content-around star">
-                                                    <div>
-                                                        <i className="fa-solid fa-tty fa-l"></i>{" "}
-                                                        <span className="px-2">{user.phone}</span>{" "}
+                                                <div className="p-2 w-100 d-flex justify-content-around star">
+                                                    <div className='d-flex align-items-center'>
+                                                        <img src={telephone} alt="" />{" "}{" "}
+                                                        <span className="px-2">{lawyer.phone}</span>{" "}
                                                     </div>
 
                                                     <div className="right-box-comment px-5">
                                                         {" "}
-                                                        <i className=" fa-sharp fa-solid fa-comments "></i>{" "}
-                                                        <span>Mesaj Gönder</span>{" "}
+                                                        <i className=" fa-sharp fa-solid fa-comments "></i>
+                                                        <span>Mesaj </span>
                                                     </div>
 
-                                                    <div className="right-box-comment px-5 ">
-                                                        <i className="fa-solid fa-globe  "></i>{" "}
+                                                    <div className=" right-box-comment px-5 ">
+                                                        <img src={web} alt="" />{" "}
                                                         <span>Web Sitesi'ne Git</span>{" "}
                                                     </div>
                                                 </div>
@@ -133,7 +135,7 @@ const LawyerCard = ({ lawyers }) => {
                                         </div>
                                     </div>
                                     <div className="search-left-border"></div>
-                                    <SearchDate user={user} />
+                                    <SearchDate lawyer={lawyer} />
                                 </div>
                             </div>
                         </div>

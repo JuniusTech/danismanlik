@@ -4,7 +4,7 @@ import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import "../css/lawyercard.css"
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from "react-scroll";
 import Footer from '../components/Footer';
 import telephone from "../assets/telephone.svg"
@@ -16,15 +16,19 @@ import ltrght from "../assets/little-right-arrow.svg"
 
 
 
-const LawyerDetail = (lawyer) => {
-  const [getLawyer, setGetLawyer] = useState([]);
-  console.log(lawyer._id)
+const LawyerDetail = () => {
+  const [lawyer, setLawyer] = useState("");
+
+
+  const params = useParams()
+  const { lawyerid } = params
+  console.log(lawyerid)
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${user._id}`)
+      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
       .then((response) => {
-        setGetLawyer(response.data);
+        setLawyer(response.data);
       })
       .catch((error) => {
         toast.error(getError(error));
@@ -43,9 +47,8 @@ const LawyerDetail = (lawyer) => {
     return filledStars + emptyStars;
   };
 
-  const { state: user } = useLocation();
 
-  console.log(user)
+
 
 
   const [readMore, setReadMore] = useState(false);
@@ -59,7 +62,7 @@ const LawyerDetail = (lawyer) => {
       [lawyerId]: !prevStates[lawyerId],
     }));
   };
-  console.log(user)
+  console.log(lawyer)
 
   function formatDate(dateString) {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
@@ -75,11 +78,11 @@ const LawyerDetail = (lawyer) => {
       <div className='mx-5 ps-5 d-flex justify-content-start align-items-center star'>
         <div className='ms-5 ps-5 '>Ana Sayfa</div>
         <img className='ps-2' src={ltrght} alt="" />
-        <div className='ps-3'>{user.branch} avukatı</div>
+        <div className='ps-3'>{lawyer.branch} avukatı</div>
         <img className='ps-2' src={ltrght} alt="" />
         <div className='ps-3'>İstanbul</div>
         <img className='ps-2' src={ltrght} alt="" />
-        <div className='ps-3'>{user.name} {user.surname}  </div>
+        <div className='ps-3'>{lawyer.name} {lawyer.surname}  </div>
       </div>
       <div className='lawyer-card-container'>
         <div>
@@ -87,7 +90,7 @@ const LawyerDetail = (lawyer) => {
             <div className="w-100 ">
               <div className="d-flex w-100 ">
                 <div className="h-100">
-                  <img width="150rem" src={user.isTick ?
+                  <img width="150rem" src={lawyer.isTick ?
                     image
                     :
                     avatar
@@ -99,21 +102,21 @@ const LawyerDetail = (lawyer) => {
                     <span>
                       {" "}
                       <b>
-                        {user.name} {user.surname}{" "}
+                        {lawyer.name} {lawyer.surname}{" "}
                       </b>{" "}
                     </span>
-                    {user.isTick ? (
+                    {lawyer.isTick ? (
                       <i className="fa-solid fa-circle-check mx-2 text-warning"></i>
                     ) : (
                       ""
                     )}
                   </div>
-                  <p className="m-2">{user.branch} avukatı, İstanbul</p>
+                  <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(user.rating?.toFixed(0))}
+                    {getStarReting(lawyer.rating?.toFixed(0))}
 
-                    <span>{user.reviews?.length} yorum</span>
+                    <span>{lawyer.reviews?.length} yorum</span>
                   </p>
                 </div>
                 <button className="like">
@@ -128,7 +131,7 @@ const LawyerDetail = (lawyer) => {
                   <div className="p-2 d-flex justify-content-start align-items-center star">
                     <div className='lawyer-card-phone'>
                       <img src={telephone} alt="" />{" "}
-                      <span className="px-2">{user.phone}</span>{" "}
+                      <span className="px-2">{lawyer.phone}</span>{" "}
                     </div>
 
                     <div className="right-box-comment lawyer-card-phone ">
@@ -179,7 +182,7 @@ const LawyerDetail = (lawyer) => {
               rerum quis minus voluptatibus sed hic ad quo
             </p>
             {readMore && extraContent}
-            {lawyerStates[user._id] && (
+            {lawyerStates[lawyer._id] && (
               <p className="extra-content">
                 Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Qui, consectetur nequeab porro quasi culpa
@@ -188,11 +191,11 @@ const LawyerDetail = (lawyer) => {
               </p>
             )}
             <h2
-              id={user._id}
+              id={lawyer._id}
               className="lawyer-detail-more"
-              onClick={() => handleReadMoreClick(user._id)}
+              onClick={() => handleReadMoreClick(lawyer._id)}
             >
-              {lawyerStates[user._id]
+              {lawyerStates[lawyer._id]
                 ? "Daha Az Gör"
                 : "Daha Fazla..."}
             </h2>
@@ -263,14 +266,14 @@ const LawyerDetail = (lawyer) => {
               <h3>Yorumlar</h3>
               <div className='d-flex align-items-center lawyer-card-comments-body'>
                 <div className='w-10'>
-                  <button className='lawyer-rating-button'>{user.reviews.length === 0 ? "0" : user.rating?.toFixed(1)}</button>
+                  <button className='lawyer-rating-button'>{lawyer.reviews?.length === 0 ? "0" : lawyer.rating?.toFixed(1)}</button>
                 </div>
-                <div className='p-0 w-25'>
+                <div className=' p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(user.rating?.toFixed(0))}
+                    {getStarReting(lawyer.rating?.toFixed(0))}
                   </p>
                   <p>Genel Skor</p>
-                  <span>{user.reviews?.length} yorum </span>
+                  <span>{lawyer.reviews?.length} yorum </span>
                 </div>
                 <div className=' mx-5'>
                   <p className='lawyer-card-comments-box mx-5 d-flex align-items-center w-100 rounded-4 m-auto '>
@@ -283,7 +286,7 @@ const LawyerDetail = (lawyer) => {
               </div>
 
               <div className="lawyer-card-user-comment">
-                {user.reviews?.map((comment) => (
+                {lawyer.reviews?.map((comment) => (
                   <>
                     <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
                       <div className=' justify-content-around w-10'>
@@ -308,6 +311,7 @@ const LawyerDetail = (lawyer) => {
 
               </div>
             </div>
+            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Yorum Ekle</button>
             <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Tüm Yorumları Göster</button>
           </div>
 
@@ -318,16 +322,16 @@ const LawyerDetail = (lawyer) => {
           <div className='d-flex justify-content-between m-4'>
             <h2>Adres</h2>
             <h2
-              id={user._id}
+              id={lawyer._id}
               className="more"
-              onClick={() => handleReadMoreClick(user._id)}
+              onClick={() => handleReadMoreClick(lawyer._id)}
             >
               Haritada Gör
             </h2>
 
           </div>
           <p className='mx-4'> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
-          <SearchDate user={user} />
+          <SearchDate lawyer={lawyer} />
         </div>
 
       </div>

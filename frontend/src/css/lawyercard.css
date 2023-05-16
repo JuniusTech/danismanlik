@@ -20,7 +20,7 @@
     border-radius: 8px;
     padding: 0 rem;
     height: fit-content;
-    width: 40%;
+    width: fit-content;
     margin-right:10rem;
     
 }
@@ -35,7 +35,7 @@
 }
 
 .lawyer-rating-button {
-  background-color: #a97900;
+  background-color: #d4bc7f;
   width: 6rem;
   height: 6rem;
   color: black;
@@ -52,7 +52,7 @@
 }
 .lawyer-card-user-comment-each{
   padding: 1rem;
-  border-bottom: 2px solid #a97900;
+  border-bottom: 2px solid #d4bc7f;
 }
 
 .lawyer-card-commentshead {
@@ -61,11 +61,15 @@
     
 }
 .lawyer-card-comments-body{
-     border-bottom: 2px solid #a97900;
+     border-bottom: 2px solid #d4bc7f;
+}
+
+.lawyer-card-comments-body-button{
+  background-color: #e9ddbf;
 }
 
 .lawyer-card-comments-box{
-    background-color: #a97900;
+    background-color: #e9ddbf;
 }
 
 .lawyer-comment-button {
@@ -121,6 +125,13 @@
   color: black; 
   font-weight: 500;
   font-size: 18px;
+}
+
+.right-box-comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid #a97900;
 }
 
 .lawyer-card-phone {
