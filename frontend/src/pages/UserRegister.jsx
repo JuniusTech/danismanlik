@@ -198,7 +198,16 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
           >
             İptal Et
           </button>
-          <button className="registerbtn2" type="submit">
+          <button
+            style={{
+              BackgroundColor: "#a97900",
+              color: "#f5f5f5",
+              fontWeight: "normal",
+              fontSize: "normal",
+            }}
+            className="registerbtn2"
+            type="submit"
+          >
             {loading ? (
               <>
                 <LoadingBox />
@@ -210,7 +219,9 @@ const AvukatLoginPage = ({ show, setShowUserRegister, setShowUserLogin }) => {
         </div>
         <p>
           Zaten üye misin? Hemen{" "}
-          <span onClick={() => handleLogin()}>giriş yap!</span>{" "}
+          <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
+            giriş yap!
+          </span>{" "}
         </p>
         <p>Doldurulması zorunlu alanlar *</p>
       </form>

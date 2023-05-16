@@ -253,7 +253,7 @@ const AvukatLoginPage = ({
         </div>
         <p>
           Zaten üye misin? Hemen{" "}
-          <span style={{ color: "orange" }} onClick={() => handleLogin()}>
+          <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
             {" "}
             giriş yap!
           </span>
