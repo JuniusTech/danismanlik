@@ -111,7 +111,7 @@ const LawyerDetail = (lawyer) => {
                   <p className="m-2">{user.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(user.rating.toFixed(0))}
+                    {getStarReting(user.rating?.toFixed(0))}
 
                     <span>{user.reviews?.length} yorum</span>
                   </p>
@@ -263,11 +263,11 @@ const LawyerDetail = (lawyer) => {
               <h3>Yorumlar</h3>
               <div className='d-flex align-items-center lawyer-card-comments-body'>
                 <div className='w-10'>
-                  <button className='lawyer-rating-button'>{user.rating.toFixed(1)}</button>
+                  <button className='lawyer-rating-button'>{user.reviews.length === 0 ? "0" : user.rating?.toFixed(1)}</button>
                 </div>
                 <div className='p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(user.rating.toFixed(0))}
+                    {getStarReting(user.rating?.toFixed(0))}
                   </p>
                   <p>Genel Skor</p>
                   <span>{user.reviews?.length} yorum </span>

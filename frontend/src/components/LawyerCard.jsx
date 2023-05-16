@@ -36,12 +36,7 @@ const LawyerCard = ({ lawyers }) => {
         console.log(user._id);
     };
 
-    function lawyerRate(intRate) {
-        const decimalRate = intRate.tofixed(1)
-        return (decimalRate)
 
-        console.log(lawyerRate)
-    }
     return (
         <>
             <div className="w-100">
@@ -80,7 +75,7 @@ const LawyerCard = ({ lawyers }) => {
                                                 <p className="m-2">{user.branch} avukatı, İstanbul</p>
                                                 <p className="mx-2">15 Yıllık Deneyim</p>
                                                 <p className="m-2 star">
-                                                    {getStarReting(user.rating)}
+                                                    {getStarReting(user.rating?.toFixed(0))}
 
                                                     <span>{user.reviews.length} yorum</span>
                                                 </p>
