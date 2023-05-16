@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Table } from "react-bootstrap";
 
-const SearchDate = ({ user }) => {
+const SearchDate = ({ lawyer }) => {
     const [moreHour, setMoreHour] = useState(false);
 
 
@@ -107,7 +107,7 @@ const SearchDate = ({ user }) => {
     function isAvailable(lawyers, day, hour) {
         return lawyers.dates?.some((date) => date.day === day && date.hour === hour);
     }
-    console.log(user)
+    console.log(lawyer)
 
     return (
         <>
@@ -118,9 +118,9 @@ const SearchDate = ({ user }) => {
                             <tr className="tarih">
                                 <td>
                                     <button
-                                        id={user._id}
+                                        id={lawyer._id}
                                         className="rounded-5 mt-3 search-caret"
-                                        onClick={() => handlePrevWeek(user._id)}
+                                        onClick={() => handlePrevWeek(lawyer._id)}
                                         disabled={new Date(dateRange[0]) < new Date()}
                                     >
                                         <i className="fa-solid fa-caret-left fa-sm mx-2"></i>
@@ -168,9 +168,9 @@ const SearchDate = ({ user }) => {
                                 })}
                                 <td>
                                     <button
-                                        id={user._id}
+                                        id={lawyer._id}
                                         className="rounded-5 mt-3 search-caret"
-                                        onClick={() => handleNextWeek(user._id)}
+                                        onClick={() => handleNextWeek(lawyer._id)}
                                     >
                                         <i className="fa-solid fa-caret-right fa-sm mx-2"></i>
                                     </button>
@@ -185,7 +185,7 @@ const SearchDate = ({ user }) => {
                                         <td >
                                             <button
                                                 key={index}
-                                                className={isAvailable(user, day, toggleHours) ? "search-hoursbutton selected rounded-2" : "search-hoursbutton rounded-2"}
+                                                className={isAvailable(lawyer, day, toggleHours) ? "search-hoursbutton selected rounded-2" : "search-hoursbutton rounded-2"}
                                                 size="sm">
                                                 {toggleHours}
                                             </button>
@@ -197,15 +197,15 @@ const SearchDate = ({ user }) => {
 
                             <tr className="much">
                                 <td
-                                    id={user._id}
+                                    id={lawyer._id}
                                     onClick={() => {
-                                        handleMoreHour(user._id);
-                                        toggleHours(!moreHour[user._id]);
+                                        handleMoreHour(lawyer._id);
+                                        toggleHours(!moreHour[lawyer._id]);
                                     }}
                                     colSpan={6}
                                 >
-                                    {moreHour[user._id] ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster"}
-                                    {moreHour[user._id] ? (
+                                    {moreHour[lawyer._id] ? "Daha Az Saat Göster" : "Daha Fazla Saat Göster"}
+                                    {moreHour[lawyer._id] ? (
                                         <i className="fa-solid fa-caret-up fa-xl mx-2"></i>
                                     ) : (
                                         <i className="fa-solid fa-caret-down fa-xl mx-2"></i>
