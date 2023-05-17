@@ -6,7 +6,6 @@
   height: 713px;
   padding-top: 2.5rem;
   color: #00242e;
-  /* UI Properties */
   opacity: 1;
 }
 .nasilCalisirContainer {
@@ -56,8 +55,6 @@
   border-radius: 50%;
 }
 
-/*!  sorrrr ?? transform: matrix(-1, 0, 0, -1, 0, 0); */
-
 .nasilCalisirFirstDiv p {
   top: 886px;
   left: 496px;
@@ -66,7 +63,6 @@
   text-align: center;
   margin: auto;
   padding-top: 1rem;
-  /*!  font-family: ;bak ??? */
   color: #ffffff;
   font: normal normal normal 81px/107px Algerian;
 }
@@ -78,7 +74,6 @@
   text-align: center;
   margin: auto;
   padding-top: 1rem;
-
   color: #ffffff;
   font: normal normal normal 81px/107px Algerian;
 }
@@ -127,8 +122,8 @@
 }
 .nasilCalisirsvg3 {
   position: absolute;
-  bottom: 8%;
-  left: 80%;
+  bottom: 6%;
+  left: 82%;
 }
 .ucgen {
   width: 0;
