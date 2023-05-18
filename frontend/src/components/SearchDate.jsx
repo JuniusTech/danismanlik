@@ -107,7 +107,7 @@ const SearchDate = ({ lawyer }) => {
     function isAvailable(lawyers, day, hour) {
         return lawyers.dates?.some((date) => date.day === day && date.hour === hour);
     }
-    console.log(lawyer)
+    // console.log(lawyer)
 
     return (
         <>

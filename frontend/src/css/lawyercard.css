@@ -89,7 +89,7 @@
   /* margin: auto; */
    margin-left: -2rem;
   margin-bottom: 0;
-  /* border: 2px solid red; */
+  
 
 }
 
@@ -112,8 +112,10 @@
   flex-direction: column;
   cursor: pointer;
   position: relative;
-  /* text-decoration: underline; */
+  
+  
 }
+
 .search-lawyer-cursor{
   cursor: pointer;
 }
@@ -125,6 +127,10 @@
   color: black; 
   font-weight: 500;
   font-size: 18px;
+}
+
+.underline {
+  border-bottom: 3px solid #839292; /* İstediğiniz alt çizgi rengini ve stilini buradan belirleyebilirsiniz */
 }
 
 .right-box-comment {
