@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom';
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
@@ -15,7 +14,7 @@ const LawyerCard = ({ lawyers }) => {
             [lawyerId]: !prevStates[lawyerId],
         }));
     };
-    console.log(lawyers)
+    // console.log(lawyers)
 
     const extraContent = <p className="extra-content"></p>;
     const [lawyerStates, setLawyerStates] = useState({});
@@ -30,13 +29,7 @@ const LawyerCard = ({ lawyers }) => {
         }
         return filledStars + emptyStars;
     };
-    const [readMore, setReadMore] = useState(false);
-
-    const lawyer = (lawyer) => {
-        ;
-
-        console.log(lawyer._id);
-    };
+    const [readMore] = useState(false);
 
 
     return (
@@ -50,7 +43,7 @@ const LawyerCard = ({ lawyers }) => {
                                     <div className='search-card-lawyer-leftbox'>
                                         <div
                                             className="d-flex w-100 search-lawyer-cursor "
-                                            onClick={() => navigate(`/${lawyer._id}`)}
+                                            onClick={() => navigate(`/${lawyer._id}`, { state: lawyer })}
                                         >
                                             <div className="h-100">
                                                 <img

@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import "../css/lawyercard.css"
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from "react-scroll";
 import Footer from '../components/Footer';
 import telephone from "../assets/telephone.svg"
 import web from "../assets/web.svg"
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { getError } from "../getError";
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
+// import { getError } from "../getError";
 import ltrght from "../assets/little-right-arrow.svg"
 
 
 
 const LawyerDetail = () => {
-  const [lawyer, setLawyer] = useState("");
+  // const [lawyer, setLawyer] = useState("");
 
 
-  const params = useParams()
-  const { lawyerid } = params
-  console.log(lawyerid)
+  // const params = useParams()
+  // const { lawyerid } = params
+  // console.log(lawyerid)
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
-      .then((response) => {
-        setLawyer(response.data);
-      })
-      .catch((error) => {
-        toast.error(getError(error));
-      });
-  }, []);
+  const { state: lawyer } = useLocation();
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
+  //     .then((response) => {
+  //       setLawyer(response.data);
+  //     })
+  //     .catch((error) => {
+  //       toast.error(getError(error));
+  //     });
+  // }, []);
 
   const getStarReting = (reting) => {
     let filledStars = "";
@@ -51,7 +53,7 @@ const LawyerDetail = () => {
 
 
 
-  const [readMore, setReadMore] = useState(false);
+  const [readMore] = useState(false);
 
   const extraContent = <p className="extra-content"></p>;
   const [lawyerStates, setLawyerStates] = useState({});
@@ -62,7 +64,7 @@ const LawyerDetail = () => {
       [lawyerId]: !prevStates[lawyerId],
     }));
   };
-  console.log(lawyer)
+  // console.log(lawyer)
 
   function formatDate(dateString) {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
@@ -150,13 +152,11 @@ const LawyerDetail = () => {
               <div className='lawyer-detail-navbar'>
                 <ul className="lawyer-detail-navbar-links">
                   {navLinks.map((item, index) => (
-                    <li
-                      className={isActive}
-                      key={index}
-                      onClick={() => setIsActive(index)}
-                    >
+                    <li>
                       <Link
-                        className="detail-link"
+                        className={isActive === index ? "detail-link active" : "detail-link"}
+                        key={index}
+                        onClick={() => setIsActive(index)}
                         to={item}
                         spy={true}
                         smooth={true}
@@ -164,6 +164,8 @@ const LawyerDetail = () => {
                         duration={300}
                       >
                         {item}
+                        {isActive === index && <div className="underline" />}
+
                         <div />
                       </Link>
                     </li>
