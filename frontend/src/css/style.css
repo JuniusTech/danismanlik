@@ -1,75 +1,72 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --main-color: #A97900;
-    --text-color: #00242E;
-    --border-color: #00000029;
-    --white-color: #FFFFFF;
-    --green-color:  #06A900;
-  }
-
-.main_color_class{
-    color: var(--main-color);
+  --main-color: #a97900;
+  --text-color: #00242e;
+  --border-color: #00000029;
+  --white-color: #ffffff;
+  --green-color: #06a900;
 }
 
-.text_color_class{
-    color: var(--text-color);
+.main_color_class {
+  color: var(--main-color);
 }
 
-.border_color_class{
-    border-color: var(--border-color);
+.text_color_class {
+  color: var(--text-color);
 }
 
-.white_color_class{
-    color: var(--white-color);
+.border_color_class {
+  border-color: var(--border-color);
 }
 
-.green_color_class{
-    color: var(--green-color);
+.white_color_class {
+  color: var(--white-color);
+}
+
+.green_color_class {
+  color: var(--green-color);
 }
 
 .contain {
-    background-image: url('../assets/homebg-image.png');
-    height: 70vh;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    padding-left: 10px;
+  background-image: url("../assets/homebg-image.png");
+  height: 70vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding-left: 10px;
 }
 
 .header {
-    text-align: center;
-    letter-spacing: 0px;
-    color: #00242E;
-    font-size: 60px;
-    opacity: 1;    
-    }
-
+  text-align: center;
+  letter-spacing: 0px;
+  color: #00242e;
+  font-size: 60px;
+  opacity: 1;
+}
 
 .home-search-input {
-    width: 488px;
-    height: 58px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 5px 10px #00000029;
-    border-radius: 5px;
-    opacity: 1;
-    border: none;
-    padding: 1rem;
+  width: 488px;
+  height: 58px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 5px 10px #00000029;
+  border-radius: 5px;
+  opacity: 1;
+  border: none;
+  padding: 1rem;
 }
 
 .home-button {
-    width: 120px;
-    height: 30px;
-    background: #A97900 0% 0% no-repeat padding-box;
-    border-radius: 0px 5px 5px 0px;
-    opacity: 1;
-    border: none;
-    
+  width: 120px;
+  height: 30px;
+  background: #a97900 0% 0% no-repeat padding-box;
+  border-radius: 0px 5px 5px 0px;
+  opacity: 1;
+  border: none;
 }
-
