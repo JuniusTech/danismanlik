@@ -13,6 +13,7 @@ import web from "../assets/web.svg"
 // import { toast } from 'react-toastify';
 // import { getError } from "../getError";
 import ltrght from "../assets/little-right-arrow.svg"
+import Comment from './Comment';
 
 
 
@@ -50,7 +51,7 @@ const LawyerDetail = () => {
   };
 
 
-
+  const user = "Ahmet"
 
 
   const [readMore] = useState(false);
@@ -70,7 +71,7 @@ const LawyerDetail = () => {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
     return (formattedDate)
   }
-
+  const [showComment, setShowComment] = useState(false)
 
   let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
   const [isActive, setIsActive] = useState(0)
@@ -116,7 +117,61 @@ const LawyerDetail = () => {
                   <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(lawyer.rating?.toFixed(0))}
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 1
+                            ? "fas fa-star"
+                            : lawyer.rating >= 0.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 2
+                            ? "fas fa-star"
+                            : lawyer.rating >= 1.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 3
+                            ? "fas fa-star"
+                            : lawyer.rating >= 2.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 4
+                            ? "fas fa-star"
+                            : lawyer.rating >= 3.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 5
+                            ? "fas fa-star"
+                            : lawyer.rating >= 4.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span><br />
 
                     <span>{lawyer.reviews?.length} yorum</span>
                   </p>
@@ -201,8 +256,8 @@ const LawyerDetail = () => {
                 ? "Daha Az Gör"
                 : "Daha Fazla..."}
             </h2>
-            <ul >
-              <h3>Eğitimler</h3>
+            <ul className='mb-4'>
+              <h3 >Eğitimler</h3>
               <li >
                 Lorem ipsum dolor
               </li>
@@ -210,7 +265,7 @@ const LawyerDetail = () => {
                 Lorem ipsum dolor
               </li>
             </ul>
-            <ul >
+            <ul className='mb-4' >
               <h3>Deneyimler</h3>
               <li >
                 Lorem ipsum dolor
@@ -219,7 +274,7 @@ const LawyerDetail = () => {
                 Lorem ipsum dolor
               </li>
             </ul>
-            <ul >
+            <ul className='mb-4'>
               <h3>Bildiğim Diller</h3>
               <li >
                 Lorem ipsum dolor
@@ -272,7 +327,61 @@ const LawyerDetail = () => {
                 </div>
                 <div className=' p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(lawyer.rating?.toFixed(0))}
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 1
+                            ? "fas fa-star"
+                            : lawyer.rating >= 0.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 2
+                            ? "fas fa-star"
+                            : lawyer.rating >= 1.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 3
+                            ? "fas fa-star"
+                            : lawyer.rating >= 2.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 4
+                            ? "fas fa-star"
+                            : lawyer.rating >= 3.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 5
+                            ? "fas fa-star"
+                            : lawyer.rating >= 4.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span><br />
                   </p>
                   <p>Genel Skor</p>
                   <span>{lawyer.reviews?.length} yorum </span>
@@ -313,7 +422,28 @@ const LawyerDetail = () => {
 
               </div>
             </div>
-            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Yorum Ekle</button>
+            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center" onClick={() => setShowComment(true)}>Yorum Ekle</button>
+            {/* <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
+              <form action="" method="post" className='d-flex w-75 justify-content-center '>
+                <div className=' justify-content-around w-10'>
+                  <button className="lawyer-rating-button rounded-circle">{user.charAt(0).toUpperCase()}</button>
+                </div>
+                <div className='justify-content-around w-75' >
+                  <textarea className='mx-3 ' name="comment" placeholder='Lütfen yorum giriniz' id="" cols="70" rows="2"></textarea>
+
+                </div>
+
+
+              </form>
+              <i className="d-flex align-items-center fa-solid fa-square-caret-right fa-2xl"></i>
+              <div className='d-flex justify-content-around w-10'>
+                <p className='m-2'>Puan:</p>
+                <p className="m-2 star">
+                  ☆☆☆☆☆
+
+                </p>
+              </div>
+            </div> */}
             <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Tüm Yorumları Göster</button>
           </div>
 
@@ -337,6 +467,10 @@ const LawyerDetail = () => {
         </div>
 
       </div>
+      <Comment
+        show={showComment}
+        onHide={() => setShowComment(false)}
+      />
       <Footer />
     </>
   )
