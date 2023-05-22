@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
+import image from "../assets/bg.jpg";
+import avatar from "../assets/avatar.jpg";
 
 const SearchDate = ({ lawyer }) => {
   const [moreHour, setMoreHour] = useState(false);
@@ -260,11 +262,21 @@ const SearchDate = ({ lawyer }) => {
                       className="randevuDetayDiv"
                       style={{ display: "flex", margin: "0 20px" }}
                     >
-                      <img src="" alt="" width={"25%"} height={"35%"} />
+                      <img
+                        src={lawyer.isTick ? image : avatar}
+                        alt=""
+                        width={"25%"}
+                        height={"35%"}
+                        style={{
+                          marginRight: "13px",
+                        }}
+                      />
                       <div className="randevuDetayDiv2">
-                        <p>İsim</p>
-                        <p>Branş</p>
-                        <p>İl</p>
+                        <p>
+                          {lawyer.name} {lawyer.surname}
+                        </p>
+                        <p>{lawyer.branch}</p>
+                        <p>Adress</p>
                       </div>
                     </div>
                   </div>
