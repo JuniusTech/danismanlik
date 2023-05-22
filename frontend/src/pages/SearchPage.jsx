@@ -30,8 +30,9 @@ const SearchPage = ({ reting }) => {
     const filterRating = filter.rating || rating;
     const filterIsTick = filter.isTick || isTick;
     const sortOrder = filter.order || order;
-    return `${skipPathname ? "" : "/search?"
-      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${
+      skipPathname ? "" : "/search?"
+    }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   const [toggle, setToggle] = useState({
@@ -39,8 +40,6 @@ const SearchPage = ({ reting }) => {
     btn2: false,
     btn3: false,
   });
-
-
 
   const [input, setInput] = useState("");
   const [title, setTitle] = useState({});
@@ -84,12 +83,6 @@ const SearchPage = ({ reting }) => {
       });
   }, [branch, query, rating, order]);
 
-
-
-
-
-
-
   const handleNew = () => {
     if (toggle.btn1 === false) {
       navigate(getFilterUrl({ order: "newest" }));
@@ -119,8 +112,6 @@ const SearchPage = ({ reting }) => {
     }
   };
 
-
-
   return (
     <>
       <Navbar />
@@ -136,7 +127,7 @@ const SearchPage = ({ reting }) => {
             title="Branş Seç"
             id="navbarScrollingDropdown"
           >
-            <option defaultValue="all">Branş Seç</option>
+            <option value="all">Branş Seç</option>
             {branchs
               ?.sort((a, b) => a.title.localeCompare(b.title))
               .map((item) => (
@@ -235,7 +226,7 @@ const SearchPage = ({ reting }) => {
             </Link>
           ))}
         </div>
-      </div >
+      </div>
       <Footer />
     </>
   );

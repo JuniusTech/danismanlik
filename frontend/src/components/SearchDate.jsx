@@ -11,7 +11,6 @@ const SearchDate = ({ lawyer }) => {
   );
   const [lawyerHours, setLawyerHours] = useState({});
 
-  //!-------------------------------------------------
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState("");
 
@@ -23,8 +22,6 @@ const SearchDate = ({ lawyer }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-
-  //!-------------------------------------------------
 
   const handleMoreHour = (lawyerId) => {
     setMoreHour((prevStates) => ({

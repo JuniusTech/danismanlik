@@ -1,39 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import "../css/lawyercard.css"
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from "react-scroll";
 import Footer from '../components/Footer';
 import telephone from "../assets/telephone.svg"
 import web from "../assets/web.svg"
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { getError } from "../getError";
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
+// import { getError } from "../getError";
 import ltrght from "../assets/little-right-arrow.svg"
+import Comment from './Comment';
 
 
 
 const LawyerDetail = () => {
-  const [lawyer, setLawyer] = useState("");
+  // const [lawyer, setLawyer] = useState("");
 
 
-  const params = useParams()
-  const { lawyerid } = params
-  console.log(lawyerid)
+  // const params = useParams()
+  // const { lawyerid } = params
+  // console.log(lawyerid)
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
-      .then((response) => {
-        setLawyer(response.data);
-      })
-      .catch((error) => {
-        toast.error(getError(error));
-      });
-  }, []);
+  const { state: lawyer } = useLocation();
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
+  //     .then((response) => {
+  //       setLawyer(response.data);
+  //     })
+  //     .catch((error) => {
+  //       toast.error(getError(error));
+  //     });
+  // }, []);
 
   const getStarReting = (reting) => {
     let filledStars = "";
@@ -48,10 +51,10 @@ const LawyerDetail = () => {
   };
 
 
+  const user = "Ahmet"
 
 
-
-  const [readMore, setReadMore] = useState(false);
+  const [readMore] = useState(false);
 
   const extraContent = <p className="extra-content"></p>;
   const [lawyerStates, setLawyerStates] = useState({});
@@ -62,13 +65,13 @@ const LawyerDetail = () => {
       [lawyerId]: !prevStates[lawyerId],
     }));
   };
-  console.log(lawyer)
+  // console.log(lawyer)
 
   function formatDate(dateString) {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
     return (formattedDate)
   }
-
+  const [showComment, setShowComment] = useState(false)
 
   let navLinks = ["Özgeçmiş", "Adres", "Hizmetler", "Yorumlar"];
   const [isActive, setIsActive] = useState(0)
@@ -114,7 +117,61 @@ const LawyerDetail = () => {
                   <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
-                    {getStarReting(lawyer.rating?.toFixed(0))}
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 1
+                            ? "fas fa-star"
+                            : lawyer.rating >= 0.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 2
+                            ? "fas fa-star"
+                            : lawyer.rating >= 1.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 3
+                            ? "fas fa-star"
+                            : lawyer.rating >= 2.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 4
+                            ? "fas fa-star"
+                            : lawyer.rating >= 3.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 5
+                            ? "fas fa-star"
+                            : lawyer.rating >= 4.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span><br />
 
                     <span>{lawyer.reviews?.length} yorum</span>
                   </p>
@@ -150,13 +207,11 @@ const LawyerDetail = () => {
               <div className='lawyer-detail-navbar'>
                 <ul className="lawyer-detail-navbar-links">
                   {navLinks.map((item, index) => (
-                    <li
-                      className={isActive}
-                      key={index}
-                      onClick={() => setIsActive(index)}
-                    >
+                    <li>
                       <Link
-                        className="detail-link"
+                        className={isActive === index ? "detail-link active" : "detail-link"}
+                        key={index}
+                        onClick={() => setIsActive(index)}
                         to={item}
                         spy={true}
                         smooth={true}
@@ -164,6 +219,8 @@ const LawyerDetail = () => {
                         duration={300}
                       >
                         {item}
+                        {isActive === index && <div className="underline" />}
+
                         <div />
                       </Link>
                     </li>
@@ -199,8 +256,8 @@ const LawyerDetail = () => {
                 ? "Daha Az Gör"
                 : "Daha Fazla..."}
             </h2>
-            <ul >
-              <h3>Eğitimler</h3>
+            <ul className='mb-4'>
+              <h3 >Eğitimler</h3>
               <li >
                 Lorem ipsum dolor
               </li>
@@ -208,7 +265,7 @@ const LawyerDetail = () => {
                 Lorem ipsum dolor
               </li>
             </ul>
-            <ul >
+            <ul className='mb-4' >
               <h3>Deneyimler</h3>
               <li >
                 Lorem ipsum dolor
@@ -217,7 +274,7 @@ const LawyerDetail = () => {
                 Lorem ipsum dolor
               </li>
             </ul>
-            <ul >
+            <ul className='mb-4'>
               <h3>Bildiğim Diller</h3>
               <li >
                 Lorem ipsum dolor
@@ -270,7 +327,61 @@ const LawyerDetail = () => {
                 </div>
                 <div className=' p-0 w-25'>
                   <p className="m-2 star">
-                    {getStarReting(lawyer.rating?.toFixed(0))}
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 1
+                            ? "fas fa-star"
+                            : lawyer.rating >= 0.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 2
+                            ? "fas fa-star"
+                            : lawyer.rating >= 1.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 3
+                            ? "fas fa-star"
+                            : lawyer.rating >= 2.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 4
+                            ? "fas fa-star"
+                            : lawyer.rating >= 3.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span>
+                    <span>
+                      <i
+                        className={
+                          lawyer.rating >= 5
+                            ? "fas fa-star"
+                            : lawyer.rating >= 4.5
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
+                        }
+                      />
+                    </span><br />
                   </p>
                   <p>Genel Skor</p>
                   <span>{lawyer.reviews?.length} yorum </span>
@@ -311,7 +422,28 @@ const LawyerDetail = () => {
 
               </div>
             </div>
-            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Yorum Ekle</button>
+            <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center" onClick={() => setShowComment(true)}>Yorum Ekle</button>
+            {/* <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
+              <form action="" method="post" className='d-flex w-75 justify-content-center '>
+                <div className=' justify-content-around w-10'>
+                  <button className="lawyer-rating-button rounded-circle">{user.charAt(0).toUpperCase()}</button>
+                </div>
+                <div className='justify-content-around w-75' >
+                  <textarea className='mx-3 ' name="comment" placeholder='Lütfen yorum giriniz' id="" cols="70" rows="2"></textarea>
+
+                </div>
+
+
+              </form>
+              <i className="d-flex align-items-center fa-solid fa-square-caret-right fa-2xl"></i>
+              <div className='d-flex justify-content-around w-10'>
+                <p className='m-2'>Puan:</p>
+                <p className="m-2 star">
+                  ☆☆☆☆☆
+
+                </p>
+              </div>
+            </div> */}
             <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Tüm Yorumları Göster</button>
           </div>
 
@@ -335,6 +467,10 @@ const LawyerDetail = () => {
         </div>
 
       </div>
+      <Comment
+        show={showComment}
+        onHide={() => setShowComment(false)}
+      />
       <Footer />
     </>
   )

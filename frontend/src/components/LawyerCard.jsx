@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom';
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
@@ -15,28 +14,11 @@ const LawyerCard = ({ lawyers }) => {
             [lawyerId]: !prevStates[lawyerId],
         }));
     };
-    console.log(lawyers)
+    // console.log(lawyers)
 
     const extraContent = <p className="extra-content"></p>;
     const [lawyerStates, setLawyerStates] = useState({});
-    const getStarReting = (reting) => {
-        let filledStars = "";
-        let emptyStars = "";
-        for (let i = 0; i < reting; i++) {
-            filledStars += "★";
-        }
-        for (let i = 0; i < 5 - reting; i++) {
-            emptyStars += "☆";
-        }
-        return filledStars + emptyStars;
-    };
-    const [readMore, setReadMore] = useState(false);
-
-    const lawyer = (lawyer) => {
-        ;
-
-        console.log(lawyer._id);
-    };
+    const [readMore] = useState(false);
 
 
     return (
@@ -50,7 +32,7 @@ const LawyerCard = ({ lawyers }) => {
                                     <div className='search-card-lawyer-leftbox'>
                                         <div
                                             className="d-flex w-100 search-lawyer-cursor "
-                                            onClick={() => navigate(`/${lawyer._id}`)}
+                                            onClick={() => navigate(`/${lawyer._id}`, { state: lawyer })}
                                         >
                                             <div className="h-100">
                                                 <img
@@ -77,7 +59,61 @@ const LawyerCard = ({ lawyers }) => {
                                                 <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
                                                 <p className="mx-2">15 Yıllık Deneyim</p>
                                                 <p className="m-2 star">
-                                                    {getStarReting(lawyer.rating?.toFixed(0))}
+                                                    <span>
+                                                        <i
+                                                            className={
+                                                                lawyer.rating >= 1
+                                                                    ? "fas fa-star"
+                                                                    : lawyer.rating >= 0.5
+                                                                        ? "fas fa-star-half-alt"
+                                                                        : "far fa-star"
+                                                            }
+                                                        />
+                                                    </span>
+                                                    <span>
+                                                        <i
+                                                            className={
+                                                                lawyer.rating >= 2
+                                                                    ? "fas fa-star"
+                                                                    : lawyer.rating >= 1.5
+                                                                        ? "fas fa-star-half-alt"
+                                                                        : "far fa-star"
+                                                            }
+                                                        />
+                                                    </span>
+                                                    <span>
+                                                        <i
+                                                            className={
+                                                                lawyer.rating >= 3
+                                                                    ? "fas fa-star"
+                                                                    : lawyer.rating >= 2.5
+                                                                        ? "fas fa-star-half-alt"
+                                                                        : "far fa-star"
+                                                            }
+                                                        />
+                                                    </span>
+                                                    <span>
+                                                        <i
+                                                            className={
+                                                                lawyer.rating >= 4
+                                                                    ? "fas fa-star"
+                                                                    : lawyer.rating >= 3.5
+                                                                        ? "fas fa-star-half-alt"
+                                                                        : "far fa-star"
+                                                            }
+                                                        />
+                                                    </span>
+                                                    <span>
+                                                        <i
+                                                            className={
+                                                                lawyer.rating >= 5
+                                                                    ? "fas fa-star"
+                                                                    : lawyer.rating >= 4.5
+                                                                        ? "fas fa-star-half-alt"
+                                                                        : "far fa-star"
+                                                            }
+                                                        />
+                                                    </span><br />
 
                                                     <span>{lawyer.reviews.length} yorum</span>
                                                 </p>
