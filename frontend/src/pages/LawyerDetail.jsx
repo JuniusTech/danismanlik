@@ -24,6 +24,7 @@ const LawyerDetail = () => {
   // const params = useParams()
   // const { lawyerid } = params
   // console.log(lawyerid)
+  // console.log(user)
 
   const { state: lawyer } = useLocation();
 
@@ -51,7 +52,7 @@ const LawyerDetail = () => {
   };
 
 
-  const user = "Ahmet"
+  // const user = "Ahmet"
 
 
   const [readMore] = useState(false);

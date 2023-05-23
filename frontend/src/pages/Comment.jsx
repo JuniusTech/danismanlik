@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../css/comment.css"
 
@@ -14,47 +14,52 @@ const Comment = ({
     setShowComment,
     id
 }) => {
-    const user = "ahmet";
-    const [name, setName] = useState("");
+    const params = useParams()
+    const { lawyerid } = params
+
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState();
-    const { dispatch } = useContext(Store);
     const navigate = useNavigate();
+    const [stars, setStars] = useState(0)
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            // axios.defaults.withCredentials = true;
+            // axios.defaults.headers.common['Authorization'] = 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZjOTkyYWE4MDg0NGI5N2U0MWUyYTEiLCJuYW1lIjoic2FkaSIsImVtYWlsIjoic2FkaXlAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4NDg0MzY4MCwiZXhwIjoxNjg0ODQ3MjgwfQ.bQz7a65i3LRvWrNzeVlC_genYkVUBC8lH11NLi-EHSU';
             const { data } = await axios.post(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${id}/reviews`,
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`,
                 {
-                    name,
-                    comment,
-                    rating,
-                }
-            );
+                    name: userInfo?.name,
+                    comment: comment,
+                    rating: stars,
+                },
+                {
+                    headers: {
+                        Authorization: "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZjOTkyYWE4MDg0NGI5N2U0MWUyYTEiLCJuYW1lIjoic2FkaSIsImVtYWlsIjoic2FkaXlAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4NDg0MzY4MCwiZXhwIjoxNjg0ODQ3MjgwfQ.bQz7a65i3LRvWrNzeVlC_genYkVUBC8lH11NLi-EHSU",
+                    }
+                })
+
+            console.log(data)
             toast.success("Yorum başarılı bir şekilde yapıldı");
-            dispatch({ type: "LAWYER_SIGNIN", payload: data });
-            localStorage.setItem("lawyerInfo", JSON.stringify(data));
+            // lawyer.reviews.unshift(data.review);
+            // lawyer.numReviews = data.numReviews;
+            // lawyer.rating = data.rating;
             setShowComment(false);
-            navigate("/${id}");
-        } catch (error) { }
+            navigate("/${lawyerid}");
+        } catch (error) {
+
+            console.log(error)
+            toast.error("Bir hata oluştu. Yorum yapılamadı.");
+        }
     };
 
-    const fillStar = (rating) => {
-        let stars = document.querySelectorAll('.comment-star');
-        for (let i = 0; i < stars.length; i++) {
-            if (i < rating) {
-                stars[i].classList.add('filled');
-            } else {
-                stars[i].classList.remove('filled');
-            }
-        }
-        console.log(rating)
-    }
+
     return (
 
         <Modal
             show={show}
-            onHide={() => setShowComment(false)}
+            onHide={() => submitHandler(false)}
             className="px-5 comment  m-auto p-5"
             animation={false}
             centered
@@ -63,21 +68,67 @@ const Comment = ({
                 <h1>Avukatınızı değerlendiriniz </h1>
                 <form action="" method="post" className='d-flex w-75 justify-content-center '>
                     <div className=' justify-content-around w-10'>
-                        <button className="lawyer-rating-button rounded-circle">{user.charAt(0).toUpperCase()}</button>
+                        <button className="lawyer-rating-button rounded-circle">{userInfo?.name?.charAt(0).toUpperCase()}</button>
                     </div>
                     <div className='justify-content-around w-75' >
-                        <textarea className='mx-3 ' name="comment" placeholder='Lütfen yorum giriniz' id="" cols="45" rows="3"></textarea>
+                        <textarea className='mx-3 ' name="comment" placeholder='Lütfen yorum giriniz' id="" cols="45" rows="3"
+                            onChange={(e) => setComment(e.target.value)}></textarea>
                     </div>
                 </form>
                 <div className='d-flex justify-content-center align-items-center w-10'>
-                    <p className='m-2'>Puan:</p>
-                    <p class="m-2 comment-star" onclick={fillStar(1)}>&#9734;</p>
-                    <p class="m-2 comment-star" onclick={fillStar(2)}>&#9734;</p>
-                    <p class="m-2 comment-star" onclick={fillStar(3)}>&#9734;</p>
-                    <p class="m-2 comment-star" onclick={fillStar(4)}>&#9734;</p>
-                    <p class="m-2 comment-star" onclick={fillStar(5)}>&#9734;</p>
+                    <div className='m-2'>Puan:</div>
+                    <span>
+                        <i
+                            className={
+                                stars >= 1
+                                    ? "comment-star fas fa-star"
+                                    : "comment-star far fa-star"
+                            } onClick={() => setStars(1)}
+                        />
+                    </span>
+                    <span>
+                        <i
+                            className={
+                                stars >= 2
+                                    ? "comment-star fas fa-star"
+                                    : "comment-star far fa-star"
+                            }
+                            onClick={() => setStars(2)}
+                        />
+                    </span>
+                    <span>
+                        <i
+                            className={
+                                stars >= 3
+                                    ? "comment-star fas fa-star"
+                                    : "comment-star far fa-star"
+                            }
+                            onClick={() => setStars(3)}
+                        />
+                    </span>
+                    <span>
+                        <i
+                            className={
+                                stars >= 4
+                                    ? "comment-star fas fa-star"
+                                    : "comment-star far fa-star"
+                            }
+                            onClick={() => setStars(4)}
+                        />
+                    </span>
+                    <span>
+                        <i
+                            className={
+                                stars >= 5
+                                    ? "comment-star fas fa-star"
+                                    : "comment-star far fa-star"
+                            }
+                            onClick={() => setStars(5)}
+                        />
 
+                    </span>
                 </div>
+
 
 
                 <div className="my-5 d-flex flex-column gap-2 justify-content-center">
