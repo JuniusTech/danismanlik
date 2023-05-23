@@ -17,10 +17,9 @@ border: 1px solid rgba(255, 255, 255, 0);}
    ;
 }
 
-.comment-star:hover,
-  .comment-star.filled {
-    transform: scale(1.4); 
-    
+.comment-star:hover {
+    transform: scale(1.2); 
+     
 
   }
 
