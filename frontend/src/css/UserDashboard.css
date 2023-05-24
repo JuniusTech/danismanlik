@@ -1,0 +1,62 @@
+.userDashboard {
+  display: flex;
+  min-height: 75vh;
+  justify-content: center;
+  width: 40vw;
+  margin: auto;
+  margin-top: 5%;
+  border: 1px solid #a97900;
+  border-radius: 10px;
+}
+.userDashboardLeft {
+  width: 35%;
+  padding: 1% 3%;
+}
+.userDashboardLeftImg {
+  border-bottom: 1px solid #a97900;
+
+  height: 23%;
+}
+.userDashboardLeft img {
+  border-radius: 100%;
+  width: 40%;
+  height: 60%;
+}
+.userDashboardp1 {
+  margin-top: 5%;
+  font: normal normal medium 14px/16px SF Pro Text;
+}
+.userDashboardp2 {
+  margin-top: 5%;
+  font: normal normal bold 20px/24px SF Pro Text;
+}
+.userDashboardp3 {
+  font: normal normal medium 16px/19px SF Pro Text;
+}
+
+.userDashboardRight {
+  border-left: 1px solid #a97900;
+  margin: 3% 0%;
+  width: 65%;
+  padding: 0 4%;
+}
+.userDashboardRight span {
+  color: #a97900;
+}
+.userdashboardButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+.userdashboardButtons button {
+  border-radius: 8px;
+  padding: 2% 4%;
+  font: normal normal bold 17px/20px SF Pro Text;
+}
+
+.userDashboardRight2 {
+  border-left: 1px solid #a97900;
+  margin: 3% 0%;
+  width: 85%;
+  padding: 0 4%;
+}
