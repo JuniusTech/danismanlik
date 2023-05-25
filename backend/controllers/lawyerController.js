@@ -254,7 +254,7 @@ const verifyLawyerAccount = expressAsyncHandler(async (req, res) => {
 });
 
 const createReview = expressAsyncHandler(async (req, res) => {
-  console.log(req.user);
+  console.log("createreview", req.user);
   const lawyerId = req.params.id;
   const lawyer = await Lawyer.findById(lawyerId);
   if (lawyer) {
