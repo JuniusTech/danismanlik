@@ -21,7 +21,7 @@ const Comment = ({
     const [rating, setRating] = useState();
     const navigate = useNavigate();
     const [stars, setStars] = useState(0)
-    const user = JSON.parse(localStorage.getItem('userInfo'));
+     
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const submitHandler = async (e) => {
        
@@ -32,7 +32,7 @@ const Comment = ({
                 
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`, 
                 { 
-                    user: user, comment: comment, rating: stars 
+                    user: userInfo, comment: comment, rating: stars 
                 },
                 {
                     withCredentials: true,
