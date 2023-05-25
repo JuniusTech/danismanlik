@@ -9,6 +9,7 @@ import UserResetPass from "./pages/UserResetPass";
 import LawyerForgetPass from "./pages/LawyerForgetPass";
 import LawyerResetPass from "./pages/LawyerResetPass";
 import LawyerDetail from "./pages/LawyerDetail";
+import LawyerDashboard from "./pages/LawyerDashboard";
 
 const AppRoute = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoute = () => {
       <Route path="/forget-password" element={<UserForgetPass />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
+      <Route path="/lawyerdashboard" element={<LawyerDashboard />} />
 
       <Route
         path="/reset-password-law/:id/:token"
