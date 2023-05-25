@@ -24,39 +24,35 @@ const Comment = ({
      
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const submitHandler = async (e) => {
-       
         e.preventDefault();
         try {
-            
-            const { data } = await axios.post(
-                
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`, 
-                { 
-                    user: userInfo, comment: comment, rating: stars 
-                },
-                {
-                    withCredentials: true,
-                    headers: {
-                        
-                      "Accept": "application/json",
-                      "Content-Type": "application/json",
-                      "Access-Control-Allow-Credentials": true
-                    }
-                })
-
-            console.log(data)
-            toast.success("Yorum başarılı bir şekilde yapıldı");
-            // lawyer.reviews.unshift(data.review);
-            // lawyer.numReviews = data.numReviews;
-            // lawyer.rating = data.rating;
-            setShowComment(false);
-            navigate("/${lawyerid}");
+            //* Cookie'den tokeni alıyoruz
+            const jwtToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('jwt='))
+            .split('=')[1];
+          const { data } = await axios.post(
+            `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`,
+            {
+              user: userInfo,
+              comment: comment,
+              rating: stars,
+              token: jwtToken
+            }
+          );
+    
+          console.log(data);
+          toast.success("Yorum başarılı bir şekilde yapıldı");
+          // lawyer.reviews.unshift(data.review);
+          // lawyer.numReviews = data.numReviews;
+          // lawyer.rating = data.rating;
+          setShowComment(false);
+          navigate(`/${lawyerid}`);
         } catch (error) {
-
-            console.log(error)
-            toast.error("Bir hata oluştu. Yorum yapılamadı.");
+          console.log(error);
+          toast.error("Bir hata oluştu. Yorum yapılamadı.");
         }
-    };
+      };
 
 
     return (
