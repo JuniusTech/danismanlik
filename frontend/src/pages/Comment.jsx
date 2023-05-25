@@ -21,22 +21,26 @@ const Comment = ({
     const [rating, setRating] = useState();
     const navigate = useNavigate();
     const [stars, setStars] = useState(0)
+    const user = JSON.parse(localStorage.getItem('userInfo'));
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const submitHandler = async (e) => {
+       
         e.preventDefault();
         try {
-            // axios.defaults.withCredentials = true;
-            // axios.defaults.headers.common['Authorization'] = 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZjOTkyYWE4MDg0NGI5N2U0MWUyYTEiLCJuYW1lIjoic2FkaSIsImVtYWlsIjoic2FkaXlAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4NDg0MzY4MCwiZXhwIjoxNjg0ODQ3MjgwfQ.bQz7a65i3LRvWrNzeVlC_genYkVUBC8lH11NLi-EHSU';
+            
             const { data } = await axios.post(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`,
-                {
-                    name: userInfo?.name,
-                    comment: comment,
-                    rating: stars,
+                
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`, 
+                { 
+                    user: user, comment: comment, rating: stars 
                 },
                 {
+                    withCredentials: true,
                     headers: {
-                        Authorization: "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZjOTkyYWE4MDg0NGI5N2U0MWUyYTEiLCJuYW1lIjoic2FkaSIsImVtYWlsIjoic2FkaXlAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4NDg0MzY4MCwiZXhwIjoxNjg0ODQ3MjgwfQ.bQz7a65i3LRvWrNzeVlC_genYkVUBC8lH11NLi-EHSU",
+                        
+                      "Accept": "application/json",
+                      "Content-Type": "application/json",
+                      "Access-Control-Allow-Credentials": true
                     }
                 })
 
