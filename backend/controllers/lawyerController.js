@@ -257,6 +257,10 @@ const createReview = expressAsyncHandler(async (req, res) => {
   console.log("createreview", req.user);
   const lawyerId = req.params.id;
   const lawyer = await Lawyer.findById(lawyerId);
+  console.log("lawyer", lawyer);
+  console.log("comment", req.body.comment);
+  console.log("rating", req.body.rating);
+
   if (lawyer) {
     if (lawyer.reviews.find((x) => x.name === req.user.name)) {
       return res

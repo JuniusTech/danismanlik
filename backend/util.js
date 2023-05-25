@@ -18,11 +18,13 @@ const generateToken = (user) => {
 const isAuth = (req, res, next) => {
   console.log("util:", req.body.user);
   const token = req.cookies.jwt;
+  console.log("token:", token);
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(401).send({ message: "Invalid Token" });
       } else {
+        console.log("decode:", decode);
         req.user = decode;
         next();
       }
