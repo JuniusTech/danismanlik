@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
+
 import { toast } from "react-toastify";
 import { getError } from "../getError";
-import LoadingBox from "../components/LoadingBox";
+
 import photo from "../assets/photo.svg"
-import eye from "../assets/eye.svg"
+
 
 import "../css/lawyerdashboard.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ButtonMainColor from "../components/Buttons/ButtonMainColor";
-import ButtonWhiteColor from "../components/Buttons/ButtonWhiteColor";
+
+import LawyerPersonalDetails from "../components/LawyerDashboard/LawyerPersonalDetails";
+import LawyerDates from "../components/LawyerDashboard/LawyerDates";
+import LawyerAccountSettings from "../components/LawyerDashboard/LawyerAccountSettings";
+import LawyerPaymentSetting from "../components/LawyerDashboard/LawyerPaymentSetting";
+import HelpAndSupport from "../components/LawyerDashboard/HelpAndSupport";
+
 
 const LawyerDashboard = ({
     show,
@@ -83,6 +88,29 @@ const LawyerDashboard = ({
         }
     };
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const [selectedItem, setSelectedItem] = useState(null);
+    const items = ["Randevularım", "Kişisel Bilgiler", "Hesap Ayarları", "Ödeme Ayarları", "Yardım ve Destek"]
+    const showComponent = (item) => {
+        // Burada, tıklanan maddenin ismine göre ilgili componenti çağırabilirsin
+        console.log("Tıklanan madde: " + item);
+        // Örneğin:
+        if (item === "Randevularım") {
+            return <LawyerDates />
+        } else if (item === "Kişisel Bilgiler") {
+            return <LawyerPersonalDetails />;
+        } else if (item === "Hesap Ayarları") {
+            return <LawyerAccountSettings />
+        } else if (item === "Ödeme Ayarları") {
+            return <LawyerPaymentSetting />
+        } else if (item === "Yardım ve Destek") {
+            return <HelpAndSupport />
+        }
+    };
+
+    const onItemClick = (item) => {
+        setSelectedItem(item);
+
+    };
     return (
         <>
             <Navbar />
@@ -98,170 +126,27 @@ const LawyerDashboard = ({
                     </div>
                     <div className="border-bottom"></div>
                     <div className="m-4 ">
-                        <h2>Hesabım</h2>
+                        <h1><b>Hesabım </b> </h1>
 
-                        <h3>Randevularım</h3>
-                        <h3>Kişisel Bilgiler</h3>
-                        <h3>Hesap Ayarları</h3>
-                        <h3>Ödeme Ayarları</h3>
-                        <h3>Yardım ve Destek</h3>
+                        <ul>
+                            {items.map((item, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => onItemClick(item)}
+                                    style={{ fontWeight: selectedItem === item ? "bold" : "normal" }}
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                 </div>
                 <div className="search-left-border"></div>
                 <div className="w-75">
-                    <div className="registerBaslık">
-                        <h1>Kişisel Bilgiler</h1>
-                    </div>
-                    <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
-                        <div className="row" id="registerRowDiv">
-                            <div className="col">
-                                <label className="registerLabel" htmlFor="">
-                                    Ad
-                                </label>
-                                <input
-                                    type="text"
-                                    className="registerFormControl"
-                                    value={name}
-                                    placeholder={userInfo.name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                                <label className="registerLabel" htmlFor="">
-                                    Soyad
-                                </label>
-                                <input
-                                    className="registerFormControl"
-                                    type="text"
-                                    value={surname}
-                                    placeholder={userInfo.surname}
-                                    onChange={(e) => setSurname(e.target.value)}
-                                />
-                                <label className="registerLabel" htmlFor="">
-                                    Baro Sicil Numarası
-                                </label>
-                                <input
-                                    className="registerFormControl"
-                                    type="text"
-                                    placeholder={userInfo._id}
-                                    value={barNo}
-                                    onChange={(e) => setBarNo(e.target.value)}
-                                />
-                                <label className="registerLabel" htmlFor="">
-                                    Branş
-                                </label>
+                    {showComponent(selectedItem)}
 
-                                <select
-                                    className="registerBranchSelect"
-                                    value={branch}
-                                    name="branch"
-                                    onChange={(e) => setBranch(e.target.value)}
-                                    title="Branş Seç"
-                                    id="navbarScrollingDropdown"
-                                >
-                                    <option defaultValue="all">Branş Seç</option>
-                                    {branches
-                                        ?.sort((a, b) => a.title.localeCompare(b.title))
-                                        .map((item) => (
-                                            <option key={item._id} value={item.title}>
-                                                {item.title}
-                                            </option>
-                                        ))}
-                                </select>
 
-                            </div>
-                            <div className="col">
-                                <label className="registerLabel" htmlFor="">
-                                    E-posta {" "}
-                                    <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
-                                        {" "}
-                                        (E-posta değiştir)
-                                    </span>
-                                </label>
-                                <input
-                                    className="registerFormControl"
-                                    type="email"
-                                    value={email}
-                                    placeholder={userInfo.email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <label className="registerLabel" htmlFor="">
-                                    Şifre <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
-                                        {" "}
-                                        (Şifre değiştir)
-                                    </span>
-                                </label>
-                                <input
-                                    className="registerFormControl"
-                                    type="password"
-                                    value={password}
-                                    placeholder="Şifre"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-
-                                <label className="registerLabel" htmlFor="">
-                                    Tel. Numarası <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
-                                        {" "}
-                                        (Numara değiştir)
-                                    </span>
-                                </label>
-                                <div className="registerTelDiv d-flex ">
-                                    <select
-                                        className="registerSelect"
-                                        value={phoneRegion}
-                                        id="inputGroupSelect02"
-                                        onChange={(e) => setPhoneRegion(e.target.value)}
-                                    >
-                                        <option selected>+90</option>
-                                        <option value="1">+91</option>
-                                        <option value="2">+92</option>
-                                        <option value="3">+93</option>
-                                    </select>
-                                    <input
-                                        className="registerFormControl"
-                                        type="text"
-                                        value={phoneNo}
-                                        placeholder=""
-                                        onChange={(e) => setPhoneNo(e.target.value)}
-                                    />
-                                </div><br />
-                                <div className="d-flex justify-content-start align-items-center">
-                                    <div className="d-flex justify-content-start align-items-center star mt-3">
-                                        <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <p className="pt-1">Branş Ekle</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
-                        <div className="registerButtons">
-                            <button
-                                className="lawyerdashboard-button-vazgec"
-                                onClick={() => setShowLawyerRegister()}
-                            >
-                                Vazgeç
-                            </button>
-                            <button className="lawyerdashboard-button-kaydet" type="submit">
-                                {loading ? (
-                                    <>
-                                        <LoadingBox />
-                                    </>
-                                ) : (
-                                    "Kaydet"
-                                )}
-                            </button>
-                        </div>
-                        <br />
-                        <br />
-                        <p className="d-flex justify-conter">
-
-                            <span style={{ color: "#a97900", margin: "auto" }} onClick={() => handleLogin()}>
-                                {" "}
-                                Avukat Hesabımı Sil
-                            </span>
-                        </p>
-
-                    </form>
                 </div >
             </div >
             <Footer />
