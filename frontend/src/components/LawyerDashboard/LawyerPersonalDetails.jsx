@@ -32,7 +32,7 @@ const LawyerPersonalDetails = ({
     const [memberAg, setMemberAg] = useState(false);
     const [perData, setPerData] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = () => {
         setShowLawyerLogin(true);
@@ -76,6 +76,11 @@ const LawyerPersonalDetails = ({
         }
     };
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+
     return (
 
         <div>
@@ -104,6 +109,7 @@ const LawyerPersonalDetails = ({
                         <label className="registerLabel" htmlFor="">
                             Baro Sicil Numarası
                         </label>
+
                         <input
                             className="registerFormControl"
                             type="text"
@@ -112,6 +118,7 @@ const LawyerPersonalDetails = ({
                         <label className="registerLabel" htmlFor="">
                             Branş
                         </label>
+
 
                         <select
                             className="registerBranchSelect"
@@ -135,10 +142,10 @@ const LawyerPersonalDetails = ({
                     <div className="col">
                         <label className="registerLabel" htmlFor="">
                             E-posta {" "}
-                            <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
+                            <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
                                 {" "}
                                 (E-posta değiştir)
-                            </span>
+                            </button>
                         </label>
                         <input
                             className="registerFormControl"
@@ -148,24 +155,32 @@ const LawyerPersonalDetails = ({
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <label className="registerLabel" htmlFor="">
-                            Şifre <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
+                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
                                 {" "}
                                 (Şifre değiştir)
-                            </span>
+                            </button>
                         </label>
-                        <input
-                            className="registerFormControl"
-                            type="password"
-                            value={password}
-                            placeholder="Şifre"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className="d-flex">
+                            <input
+                                className="registerFormControl"
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                placeholder="Şifre"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <img
+                                src={eye}
+                                alt="Toggle Password Visibility"
+                                onClick={togglePasswordVisibility}
+                                style={{ cursor: 'pointer', marginLeft: '-25px' }}
+                            />
+                        </div>
 
                         <label className="registerLabel" htmlFor="">
-                            Tel. Numarası <span style={{ color: "#a97900" }} onClick={() => handleLogin()}>
+                            Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
                                 {" "}
                                 (Numara değiştir)
-                            </span>
+                            </button>
                         </label>
                         <div className="registerTelDiv d-flex ">
                             <select
@@ -218,10 +233,12 @@ const LawyerPersonalDetails = ({
                 <br />
                 <p className="d-flex justify-conter">
 
-                    <span style={{ color: "#a97900", margin: "auto" }} onClick={() => handleLogin()}>
-                        {" "}
+                    <button
+                        style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+                        onClick={() => handleLogin()}
+                    >
                         Avukat Hesabımı Sil
-                    </span>
+                    </button>
                 </p>
 
             </form>
