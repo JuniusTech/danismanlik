@@ -149,16 +149,26 @@
     border: 1px solid black;
     border-radius: 50%;
 }
+.lawyerdashboard-buttons{
+  
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 2rem;
+  
+}
 .lawyerdashboard-button-vazgec{
     background-color: #ffffff;
     color: #aeb9bc;
-    width: 150px;
+    width: 70px;
+    border-radius: 10px; 
+    height: 40px;
     
 }
 .lawyerdashboard-button-kaydet{
     background-color: #d4bc7f;
     color: white;
-    width: 5rem;
-    height: 40px;
+    width: 70px;
+    border-radius: 10px; 
     border: none;
 }

@@ -61,16 +61,10 @@ const LawyerPersonalDetails = ({
             const { data } = await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
                 {
-                    name,
-                    surname,
                     email,
                     password,
-                    barNo,
                     branch,
                     phone,
-                    infoText,
-                    memberAg,
-                    perData,
                 }
             );
             setLoading(false);
@@ -83,6 +77,7 @@ const LawyerPersonalDetails = ({
     };
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     return (
+
         <div>
             <div className="registerBaslık">
                 <h1>Kişisel Bilgiler</h1>
@@ -96,9 +91,7 @@ const LawyerPersonalDetails = ({
                         <input
                             type="text"
                             className="registerFormControl"
-                            value={name}
-                            placeholder={userInfo.name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={userInfo.name}
                         />
                         <label className="registerLabel" htmlFor="">
                             Soyad
@@ -106,9 +99,7 @@ const LawyerPersonalDetails = ({
                         <input
                             className="registerFormControl"
                             type="text"
-                            value={surname}
-                            placeholder={userInfo.surname}
-                            onChange={(e) => setSurname(e.target.value)}
+                            value={userInfo.surname}
                         />
                         <label className="registerLabel" htmlFor="">
                             Baro Sicil Numarası
@@ -116,9 +107,7 @@ const LawyerPersonalDetails = ({
                         <input
                             className="registerFormControl"
                             type="text"
-                            placeholder={userInfo._id}
-                            value={barNo}
-                            onChange={(e) => setBarNo(e.target.value)}
+                            value={userInfo._id}
                         />
                         <label className="registerLabel" htmlFor="">
                             Branş
@@ -208,7 +197,7 @@ const LawyerPersonalDetails = ({
 
                 <br />
                 <br />
-                <div className="registerButtons">
+                <div className="lawyerdashboard-buttons">
                     <button
                         className="lawyerdashboard-button-vazgec"
                         onClick={() => setShowLawyerRegister()}

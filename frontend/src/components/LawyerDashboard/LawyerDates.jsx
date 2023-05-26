@@ -2,7 +2,7 @@ import React from 'react'
 
 const LawyerDates = () => {
     return (
-        <div>My dates</div>
+        <div>Randevularım</div>
     )
 }
 
