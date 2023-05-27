@@ -38,8 +38,8 @@ const LawyerDashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="d-flex border border-warning w-50 m-auto mb-5 rounded-3">
-                <div className="w-25">
+            <div className="d-flex border border-warning m-auto lawyerdashbord-container mb-5 rounded-3">
+                <div className="lawyerdashbord-leftcard">
                     <div className="d-flex justify-content-center ">
                         <div className="lawyerdashboard-photo">
                             {/* //! Bu kısım  userInfo.image varsa olarak değişecek. */}
@@ -72,7 +72,7 @@ const LawyerDashboard = () => {
 
                 </div>
                 <div className="search-left-border"></div>
-                <div className="w-75">
+                <div className="lawyerdashbord-rightcard">
                     {showComponent(selectedItem)}
 
 
