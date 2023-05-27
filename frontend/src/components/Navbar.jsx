@@ -95,7 +95,7 @@ const Navbar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="">Profilim</Dropdown.Item>
+                      <Dropdown.Item href="" onClick={() => navigate("/lawyerdashboard")}>Profilim</Dropdown.Item>
                       <Dropdown.Item onClick={() => userSignOut()}>
                         Çıkış Yap
                       </Dropdown.Item>
@@ -114,7 +114,7 @@ const Navbar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="">Profilim</Dropdown.Item>
+                      <Dropdown.Item href="" >Profilim</Dropdown.Item>
                       <Dropdown.Item onClick={() => lawyerSignOut()}>
                         Çıkış Yap
                       </Dropdown.Item>

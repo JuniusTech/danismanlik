@@ -1,0 +1,174 @@
+.registerBaslık {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-content {
+  border-radius: 20px !important;
+  width: 100% !important;
+  color: #00242e;
+}
+.modal-content label {
+  color: #00242e;
+}
+
+.registerBaslık h1 {
+  margin: 4%;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 500px) {
+  #registerRowDiv {
+    display: block;
+    text-align: center;
+  }
+}
+
+.lawyerRegisterFormDiv {
+  height: 70vh;
+  width: 100%;
+  padding: 2rem;
+  overflow: auto;
+  border-radius: 15px;
+  color: #00242e;
+}
+
+.UserRegisterFormDiv {
+  height: 54vh;
+  width: 100%;
+  padding: 2rem;
+  overflow: auto;
+  color: #00242e;
+}
+.UserRegisterFormDiv span {
+  color: orange;
+}
+
+.registerFormDiv span {
+  color: orange;
+}
+
+.registerLabel {
+  width: 100%;
+  margin-left: 2%;
+  color: rgb(50, 47, 47);
+}
+.registerFormControl {
+  padding: 3px 6px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid hsl(0, 0%, 29%, 30%);
+  margin: 3% 0;
+}
+
+.registerSelect {
+  height: 65%;
+  margin-top: 3.5%;
+  border: 1px solid hsl(0, 0%, 29%, 30%);
+  border-radius: 5px;
+}
+.registerSelectuser {
+  margin-top: 2.7%;
+  margin-right: 2%;
+  height: 3.9vh;
+  border: 1px solid hsl(0, 0%, 29%, 30%);
+  border-radius: 5px;
+}
+.registerBranchSelect {
+  width: 100%;
+  margin-top: 4%;
+  margin-bottom: 3%;
+  height: 10%;
+  border: 1px solid hsl(0, 0%, 29%, 30%);
+  border-radius: 5px;
+}
+
+.registerTelDiv {
+  gap: 1rem;
+  height: 15%;
+}
+
+.registerCheckBtn {
+  margin: 4% 0;
+}
+.registerCheckBtn label {
+  font-size: 10px;
+  margin-left: 2%;
+}
+
+.registerCheckBtn span {
+  color: #a97900;
+  font-size: 10px;
+}
+
+.registerButtons {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 2rem;
+
+  font: normal normal bold 18px/21px SF Pro Text;
+}
+
+.registerButtons button {
+  padding: 5px;
+  border-radius: 4px;
+  width: 25%;
+}
+.registerbtn1 {
+  border: 1px solid black;
+
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+.registerbtn2 {
+  border: none;
+  background: #a97900 0% 0% no-repeat padding-box;
+  color: #f5f5f5;
+}
+.registerFormDiv p {
+  text-align: center;
+}
+
+.UserRegisterFormDiv p {
+  text-align: center;
+}
+
+.border-bottom{
+    margin: 2rem 1rem 2rem 1rem;
+  /* border-bottom: 20px solid #a97900; */
+  border: 2px solid #f3eddd;
+}
+.lawyerdashboard-photo{
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.lawyerdashboard-buttons{
+  
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 2rem;
+  
+}
+.lawyerdashboard-button-vazgec{
+    background-color: #ffffff;
+    color: #aeb9bc;
+    width: 70px;
+    border-radius: 10px; 
+    height: 40px;
+    
+}
+.lawyerdashboard-button-kaydet{
+    background-color: #d4bc7f;
+    color: white;
+    width: 70px;
+    border-radius: 10px; 
+    border: none;
+}

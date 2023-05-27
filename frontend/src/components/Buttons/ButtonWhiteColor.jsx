@@ -15,7 +15,7 @@ const ButtonWhiteColor = ({ children, ...props }) => {
     letterSpacing: '0px',
     color: '#00242E',
     textAlign: 'center',
-    margin: '10px' 
+    margin: '10px'
   };
 
   const textStyle = {
@@ -29,8 +29,8 @@ const ButtonWhiteColor = ({ children, ...props }) => {
 
   return (
     <Button style={buttonStyle} {...props}>
-    <span style={textStyle}>{children}</span>
-  </Button>
+      <span style={textStyle}>{children}</span>
+    </Button>
   );
 };
 
