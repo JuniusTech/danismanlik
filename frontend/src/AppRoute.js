@@ -9,11 +9,10 @@ import UserResetPass from "./pages/UserResetPass";
 import LawyerForgetPass from "./pages/LawyerForgetPass";
 import LawyerResetPass from "./pages/LawyerResetPass";
 import LawyerDetail from "./pages/LawyerDetail";
-<<<<<<< HEAD
-import UserDashboard from "./components/UserDashboard";
-=======
+
+import UserDashboard from "./pages/UserDashboard";
+
 import LawyerDashboard from "./pages/LawyerDashboard";
->>>>>>> ebc339f445069a7b68985dc2a2ea63d220d72c11
 
 const AppRoute = () => {
   return (
@@ -25,11 +24,8 @@ const AppRoute = () => {
       <Route path="/forget-password" element={<UserForgetPass />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
-<<<<<<< HEAD
       <Route path="/userDashboard" element={<UserDashboard />} />
-=======
-      <Route path="/lawyerdashboard" element={<LawyerDashboard />} />
->>>>>>> ebc339f445069a7b68985dc2a2ea63d220d72c11
+      <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
 
       <Route
         path="/reset-password-law/:id/:token"
