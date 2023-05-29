@@ -16,12 +16,15 @@ const generateToken = (user) => {
 };
 
 const isAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
+
+  const token = req.body.token;
+
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(401).send({ message: "Invalid Token" });
       } else {
+        console.log("decode:", decode);
         req.user = decode;
         next();
       }

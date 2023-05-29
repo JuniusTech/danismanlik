@@ -32,7 +32,7 @@ const LawyerCard = ({ lawyers }) => {
                                     <div className='search-card-lawyer-leftbox'>
                                         <div
                                             className="d-flex w-100 search-lawyer-cursor "
-                                            onClick={() => navigate(`/${lawyer._id}`, { state: lawyer })}
+                                            onClick={() => navigate(`/lawyer/${lawyer._id}`, { state: lawyer })}
                                         >
                                             <div className="h-100">
                                                 <img

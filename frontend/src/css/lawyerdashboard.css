@@ -1,0 +1,49 @@
+.lawyerdashbord-container{
+  width: 85rem;
+}
+
+.lawyerdashbord-leftcard{
+  width: 30rem;
+}
+
+.lawyerdashbord-rightcard{
+  width: 55rem;
+}
+.border-bottom{
+    margin: 2rem 1rem 2rem 1rem;
+  /* border-bottom: 20px solid #a97900; */
+  border: 2px solid #f3eddd;
+}
+.lawyerdashboard-photo{
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.lawyerdashboard-buttons{
+  
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 2rem;
+  
+}
+.lawyerdashboard-button-vazgec{
+    background-color: #ffffff;
+    color: #aeb9bc;
+    width: 70px;
+    border-radius: 10px; 
+    height: 40px;
+    
+}
+.lawyerdashboard-button-kaydet{
+    background-color: #d4bc7f;
+    color: white;
+    width: 70px;
+    border-radius: 10px; 
+    border: none;
+}
