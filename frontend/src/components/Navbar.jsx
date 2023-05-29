@@ -25,6 +25,7 @@ const Navbar = () => {
     localStorage.removeItem("userInfo");
     toast.success("Çıkış Yaptınız.");
     removeCookie("jwt");
+    navigate("/")
   };
   const lawyerSignOut = () => {
     dispatch({ type: "LAWYER_SIGNOUT" });
