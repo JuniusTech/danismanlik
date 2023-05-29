@@ -4,12 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
-import photo from "../../assets/photo.svg"
 import eye from "../../assets/eye.svg"
-
-// import "../css/lawyerdashboard.css";
-
-
 
 
 const LawyerPersonalDetails = ({
@@ -17,20 +12,13 @@ const LawyerPersonalDetails = ({
     setShowLawyerLogin,
     setShowLawyerRegister,
 }) => {
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [barNo, setBarNo] = useState("");
     const [phoneRegion, setPhoneRegion] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
     const [branch, setBranch] = useState("");
     const [branches, setBranches] = useState([]);
-    const [password2, setPassword2] = useState("");
-    const [infoText, setInfoText] = useState(false);
-    const [memberAg, setMemberAg] = useState(false);
-    const [perData, setPerData] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -52,10 +40,6 @@ const LawyerPersonalDetails = ({
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (password !== password2) {
-            toast.error("Şifre eşleşmiyor");
-            return;
-        }
         setLoading(true);
         try {
             const { data } = await axios.post(
