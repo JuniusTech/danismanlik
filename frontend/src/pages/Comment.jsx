@@ -11,65 +11,68 @@ import "../css/comment.css"
 
 
 const Comment = ({
-    show,
-    setShowComment,
-    id
+  show,
+  setShowComment,
+  id
 }) => {
-    const params = useParams()
-    const { lawyerid } = params
+  const params = useParams()
+  const { lawyerid } = params
 
-    const [comment, setComment] = useState("");
-    const [rating, setRating] = useState();
-    const navigate = useNavigate();
-    const [stars, setStars] = useState(0)
-     
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        try {
-            //* Cookie'den tokeni alıyoruz
-            const jwtToken = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('jwt='))
-            .split('=')[1];
-          const { data } = await axios.post(
-            `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`,
-            {
-              user: userInfo,
-              comment: comment,
-              rating: stars,
-              token: jwtToken
-            }
-          );
-    
-          console.log(data);
-          toast.success("Yorum başarılı bir şekilde yapıldı");
-          // lawyer.reviews.unshift(data.review);
-          // lawyer.numReviews = data.numReviews;
-          // lawyer.rating = data.rating;
-          setShowComment(false);
-          navigate(`/${lawyerid}`);
-        } catch (error) {
-          console.log(error);
-          toast.error("Bir hata oluştu. Yorum yapılamadı.");
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState();
+  const navigate = useNavigate();
+  const [stars, setStars] = useState(0)
+
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      //* Cookie'den tokeni alıyoruz
+      const jwtToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('jwt='))
+        .split('=')[1];
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}/reviews`,
+        {
+          user: userInfo,
+          comment: comment,
+          rating: stars,
+          token: jwtToken
         }
-      };
+      );
+
+      console.log(data);
+      toast.success("Yorum başarılı bir şekilde yapıldı");
+      // lawyer.reviews.unshift(data.review);
+      // lawyer.numReviews = data.numReviews;
+      // lawyer.rating = data.rating;
+      setShowComment(false);
+      navigate(`/${lawyerid}`);
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu. Yorum yapılamadı.");
+    }
+  };
 
 
-    return (
+  return (
 
-        <Modal
-            show={show}
-            onHide={() => submitHandler(false)}
-            className="px-5 comment  m-auto p-5"
-            animation={false}
-            centered
+    <Modal
+      show={show}
+      onHide={() => submitHandler(false)}
+      className="px-5 comment  m-auto p-5"
+      animation={false}
+      centered
 
-        >
+    >
+      <Form>
+
+        <div className="d-flex m-5">
           <div className=" justify-content-around w-10">
-            <button className="lawyer-rating-button rounded-circle">
+            <div className="lawyer-rating-button d-flex justify-content-center align-items-center rounded-circle">
               {userInfo?.name?.charAt(0).toUpperCase()}
-            </button>
+            </div>
           </div>
           <div className="justify-content-around w-75">
             <textarea
@@ -82,7 +85,7 @@ const Comment = ({
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
           </div>
-        </form>
+        </div>
         <div className="d-flex justify-content-center align-items-center w-10">
           <div className="m-2">Puan:</div>
           <span>
@@ -138,13 +141,13 @@ const Comment = ({
         </div>
 
         <div className="my-5 d-flex flex-column gap-2 justify-content-center">
-          <Button
+          <button
             type="submit"
             size="lg"
-            className="w-75  m-auto mb-4  bg border-0"
+            className="lawyer-comment-button w-75  m-auto mb-4  bg border-0 "
           >
             Yorum Yap
-          </Button>
+          </button>
         </div>
       </Form>
     </Modal>
