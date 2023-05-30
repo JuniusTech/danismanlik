@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
+import { Navigate, useNavigate } from "react-router-dom";
+import LawyerRegister from "../../pages/LawyerRegister";
 
 
 const LawyerPersonalDetails = ({
     show,
     setShowLawyerLogin,
-    setShowLawyerRegister,
+
 }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,12 +23,14 @@ const LawyerPersonalDetails = ({
     const [branches, setBranches] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const [showLawyerRegister, setShowLawyerRegister] = useState(false);
+
 
     const handleLogin = () => {
         setShowLawyerLogin(true);
-        setShowLawyerRegister(false);
-    };
 
+    };
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_BASE_URI}/api/branchs`)
@@ -63,6 +67,10 @@ const LawyerPersonalDetails = ({
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const navigateRegister = () => {
+
+        navigate("/api/lawyers/signup")
+    }
 
 
     return (
@@ -126,7 +134,7 @@ const LawyerPersonalDetails = ({
                     <div className="col">
                         <label className="registerLabel" htmlFor="">
                             E-posta {" "}
-                            <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
+                            <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
                                 {" "}
                                 (E-posta değiştir)
                             </button>
@@ -139,7 +147,7 @@ const LawyerPersonalDetails = ({
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <label className="registerLabel" htmlFor="">
-                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
+                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
                                 {" "}
                                 (Şifre değiştir)
                             </button>
@@ -161,7 +169,7 @@ const LawyerPersonalDetails = ({
                         </div>
 
                         <label className="registerLabel" htmlFor="">
-                            Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => handleLogin()}>
+                            Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
                                 {" "}
                                 (Numara değiştir)
                             </button>
@@ -226,6 +234,12 @@ const LawyerPersonalDetails = ({
                 </p>
 
             </form>
+            <LawyerRegister
+                setShowLawyerRegister={setShowLawyerRegister}
+                setShowLawyerLogin={setShowLawyerLogin}
+                show={showLawyerRegister}
+                onHide={() => setShowLawyerRegister(false)}
+            />
 
         </div>
     )
