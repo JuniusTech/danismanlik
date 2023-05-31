@@ -98,38 +98,6 @@ const LawyerPersonalDetails = ({
                             type="text"
                             value={lawyerInfo.surname}
                         />
-                        <label className="registerLabel" htmlFor="">
-                            Baro Sicil Numarası
-                        </label>
-
-                        <input
-                            className="registerFormControl"
-                            type="text"
-                            value={lawyerInfo._id}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Branş
-                        </label>
-
-
-                        <select
-                            className="registerBranchSelect"
-                            value={branch}
-                            name="branch"
-                            onChange={(e) => setBranch(e.target.value)}
-                            title="Branş Seç"
-                            id="navbarScrollingDropdown"
-                        >
-                            <option defaultValue="all">Branş Seç</option>
-                            {branches
-                                ?.sort((a, b) => a.title.localeCompare(b.title))
-                                .map((item) => (
-                                    <option key={item._id} value={item.title}>
-                                        {item.title}
-                                    </option>
-                                ))}
-                        </select>
-
                     </div>
                     <div className="col">
                         <label className="registerLabel" htmlFor="">
@@ -146,27 +114,6 @@ const LawyerPersonalDetails = ({
                             placeholder={lawyerInfo.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <label className="registerLabel" htmlFor="">
-                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
-                                (Şifre değiştir)
-                            </button>
-                        </label>
-                        <div className="d-flex">
-                            <input
-                                className="registerFormControl"
-                                type={showPassword ? 'text' : 'password'}
-                                value={password}
-                                placeholder="Şifre"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <img
-                                src={eye}
-                                alt="Toggle Password Visibility"
-                                onClick={togglePasswordVisibility}
-                                style={{ cursor: 'pointer', marginLeft: '-25px' }}
-                            />
-                        </div>
 
                         <label className="registerLabel" htmlFor="">
                             Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
@@ -176,7 +123,7 @@ const LawyerPersonalDetails = ({
                         </label>
                         <div className="registerTelDiv d-flex ">
                             <select
-                                className="registerSelect"
+                                className="egisterFormControl"
                                 value={phoneRegion}
                                 id="inputGroupSelect02"
                                 onChange={(e) => setPhoneRegion(e.target.value)}
@@ -187,20 +134,35 @@ const LawyerPersonalDetails = ({
                                 <option value="3">+93</option>
                             </select>
                             <input
-                                className="registerFormControl"
+                                className="egisterFormControl"
                                 type="text"
                                 value={phoneNo}
                                 placeholder=""
                                 onChange={(e) => setPhoneNo(e.target.value)}
                             />
-                        </div><br />
-                        <div className="d-flex justify-content-start align-items-center">
-                            <div className="d-flex justify-content-start align-items-center star mt-3">
-                                <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <p className="pt-1">Branş Ekle</p>
-                            </div>
                         </div>
+
+
+                        <br />
+
                     </div>
                 </div>
+                <div className="d-flex row" style={{ width: "508px" }}>
+                    <label htmlFor="">
+                        Büro Adresi
+                    </label>
+
+                    <textarea
+                        className="mx-3 "
+                        name="comment"
+                        placeholder="Lütfen adresinizi giriniz"
+                        id=""
+                        cols="45"
+                        rows="1"
+
+                    ></textarea>
+                </div>
+
 
                 <br />
                 <br />
