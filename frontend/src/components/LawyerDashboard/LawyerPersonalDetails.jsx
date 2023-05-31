@@ -63,7 +63,7 @@ const LawyerPersonalDetails = ({
             setLoading(false);
         }
     };
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -88,7 +88,7 @@ const LawyerPersonalDetails = ({
                         <input
                             type="text"
                             className="registerFormControl"
-                            value={userInfo.name}
+                            value={lawyerInfo.name}
                         />
                         <label className="registerLabel" htmlFor="">
                             Soyad
@@ -96,7 +96,7 @@ const LawyerPersonalDetails = ({
                         <input
                             className="registerFormControl"
                             type="text"
-                            value={userInfo.surname}
+                            value={lawyerInfo.surname}
                         />
                         <label className="registerLabel" htmlFor="">
                             Baro Sicil Numarası
@@ -105,7 +105,7 @@ const LawyerPersonalDetails = ({
                         <input
                             className="registerFormControl"
                             type="text"
-                            value={userInfo._id}
+                            value={lawyerInfo._id}
                         />
                         <label className="registerLabel" htmlFor="">
                             Branş
@@ -143,7 +143,7 @@ const LawyerPersonalDetails = ({
                             className="registerFormControl"
                             type="email"
                             value={email}
-                            placeholder={userInfo.email}
+                            placeholder={lawyerInfo.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <label className="registerLabel" htmlFor="">

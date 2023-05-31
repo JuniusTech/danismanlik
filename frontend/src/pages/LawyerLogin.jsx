@@ -11,6 +11,7 @@ import LoadingBox from "../components/LoadingBox";
 import { useNavigate } from "react-router-dom";
 
 const AvukatSignPage = ({
+  lawyer,
   show,
   setShowLawyerLogin,
   setShowLawyerRegister,
@@ -43,8 +44,8 @@ const AvukatSignPage = ({
       dispatch({ type: "LAWYER_SIGNIN", payload: data });
       localStorage.setItem("lawyerInfo", JSON.stringify(data));
       setShowLawyerLogin(false);
-      navigate("/lawyer");
-    } catch (error) {}
+      navigate(`/lawyer/${lawyer._id}`, { state: lawyer });
+    } catch (error) { }
   };
 
   return (
