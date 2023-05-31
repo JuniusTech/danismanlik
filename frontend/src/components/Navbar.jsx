@@ -96,7 +96,7 @@ const Navbar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="" onClick={() => navigate("/useerdashboard")}>Profilim</Dropdown.Item>
+                      <Dropdown.Item href="" onClick={() => navigate("/userdashboard")}>Profilim</Dropdown.Item>
                       <Dropdown.Item onClick={() => userSignOut()}>
                         Çıkış Yap
                       </Dropdown.Item>
