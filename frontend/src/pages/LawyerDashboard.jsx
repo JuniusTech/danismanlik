@@ -13,7 +13,7 @@ import image from "../assets/avatar.jpg"
 
 const LawyerDashboard = () => {
 
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
     const [selectedItem, setSelectedItem] = useState(null);
     const items = ["Randevularım", "Kişisel Bilgiler", "Hesap Ayarları", "Ödeme Ayarları", "Yardım ve Destek"]
     const showComponent = (item) => {
@@ -43,7 +43,7 @@ const LawyerDashboard = () => {
                     <div className="d-flex justify-content-center ">
                         <div className="lawyerdashboard-photo">
                             {/* //! Bu kısım  userInfo.image varsa olarak değişecek. */}
-                            <img width="30rem" src={userInfo.surname ?
+                            <img width="30rem" src={lawyerInfo.surname ?
                                 image
                                 :
                                 photo
@@ -51,7 +51,7 @@ const LawyerDashboard = () => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-center m-auto">
-                        {userInfo.name} {userInfo.surname}
+                        {lawyerInfo.name} {lawyerInfo.surname}
                     </div>
                     <div className="border-bottom"></div>
                     <div className="m-4 ">

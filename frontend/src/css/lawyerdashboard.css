@@ -47,3 +47,24 @@
     border-radius: 10px; 
     border: none;
 }
+
+.lawyerdashboardregisterBaslık{
+  width: 142px;
+  height: 24px;
+  font-size: 20px;
+}
+
+.lawyerdashboard-registerLabel{
+  width: 23px;
+  height: 21px;
+}
+
+.lawyerdashboard-registerFormControl{
+  width: 274px;
+  height: 20px;
+}
+
+.lawyerdashboardFormDiv{
+  width: 500px;
+  border: 2px solid red;
+}
