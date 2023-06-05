@@ -38,31 +38,31 @@ const LawyerDashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="d-flex border border-warning m-auto lawyerdashbord-container mb-5 rounded-3">
+            <div className="lawyerdashbord-container">
                 <div className="lawyerdashbord-leftcard">
                     <div className="d-flex justify-content-center ">
                         <div className="lawyerdashboard-photo">
-                            {/* //! Bu kısım  userInfo.image varsa olarak değişecek. */}
-                            <img width="30rem" src={lawyerInfo.surname ?
+                            {/* //! Bu kısım  lawyerInfo.image varsa olarak değişecek. */}
+                            <img width="23.69px" height="21.63px" src={lawyerInfo.surname ?
                                 image
                                 :
                                 photo
                             } alt="" />
                         </div>
                     </div>
-                    <div className="d-flex justify-content-center m-auto">
+                    <div className="d-flex justify-content-center m-auto" width="82px">
                         {lawyerInfo.name} {lawyerInfo.surname}
                     </div>
                     <div className="border-bottom"></div>
                     <div className="m-4 ">
-                        <h1><b>Hesabım </b> </h1>
 
                         <ul>
+                            <li style={{ listStyle: "none", marginBottom: "20px" }}><b style={{ fontSize: "20px" }}>Hesabım </b> </li>
                             {items.map((item, index) => (
-                                <li
+                                <li className="leftbox-li"
                                     key={index}
                                     onClick={() => onItemClick(item)}
-                                    style={{ fontWeight: selectedItem === item ? "bold" : "normal", listStyle: "none" }}
+                                    style={{ fontWeight: selectedItem === item ? "bold" : "normal", listStyle: "none", marginBottom: "20px", fontSize: "16px" }}
                                 >
                                     {item}
                                 </li>

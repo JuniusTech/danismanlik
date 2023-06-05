@@ -1,26 +1,39 @@
 .lawyerdashbord-container{
-  width: 85rem;
+  top: 130px;
+  left: 505px;
+  right: 504px;
+  bottom: 5950px;
+  border: 1px solid #a97900;
+  display: flex;
+  margin: auto;
+  margin-bottom: 169px;
+  width: 911px;
+  height: 649px;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 .lawyerdashbord-leftcard{
-  width: 30rem;
+  width: 280px;
+  
 }
 
 .lawyerdashbord-rightcard{
-  width: 55rem;
+  width: 631px;
+  
 }
 .border-bottom{
-    margin: 2rem 1rem 2rem 1rem;
+    margin: 32px 30px 32px 30px;
   /* border-bottom: 20px solid #a97900; */
-  border: 2px solid #f3eddd;
+  border: 1px solid #a97900;
 }
 .lawyerdashboard-photo{
     margin: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8rem;
-    height: 8rem;
+    width: 70px;
+    height: 70px;
     border: 1px solid black;
     border-radius: 50%;
 }
@@ -61,10 +74,25 @@
 
 .lawyerdashboard-registerFormControl{
   width: 274px;
-  height: 20px;
+  height: 40px;
+  border: 1px solid #7F9196;
+  border-radius: 5px;
+  opacity: 1;
+  /* margin-right: 3px; */
+}
+.lawyerdashboard-registerFormControl-phone{
+  width: 212px;
+  height: 40px;
+  border: 1px solid #7F9196;
+  border-radius: 5px;
+  opacity: 1;
 }
 
 .lawyerdashboardFormDiv{
   width: 500px;
   border: 2px solid red;
+}
+.lawyerdashboardadrees{
+  width: 350px;
+  height: 40px;
 }

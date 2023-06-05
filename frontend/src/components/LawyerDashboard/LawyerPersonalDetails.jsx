@@ -7,6 +7,7 @@ import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
 import { Navigate, useNavigate } from "react-router-dom";
 import LawyerRegister from "../../pages/LawyerRegister";
+import data from "./data/data.json"
 
 
 const LawyerPersonalDetails = ({
@@ -33,13 +34,14 @@ const LawyerPersonalDetails = ({
     };
     useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_BASE_URI}/api/branchs`)
+            .get(data.json)
             .then((response) => {
-                setBranches(response.data);
+                setBranches(data.name);
             })
             .catch((error) => {
                 console.log(error);
             });
+        console.log(data)
     }, []);
 
     const submitHandler = async (e) => {
@@ -71,6 +73,29 @@ const LawyerPersonalDetails = ({
 
         navigate("/api/lawyers/signup")
     }
+    const [seciliIl, setSeciliIl] = useState("");
+    const [seciliIlce, setSeciliIlce] = useState("");
+    const [seciliMahalle, setSeciliMahalle] = useState("");
+
+    const handleIlChange = (e) => {
+        const ilIndex = e.target.value;
+        setSeciliIl(data[ilIndex].name);
+        setSeciliIlce("İlçe Seçiniz");
+        setSeciliMahalle("");
+        console.log(seciliIl)
+    };
+
+    const handleIlceChange = (e) => {
+        const ilceIndex = e.target.value;
+        setSeciliIlce(data.find(il => il.name === seciliIl).towns[ilceIndex].name);
+        setSeciliMahalle("");
+    };
+
+    const handleMahalleChange = (e) => {
+        const mahalleIndex = e.target.value;
+        setSeciliMahalle(data.find(il => il.name === seciliIl).towns.find(t => t.name === seciliIlce).districts[mahalleIndex]);
+    };
+
 
 
     return (
@@ -87,49 +112,17 @@ const LawyerPersonalDetails = ({
                         </label>
                         <input
                             type="text"
-                            className="registerFormControl"
+                            className="lawyerdashboard-registerFormControl"
                             value={lawyerInfo.name}
                         />
                         <label className="registerLabel" htmlFor="">
                             Soyad
                         </label>
                         <input
-                            className="registerFormControl"
+                            className="lawyerdashboard-registerFormControl"
                             type="text"
                             value={lawyerInfo.surname}
                         />
-                        <label className="registerLabel" htmlFor="">
-                            Baro Sicil Numarası
-                        </label>
-
-                        <input
-                            className="registerFormControl"
-                            type="text"
-                            value={lawyerInfo._id}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Branş
-                        </label>
-
-
-                        <select
-                            className="registerBranchSelect"
-                            value={branch}
-                            name="branch"
-                            onChange={(e) => setBranch(e.target.value)}
-                            title="Branş Seç"
-                            id="navbarScrollingDropdown"
-                        >
-                            <option defaultValue="all">Branş Seç</option>
-                            {branches
-                                ?.sort((a, b) => a.title.localeCompare(b.title))
-                                .map((item) => (
-                                    <option key={item._id} value={item.title}>
-                                        {item.title}
-                                    </option>
-                                ))}
-                        </select>
-
                     </div>
                     <div className="col">
                         <label className="registerLabel" htmlFor="">
@@ -140,33 +133,12 @@ const LawyerPersonalDetails = ({
                             </button>
                         </label>
                         <input
-                            className="registerFormControl"
+                            className="lawyerdashboard-registerFormControl"
                             type="email"
                             value={email}
                             placeholder={lawyerInfo.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <label className="registerLabel" htmlFor="">
-                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
-                                (Şifre değiştir)
-                            </button>
-                        </label>
-                        <div className="d-flex">
-                            <input
-                                className="registerFormControl"
-                                type={showPassword ? 'text' : 'password'}
-                                value={password}
-                                placeholder="Şifre"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <img
-                                src={eye}
-                                alt="Toggle Password Visibility"
-                                onClick={togglePasswordVisibility}
-                                style={{ cursor: 'pointer', marginLeft: '-25px' }}
-                            />
-                        </div>
 
                         <label className="registerLabel" htmlFor="">
                             Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
@@ -176,7 +148,8 @@ const LawyerPersonalDetails = ({
                         </label>
                         <div className="registerTelDiv d-flex ">
                             <select
-                                className="registerSelect"
+                                style={{ width: "52px", height: "40px" }}
+                                className="egisterFormControl"
                                 value={phoneRegion}
                                 id="inputGroupSelect02"
                                 onChange={(e) => setPhoneRegion(e.target.value)}
@@ -187,21 +160,114 @@ const LawyerPersonalDetails = ({
                                 <option value="3">+93</option>
                             </select>
                             <input
-                                className="registerFormControl"
+                                className="lawyerdashboard-registerFormControl-phone"
                                 type="text"
                                 value={phoneNo}
                                 placeholder=""
                                 onChange={(e) => setPhoneNo(e.target.value)}
                             />
-                        </div><br />
-                        <div className="d-flex justify-content-start align-items-center">
-                            <div className="d-flex justify-content-start align-items-center star mt-3">
-                                <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <p className="pt-1">Branş Ekle</p>
-                            </div>
                         </div>
+
+
+                        <br />
+
                     </div>
                 </div>
+                <div className="d-flex row" style={{ width: "578px" }}>
+                    <label htmlFor="">
+                        Büro Adresi
+                    </label>
 
+                    <textarea
+                        style={{ width: "570px", height: "40px", fontSize: "17px", borderRadius: "5px", opacity: "1", resize: "none", padding: "10 411 10 10" }}
+                        className="mx-3 "
+                        name="comment"
+                        placeholder="Tam adres belirtiniz"
+                        id=""
+                        resiz
+
+
+                    ></textarea>
+                </div>
+                <div className="d-flex">
+                    <div>
+                        <label className="registerLabel" htmlFor="">
+                            İl
+                        </label>
+                        <select
+                            className="lawyerdashboard-registerFormControl"
+                            value={data.name}
+                            name="il"
+                            onChange={handleIlChange}
+                            title="İl Seçiniz"
+                            id="navbarScrollingDropdown"
+                        >
+                            <option defaultValue="all">İl Seçiniz</option>
+                            {data
+                                ?.map((il, index) => (
+                                    <option key={index} value={index}>
+                                        {il.name}
+                                    </option>
+                                ))}
+                        </select>
+                        <label className="registerLabel" htmlFor="">
+                            Mahalle
+                        </label>
+                        <select className="lawyerdashboard-registerFormControl"
+                            id="mahalle"
+                            value={data.name}
+                            onChange={handleMahalleChange}
+                            name="mahalle"
+                            title="Mahalle Seçiniz"
+                        >
+                            <option defaultValue="all">Mahalle Seçiniz</option>
+                            {data.find(il => il.name === seciliIl)?.towns.find(t => t.name === seciliIlce)?.districts
+                                .flatMap(mahalle => mahalle.quarters)
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((quarter, index) => (
+                                    <option value={index} key={index}>{quarter.name}</option>
+
+                                ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label className="registerLabel" htmlFor="">
+                            İlçe
+                        </label>
+                        {(
+                            <div>
+
+                                <select className="lawyerdashboard-registerFormControl"
+                                    id="ilce"
+                                    value={data.name}
+                                    onChange={handleIlceChange}
+                                    name="ilçe"
+                                    title="İl Seçiniz"
+
+                                >
+                                    <option value="">İlçe Seçiniz</option>
+                                    {data.find(i => i.name === seciliIl)?.towns.map((ilce, index) => (
+                                        <option value={index} key={index}>{ilce.name}</option>
+                                    ))}
+                                </select>
+
+                            </div>)
+
+                        }
+                        <label className="registerLabel" htmlFor="">
+                            Posta Kodu
+                        </label>
+                        <input
+                            type="text"
+                            className="lawyerdashboard-registerFormControl"
+                            placeholder="Posta Kodu"
+                        />
+
+
+                    </div>
+
+
+                </div>
                 <br />
                 <br />
                 <div className="lawyerdashboard-buttons">
@@ -223,15 +289,7 @@ const LawyerPersonalDetails = ({
                 </div>
                 <br />
                 <br />
-                <p className="d-flex justify-conter">
 
-                    <button
-                        style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }}
-                        onClick={() => handleLogin()}
-                    >
-                        Avukat Hesabımı Sil
-                    </button>
-                </p>
 
             </form>
             <LawyerRegister
