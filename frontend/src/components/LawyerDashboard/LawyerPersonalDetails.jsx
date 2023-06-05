@@ -10,39 +10,18 @@ import LawyerRegister from "../../pages/LawyerRegister";
 import data from "./data/data.json"
 
 
-const LawyerPersonalDetails = ({
-    show,
-    setShowLawyerLogin,
-
-}) => {
+const LawyerPersonalDetails = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phoneRegion, setPhoneRegion] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
-    const [branch, setBranch] = useState("");
-    const [branches, setBranches] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
 
 
-    const handleLogin = () => {
-        setShowLawyerLogin(true);
 
-    };
-    useEffect(() => {
-        axios
-            .get(data.json)
-            .then((response) => {
-                setBranches(data.name);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        console.log(data)
-    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -53,7 +32,6 @@ const LawyerPersonalDetails = ({
                 {
                     email,
                     password,
-                    branch,
                     phone,
                 }
             );
@@ -66,13 +44,7 @@ const LawyerPersonalDetails = ({
         }
     };
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-    const navigateRegister = () => {
 
-        navigate("/api/lawyers/signup")
-    }
     const [seciliIl, setSeciliIl] = useState("");
     const [seciliIlce, setSeciliIlce] = useState("");
     const [seciliMahalle, setSeciliMahalle] = useState("");
@@ -297,12 +269,6 @@ const LawyerPersonalDetails = ({
 
 
             </form>
-            <LawyerRegister
-                setShowLawyerRegister={setShowLawyerRegister}
-                setShowLawyerLogin={setShowLawyerLogin}
-                show={showLawyerRegister}
-                onHide={() => setShowLawyerRegister(false)}
-            />
 
         </div>
     )
