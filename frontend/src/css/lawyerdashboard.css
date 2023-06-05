@@ -8,19 +8,22 @@
   margin: auto;
   margin-bottom: 169px;
   width: 911px;
-  height: 649px;
+  height: 699px;
   border-radius: 10px;
   opacity: 1;
 }
 
 .lawyerdashbord-leftcard{
-  width: 280px;
+  width: 260px;
   
 }
 
 .lawyerdashbord-rightcard{
-  width: 631px;
+  width: 651px;
   
+}
+.lawyerRegisterFormDiv{
+  height: 655px;
 }
 .border-bottom{
     margin: 32px 30px 32px 30px;
@@ -48,28 +51,44 @@
 .lawyerdashboard-button-vazgec{
     background-color: #ffffff;
     color: #aeb9bc;
-    width: 70px;
-    border-radius: 10px; 
+    width: 82px;
     height: 40px;
+    border: 1px solid #00242E;
+    border-radius: 8px; 
+    opacity: 1;
+    margin-right: 14px;
     
 }
 .lawyerdashboard-button-kaydet{
     background-color: #d4bc7f;
     color: white;
-    width: 70px;
-    border-radius: 10px; 
+    width: 80px;
+    height: 40px;
+    top: 699px;
+    left: 1000px;
+    border-radius: 8px; 
     border: none;
+    opacity: 1;
+    /* margin-left: 14px; */
 }
 
 .lawyerdashboardregisterBaslık{
-  width: 142px;
+  top: 160px;
+  left: 808px;
+  width: 162px;
   height: 24px;
   font-size: 20px;
+  margin-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  
 }
 
 .lawyerdashboard-registerLabel{
-  width: 23px;
+  width: 90px;
   height: 21px;
+  margin-top: 20px;
+  margin-bottom: 12px;
 }
 
 .lawyerdashboard-registerFormControl{
