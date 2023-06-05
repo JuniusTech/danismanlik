@@ -42,7 +42,7 @@ const FiyatlandırmaSayfası = () => {
       </p>
       <div
         style={{
-          width: "1640px",
+          width: "1240px",
           height: "150px",
           margin: "100px 140px",
           display: "flex",
@@ -621,7 +621,7 @@ const FiyatlandırmaSayfası = () => {
             height: "890px",
             background: "#FFFFFF",
             boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.25)",
-            border: "1px solid #A97900",
+            border: "1px solid #00242E",
             borderRadius: "20px",
           }}
         >
