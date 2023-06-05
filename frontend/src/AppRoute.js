@@ -13,6 +13,7 @@ import LawyerDetail from "./pages/LawyerDetail";
 import UserDashboard from "./pages/UserDashboard";
 
 import LawyerDashboard from "./pages/LawyerDashboard";
+import LawyerHomePage from "./pages/LawyerHomePage";
 
 const AppRoute = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoute = () => {
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
       <Route path="/userDashboard" element={<UserDashboard />} />
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
+      <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
 
       <Route
         path="/reset-password-law/:id/:token"
