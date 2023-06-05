@@ -15,6 +15,7 @@ import UserDashboard from "./pages/UserDashboard";
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
 import SıkSorulanSorular from "./components/SıkSorulanSorular";
+import FiyatlandırmaSayfası from "./pages/FiyatlandırmaSayfası";
 
 const AppRoute = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoute = () => {
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
       <Route path="/sıksorulansorular" element={<SıkSorulanSorular />} />
+      <Route path="/fiyatlandırma" element={<FiyatlandırmaSayfası />} />
 
       <Route
         path="/reset-password-law/:id/:token"
