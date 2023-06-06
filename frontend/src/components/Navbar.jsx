@@ -32,6 +32,7 @@ const Navbar = () => {
     localStorage.removeItem("lawyerInfo");
     toast.success("Çıkış Yaptınız.");
     removeCookie("jwt");
+    navigate("/")
   };
   const lawyer = () => {
     setIsLawyer(true);

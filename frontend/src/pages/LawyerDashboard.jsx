@@ -50,7 +50,7 @@ const LawyerDashboard = () => {
                             } alt="" />
                         </div>
                     </div>
-                    <div className="d-flex justify-content-center m-auto" width="82px">
+                    <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
                         {lawyerInfo.name} {lawyerInfo.surname}
                     </div>
                     <div className="border-bottom"></div>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
 import { Navigate, useNavigate } from "react-router-dom";
 import LawyerRegister from "../../pages/LawyerRegister";
+
 
 const LawyerAccountSettings = ({
     show,
@@ -24,6 +24,10 @@ const LawyerAccountSettings = ({
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
+    const [branchCount, setBranchCount] = useState(1);
+    const [branchOptions, setBranchOptions] = useState(['Branş 1']);
+    const [showAddButton, setShowAddButton] = useState(true);
+
 
 
     const handleLogin = () => {
@@ -70,7 +74,11 @@ const LawyerAccountSettings = ({
 
         navigate("/api/lawyers/signup")
     }
+    const handleAddBranch = () => {
 
+
+        setShowAddButton(false)
+    };
 
     return (
 
@@ -82,74 +90,10 @@ const LawyerAccountSettings = ({
                 <div className="row" id="registerRowDiv">
                     <div className="col">
                         <label className="registerLabel" htmlFor="">
-                            Ad
-                        </label>
-                        <input
-                            type="text"
-                            className="registerFormControl"
-                            value={lawyerInfo.name}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Soyad
-                        </label>
-                        <input
-                            className="registerFormControl"
-                            type="text"
-                            value={lawyerInfo.surname}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Baro Sicil Numarası
-                        </label>
-
-                        <input
-                            className="registerFormControl"
-                            type="text"
-                            value={lawyerInfo._id}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Branş
-                        </label>
-
-
-                        <select
-                            className="registerBranchSelect"
-                            value={branch}
-                            name="branch"
-                            onChange={(e) => setBranch(e.target.value)}
-                            title="Branş Seç"
-                            id="navbarScrollingDropdown"
-                        >
-                            <option defaultValue="all">Branş Seç</option>
-                            {branches
-                                ?.sort((a, b) => a.title.localeCompare(b.title))
-                                .map((item) => (
-                                    <option key={item._id} value={item.title}>
-                                        {item.title}
-                                    </option>
-                                ))}
-                        </select>
-
-                    </div>
-                    <div className="col">
-                        <label className="registerLabel" htmlFor="">
-                            E-posta {" "}
-                            <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
-                                (E-posta değiştir)
-                            </button>
-                        </label>
-                        <input
-                            className="registerFormControl"
-                            type="email"
-                            value={email}
-                            placeholder={lawyerInfo.email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <label className="registerLabel" htmlFor="">
-                            Şifre <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
+                            Şifre <label style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none" }} >
                                 {" "}
                                 (Şifre değiştir)
-                            </button>
+                            </label>
                         </label>
                         <div className="d-flex">
                             <input
@@ -166,44 +110,146 @@ const LawyerAccountSettings = ({
                                 style={{ cursor: 'pointer', marginLeft: '-25px' }}
                             />
                         </div>
-
                         <label className="registerLabel" htmlFor="">
-                            Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
-                                (Numara değiştir)
-                            </button>
+                            Web Sitesi
                         </label>
-                        <div className="registerTelDiv d-flex ">
-                            <select
-                                className="registerSelect"
-                                value={phoneRegion}
-                                id="inputGroupSelect02"
-                                onChange={(e) => setPhoneRegion(e.target.value)}
-                            >
-                                <option selected>+90</option>
-                                <option value="1">+91</option>
-                                <option value="2">+92</option>
-                                <option value="3">+93</option>
-                            </select>
-                            <input
-                                className="registerFormControl"
-                                type="text"
-                                value={phoneNo}
-                                placeholder=""
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                            />
-                        </div><br />
-                        <div className="d-flex justify-content-start align-items-center">
-                            <div className="d-flex justify-content-start align-items-center star mt-3">
-                                <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <p className="pt-1">Branş Ekle</p>
-                            </div>
-                        </div>
+                        <input
+                            placeholder="Bağlantı Ekle"
+                            className="registerFormControl"
+                            type="text"
+                            value={""}
+                        />
+                        <label className="registerLabel" htmlFor="">
+                            Branş 2
+                            <label style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none" }} >
+                                { }
+                                (Sil)
+                            </label>
+                        </label>
+
+                        <select
+                            className="registerFormControl"
+                            value={branch}
+                            name="branch"
+                            onChange={(e) => setBranch(e.target.value)}
+                            title="Branş Seç"
+                            id="navbarScrollingDropdown"
+                        >
+                            <option defaultValue="all">Branş Seç</option>
+                            {branches
+                                ?.sort((a, b) => a.title.localeCompare(b.title))
+                                .map((item) => (
+                                    <option key={item._id} value={item.title}>
+                                        {item.title}
+                                    </option>
+                                ))}
+                        </select>
+
+
+                    </div>
+                    <div className="col">
+                        <label className="registerLabel" htmlFor="">
+                            Baro Sicil Numarası
+                        </label>
+
+                        <input
+                            className="registerFormControl"
+                            type="text"
+                            value={lawyerInfo._id}
+                        />
+                        <label className="registerLabel" htmlFor="">
+                            Branş 1
+                        </label>
+
+
+                        <select
+                            className="registerFormControl"
+                            value={branch}
+                            name="branch"
+                            onChange={() => { }}
+                            title="Branş Seç"
+                            id="navbarScrollingDropdown"
+                        >
+                            <option defaultValue="all">Branş Seç</option>
+                            {branches
+                                ?.sort((a, b) => a.title.localeCompare(b.title))
+                                .map((item) => (
+                                    <option key={item._id} value={item.title}>
+                                        {item.title}
+                                    </option>
+                                ))}
+                        </select>
+
+                        {showAddButton ? (
+                            <div className="d-flex justify-content-start align-items-center" >
+                                <br /><br /> <br /> <br />
+                                <div className="d-flex justify-content-start align-items-center star mt-3" style={{ cursor: "pointer" }} onClick={handleAddBranch}>
+                                    <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <h5 className=" d-flex align-items-center">Branş Ekle</h5>
+                                </div>
+                            </div>) : (
+                            <div><label className="registerLabel" htmlFor="">
+                                Branş 3
+                                <label style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none" }} >
+                                    { }
+                                    (Sil)
+                                </label>
+                            </label>
+
+
+                                <select
+                                    className="registerFormControl"
+                                    value={branch}
+                                    name="branch"
+                                    onChange={() => { }}
+                                    title="Branş Seç"
+                                    id="navbarScrollingDropdown"
+                                >
+                                    <option defaultValue="all">Branş Seç</option>
+                                    {branches
+                                        ?.sort((a, b) => a.title.localeCompare(b.title))
+                                        .map((item) => (
+                                            <option key={item._id} value={item.title}>
+                                                {item.title}
+                                            </option>
+                                        ))}
+                                </select> </div>)}
                     </div>
                 </div>
 
+
                 <br />
-                <br />
-                <div className="lawyerdashboard-buttons">
+                <div >
+                    <h1 style={{ marginLeft: "0 px" }}>Randevu  ve Sistem Bildirimleri</h1>
+                </div>
+                <div className="d-flex">
+                    <div>
+                        <div className="d-flex justify-content-ce align-items-center" style={{ width: "274px" }}>
+
+                            <p className="p-2">E-posta bildirimlerini aç</p>
+                            <label className="switch">
+                                <input type="checkbox" />
+                                <span className="slider round"></span>
+                            </label>
+
+                        </div>
+                        <div className="d-flex align-items-center" style={{ width: "274px" }}>
+
+                            <p className="p-2">SMS bildirimlerini aç</p>
+                            <label className="switch">
+                                <input type="checkbox" />
+                                <span className="slider round"></span>
+                            </label>
+
+                        </div>
+                    </div>
+                    <div className="search-left-border"></div>
+                    <div className="d-flex" style={{ width: "274px" }}>
+                        <label style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none" }} >
+                            Üyelik Planını Yükselt
+                        </label>
+                    </div>
+                </div>
+                <div className="lawyerdashboard-buttons" style={{ marginTop: "40px" }}>
                     <button
                         className="lawyerdashboard-button-vazgec"
                         onClick={() => setShowLawyerRegister()}
