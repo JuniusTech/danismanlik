@@ -17,14 +17,12 @@ const LawyerHomePage = () => {
   return (
     <>
       <div
-        className="Bdiv"
         style={{
           width: "1420px",
           margin: "20px auto",
         }}
       >
         <div
-          className="div1"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -95,7 +93,6 @@ const LawyerHomePage = () => {
           </div>
 
           <div
-            className="div3"
             style={{
               width: "500px",
               height: "500px",
@@ -105,7 +102,6 @@ const LawyerHomePage = () => {
             }}
           >
             <div
-              className="div4"
               style={{
                 width: "500px",
                 height: "500px",
