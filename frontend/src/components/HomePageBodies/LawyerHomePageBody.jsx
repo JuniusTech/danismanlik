@@ -1,10 +1,11 @@
 import React from "react";
+import LawyerHomePage from "../../pages/LawyerHomePage";
 
 const LawyerHomePageBody = () => {
   return (
-    <div>
-     <h1>lawyer home page yapılacak</h1>
-    </div>
+    <>
+      <LawyerHomePage />
+    </>
   );
 };
 

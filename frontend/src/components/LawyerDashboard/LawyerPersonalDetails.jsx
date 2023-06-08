@@ -10,39 +10,18 @@ import LawyerRegister from "../../pages/LawyerRegister";
 import data from "./data/data.json"
 
 
-const LawyerPersonalDetails = ({
-    show,
-    setShowLawyerLogin,
-
-}) => {
+const LawyerPersonalDetails = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phoneRegion, setPhoneRegion] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
-    const [branch, setBranch] = useState("");
-    const [branches, setBranches] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
 
 
-    const handleLogin = () => {
-        setShowLawyerLogin(true);
 
-    };
-    useEffect(() => {
-        axios
-            .get(data.json)
-            .then((response) => {
-                setBranches(data.name);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        console.log(data)
-    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -53,7 +32,6 @@ const LawyerPersonalDetails = ({
                 {
                     email,
                     password,
-                    branch,
                     phone,
                 }
             );
@@ -66,13 +44,7 @@ const LawyerPersonalDetails = ({
         }
     };
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-    const navigateRegister = () => {
 
-        navigate("/api/lawyers/signup")
-    }
     const [seciliIl, setSeciliIl] = useState("");
     const [seciliIlce, setSeciliIlce] = useState("");
     const [seciliMahalle, setSeciliMahalle] = useState("");
@@ -101,13 +73,13 @@ const LawyerPersonalDetails = ({
     return (
 
         <div>
-            <div className="registerBaslık">
+            <div className="lawyerdashboardregisterBaslık">
                 <h1>Kişisel Bilgiler</h1>
             </div>
             <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
                 <div className="row" id="registerRowDiv">
                     <div className="col">
-                        <label className="registerLabel" htmlFor="">
+                        <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Ad
                         </label>
                         <input
@@ -115,7 +87,7 @@ const LawyerPersonalDetails = ({
                             className="lawyerdashboard-registerFormControl"
                             value={lawyerInfo.name}
                         />
-                        <label className="registerLabel" htmlFor="">
+                        <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Soyad
                         </label>
                         <input
@@ -125,13 +97,15 @@ const LawyerPersonalDetails = ({
                         />
                     </div>
                     <div className="col">
-                        <label className="registerLabel" htmlFor="">
-                            E-posta {" "}
-                            <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
+                        <div className="d-flex justify-content-start">
+                            <label className="lawyerdashboard-registerLabel" style={{ width: "55px" }} htmlFor="">
+                                E-posta {" "}
+                            </label>
+                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }} >
+
                                 (E-posta değiştir)
-                            </button>
-                        </label>
+                            </label>
+                        </div>
                         <input
                             className="lawyerdashboard-registerFormControl"
                             type="email"
@@ -139,17 +113,19 @@ const LawyerPersonalDetails = ({
                             placeholder={lawyerInfo.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        <div className="d-flex justify-content-start">
+                            <label className="lawyerdashboard-registerLabel" style={{ width: "100px" }} htmlFor="">
+                                Tel. Numarası
+                            </label>
+                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px" }} >
 
-                        <label className="registerLabel" htmlFor="">
-                            Tel. Numarası <button style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }} onClick={() => setShowLawyerRegister(true)}>
-                                {" "}
                                 (Numara değiştir)
-                            </button>
-                        </label>
+                            </label>
+                        </div>
                         <div className="registerTelDiv d-flex ">
                             <select
                                 style={{ width: "52px", height: "40px" }}
-                                className="egisterFormControl"
+                                className="lawyerdashboard-registerFormControl-phone"
                                 value={phoneRegion}
                                 id="inputGroupSelect02"
                                 onChange={(e) => setPhoneRegion(e.target.value)}
@@ -173,14 +149,14 @@ const LawyerPersonalDetails = ({
 
                     </div>
                 </div>
-                <div className="d-flex row" style={{ width: "578px" }}>
+                <div className="d-flex row" style={{ width: "588px" }}>
                     <label htmlFor="">
                         Büro Adresi
                     </label>
 
                     <textarea
-                        style={{ width: "570px", height: "40px", fontSize: "17px", borderRadius: "5px", opacity: "1", resize: "none", padding: "10 411 10 10" }}
-                        className="mx-3 "
+                        style={{ width: "588px", height: "40px", fontSize: "17px", borderRadius: "5px", opacity: "1", resize: "none" }}
+                        className="mx-2 pt-2 "
                         name="comment"
                         placeholder="Tam adres belirtiniz"
                         id=""
@@ -190,12 +166,13 @@ const LawyerPersonalDetails = ({
                     ></textarea>
                 </div>
                 <div className="d-flex">
-                    <div>
-                        <label className="registerLabel" htmlFor="">
+                    <div style={{ width: "364px" }}>
+                        <label style={{ width: "60px" }} className="lawyerdashboard-registerLabel" htmlFor="">
                             İl
                         </label>
                         <select
                             className="lawyerdashboard-registerFormControl"
+
                             value={data.name}
                             name="il"
                             onChange={handleIlChange}
@@ -210,7 +187,7 @@ const LawyerPersonalDetails = ({
                                     </option>
                                 ))}
                         </select>
-                        <label className="registerLabel" htmlFor="">
+                        <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Mahalle
                         </label>
                         <select className="lawyerdashboard-registerFormControl"
@@ -230,8 +207,8 @@ const LawyerPersonalDetails = ({
                                 ))}
                         </select>
                     </div>
-                    <div>
-                        <label className="registerLabel" htmlFor="">
+                    <div style={{ paddingLeft: "7px" }}>
+                        <label className="lawyerdashboard-registerLabel" htmlFor="">
                             İlçe
                         </label>
                         {(
@@ -254,7 +231,7 @@ const LawyerPersonalDetails = ({
                             </div>)
 
                         }
-                        <label className="registerLabel" htmlFor="">
+                        <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Posta Kodu
                         </label>
                         <input
@@ -292,12 +269,6 @@ const LawyerPersonalDetails = ({
 
 
             </form>
-            <LawyerRegister
-                setShowLawyerRegister={setShowLawyerRegister}
-                setShowLawyerLogin={setShowLawyerLogin}
-                show={showLawyerRegister}
-                onHide={() => setShowLawyerRegister(false)}
-            />
 
         </div>
     )

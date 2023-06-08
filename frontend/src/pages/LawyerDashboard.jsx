@@ -9,6 +9,7 @@ import LawyerAccountSettings from "../components/LawyerDashboard/LawyerAccountSe
 import LawyerPaymentSetting from "../components/LawyerDashboard/LawyerPaymentSetting";
 import HelpAndSupport from "../components/LawyerDashboard/HelpAndSupport";
 import image from "../assets/avatar.jpg"
+import LawyerDatesDetail from "../components/LawyerDashboard/LawyerDatesDetail";
 
 
 const LawyerDashboard = () => {
@@ -18,7 +19,7 @@ const LawyerDashboard = () => {
     const items = ["Randevularım", "Kişisel Bilgiler", "Hesap Ayarları", "Ödeme Ayarları", "Yardım ve Destek"]
     const showComponent = (item) => {
         if (item === "Randevularım") {
-            return <LawyerDates />
+            return <LawyerDates />;
         } else if (item === "Kişisel Bilgiler") {
             return <LawyerPersonalDetails />;
         } else if (item === "Hesap Ayarları") {
@@ -31,9 +32,20 @@ const LawyerDashboard = () => {
         else return < LawyerPersonalDetails />;
     };
 
+    const [showDates, setShowDates] = useState(false);
+    const showDatesDetails = (item) => {
+        if (item === "Randevularım") {
+            setShowDates(true);
+        } else {
+            setShowDates(false);
+        }
+    };
+    console.log(showDates)
+
+
     const onItemClick = (item) => {
         setSelectedItem(item);
-
+        showDatesDetails(item)
     };
     return (
         <>
@@ -50,7 +62,7 @@ const LawyerDashboard = () => {
                             } alt="" />
                         </div>
                     </div>
-                    <div className="d-flex justify-content-center m-auto" width="82px">
+                    <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
                         {lawyerInfo.name} {lawyerInfo.surname}
                     </div>
                     <div className="border-bottom"></div>
@@ -78,9 +90,17 @@ const LawyerDashboard = () => {
 
                 </div >
             </div >
+            <div className="lawyerdashbord-datedetail">
+                {showDates && selectedItem === "Randevularım" && (
+                    <LawyerDatesDetail />
+                )}
+
+
+            </div >
             <Footer />
         </>
     );
 }
+
 
 export default LawyerDashboard

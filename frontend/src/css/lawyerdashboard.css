@@ -8,19 +8,22 @@
   margin: auto;
   margin-bottom: 169px;
   width: 911px;
-  height: 649px;
+  height: 699px;
   border-radius: 10px;
   opacity: 1;
 }
 
 .lawyerdashbord-leftcard{
-  width: 280px;
+  width: 260px;
   
 }
 
 .lawyerdashbord-rightcard{
-  width: 631px;
+  width: 651px;
   
+}
+.lawyerRegisterFormDiv{
+  height: 655px;
 }
 .border-bottom{
     margin: 32px 30px 32px 30px;
@@ -43,33 +46,50 @@
   justify-content: center;
   padding: 10px;
   gap: 2rem;
+  font-weight: bold;
   
 }
 .lawyerdashboard-button-vazgec{
     background-color: #ffffff;
     color: #aeb9bc;
-    width: 70px;
-    border-radius: 10px; 
+    width: 82px;
     height: 40px;
+    border: 1px solid #00242E;
+    border-radius: 8px; 
+    opacity: 1;
+    margin-right: 14px;
     
 }
 .lawyerdashboard-button-kaydet{
     background-color: #d4bc7f;
     color: white;
-    width: 70px;
-    border-radius: 10px; 
+    width: 80px;
+    height: 40px;
+    top: 699px;
+    left: 1000px;
+    border-radius: 8px; 
     border: none;
+    opacity: 1;
+    /* margin-left: 14px; */
 }
 
 .lawyerdashboardregisterBaslık{
-  width: 142px;
+  top: 160px;
+  left: 808px;
+  width: 162px;
   height: 24px;
   font-size: 20px;
+  margin-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  
 }
 
 .lawyerdashboard-registerLabel{
-  width: 23px;
+  width: 90px;
   height: 21px;
+  margin-top: 20px;
+  margin-bottom: 12px;
 }
 
 .lawyerdashboard-registerFormControl{
@@ -78,6 +98,8 @@
   border: 1px solid #7F9196;
   border-radius: 5px;
   opacity: 1;
+  font-size: 14px;
+  padding-left: 5px;
   /* margin-right: 3px; */
 }
 .lawyerdashboard-registerFormControl-phone{
@@ -95,4 +117,72 @@
 .lawyerdashboardadrees{
   width: 350px;
   height: 40px;
+}
+
+.rounded-button .btn-switch {
+  border-radius: 50px;
+  
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #7f9196;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #A97900;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #A97900;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
