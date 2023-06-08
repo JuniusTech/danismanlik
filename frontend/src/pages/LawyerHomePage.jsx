@@ -19,9 +19,8 @@ const LawyerHomePage = () => {
       <div
         className="Bdiv"
         style={{
-          width: "1640px",
-          marginLeft: "140px",
-          marginRight: "140px",
+          width: "1420px",
+          margin: "20px auto",
         }}
       >
         <div
@@ -29,9 +28,9 @@ const LawyerHomePage = () => {
           style={{
             display: "flex",
             justifyContent: "center",
-            width: "1640px",
-            margin: "2px",
-            border: "2px solid red",
+            width: "1320px",
+            height: "500px",
+            marginLeft: "30px",
           }}
         >
           <div
@@ -39,13 +38,12 @@ const LawyerHomePage = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "989px",
-              height: "680px",
+              width: "740px",
+              height: "500px",
               textAlign: "center",
               justifyContent: "center",
               alignItems: "center",
-              margin: "2px",
-              border: "2px solid gold",
+              marginLeft: "60px",
             }}
           >
             <p
@@ -53,10 +51,11 @@ const LawyerHomePage = () => {
                 fontFamily: "Segoe UI",
                 fontStyle: "normal",
                 fontWeight: 300,
-                fontSize: "64px",
+                fontSize: "54px",
                 lineHeight: "85px",
-                width: "989px",
+                width: "740px",
                 height: "85px",
+                textAlign: "center",
               }}
             >
               500.000+ Müvekkil Seni Bekliyor!
@@ -87,6 +86,8 @@ const LawyerHomePage = () => {
                 fontSize: "32px",
                 lineHeight: "43px",
                 color: "#FFFFFF",
+                marginLeft: "-35px",
+                marginTop: "15px",
               }}
             >
               Kayıt Ol
@@ -96,43 +97,44 @@ const LawyerHomePage = () => {
           <div
             className="div3"
             style={{
+              width: "500px",
+              height: "500px",
               position: "relative",
               display: "flex",
-              margin: "2px",
-              border: "2px solid blue",
+              marginLeft: "60px",
             }}
           >
             <div
               className="div4"
               style={{
-                width: "605px",
-                height: "605px",
+                width: "500px",
+                height: "500px",
                 border: "1px solid #A97900",
                 borderRadius: "50%",
               }}
             ></div>
             <img
               src={ladyJustice}
-              width={"490px"}
-              height={"680px"}
+              width={"450px"}
+              height={"480px"}
               style={{
                 position: "absolute",
-                marginLeft: "58px",
-                marginTop: "5px",
+                marginLeft: "38px",
+                marginTop: "25px",
               }}
               alt=""
             />
           </div>
         </div>
-        //!--------------------------------------------------------------------------------------
+
         <div
           className="nasilCalisir"
           style={{
-            width: "1640px",
+            width: "1420px",
             height: "880px",
             background: "#00242E",
             borderRadius: "15px",
-            marginTop: "42px",
+            margin: "5px auto",
           }}
         >
           <p
@@ -405,11 +407,12 @@ const LawyerHomePage = () => {
         </div>
         <div
           style={{
-            width: "1640px",
+            width: "1420px",
             height: "150px",
-
+            margin: "90px auto",
             display: "flex",
             justifyContent: "space-between",
+            paddingLeft: "60px",
           }}
         >
           <div
@@ -620,7 +623,7 @@ const LawyerHomePage = () => {
         </div>
         <div
           style={{
-            width: "1640px",
+            width: "1420px",
             height: "477px",
             display: "flex",
             padding: "40px",
@@ -631,7 +634,7 @@ const LawyerHomePage = () => {
           <div>
             <p
               style={{
-                width: "557.18px",
+                width: "500px",
                 height: "64.47px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -644,7 +647,7 @@ const LawyerHomePage = () => {
             </p>
             <p
               style={{
-                width: "530.18px",
+                width: "500.18px",
                 height: "50.47px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -658,7 +661,7 @@ const LawyerHomePage = () => {
             </p>
             <p
               style={{
-                width: "557.18px",
+                width: "500.18px",
                 height: "50.47px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -673,13 +676,14 @@ const LawyerHomePage = () => {
             </p>
             <p
               style={{
-                width: "557.18px",
+                width: "500.18px",
                 height: "50.47px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
                 fontWeight: 400,
                 fontSize: "24px",
                 lineHeight: "28px",
+                marginTop: "55px",
               }}
             >
               Danışmanlık ve dava süreçlerinde takip kolaylığı sunan, ödeme
@@ -689,37 +693,38 @@ const LawyerHomePage = () => {
           </div>
           <div
             style={{
-              marginLeft: "300px",
+              marginLeft: "250px",
               display: "flex",
               borderRadius: "15px",
             }}
           >
-            <img src={box1} width={"175px"} height={"400px"} alt="" />
-            <img src={box2} width={"175px"} height={"400px"} alt="" />
-            <img src={box3} width={"175px"} height={"400px"} alt="" />
-            <img src={box4} width={"175px"} height={"400px"} alt="" />
+            <img src={box1} width={"155px"} height={"400px"} alt="" />
+            <img src={box2} width={"155px"} height={"400px"} alt="" />
+            <img src={box3} width={"155px"} height={"400px"} alt="" />
+            <img src={box4} width={"155px"} height={"400px"} alt="" />
           </div>
         </div>
         <div
           style={{
-            width: "1640px",
+            width: "1420px",
             height: "477px",
             display: "flex",
+            padding: "40px",
             margin: "auto",
             marginTop: "60px",
           }}
         >
           <img
             src={secondImg}
-            width={"700px"}
+            width={"620px"}
             height={"400px"}
-            style={{ margin: "46px 40px 40px 45px", borderRadius: "15px" }}
+            style={{ margin: "26px 20px 20px 0px", borderRadius: "15px" }}
             alt=""
           />
-          <div style={{ color: "#00242E" }}>
+          <div style={{ color: "#00242E", width: "740px" }}>
             <p
               style={{
-                width: "700px",
+                width: "640px",
                 height: "116.1px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -734,7 +739,7 @@ const LawyerHomePage = () => {
             </p>
             <p
               style={{
-                width: "682.74px",
+                width: "640.74px",
                 height: "140.19px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -773,17 +778,17 @@ const LawyerHomePage = () => {
         </div>
         <div
           style={{
-            width: "1640px",
+            width: "1420px",
             height: "477px",
             display: "flex",
             margin: "auto",
             marginTop: "60px",
           }}
         >
-          <div style={{ color: "#00242E", padding: "40px 100px 0 40px" }}>
+          <div style={{ color: "#00242E", padding: "50px 30px 40px 30px" }}>
             <p
               style={{
-                width: "670px",
+                width: "630px",
                 height: "158.21px",
                 fontFamily: "'SF Pro Text'",
                 fontStyle: "normal",
@@ -834,9 +839,9 @@ const LawyerHomePage = () => {
           </div>
           <img
             src={thirdImg}
-            width={"700px"}
+            width={"620px"}
             height={"400px"}
-            style={{ margin: "60px 0px 0 60px" }}
+            style={{ margin: "60px 0px 0 90px" }}
             alt=""
           />
         </div>
