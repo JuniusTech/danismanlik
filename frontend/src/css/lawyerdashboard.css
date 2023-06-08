@@ -46,6 +46,7 @@
   justify-content: center;
   padding: 10px;
   gap: 2rem;
+  font-weight: bold;
   
 }
 .lawyerdashboard-button-vazgec{
@@ -127,8 +128,8 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 17px;
+  width: 32px;
+  height: 20px;
 }
 
 /* Hide default HTML checkbox */
@@ -146,7 +147,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #7f9196;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -154,8 +155,8 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 13px;
-  width: 13px;
+  height: 17px;
+  width: 16px;
   left: 2px;
   bottom: 2px;
   background-color: white;
@@ -164,11 +165,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #A97900;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #A97900;
 }
 
 input:checked + .slider:before {
@@ -179,7 +180,7 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 17px;
+  border-radius: 20px;
 }
 
 .slider.round:before {

@@ -223,19 +223,19 @@ const LawyerAccountSettings = ({
                 </div>
                 <div className="d-flex">
                     <div>
-                        <div className="d-flex justify-content-ce align-items-center" style={{ width: "274px" }}>
+                        <div className="d-flex justify-content-start align-items-center" style={{ width: "274px" }}>
 
-                            <p className="p-2">E-posta bildirimlerini aç</p>
-                            <label className="switch">
+                            <p className="p-2" style={{ width: "183px" }}>E-posta bildirimlerini aç</p>
+                            <label className="switch" style={{ marginLeft: "30px" }}>
                                 <input type="checkbox" />
                                 <span className="slider round"></span>
                             </label>
 
                         </div>
-                        <div className="d-flex align-items-center" style={{ width: "274px" }}>
+                        <div className="d-flex justify-content-start align-items-center" style={{ width: "274px" }}>
 
-                            <p className="p-2">SMS bildirimlerini aç</p>
-                            <label className="switch">
+                            <p className="p-2" style={{ width: "183px" }}>SMS bildirimlerini aç</p>
+                            <label className="switch" style={{ marginLeft: "30px" }}>
                                 <input type="checkbox" />
                                 <span className="slider round"></span>
                             </label>
@@ -244,12 +244,12 @@ const LawyerAccountSettings = ({
                     </div>
                     <div className="search-left-border"></div>
                     <div className="d-flex" style={{ width: "274px" }}>
-                        <label style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none" }} >
+                        <label className="align-items-center" style={{ color: "#a97900", marginLeft: "5px", marginTop: "28px", backgroundColor: "transparent", border: "none" }} >
                             Üyelik Planını Yükselt
                         </label>
                     </div>
                 </div>
-                <div className="lawyerdashboard-buttons" style={{ marginTop: "40px" }}>
+                <div className="lawyerdashboard-buttons" style={{ marginTop: "60px" }}>
                     <button
                         className="lawyerdashboard-button-vazgec"
                         onClick={() => setShowLawyerRegister()}
@@ -279,12 +279,7 @@ const LawyerAccountSettings = ({
                 </p>
 
             </form>
-            <LawyerRegister
-                setShowLawyerRegister={setShowLawyerRegister}
-                setShowLawyerLogin={setShowLawyerLogin}
-                show={showLawyerRegister}
-                onHide={() => setShowLawyerRegister(false)}
-            />
+
 
         </div>
     )
