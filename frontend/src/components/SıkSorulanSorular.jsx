@@ -1,28 +1,38 @@
-import React from "react";
-import Accordion from "react-bootstrap/Accordion";
+import React, { useState } from "react";
+
 import "../css/sıkSorulanSorular.css";
 import background from "../assets/sıksorulansorularbackground.png";
+
+import Card from "react-bootstrap/Card";
+import Nav from "react-bootstrap/Nav";
+
 const SıkSorulanSorular = () => {
+  const [activeLink, setActiveLink] = useState("#first");
+
+  const handleLinkClick = (eventKey) => {
+    setActiveLink(eventKey);
+  };
+
   return (
     <div>
       <div
         style={{
-          width: "1640px",
-          height: "450px",
-          margin: "180px 140px 0 140px",
+          width: "1300px",
+          height: "420px",
+          margin: "100px auto",
           backgroundImage: `url(${background})`,
-          paddingTop: "200px",
+          paddingTop: "150px",
           filter: "drop-shadow(0px 8px 8px rgba(0, 0, 0, 0.25))",
           borderRadius: "20px",
         }}
       >
         <p
           style={{
-            height: "48px",
+            height: "38px",
             fontFamily: "'SF Pro Text'",
             fontStyle: "normal",
             fontWeight: "400",
-            fontSize: "55px",
+            fontSize: "45px",
             lineHeight: "66px",
             color: "#00242E",
             textAlign: "center",
@@ -30,215 +40,102 @@ const SıkSorulanSorular = () => {
         >
           Hangi konuda sorun yaşıyorsunuz?
         </p>
+        <form
+          className="search-bar"
+          style={{
+            position: "relative",
+            width: "630px",
+            margin: "auto",
+            height: "50px",
+          }}
+        >
+          <i
+            className="search-icon fa fa-search "
+            aria-hidden="true"
+            style={{
+              top: "39px",
+              left: "18px",
+              position: "absolute",
+              fontSize: "24px",
+              opacity: "0.5",
+            }}
+          ></i>
+          <input
+            type="text"
+            placeholder="Sorununuzu anlatacak bir kelime giriniz"
+            style={{
+              paddingLeft: "50px",
+              width: "630px",
+              height: "50px",
+              borderRadius: "8px",
+              marginTop: "25px",
+              border: "none",
+            }}
+          ></input>
+        </form>
       </div>
 
       <h1 style={{ textAlign: "center", marginTop: "5rem", color: " #A97900" }}>
         Sıkca Sorulan Sorular
       </h1>
-      <Accordion
-        defaultActiveKey="0"
-        style={{
-          margin: "5rem 3rem",
-          color: "#00242E",
-        }}
-      >
-        <Accordion.Item
-          eventKey="0"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Profesyonel üyelik ile gelen hizmetler nelerdir?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="1"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Bu hizmetin bir faturasını alacak mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="2"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            12 aylık üyeliğim bittikten sonra üyeliğim otomatik olarak yenilenir
-            mi?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="3"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="4"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="5"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="3"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="6"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item
-          eventKey="7"
-          style={{
-            margin: "1rem auto",
-            border: "1px solid #A97900",
-            width: "650px",
-          }}
-        >
-          <Accordion.Header>
-            Satın alma işleminden sonra hizmetten hemen yararlanmaya başlayacak
-            mıyım?
-          </Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+      {/* <Nav
+              fill
+              variant="tabs"
+              defaultActiveKey="#first"
+              activeKey={activeLink}
+              onSelect={handleLinkClick}
+            >
+              <Nav.Item style={{ width: "50%" }}>
+                <Nav.Link eventKey="#first">First</Nav.Link>
+              </Nav.Item>
+              <Nav.Item style={{ width: "50%" }}>
+                <Nav.Link eventKey="#link">Link</Nav.Link>
+              </Nav.Item>
+            </Nav> */}
+      <div style={{ display: "flex", width: "1250px", margin: "auto" }}>
+        <Card style={{ width: "1250px" }}>
+          <Card.Header>
+            <Nav
+              fill
+              variant="tabs"
+              defaultActiveKey="#first"
+              activeKey={activeLink}
+              onSelect={handleLinkClick}
+            >
+              <Nav.Item style={{ width: "50%" }}>
+                <Nav.Link
+                  style={{ border: activeLink === "#first" ? "none" : "" }}
+                  eventKey="#first"
+                  className={activeLink === "#first" ? "active-link" : ""}
+                >
+                  First
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item style={{ width: "50%" }}>
+                <Nav.Link
+                  style={{
+                    border: activeLink === "#link" ? "2px solid white" : "",
+                  }}
+                  eventKey="#link"
+                  className={activeLink === "#link" ? "active-link" : ""}
+                >
+                  Link
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Card.Header>
+          <Card.Body>
+            <div
+              style={{ display: activeLink === "#first" ? "block" : "none" }}
+            >
+              <p>Açıklama 1</p>
+            </div>
+            <div style={{ display: activeLink === "#link" ? "block" : "none" }}>
+              <p>Açıklama 2</p>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
       <div
         style={{
           width: "494px",
