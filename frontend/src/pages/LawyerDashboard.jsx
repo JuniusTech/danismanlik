@@ -50,53 +50,55 @@ const LawyerDashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="lawyerdashbord-container">
-                <div className="lawyerdashbord-leftcard">
-                    <div className="d-flex justify-content-center ">
-                        <div className="lawyerdashboard-photo">
-                            {/* //! Bu kısım  lawyerInfo.image varsa olarak değişecek. */}
-                            <img width="23.69px" height="21.63px" src={lawyerInfo.surname ?
-                                image
-                                :
-                                photo
-                            } alt="" />
+            <div className="d-flex justify-content-center" >
+                <div className="lawyerdashbord-container" >
+                    <div className="lawyerdashbord-leftcard">
+                        <div className="d-flex justify-content-center ">
+                            <div className="lawyerdashboard-photo">
+                                {/* //! Bu kısım  lawyerInfo.image varsa olarak değişecek. */}
+                                <img width="23.69px" height="21.63px" src={lawyerInfo.surname ?
+                                    image
+                                    :
+                                    photo
+                                } alt="" />
+                            </div>
                         </div>
+                        <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
+                            {lawyerInfo.name} {lawyerInfo.surname}
+                        </div>
+                        <div className="border-bottom"></div>
+                        <div className="m-4 ">
+
+                            <ul>
+                                <li style={{ listStyle: "none", marginBottom: "20px" }}><b style={{ fontSize: "20px" }}>Hesabım </b> </li>
+                                {items.map((item, index) => (
+                                    <li className="leftbox-li"
+                                        key={index}
+                                        onClick={() => onItemClick(item)}
+                                        style={{ fontWeight: selectedItem === item ? "bold" : "normal", listStyle: "none", marginBottom: "20px", fontSize: "16px" }}
+                                    >
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
                     </div>
-                    <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
-                        {lawyerInfo.name} {lawyerInfo.surname}
-                    </div>
-                    <div className="border-bottom"></div>
-                    <div className="m-4 ">
-
-                        <ul>
-                            <li style={{ listStyle: "none", marginBottom: "20px" }}><b style={{ fontSize: "20px" }}>Hesabım </b> </li>
-                            {items.map((item, index) => (
-                                <li className="leftbox-li"
-                                    key={index}
-                                    onClick={() => onItemClick(item)}
-                                    style={{ fontWeight: selectedItem === item ? "bold" : "normal", listStyle: "none", marginBottom: "20px", fontSize: "16px" }}
-                                >
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                </div>
-                <div className="search-left-border"></div>
-                <div className="lawyerdashbord-rightcard">
-                    {showComponent(selectedItem)}
+                    <div className="search-left-border"></div>
+                    <div className="lawyerdashbord-rightcard">
+                        {showComponent(selectedItem)}
 
 
+                    </div >
                 </div >
-            </div >
-            <div className="lawyerdashbord-datedetail">
-                {showDates && selectedItem === "Randevularım" && (
-                    <LawyerDatesDetail />
-                )}
 
 
-            </div >
+                <div className="lawyerdashbord-datedetail-container">
+                    {showDates && selectedItem === "Randevularım" && (
+                        <LawyerDatesDetail />
+                    )}
+                </div >
+            </div>
             <Footer />
         </>
     );
