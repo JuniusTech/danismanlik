@@ -2,7 +2,7 @@ import React from 'react'
 
 const LawyerDates = () => {
     return (
-        <div style={{ padding: "20px", color: " #00242E", width: "750px" }}>
+        <div style={{ padding: "20px", color: " #00242E" }}>
             <p
                 style={{
                     font: "normal normal bold 20px/24px SF Pro Text",
