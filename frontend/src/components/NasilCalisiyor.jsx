@@ -19,6 +19,7 @@ const NasilCalisiyor = () => {
               100.000'den fazla avukat arasından seçim yapın. Diğer insanların
               görüşlerini inceleyin.
             </h3>
+
             <svg
               className="nasilCalisirsvg1 "
               xmlns="http://www.w3.org/2000/svg"
