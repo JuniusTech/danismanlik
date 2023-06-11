@@ -19,7 +19,7 @@ const LawyerHomePage = () => {
       <div
         style={{
           width: "1420px",
-          margin: "20px auto",
+          margin: "0px auto",
         }}
       >
         <div
