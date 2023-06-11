@@ -54,7 +54,8 @@ const LawyerPaymentSetting = () => {
                             <label className="lawyerdashboard-registerLabel" style={{ width: "105px" }} htmlFor="">
                                 Üyelik Planım {" "}
                             </label>
-                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }} >
+                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }}
+                                onClick={() => setShowUserLogin(true)} >
 
                                 (Değiştir)
                             </label>
