@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
-import { Navigate, useNavigate } from "react-router-dom";
-import LawyerRegister from "../../pages/LawyerRegister";
-import data from "./data/data.json"
+import { useNavigate } from "react-router-dom";
+import LawyerPaymentPlan from "./LawyerPaymentPlan";
+import InvoiceDetails from "./InvoiceDetails";
+
+
 
 const LawyerPaymentSetting = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [phoneRegion, setPhoneRegion] = useState("");
-    const [phoneNo, setPhoneNo] = useState("");
-    const phone = `${phoneRegion} + ${phoneNo}`;
+    const navigate = useNavigate();
+
     const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
 
 
@@ -31,7 +31,7 @@ const LawyerPaymentSetting = () => {
                 {
                     email,
                     password,
-                    phone,
+
                 }
             );
             setLoading(false);
@@ -44,136 +44,158 @@ const LawyerPaymentSetting = () => {
     };
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
 
-    const [seciliIl, setSeciliIl] = useState("");
-    const [seciliIlce, setSeciliIlce] = useState("");
-    const [seciliMahalle, setSeciliMahalle] = useState("");
+    const [showLawyerPaymentPlan, setShowLawyerPaymentPlan] = useState(true)
+    const [showInvoiceDetails, setShowInvoiceDetails] = useState(true)
 
-    const handleIlChange = (e) => {
-        const ilIndex = e.target.value;
-        setSeciliIl(data[ilIndex].name);
-        setSeciliIlce("İlçe Seçiniz");
-        setSeciliMahalle("");
-        console.log(seciliIl)
-    };
-
-    const handleIlceChange = (e) => {
-        const ilceIndex = e.target.value;
-        setSeciliIlce(data.find(il => il.name === seciliIl).towns[ilceIndex].name);
-        setSeciliMahalle("");
-    };
-
-    const handleMahalleChange = (e) => {
-        const mahalleIndex = e.target.value;
-        setSeciliMahalle(data.find(il => il.name === seciliIl).towns.find(t => t.name === seciliIlce).districts[mahalleIndex]);
-    };
     return (
-        <div>
-            <div className="lawyerdashboardregisterBaslık">
-                <h1 style={{ width: "180px" }}>Ödeme Ayarları</h1>
-            </div>
-            <form className="lawyerRegisterFormDiv" style={{ width: "375px" }} onSubmit={submitHandler}>
-                <div className="row" id="registerRowDiv" style={{ width: "345px" }}>
+        showLawyerPaymentPlan && showInvoiceDetails ?
+            <div style={{ width: "fit-content", margin: "0" }}>
+                <div className="lawyerdashboardregisterBaslık">
+                    <h1 style={{ width: "180px" }} >Ödeme Ayarları</h1>
+                </div>
+                <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
+                    <div className="row" id="registerRowDiv" style={{ width: "345px", marginTop: "-20px" }}>
 
-                    <div className="col" style={{ width: "345px" }}>
-                        <div className="d-flex justify-content-start" style={{ width: "345px" }}>
-                            <label className="lawyerdashboard-registerLabel" style={{ width: "105px" }} htmlFor="">
-                                Üyelik Planım {" "}
-                            </label>
-                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }} >
+                        <div className="col" style={{ width: "345px" }}>
+                            <div className="d-flex justify-content-start" style={{ width: "345px" }}>
+                                <label className="lawyerdashboard-registerLabel" style={{ width: "105px" }} htmlFor="">
+                                    Üyelik Planım {" "}
+                                </label>
+                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }}
+                                    onClick={() => setShowLawyerPaymentPlan(false)} >
 
-                                (E-posta değiştir)
-                            </label>
-                        </div>
-                        <input
-                            className="lawyerdashboard-registerFormControl"
-                            style={{ width: "129px", paddingLeft: "28px" }}
-                            type="email"
-                            value={email}
-                            placeholder="STANDART"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <div className="d-flex justify-content-start" style={{ width: "345px" }}>
-                            <label className="lawyerdashboard-registerLabel" style={{ width: "90px" }} htmlFor="">
-                                Fatura Özeti
-                            </label>
-                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px" }} >
-
-                                (Detayları Gör)
-                            </label>
-                        </div>
-                        <div className="registerTelDiv d-flex " style={{ width: "345px" }}>
-
+                                    (Değiştir)
+                                </label>
+                            </div>
                             <input
                                 className="lawyerdashboard-registerFormControl"
-                                style={{ width: "341px" }}
-                                type="text"
-                                value={phoneNo}
-                                placeholder=""
-                                onChange={(e) => setPhoneNo(e.target.value)}
+                                style={{ width: "129px", paddingLeft: "28px" }}
+                                type="email"
+                                value={email}
+                                placeholder="STANDART"
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-                        </div>
-                        <div className="d-flex justify-content-start" style={{ width: "345px" }}>
-                            <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
-                                Kart Üzerindeki İsim
-                            </label>
+                            <div className="d-flex justify-content-start" style={{ width: "345px" }}>
+                                <label className="lawyerdashboard-registerLabel" style={{ width: "90px" }} htmlFor="">
+                                    Fatura Özeti
+                                </label>
+                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px" }}
+                                    onClick={() => setShowInvoiceDetails(false)} >
+
+                                    (Detayları Gör)
+                                </label>
+                            </div>
+                            <div className="registerTelDiv  " style={{ width: "345px" }}>
+
+                                <input
+                                    className="lawyerdashboard-registerFormControl"
+                                    style={{ width: "341px", height: "40px", borderRadius: "10px 10px 0 0 ", borderBottom: "none", paddingLeft: "28px" }}
+                                    type="text"
+                                    value=""
+                                    placeholder="Son Fatura Tarihi : 01.05.2023 "
+
+                                />
+                                <div className="border border-bottom " style={{ margin: "-0.1px 20px" }}></div>
+                                <input
+                                    className="lawyerdashboard-registerFormControl"
+                                    style={{ width: "341px", height: "40px", borderRadius: "0 0 10px 10px", borderTop: "none", paddingLeft: "28px" }}
+                                    type="text"
+                                    value=""
+                                    placeholder="Sonraki Faturalama Tarihi : 01.06.2023 "
+
+                                />
+                            </div>
+                            <div className="d-flex justify-content-start" style={{ width: "345px", }}>
+                                <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
+                                    Kart Üzerindeki İsim
+                                </label>
+
+                            </div>
+                            <div className="registerTelDiv " style={{ width: "345px", marginBottom: "-25px" }}>
+
+                                <input
+                                    className="lawyerdashboard-registerFormControl"
+                                    style={{ width: "341px", paddingLeft: "28px", marginTop: "10px", marginBottom: "-10px" }}
+                                    type="text"
+                                    value={""}
+                                    placeholder="Kart Üzerindeki İsim"
+
+                                />
+                            </div>
+                            <div style={{ width: "345px" }}>
+                                <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
+                                    Kart Numarası
+                                </label>
+
+                            </div>
+                            <div className="registerTelDiv " style={{ width: "345px  " }}>
+
+                                <input
+                                    className="lawyerdashboard-registerFormControl"
+                                    style={{ width: "341px", paddingLeft: "28px", marginBottom: "20px" }}
+                                    type="text"
+                                    value={""}
+                                    placeholder="1234 1234 1234 1234"
+
+                                />
+                                <div>
+                                    <input
+                                        className="lawyerdashboard-registerFormControl"
+                                        style={{ width: "79px", paddingLeft: "28px" }}
+                                        type="text"
+                                        value={""}
+                                        placeholder="Ay"
+
+                                    />
+                                    <input
+                                        className="lawyerdashboard-registerFormControl"
+                                        style={{ width: "79px", paddingLeft: "28px", marginLeft: "20px" }}
+                                        type="text"
+                                        value={""}
+                                        placeholder="Yıl"
+
+                                    />
+                                    <input
+                                        className="lawyerdashboard-registerFormControl"
+                                        style={{ width: "143px", paddingLeft: "28px", marginLeft: "20px" }}
+                                        type="text"
+                                        value={""}
+                                        placeholder="CVC"
+
+                                    />
+                                </div>
+                            </div>
+
+
 
                         </div>
-                        <div className="registerTelDiv d-flex " style={{ width: "345px" }}>
-
-                            <input
-                                className="lawyerdashboard-registerFormControl"
-                                style={{ width: "341px", paddingLeft: "28px" }}
-                                type="text"
-                                value={phoneNo}
-                                placeholder="Kart Üzerindeki İsim"
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                            />
-                        </div>
-                        <div className="d-flex justify-content-start" style={{ width: "345px" }}>
-                            <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
-                                Kart Numarası
-                            </label>
-
-                        </div>
-                        <div className="registerTelDiv d-flex " style={{ width: "345px  " }}>
-
-                            <input
-                                className="lawyerdashboard-registerFormControl"
-                                style={{ width: "341px", paddingLeft: "28px" }}
-                                type="text"
-                                value={phoneNo}
-                                placeholder="1234 1234 1234 1234"
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                            />
-                        </div>
-
-                        <br />
-
                     </div>
-                </div>
 
 
-                <br />
-                <br />
-                <div className="lawyerdashboard-buttons" style={{ width: "345px" }}>
+                    <br />
+                    <br />
+                    <div className="lawyerdashboard-buttons" >
 
-                    <button className="lawyerdashboard-button-kaydet" type="submit">
-                        {loading ? (
-                            <>
-                                <LoadingBox />
-                            </>
-                        ) : (
-                            "Kaydet"
-                        )}
-                    </button>
-                </div>
-                <br />
-                <br />
+                        <button className="lawyerdashboard-button-ödeme" type="submit">
+                            {loading ? (
+                                <>
+                                    <LoadingBox />
+                                </>
+                            ) : (
+                                "Ödeme Yap"
+                            )}
+                        </button>
+                    </div>
+                    <br />
+                    <br />
 
 
-            </form>
+                </form>
 
-        </div>
+            </div>
+            : (showLawyerPaymentPlan ?
+                (showInvoiceDetails ? <LawyerPaymentPlan /> : <InvoiceDetails />) : <LawyerPaymentPlan />)
+
     )
 }
 
