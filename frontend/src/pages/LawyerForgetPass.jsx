@@ -35,7 +35,7 @@ const LawyerForgetPass = () => {
       );
       setLoading(false);
       toast.success(data.message);
-      navigate("/");
+      navigate("/sifre-sıfırlama");
     } catch (err) {
       toast.error(getError(err));
       setLoading(false);

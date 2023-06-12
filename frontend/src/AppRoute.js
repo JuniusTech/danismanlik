@@ -11,12 +11,13 @@ import LawyerResetPass from "./pages/LawyerResetPass";
 import LawyerDetail from "./pages/LawyerDetail";
 
 import UserDashboard from "./pages/UserDashboard";
-import HesapDoğrulamaEkranı from "./pages/HesapDoğrulamaEkrani";
+import HesapDoğrulamaEkranı from "./components/şifre yenileme/HesapDoğrulamaEkrani.jsx";
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
 import SıkSorulanSorular from "./components/SıkSorulanSorular";
 import FiyatlandırmaSayfası from "./pages/FiyatlandırmaSayfası";
 import SifreSıfırlama from "./pages/SifreSıfırlama";
+import YeniSifreBelirle from "./components/şifre yenileme/YeniSifreBelirle";
 
 const AppRoute = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoute = () => {
       <Route path="/hesap-doğrulama" element={<HesapDoğrulamaEkranı />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
+      <Route path="/yeni-sifre-belirle" element={<YeniSifreBelirle />} />
       <Route path="/userDashboard" element={<UserDashboard />} />
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
