@@ -1,6 +1,23 @@
 import React from "react";
 
 const hesapDoğrulamaEkranı = () => {
+  // const yenidenGönder=()=>{
+  //   try {
+  //     const { data } = await axios.post(
+  //       `${process.env.REACT_APP_BASE_URI}/api/law-password-reset`,
+  //       {
+  //         email,
+  //       }
+  //     );
+  //     setLoading(false);
+  //     toast.success(data.message);
+  //     navigate("/");
+  //   } catch (err) {
+  //     toast.error(getError(err));
+  //     setLoading(false);
+  //   }
+  // }
+
   const moveToNextInput = (event, inputNumber) => {
     const input = event.target;
     const maxLength = parseInt(input.getAttribute("maxLength"));
@@ -48,7 +65,7 @@ const hesapDoğrulamaEkranı = () => {
           marginBottom: "18px",
         }}
       >
-        personal@email.com adresinize gönderilen altı haneli doğrulama kodunu
+        xxxxxx@gmail.com adresinize gönderilen altı haneli doğrulama kodunu
         giriniz.
       </p>
       <div style={{ display: "flex", justifyContent: "center", gap: "5px" }}>

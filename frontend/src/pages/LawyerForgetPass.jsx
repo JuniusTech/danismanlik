@@ -73,7 +73,6 @@ const LawyerForgetPass = () => {
                   textAlign: "center",
                   width: "250px",
                   height: "70px",
-
                   margin: "32px 0 15px -6px",
                 }}
               >

@@ -16,6 +16,7 @@ import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
 import SıkSorulanSorular from "./components/SıkSorulanSorular";
 import FiyatlandırmaSayfası from "./pages/FiyatlandırmaSayfası";
+import SifreSıfırlama from "./pages/SifreSıfırlama";
 
 const AppRoute = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoute = () => {
       <Route path="/lawyer/:lawyerid" element={<LawyerDetail />} />
       <Route path="/verify/:id/:token" element={<EmailVerify />} />
       <Route path="/forget-password" element={<UserForgetPass />} />
+      <Route path="/sifre-sıfırlama" element={<SifreSıfırlama />} />
       <Route path="/hesap-doğrulama" element={<HesapDoğrulamaEkranı />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
