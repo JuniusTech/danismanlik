@@ -72,11 +72,11 @@ const LawyerPersonalDetails = () => {
 
     return (
 
-        <div>
+        <div style={{ widht: "650px" }}>
             <div className="lawyerdashboardregisterBaslık">
                 <h1>Kişisel Bilgiler</h1>
             </div>
-            <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
+            <form className="lawyerpersonaldetailFormDiv" style={{ widht: "650px" }} onSubmit={submitHandler}>
                 <div className="row" id="registerRowDiv">
                     <div className="col">
                         <label className="lawyerdashboard-registerLabel" htmlFor="">

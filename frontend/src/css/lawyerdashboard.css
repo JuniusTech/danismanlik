@@ -1,5 +1,5 @@
 .lawyerdashbord-container{
-  width: auto;
+  
   border: 1px solid #a97900;
   display: flex;
   margin-bottom: 169px;
@@ -9,12 +9,18 @@
 }
 
 .lawyerdashbord-leftcard{
-  width: 260px;
+  width: 234px;
   
+}
+.lawyerpersonaldetailFormDiv{
+  width: 600px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .lawyerdashbord-rightcard{
-  width: 651px;
+  
+  height: max-content;
   
 }
 
@@ -29,11 +35,7 @@ margin-left: 20px;
 
 }
 
-.lawyerRegisterFormDiv{
-  height: fit-content;
-  width: fit-content;
-  
-}
+
 .border-bottom{
     margin: 32px 30px 32px 30px;
   /* border-bottom: 20px solid #a97900; */
@@ -110,6 +112,10 @@ margin-left: 20px;
   font-size: 14px;
   padding-left: 5px;
   /* margin-right: 3px; */
+}
+
+.lawyeraccountsetting-input{
+  width: 274px;
 }
 .lawyerdashboard-registerFormControl-phone{
   width: 212px;

@@ -35,7 +35,7 @@ const LawyerPaymentPlan = () => {
                 <div
                     style={{
                         width: "192px",
-                        height: "383px",
+                        height: "393px",
                         background: "#FFFFFF",
                         boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.25)",
                         border: "1px solid #00242E",
@@ -202,16 +202,31 @@ const LawyerPaymentPlan = () => {
                             />{" "}
                             Fotoğraflar
                         </p>
-                        <p style={{ fontSize: "12px" }}>
+                        <p style={{ fontSize: "12px", marginBottom: "20px" }}>
                             <img
                                 src={X}
                                 width={"13px"}
                                 height={"13px"}
                                 alt=""
-                                style={{ marginTop: "-3px", marginRight: "5px" }}
+                                style={{ marginTop: "-3px", marginRight: "5px", }}
                             />{" "}
                             Profilde Video Paylaşımı
                         </p>
+                    </div>
+                    <div>
+                        <p style={{
+                            width: "121px",
+                            height: "19px",
+                            fontFamily: "SF Pro Text",
+                            fontStyle: "bold",
+
+                            fontSize: "16px",
+
+                            textAlign: "center",
+                            color: "#A97900",
+                            margin: "55px 42px 6px 42px "
+
+                        }}>Diğer Planları Gör</p>
                     </div>
                 </div>
             </div>
