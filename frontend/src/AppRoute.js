@@ -11,7 +11,7 @@ import LawyerResetPass from "./pages/LawyerResetPass";
 import LawyerDetail from "./pages/LawyerDetail";
 
 import UserDashboard from "./pages/UserDashboard";
-
+import HesapDoğrulamaEkranı from "./pages/HesapDoğrulamaEkrani";
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
 import SıkSorulanSorular from "./components/SıkSorulanSorular";
@@ -25,6 +25,7 @@ const AppRoute = () => {
       <Route path="/lawyer/:lawyerid" element={<LawyerDetail />} />
       <Route path="/verify/:id/:token" element={<EmailVerify />} />
       <Route path="/forget-password" element={<UserForgetPass />} />
+      <Route path="/hesap-doğrulama" element={<HesapDoğrulamaEkranı />} />
       <Route path="/reset-password/:id/:token" element={<UserResetPass />} />
       <Route path="/forget-password-law" element={<LawyerForgetPass />} />
       <Route path="/userDashboard" element={<UserDashboard />} />
