@@ -53,7 +53,7 @@ const LawyerPaymentSetting = () => {
                 <div className="lawyerdashboardregisterBaslık">
                     <h1 style={{ width: "180px" }} >Ödeme Ayarları</h1>
                 </div>
-                <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
+                <form className="lawyerRegisterFormDiv" style={{ height: "6500px" }} onSubmit={submitHandler}>
                     <div className="row" id="registerRowDiv" style={{ width: "345px", marginTop: "-20px" }}>
 
                         <div className="col" style={{ width: "345px" }}>
