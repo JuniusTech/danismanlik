@@ -49,11 +49,11 @@ const LawyerPaymentSetting = () => {
 
     return (
         showLawyerPaymentPlan && showInvoiceDetails ?
-            <div style={{ width: "fit-content", margin: "0" }}>
+            <div style={{ width: "fit-content", height: "700px", margin: "0" }}>
                 <div className="lawyerdashboardregisterBaslık">
                     <h1 style={{ width: "180px" }} >Ödeme Ayarları</h1>
                 </div>
-                <form className="lawyerRegisterFormDiv" style={{ height: "6500px" }} onSubmit={submitHandler}>
+                <form className="lawyerRegisterFormDiv" style={{ height: "645px", marginRight: "20px" }} onSubmit={submitHandler}>
                     <div className="row" id="registerRowDiv" style={{ width: "345px", marginTop: "-20px" }}>
 
                         <div className="col" style={{ width: "345px" }}>

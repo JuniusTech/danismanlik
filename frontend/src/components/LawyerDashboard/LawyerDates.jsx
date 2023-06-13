@@ -10,7 +10,7 @@ const LawyerDates = () => {
             >
                 Randevularım
             </p>
-            <table style={{ width: "95%", marginTop: "25px" }}>
+            <table style={{ width: "100%", marginTop: "25px" }}>
                 <thead>
                     <tr
                         style={{
