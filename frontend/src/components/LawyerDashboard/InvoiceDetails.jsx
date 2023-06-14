@@ -50,7 +50,7 @@ const InvoiceDetails = () => {
                 />
                 <p style={{ fontSize: "14px", width: "977px", height: "16px", color: "#00242E", opacity: "0.5", margin: "20px 62px 20px 0px" }}>Üyelik ücretleri her dönemin başlangıcında faturalandırılır ve hesabınızda görüntülenmesi fatura tarihinden ititbaren birkaç gün sürebilir.  </p>
             </div>
-            <table style={{ width: "1009px", height: "33px", marginTop: "20px", marginLeft: "30px" }}>
+            <table style={{ width: "1009px", height: "33px", marginTop: "20px", marginLeft: "30px", marginRight: "30px" }}>
                 <thead>
                     <tr
                         style={{
@@ -78,21 +78,22 @@ const InvoiceDetails = () => {
                         </th>
                     </tr>
                 </thead>
-                <tbody style={{ font: "normal small normal 14px/16px SF Pro Text" }}>
+                <tbody style={{ font: "SF Pro Text, bold 14px " }}>
                     <tr
                         style={{
                             borderBottom: "1px solid #A97900",
                             paddingTop: "10px",
                             paddingBottom: "10px",
-                            font: "normal normal normal 14px/16px SF Pro Text",
+                            font: "SF Pro Text, bold 14px ",
                         }}
                     >
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                                 color: "#a97900",
-                                fontWeight: "regular",
+                                fontWeight: "bold",
                                 font: "14px"
                             }}
                         >
@@ -101,6 +102,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -109,6 +111,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -117,6 +120,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -125,14 +129,16 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
-                            211,02 TL <span>(+37,98 TL KDV)</span>
+                            211,02 TL <span style={{ opacity: "0.5" }}>(+37,98 TL KDV)</span>
                         </td>
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -150,9 +156,10 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                                 color: "#a97900",
-                                fontWeight: "regular",
+                                fontWeight: "bold",
                                 font: "14px"
                             }}
                         >
@@ -161,6 +168,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -169,6 +177,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -177,6 +186,7 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
@@ -185,14 +195,16 @@ const InvoiceDetails = () => {
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
-                            211,02 TL <span>(+37,98 TL KDV)</span>
+                            211,02 TL <span style={{ opacity: "0.5" }}>(+37,98 TL KDV)</span>
                         </td>
                         <td
                             style={{
                                 paddingTop: "7px",
+                                paddingLeft: "7px",
                                 paddingBottom: "7px",
                             }}
                         >
