@@ -25,14 +25,16 @@ const Navbar = () => {
     localStorage.removeItem("userInfo");
     toast.success("Çıkış Yaptınız.");
     removeCookie("jwt");
-    navigate("/")
+    navigate("/");
   };
   const lawyerSignOut = () => {
     dispatch({ type: "LAWYER_SIGNOUT" });
     localStorage.removeItem("lawyerInfo");
     toast.success("Çıkış Yaptınız.");
+    // setIsLawyer(false);
+    console.log(is_lawyer);
     removeCookie("jwt");
-    navigate("/")
+    navigate("/");
   };
   const lawyer = () => {
     setIsLawyer(true);
@@ -97,7 +99,12 @@ const Navbar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="" onClick={() => navigate("/userdashboard")}>Profilim</Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        onClick={() => navigate("/userdashboard")}
+                      >
+                        Profilim
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={() => userSignOut()}>
                         Çıkış Yap
                       </Dropdown.Item>
@@ -116,7 +123,12 @@ const Navbar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="" onClick={() => navigate("/lawyerdashboard")}>Profilim</Dropdown.Item>
+                      <Dropdown.Item
+                        href=""
+                        onClick={() => navigate("/lawyerdashboard")}
+                      >
+                        Profilim
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={() => lawyerSignOut()}>
                         Çıkış Yap
                       </Dropdown.Item>

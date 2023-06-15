@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import ladyJustice from "../assets/Lady Justice.png";
 import userIcon from "../assets/User Icon.png";
 import TL from "../assets/TL.png";
@@ -14,6 +15,12 @@ import secondImg from "../assets/lawyerHomePageImg.png";
 import thirdImg from "../assets/lawyerHomeImg2.png";
 
 const LawyerHomePage = () => {
+  const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
+
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate("/fiyatlandırma");
+  };
   return (
     <>
       <div
@@ -71,25 +78,27 @@ const LawyerHomePage = () => {
             >
               Dava sürecini planla ve kolayca takip et.
             </p>
-            <button
-              style={{
-                width: "200px",
-                height: "60px",
-                background: "#A97900",
-                borderRadius: "8px",
-                border: "none",
-                fontFamily: "Segoe UI",
-                fontStyle: "normal",
-                fontWeight: 700,
-                fontSize: "32px",
-                lineHeight: "43px",
-                color: "#FFFFFF",
-                marginLeft: "-35px",
-                marginTop: "15px",
-              }}
-            >
-              Kayıt Ol
-            </button>
+            {!lawyerInfo && (
+              <button
+                style={{
+                  width: "200px",
+                  height: "60px",
+                  background: "#A97900",
+                  borderRadius: "8px",
+                  border: "none",
+                  fontFamily: "Segoe UI",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  fontSize: "32px",
+                  lineHeight: "43px",
+                  color: "#FFFFFF",
+                  marginLeft: "-35px",
+                  marginTop: "15px",
+                }}
+              >
+                Kayıt Ol
+              </button>
+            )}
           </div>
 
           <div
@@ -111,12 +120,12 @@ const LawyerHomePage = () => {
             ></div>
             <img
               src={ladyJustice}
-              width={"450px"}
-              height={"480px"}
+              width={"380px"}
+              height={"508px"}
               style={{
                 position: "absolute",
-                marginLeft: "38px",
-                marginTop: "25px",
+                marginLeft: "50px",
+                marginTop: "-3px",
               }}
               alt=""
             />
@@ -767,6 +776,7 @@ const LawyerHomePage = () => {
                 padding: " 0 15px",
                 marginLeft: "100px",
               }}
+              onClick={handleButtonClick}
             >
               Ödeme Planlarını Görün
             </button>
@@ -829,6 +839,7 @@ const LawyerHomePage = () => {
                 padding: " 0 15px",
                 marginTop: "20px",
               }}
+              onClick={handleButtonClick}
             >
               Ödeme Planlarını Görün
             </button>

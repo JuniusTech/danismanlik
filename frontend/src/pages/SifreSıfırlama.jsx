@@ -31,15 +31,6 @@ const SifreSıfırlama = () => {
               boxShadow: "0px 2px 6px #00000029",
             }}
           >
-            <svg
-              style={{ margin: "30px auto" }}
-              xmlns="http://www.w3.org/2000/svg"
-              width="38.469"
-              height="36.385"
-              viewBox="0 0 38.469 46.385"
-            >
-              {/* SVG Path */}
-            </svg>{" "}
             avukatımol
           </div>
           <div
