@@ -19,6 +19,8 @@ const LawyerAccountSettings = ({
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
     const [branch, setBranch] = useState("");
+    const [branch2, setBranch2] = useState("");
+    const [branch3, setBranch3] = useState("");
     const [branches, setBranches] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -86,7 +88,7 @@ const LawyerAccountSettings = ({
             <div className="registerBaslık">
                 <h1>Hesap Ayarları</h1>
             </div>
-            <form className="lawyerRegisterFormDiv" style={{ height: "650px" }} onSubmit={submitHandler}>
+            <form className="lawyerRegisterFormDiv" style={{ height: "fit-content" }} onSubmit={submitHandler}>
                 <div className="d-flex"   >
                     <div  >
                         <label htmlFor="">
@@ -111,7 +113,8 @@ const LawyerAccountSettings = ({
                             />
                         </div>
 
-                        <label className="lawyeraccountsetting-input" style={{ widht: "20px", display: "flex" }} htmlFor="">
+                        <label className="lawyeraccountsetting-input"
+                            style={{ widht: "20px", display: "flex", marginTop: "15px" }} htmlFor="">
                             Web Sitesi
                         </label>
 
@@ -121,7 +124,8 @@ const LawyerAccountSettings = ({
                             type="text"
                             value={""}
                         />
-                        <label className="lawyeraccountsetting-input d-flex justify-content-start" htmlFor="">
+                        <label className="lawyeraccountsetting-input "
+                            style={{ display: "flex", justifyContent: "start", marginTop: "15px" }} htmlFor="">
                             Branş 2
                             <label style={{ color: "#a97900", backgroundColor: "transparent", border: "none" }} >
                                 { }
@@ -131,9 +135,9 @@ const LawyerAccountSettings = ({
 
                         <select
                             className="lawyerdashboard-registerFormControl"
-                            value={branch}
+                            value={branch2}
                             name="branch"
-                            onChange={(e) => setBranch(e.target.value)}
+                            onChange={(e) => setBranch2(e.target.value)}
                             title="Branş Seç"
                             id="navbarScrollingDropdown"
                         >
@@ -166,7 +170,7 @@ const LawyerAccountSettings = ({
 
                         </div>
 
-                        <label className="lawyeraccountsetting-input" style={{ widht: "20px", display: "flex" }} htmlFor="">
+                        <label className="lawyeraccountsetting-input" style={{ widht: "20px", display: "flex", marginTop: "15px" }} htmlFor="">
                             Branş 1
                         </label>
 
@@ -174,7 +178,7 @@ const LawyerAccountSettings = ({
 
                         <select
                             className="lawyerdashboard-registerFormControl"
-                            value={branch}
+                            value={lawyerInfo.branch}
                             name="branch"
                             onChange={() => { }}
                             title="Branş Seç"
@@ -190,14 +194,16 @@ const LawyerAccountSettings = ({
                                 ))}
                         </select>
                         {showAddButton ? (
-                            <div className="d-flex justify-content-start align-items-center" >
+                            <div className="d-flex justify-content-start align-items-center"
+                                style={{ marginTop: "15px" }}>
                                 <br /><br /> <br /> <br />
                                 <div className="d-flex justify-content-start align-items-center star mt-3" style={{ cursor: "pointer" }} onClick={handleAddBranch}>
-                                    <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <h5 className=" d-flex align-items-center">Branş Ekle</h5>
+                                    <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <h5 className=" d-flex align-items-center pt-2">Branş Ekle</h5>
                                 </div>
                             </div>) : (
                             <div >
-                                <div>
+                                <div
+                                    style={{ marginTop: "15px" }}>
                                     <label className="lawyeraccountsetting-input d-flex justify-content-start" htmlFor="">
                                         Branş 3
                                         <label style={{ color: "#a97900", backgroundColor: "transparent", border: "none" }} >
@@ -209,9 +215,9 @@ const LawyerAccountSettings = ({
                                 <div>
                                     <select
                                         className="lawyerdashboard-registerFormControl"
-                                        value={branch}
+                                        value={branch3}
                                         name="branch"
-                                        onChange={(e) => setBranch(e.target.value)}
+                                        onChange={(e) => setBranch3(e.target.value)}
                                         title="Branş Seç"
                                         id="navbarScrollingDropdown"
                                     >
@@ -235,11 +241,11 @@ const LawyerAccountSettings = ({
 
                 <br />
                 <div >
-                    <h1 style={{ marginLeft: "0 px" }}>Randevu  ve Sistem Bildirimleri</h1>
+                    <h1 style={{ marginLeft: "0 px", marginTop: "5px", marginBottom: "10px" }}>Randevu  ve Sistem Bildirimleri</h1>
                 </div>
                 <div className="d-flex">
                     <div>
-                        <div className="d-flex justify-content-start align-items-center" style={{ width: "274px" }}>
+                        <div className="d-flex justify-content-start align-items-center" style={{ width: "274px", display: "flex", alignItems: "center" }}>
 
                             <p className="p-2" style={{ width: "183px" }}>E-posta bildirimlerini aç</p>
                             <label className="switch" style={{ marginLeft: "30px" }}>
@@ -265,7 +271,7 @@ const LawyerAccountSettings = ({
                         </label>
                     </div>
                 </div>
-                <div className="lawyerdashboard-buttons" style={{ marginTop: "60px" }}>
+                <div className="lawyerdashboard-buttons" style={{ marginTop: "130px" }}>
                     <button
                         className="lawyerdashboard-button-vazgec"
                         onClick={() => setShowLawyerRegister()}
@@ -287,7 +293,7 @@ const LawyerAccountSettings = ({
                 <p className="d-flex justify-conter">
 
                     <button
-                        style={{ color: "#a97900", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+                        style={{ color: "#a97900", fontSize: "19px", margin: "auto", backgroundColor: "transparent", border: "none", cursor: "pointer" }}
                         onClick={() => handleLogin()}
                     >
                         Avukat Hesabımı Sil
