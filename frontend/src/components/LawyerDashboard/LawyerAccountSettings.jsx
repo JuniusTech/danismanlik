@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
-import { Navigate, useNavigate } from "react-router-dom";
-import LawyerRegister from "../../pages/LawyerRegister";
+import { useNavigate } from "react-router-dom";
+
 
 
 const LawyerAccountSettings = ({

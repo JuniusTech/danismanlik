@@ -30,9 +30,8 @@ const SearchPage = ({ reting }) => {
     const filterRating = filter.rating || rating;
     const filterIsTick = filter.isTick || isTick;
     const sortOrder = filter.order || order;
-    return `${
-      skipPathname ? "" : "/search?"
-    }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `${skipPathname ? "" : "/search?"
+      }branch=${filterBranch}&query=${filterQuery}&isTick=${filterIsTick}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   const [toggle, setToggle] = useState({
