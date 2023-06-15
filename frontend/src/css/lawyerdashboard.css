@@ -3,7 +3,7 @@
   border: 1px solid #a97900;
   display: flex;
   margin-bottom: 169px;
-  height: 699px;
+  height: fit-content;
   border-radius: 10px;
   opacity: 1;
 }
