@@ -744,12 +744,12 @@ const SıkSorulanSorular = () => {
       <div
         style={{
           width: "494px",
-          height: "180px",
+          height: "280px",
           background: "#00242E",
           boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.25)",
           borderRadius: "8px",
-          margin: "200px 500px 40px 500px",
-          paddingTop: "28px ",
+          margin: "80px 500px 40px 500px",
+          paddingTop: "10px ",
         }}
       >
         <p
@@ -759,7 +759,7 @@ const SıkSorulanSorular = () => {
             fontFamily: "'SF Pro Text'",
             fontStyle: "normal",
             fontWeight: "400",
-            fontSize: "24px",
+            fontSize: "16px",
             lineHeight: "29px",
             textAlign: "center",
             color: "#FFFFFF",
@@ -768,6 +768,15 @@ const SıkSorulanSorular = () => {
         >
           Aradığınızı cevapları bulamadınız mı? Bizimle iletişime geçin.
         </p>
+        <input
+          type="text"
+          style={{
+            width: "450px",
+            height: "100px",
+            margin: "0px 23px",
+            borderRadius: "10px",
+          }}
+        />
         <div
           style={{
             width: "450px",
@@ -780,7 +789,12 @@ const SıkSorulanSorular = () => {
         >
           <input
             type="text"
-            style={{ width: "350px", height: "50px", paddingLeft: "15px" }}
+            style={{
+              width: "350px",
+              height: "50px",
+              paddingLeft: "15px",
+              borderRadius: "8px 0px 0px 8px",
+            }}
             placeholder="Email adresiniz"
           />{" "}
           <button
