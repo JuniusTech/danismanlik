@@ -14,7 +14,8 @@ module.exports = async (userEmail, subject, htmlTemplate) => {
     });
 
     const mailOptions = {
-      from: process.env.EMAIL,
+      // from: process.env.EMAIL,
+      from: "df941bc2eb0b92",
       to: userEmail,
       subject: subject,
       html: htmlTemplate,
