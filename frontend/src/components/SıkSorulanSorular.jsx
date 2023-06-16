@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-
-import "../css/sıkSorulanSorular.css";
+import { Nav, NavItem, TabPane, TabContent } from "react-bootstrap";
 import background from "../assets/sıksorulansorularbackground.png";
-
+import Footer from "./Footer";
+import Navbar from "./Navbar";
+import "../css/sıkSorulanSorular.css";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
 
 const SıkSorulanSorular = () => {
-  const [activeLink, setActiveLink] = useState("#first");
+  const [activeTab, setActiveTab] = useState("#first");
 
-  const handleLinkClick = (eventKey) => {
-    setActiveLink(eventKey);
+  const handleTabChange = (tabName) => {
+    setActiveTab(tabName);
   };
 
   return (
     <div>
+      <Navbar />
       <div
         style={{
           width: "1300px",
@@ -74,68 +76,671 @@ const SıkSorulanSorular = () => {
           ></input>
         </form>
       </div>
-
-      <h1 style={{ textAlign: "center", marginTop: "5rem", color: " #A97900" }}>
-        Sıkca Sorulan Sorular
-      </h1>
-      {/* <Nav
-              fill
-              variant="tabs"
-              defaultActiveKey="#first"
-              activeKey={activeLink}
-              onSelect={handleLinkClick}
-            >
-              <Nav.Item style={{ width: "50%" }}>
-                <Nav.Link eventKey="#first">First</Nav.Link>
-              </Nav.Item>
-              <Nav.Item style={{ width: "50%" }}>
-                <Nav.Link eventKey="#link">Link</Nav.Link>
-              </Nav.Item>
-            </Nav> */}
-      <div style={{ display: "flex", width: "1250px", margin: "auto" }}>
-        <Card style={{ width: "1250px" }}>
-          <Card.Header>
-            <Nav
-              fill
-              variant="tabs"
-              defaultActiveKey="#first"
-              activeKey={activeLink}
-              onSelect={handleLinkClick}
-            >
-              <Nav.Item style={{ width: "50%" }}>
-                <Nav.Link
-                  style={{ border: activeLink === "#first" ? "none" : "" }}
-                  eventKey="#first"
-                  className={activeLink === "#first" ? "active-link" : ""}
-                >
-                  First
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item style={{ width: "50%" }}>
-                <Nav.Link
-                  style={{
-                    border: activeLink === "#link" ? "2px solid white" : "",
-                  }}
-                  eventKey="#link"
-                  className={activeLink === "#link" ? "active-link" : ""}
-                >
-                  Link
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Card.Header>
-          <Card.Body>
-            <div
-              style={{ display: activeLink === "#first" ? "block" : "none" }}
-            >
-              <p>Açıklama 1</p>
-            </div>
-            <div style={{ display: activeLink === "#link" ? "block" : "none" }}>
-              <p>Açıklama 2</p>
-            </div>
-          </Card.Body>
-        </Card>
-      </div>
+      <Card
+        style={{ width: "1300px", margin: "50px auto", paddingBottom: "60px" }}
+      >
+        <Card.Header>
+          <Nav variant="tabs" defaultActiveKey="#first">
+            <Nav.Item>
+              <Nav.Link
+                href="#first"
+                active={activeTab === "#first"}
+                onClick={() => handleTabChange("#first")}
+              >
+                Avukat
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                href="#link"
+                active={activeTab === "#link"}
+                onClick={() => handleTabChange("#link")}
+              >
+                Müvekkil
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+            {activeTab === "#first" ? (
+              <div
+                style={{
+                  display: "flex",
+                }}
+              >
+                <div style={{ marginLeft: "40px", marginTop: "10px" }}>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      Genel (Avukat){" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      HESAP DONDURMA VEYA SİLME{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      TEKNİK DESTEK{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div style={{ marginLeft: "50px", marginTop: "10px" }}>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      ÖDEME VE İADE{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      MESAJLAŞMA / İLETİŞİM / BİLGİLENDİRME
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      GİRİŞ VE ŞİFRE
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                }}
+              >
+                <div style={{ marginLeft: "40px", marginTop: "10px" }}>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      Genel (Müvekkil)
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      HESAP DONDURMA VEYA SİLME{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      TEKNİK DESTEK{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div style={{ marginLeft: "50px", marginTop: "10px" }}>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      ÖDEME VE İADE{" "}
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      MESAJLAŞMA / İLETİŞİM / BİLGİLENDİRME
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ width: "550px", marginTop: "90px" }}>
+                    <p style={{ fontSize: "24px", color: "#A97900" }}>
+                      GİRİŞ VE ŞİFRE
+                    </p>
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Bu siteyi nasıl kullanabilirim?
+                    </p>
+                    <hr />
+                    <p style={{ fontSize: "16px", color: "#00242E" }}>
+                      Neden Avukatımol’da hizmet vermeliyim?
+                    </p>
+                    <hr />
+                    <p style={{ color: "#A97900" }}>
+                      17 makalenin tümünü görüntüle{" "}
+                      <span>
+                        <svg
+                          style={{ marginTop: "-3px", marginLeft: "5px" }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="7"
+                          height="12"
+                          viewBox="0 0 5.912 10.134"
+                          fill="##A97900"
+                        >
+                          <path
+                            id="Icon_awesome-caret-down"
+                            data-name="Icon awesome-caret-down"
+                            d="M1.123,7.5h8.77a.7.7,0,0,1,.481,1.2L5.991,13.206a.67.67,0,0,1-.965,0L.642,8.7A.7.7,0,0,1,1.123,7.5Z"
+                            transform="translate(-7.5 10.575) rotate(-90)"
+                            fill="##A97900"
+                            opacity="0.75"
+                          />
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Card.Text>
+        </Card.Body>
+      </Card>
       <div
         style={{
           width: "494px",
@@ -143,7 +748,7 @@ const SıkSorulanSorular = () => {
           background: "#00242E",
           boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.25)",
           borderRadius: "8px",
-          margin: "200px 700px 40px 700px",
+          margin: "200px 500px 40px 500px",
           paddingTop: "28px ",
         }}
       >
@@ -197,6 +802,7 @@ const SıkSorulanSorular = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
