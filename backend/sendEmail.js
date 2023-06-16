@@ -6,8 +6,10 @@ module.exports = async (userEmail, subject, htmlTemplate) => {
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        // user: process.env.EMAIL,
+        // pass: process.env.PASSWORD,
+        user: "df941bc2eb0b92",
+        pass: "6643ef199994ba",
       },
     });
 
