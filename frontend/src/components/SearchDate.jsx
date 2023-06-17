@@ -19,6 +19,7 @@ const SearchDate = ({ lawyer, user }) => {
   const [selectedHour, setSelectedHour] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("")
+  const [selectedYear, setSelectedYear] = useState("")
 
   const handleButtonClick = (hour, index) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
@@ -26,11 +27,14 @@ const SearchDate = ({ lawyer, user }) => {
 
 
     const dayOfMonth = selectedDate.getDate();
-    const month = selectedDate.toLocaleString("default", { month: "long" });
+    const monthIndex = selectedDate.getMonth();
+    const month = monthIndex + 1;
+    const year = selectedDate.getFullYear()
 
     setSelectedHour(hour);
     setSelectedDay(dayOfMonth);
     setSelectedMonth(month);
+    setSelectedYear(year)
     setModalOpen(true);
 
     console.log(dayOfMonth, month, selectedHour);
@@ -101,12 +105,12 @@ const SearchDate = ({ lawyer, user }) => {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
-          day: dayOfMonth,
+          day: selectedDay + "-" + selectedMonth + "-" + selectedYear,
           hour: selectedHour,
           description: "randevu",
           token: jwtToken
         },
-        console.log(dayOfMonth),
+        console.log(selectedDay + "-" + selectedMonth + "-" + selectedYear),
         console.log(jwtToken)
       );
       setLoading(false);
