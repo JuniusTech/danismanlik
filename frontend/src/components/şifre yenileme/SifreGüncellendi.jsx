@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SifreGüncellendi = () => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate("/");
+  };
   return (
     <div
       style={{
@@ -72,6 +77,7 @@ const SifreGüncellendi = () => {
             borderRadius: "3px",
             marginTop: "30px",
           }}
+          onClick={handleButtonClick}
         >
           Giriş yap
         </button>

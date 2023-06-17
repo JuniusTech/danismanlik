@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import SifreGüncellendi from "./SifreGüncellendi";
+import { useNavigate } from "react-router-dom";
 
 const SifreSıfırlama = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const navigate = useNavigate();
+
+  const handleButtonClick2 = () => {
+    navigate("/");
+  };
 
   const handleButtonClick = () => {
     setIsButtonClicked(true);
@@ -141,7 +147,10 @@ const SifreSıfırlama = () => {
 
             <p style={{ fontSize: "12px" }}>
               Hesabın yok mu? Hemen{" "}
-              <span style={{ color: "#A97900" }}> kayıt ol!</span>
+              <span style={{ color: "#A97900" }} onClick={handleButtonClick2}>
+                {" "}
+                kayıt ol!
+              </span>
             </p>
           </Container>
         </div>
