@@ -88,32 +88,33 @@ const SearchDate = ({ lawyer, user }) => {
   const [day, setDay] = useState("")
   const [hour, setHour] = useState("")
   const [description, setDescription] = useState("")
-  const token = userInfo.token
 
-  const submitHandler = async (dayOfMonth, selectedHour, description, token) => {
+
+  const submitHandler = async (dayOfMonth, selectedHour, description, jwtToken) => {
     //! burada kaldım. token hatası alıyorum ve de postmandeki formatta gönderemiyorum
     setLoading(true);
     try {
+      const jwtToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('jwt='))
+        .split('=')[1]
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
-          dayOfMonth,
-          selectedHour,
-          description,
+          day: dayOfMonth,
+          hour: selectedHour,
+          description: "randevu",
+          token: jwtToken
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Token'ı Authorization başlığına ekleyin
-          },
-        }
+        console.log(dayOfMonth),
+        console.log(jwtToken)
       );
       setLoading(false);
       toast.success("Randevunuz oluşturuldu.");
     } catch (error) {
       toast.error(getError(error));
       setLoading(false);
-      console.log(token)
-      console.log(dayOfMonth)
+
     }
   };
 
@@ -145,7 +146,7 @@ const SearchDate = ({ lawyer, user }) => {
       (date) => date.day === day && date.hour === hour
     );
   }
-  console.log(userInfo);
+
 
   return (
     <>
@@ -407,7 +408,7 @@ const SearchDate = ({ lawyer, user }) => {
                         day,
                         selectedHour,
                         description,
-                        token,)}
+                      )}
                     >
                       Randevu Oluştur
                     </button>
