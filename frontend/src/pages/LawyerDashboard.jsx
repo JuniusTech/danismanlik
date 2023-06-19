@@ -17,9 +17,11 @@ const LawyerDashboard = () => {
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
     const [selectedItem, setSelectedItem] = useState(null);
     const items = ["Randevularım", "Kişisel Bilgiler", "Hesap Ayarları", "Ödeme Ayarları", "Yardım ve Destek"]
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedRow, setSelectedRow] = useState(null)
     const showComponent = (item) => {
         if (item === "Randevularım") {
-            return <LawyerDates />;
+            return <LawyerDates handleDateClick={handleDateClick} />;
         } else if (item === "Kişisel Bilgiler") {
             return <LawyerPersonalDetails />;
         } else if (item === "Hesap Ayarları") {
@@ -32,6 +34,11 @@ const LawyerDashboard = () => {
         else return < LawyerPersonalDetails />;
     };
 
+    const handleDateClick = (date, index) => {
+        setSelectedRow(index);
+        setSelectedDate(date);
+    };
+
     const [showDates, setShowDates] = useState(false);
     const showDatesDetails = (item) => {
         if (item === "Randevularım") {
@@ -40,8 +47,6 @@ const LawyerDashboard = () => {
             setShowDates(false);
         }
     };
-    console.log(showDates)
-
 
     const onItemClick = (item) => {
         setSelectedItem(item);
@@ -95,7 +100,7 @@ const LawyerDashboard = () => {
 
                 <div className="lawyerdashbord-datedetail-container">
                     {showDates && selectedItem === "Randevularım" && (
-                        <LawyerDatesDetail />
+                        <LawyerDatesDetail date={selectedDate} />
                     )}
                 </div >
             </div>

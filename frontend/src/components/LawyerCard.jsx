@@ -171,7 +171,7 @@ const LawyerCard = ({ lawyers }) => {
                                         </div>
                                     </div>
                                     <div className="search-left-border"></div>
-                                    <SearchDate lawyer={lawyer} />
+                                    <SearchDate lawyer={lawyer} setLawyerStates={setLawyerStates} />
                                 </div>
                             </div>
                         </div>
