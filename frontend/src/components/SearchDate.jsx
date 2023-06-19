@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import image from "../assets/bg.jpg";
@@ -7,19 +7,38 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../getError";
 
-const SearchDate = ({ lawyer, user }) => {
+const SearchDate = ({ lawyer }) => {
   const [moreHour, setMoreHour] = useState(false);
 
   const [hours, setHours] = useState(
     [...Array(5).keys()].map((i) => `${i + 9}:00`)
   );
-  const [lawyerHours, setLawyerHours] = useState({});
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("")
+  const [selectedMonthtext, setSelectedMonthtext] = useState("")
   const [selectedYear, setSelectedYear] = useState("")
+  const [dates, setDates] = useState([])
+  const [lawyerHours, setLawyerHours] = useState({});
+
+
+  useEffect(() => {
+    const fetchDates = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URI}/lawyers`, {
+          params: {
+            lawyerId: lawyer._id,
+          },
+        });
+        setDates(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDates();
+  }, [lawyer]);
 
   const handleButtonClick = (hour, index) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
@@ -29,11 +48,16 @@ const SearchDate = ({ lawyer, user }) => {
     const dayOfMonth = selectedDate.getDate();
     const monthIndex = selectedDate.getMonth();
     const month = monthIndex + 1;
+    const monthText = selectedDate.toLocaleString("default", {
+      month: "long",
+    });
     const year = selectedDate.getFullYear()
+
 
     setSelectedHour(hour);
     setSelectedDay(dayOfMonth);
     setSelectedMonth(month);
+    setSelectedMonthtext(monthText);
     setSelectedYear(year)
     setModalOpen(true);
 
@@ -86,16 +110,15 @@ const SearchDate = ({ lawyer, user }) => {
       }-${currentDate.getFullYear()}`;
   });
 
-  const [lawyerDates, setLawyerDates] = useState([])
+
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [loading, setLoading] = useState(false);
   const [day, setDay] = useState("")
-  const [hour, setHour] = useState("")
   const [description, setDescription] = useState("")
 
 
   const submitHandler = async (dayOfMonth, selectedHour, description, jwtToken) => {
-    //! burada kaldım. token hatası alıyorum ve de postmandeki formatta gönderemiyorum
+
     setLoading(true);
     try {
       const jwtToken = document.cookie
@@ -113,6 +136,8 @@ const SearchDate = ({ lawyer, user }) => {
         console.log(selectedDay + "-" + selectedMonth + "-" + selectedYear),
         console.log(jwtToken)
       );
+      console.log(data);
+      setDates([...dates, data])
       setLoading(false);
       toast.success("Randevunuz oluşturuldu.");
     } catch (error) {
@@ -285,7 +310,7 @@ const SearchDate = ({ lawyer, user }) => {
                         textAlign: "center",
                       }}
                     >
-                      Seçilen gün: {selectedDay} {selectedMonth}
+                      Seçilen gün: {selectedDay} {selectedMonthtext} {selectedYear}
                     </p>
                     <p
                       style={{

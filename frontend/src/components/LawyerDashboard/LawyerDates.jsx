@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-const LawyerDates = () => {
+const LawyerDates = ({ handleDateClick, index }) => {
     const [lawyerDates, setLawyerDates] = useState([])
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
+    const [selectedRow, setSelectedRow] = useState(null)
+
 
 
     useEffect(() => {
@@ -16,7 +18,7 @@ const LawyerDates = () => {
             .catch((error) => {
                 console.log(error);
             });
-        console.log(setLawyerDates)
+
     }, []);
 
     return (
@@ -63,13 +65,16 @@ const LawyerDates = () => {
 
 
                             <tr
-                                key={item._id} value={item.title}
+                                key={item._id}
+                                onClick={() => handleDateClick(item, index)}
+
 
                                 style={{
                                     borderBottom: "1px solid #A97900",
                                     paddingTop: "10px",
                                     paddingBottom: "10px",
                                     font: "normal normal normal 14px/16px SF Pro Text",
+                                    backgroundColor: selectedRow === index ? "#a97900" : "transparent",
                                 }}
                             >
                                 <td
