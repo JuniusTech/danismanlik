@@ -14,7 +14,7 @@ import UserDashboard from "./pages/UserDashboard";
 import HesapDoğrulamaEkranı from "./components/şifre yenileme/HesapDoğrulamaEkrani.jsx";
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
-import SıkSorulanSorular from "./components/SıkSorulanSorular";
+import SSSMain from "./components/sıkSorulanSorular/SSSMain.jsx";
 import FiyatlandırmaSayfası from "./pages/FiyatlandırmaSayfası";
 import SifreSıfırlama from "./pages/SifreSıfırlama";
 import YeniSifreBelirle from "./components/şifre yenileme/YeniSifreBelirle";
@@ -35,7 +35,7 @@ const AppRoute = () => {
       <Route path="/userDashboard" element={<UserDashboard />} />
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
-      <Route path="/sıksorulansorular" element={<SıkSorulanSorular />} />
+      <Route path="/sıksorulansorular" element={<SSSMain />} />
       <Route path="/fiyatlandırma" element={<FiyatlandırmaSayfası />} />
 
       <Route
