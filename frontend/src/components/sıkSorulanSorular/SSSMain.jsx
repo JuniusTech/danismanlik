@@ -1,12 +1,16 @@
-import React from "react";
-import { Nav, NavItem, TabPane, TabContent } from "react-bootstrap";
+import React, { useState } from "react";
 import background from "../../assets/sıksorulansorularbackground.png";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import Card from "react-bootstrap/Card";
 import SSSGenel from "./SSSGenel";
 
 const SıkSorulanSorular = () => {
+  const [soru, setSoru] = useState("");
+  const [email, setEmail] = useState("");
+  const iletişimeGeçin = () => {
+    console.log(soru, email);
+    /* post işlemi */
+  };
   return (
     <>
       {" "}
@@ -71,6 +75,84 @@ const SıkSorulanSorular = () => {
         </form>
       </div>
       <SSSGenel />
+      <div
+        style={{
+          width: "494px",
+          height: "280px",
+          background: "#00242E",
+          boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.25)",
+          borderRadius: "8px",
+          margin: "80px 500px 40px 500px",
+          paddingTop: "10px ",
+        }}
+      >
+        <p
+          style={{
+            width: "416px",
+            height: "58px",
+            fontFamily: "'SF Pro Text'",
+            fontStyle: "normal",
+            fontWeight: "400",
+            fontSize: "16px",
+            lineHeight: "29px",
+            textAlign: "center",
+            color: "#FFFFFF",
+            margin: "auto",
+          }}
+        >
+          Aradığınızı cevapları bulamadınız mı? Bizimle iletişime geçin.
+        </p>
+        <input
+          type="text"
+          style={{
+            width: "450px",
+            height: "100px",
+            margin: "0px 23px",
+            borderRadius: "10px",
+          }}
+          onChange={(e) => setSoru(e.target.value)}
+        />
+        <div
+          style={{
+            width: "450px",
+            height: "50px",
+            borderRadius: "8px",
+            background: "#FFFFFF",
+            margin: "24px auto",
+            display: "flex",
+          }}
+        >
+          <input
+            type="text"
+            style={{
+              width: "350px",
+              height: "50px",
+              paddingLeft: "15px",
+              borderRadius: "8px 0px 0px 8px",
+            }}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email adresiniz"
+          />{" "}
+          <button
+            style={{
+              width: "100px",
+              height: "50px",
+              background: "#A97900",
+              borderRadius: "0px 8px 8px 0px",
+              fontFamily: "'SF Pro Text'",
+              fontStyle: "normal",
+              fontWeight: 400,
+              fontSize: "20px",
+              lineHeight: "24px",
+              textAlign: "center",
+              color: "#FFFFFF",
+            }}
+            onClick={iletişimeGeçin}
+          >
+            Gönder
+          </button>
+        </div>
+      </div>
       <Footer />
     </>
   );
