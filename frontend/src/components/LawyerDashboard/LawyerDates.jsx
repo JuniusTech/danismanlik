@@ -6,6 +6,12 @@ const LawyerDates = ({ handleDateClick, index }) => {
     const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
     const [selectedRow, setSelectedRow] = useState(null)
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const getDisplayedDates = () => {
+        const startIndex = (currentPage - 1) * 15;
+        const endIndex = startIndex + 15;
+        return lawyerDates.slice(startIndex, endIndex);
+    };
 
 
     useEffect(() => {
@@ -60,7 +66,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
                     </tr>
                 </thead>
                 <tbody style={{ font: "normal small normal 14px/16px SF Pro Text" }}>
-                    {lawyerDates
+                    {getDisplayedDates()
                         .map((item) => (
 
 
@@ -141,6 +147,30 @@ const LawyerDates = ({ handleDateClick, index }) => {
 
                 </tbody>
             </table>
+            <div style={{ marginTop: "10px", display: "flex", justifyContent: "end" }}>
+                {Array(Math.ceil(lawyerDates.length / 15))
+                    .fill(0)
+                    .map((_, i) => (
+                        <button
+                            key={i}
+                            style={{
+                                border:
+                                    currentPage === i + 1 ? "none" : "1px solid #00242E",
+                                background:
+                                    currentPage === i + 1 ? "#a97900" : "",
+                                borderRadius: "14px",
+                                font: "normal normal normal 16px SF Pro Text",
+                                padding: "2px 6px",
+                                color:
+                                    currentPage === i + 1 ? "#FFFFFF" : "#00242e",
+                                marginRight: "5px"
+                            }}
+                            onClick={() => setCurrentPage(i + 1)}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+            </div>
         </div>
     )
 }
