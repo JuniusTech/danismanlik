@@ -4,11 +4,13 @@ import tik from "../../assets/fiyatlandırmaTik.png";
 import X from "../../assets/fiyatlandırmaX.png";
 import ltrght from "../../assets/little-right-arrow.svg"
 import LawyerPaymentSetting from './LawyerPaymentSetting';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const LawyerPaymentPlan = () => {
     const [showLawyerPaymentPlan, setShowLawyerPaymentPlan] = useState(true)
+    const navigate = useNavigate();
     return (showLawyerPaymentPlan ?
         <div>
             <div>
@@ -35,10 +37,10 @@ const LawyerPaymentPlan = () => {
                 <div
                     style={{
                         width: "192px",
-                        height: "383px",
+                        height: "393px",
                         background: "#FFFFFF",
-                        boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.25)",
-                        border: "1px solid #00242E",
+
+                        border: "1px solid #a97900",
                         borderRadius: "10px",
                         margin: "30px 104px 252px 90px",
                         justifyContent: "center",
@@ -202,18 +204,37 @@ const LawyerPaymentPlan = () => {
                             />{" "}
                             Fotoğraflar
                         </p>
-                        <p style={{ fontSize: "12px" }}>
+                        <p style={{ fontSize: "12px", marginBottom: "20px" }}>
                             <img
                                 src={X}
                                 width={"13px"}
                                 height={"13px"}
                                 alt=""
-                                style={{ marginTop: "-3px", marginRight: "5px" }}
+                                style={{ marginTop: "-3px", marginRight: "5px", }}
                             />{" "}
                             Profilde Video Paylaşımı
                         </p>
                     </div>
+                    <div>
+                        <p style={{
+                            width: "121px",
+                            height: "19px",
+                            fontFamily: "SF Pro Text",
+                            fontStyle: "bold",
+                            fontSize: "16px",
+                            textAlign: "center",
+                            color: "#A97900",
+                            margin: "55px 42px 6px 42px ",
+                            cursor: "pointer"
+                        }}
+                            onClick={() => navigate("/fiyatlandırma")}
+                        >Diğer Planları Gör</p>
+                    </div>
+                    <div style={{ width: "341px", height: "24px", margin: "50px 60px 30px -70px" }}>
+                        <p style={{ fontSize: "10px", width: "341px", height: "24px", color: "#00242E", opacity: "0.5", textAlign: "center" }}>Üyelik ücretleri her dönemin başlangıcında faturalandırılır ve hesabınızda görüntülenmesi fatura tarihinden ititbaren birkaç gün sürebilir.  </p>
+                    </div>
                 </div>
+
             </div>
 
         </div >

@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
-import eye from "../../assets/eye.svg"
-import { Navigate, useNavigate } from "react-router-dom";
-import LawyerRegister from "../../pages/LawyerRegister";
 import data from "./data/data.json"
 
 
 const LawyerPersonalDetails = () => {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [phoneRegion, setPhoneRegion] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
     const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
+    const [name, setName] = useState("")
 
 
 
@@ -30,13 +25,13 @@ const LawyerPersonalDetails = () => {
             const { data } = await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
                 {
+                    name,
                     email,
-                    password,
                     phone,
                 }
             );
             setLoading(false);
-            toast.success("Emailinize doğrulama linki gönderildi.");
+
             setShowLawyerRegister(false);
         } catch (error) {
             toast.error(getError(error));
@@ -72,11 +67,11 @@ const LawyerPersonalDetails = () => {
 
     return (
 
-        <div>
+        <div style={{ widht: "650px" }}>
             <div className="lawyerdashboardregisterBaslık">
                 <h1>Kişisel Bilgiler</h1>
             </div>
-            <form className="lawyerRegisterFormDiv" onSubmit={submitHandler}>
+            <form className="lawyerpersonaldetailFormDiv" style={{ widht: "650px" }} onSubmit={submitHandler}>
                 <div className="row" id="registerRowDiv">
                     <div className="col">
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -86,6 +81,7 @@ const LawyerPersonalDetails = () => {
                             type="text"
                             className="lawyerdashboard-registerFormControl"
                             value={lawyerInfo.name}
+                            onChange={() => setName(lawyerInfo.name)}
                         />
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Soyad
@@ -137,8 +133,9 @@ const LawyerPersonalDetails = () => {
                             </select>
                             <input
                                 className="lawyerdashboard-registerFormControl-phone"
+                                style={{ paddingLeft: "5px" }}
                                 type="text"
-                                value={phoneNo}
+                                value={lawyerInfo.phone}
                                 placeholder=""
                                 onChange={(e) => setPhoneNo(e.target.value)}
                             />
@@ -181,7 +178,8 @@ const LawyerPersonalDetails = () => {
                         >
                             <option defaultValue="all">İl Seçiniz</option>
                             {data
-                                ?.map((il, index) => (
+                                ?.sort((a, b) => a.name.localeCompare(b.name, 'tr'))
+                                .map((il, index) => (
                                     <option key={index} value={index}>
                                         {il.name}
                                     </option>

@@ -1,9 +1,11 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../getError";
 
 const SearchDate = ({ lawyer }) => {
   const [moreHour, setMoreHour] = useState(false);
@@ -11,15 +13,57 @@ const SearchDate = ({ lawyer }) => {
   const [hours, setHours] = useState(
     [...Array(5).keys()].map((i) => `${i + 9}:00`)
   );
-  const [lawyerHours, setLawyerHours] = useState({});
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState("");
+  const [selectedDay, setSelectedDay] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("")
+  const [selectedMonthtext, setSelectedMonthtext] = useState("")
+  const [selectedYear, setSelectedYear] = useState("")
+  const [dates, setDates] = useState([])
+  const [lawyerHours, setLawyerHours] = useState({});
 
-  const handleButtonClick = (hour) => {
+
+  useEffect(() => {
+    const fetchDates = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URI}/lawyers`, {
+          params: {
+            lawyerId: lawyer._id,
+          },
+        });
+        setDates(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDates();
+  }, [lawyer]);
+
+  const handleButtonClick = (hour, index) => {
+    const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
+    selectedDate.setDate(dateRange[0].getDate() + index); // index değeriyle seçilen günü hesaplıyoruz
+
+
+    const dayOfMonth = selectedDate.getDate();
+    const monthIndex = selectedDate.getMonth();
+    const month = monthIndex + 1;
+    const monthText = selectedDate.toLocaleString("default", {
+      month: "long",
+    });
+    const year = selectedDate.getFullYear()
+
+
     setSelectedHour(hour);
+    setSelectedDay(dayOfMonth);
+    setSelectedMonth(month);
+    setSelectedMonthtext(monthText);
+    setSelectedYear(year)
     setModalOpen(true);
+
+    console.log(dayOfMonth, month, selectedHour);
   };
+
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -62,30 +106,46 @@ const SearchDate = ({ lawyer }) => {
   const datesDate = [0, 1, 2, 3].map((day, index) => {
     const currentDate = new Date(dateRange[0]);
     currentDate.setDate(dateRange[0].getDate() + index);
-    return `0${currentDate.getDate()}-0${
-      currentDate.getMonth() + 1
-    }-${currentDate.getFullYear()}`;
+    return `0${currentDate.getDate()}-0${currentDate.getMonth() + 1
+      }-${currentDate.getFullYear()}`;
   });
 
-  // const [days, setDays] = useState(datesDate)
 
-  // useEffect(() => {
-  //     setDays(datesDate)
-  // }, [datesDate])
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const [loading, setLoading] = useState(false);
+  const [day, setDay] = useState("")
+  const [description, setDescription] = useState("")
 
-  // console.log(days)
 
-  // for (let i = 0; i < 4; i++) {
-  //     const date = new Date(today);
-  //     date.setDate(today.getDate() + i);
-  //     const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
-  //         date.getMonth() + 1
-  //     )
-  //         .toString()
-  //         .padStart(2, "0")}-${date.getFullYear().toString()}`;
-  //     console.log("formattedDate", formattedDate);
-  //     days.push(formattedDate);
-  // }
+  const submitHandler = async (dayOfMonth, selectedHour, description, jwtToken) => {
+
+    setLoading(true);
+    try {
+      const jwtToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('jwt='))
+        .split('=')[1]
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
+        {
+          day: "0" + selectedDay + "-" + "0" + selectedMonth + "-" + selectedYear,
+          hour: selectedHour,
+          description: "randevu",
+          token: jwtToken
+        },
+        console.log(selectedDay + "-" + selectedMonth + "-" + selectedYear),
+        console.log(jwtToken)
+      );
+      console.log(data);
+      setDates([...dates, data])
+      setLoading(false);
+      toast.success("Randevunuz oluşturuldu.");
+    } catch (error) {
+      toast.error(getError(error));
+      setLoading(false);
+
+    }
+  };
 
   const handlePrevWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[0]);
@@ -115,7 +175,7 @@ const SearchDate = ({ lawyer }) => {
       (date) => date.day === day && date.hour === hour
     );
   }
-  console.log(lawyer);
+
 
   return (
     <>
@@ -148,17 +208,17 @@ const SearchDate = ({ lawyer }) => {
                   if (
                     dayOfMonth === today.getDate() &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Bugün";
                   } else if (
                     dayOfMonth === today.getDate() + 1 &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Yarın";
                   } else {
@@ -190,14 +250,17 @@ const SearchDate = ({ lawyer }) => {
                   {datesDate.map((day, index) => (
                     <td>
                       <button
+
+
                         key={index}
                         className={
                           isAvailable(lawyer, day, toggleHours)
-                            ? "search-hoursbutton selected rounded-2"
+                            ? "search-hoursbutton selected inactive-button rounded-2"
                             : "search-hoursbutton rounded-2"
                         }
                         size="sm"
-                        onClick={() => handleButtonClick(toggleHours)}
+                        onClick={() => handleButtonClick(toggleHours, index)}
+                        disabled={isAvailable(lawyer, day, toggleHours)}
                       >
                         {toggleHours}
                       </button>
@@ -240,6 +303,15 @@ const SearchDate = ({ lawyer }) => {
                     >
                       Randevu Özeti
                     </h2>
+                    <p
+                      style={{
+                        borderBottom: "1px solid #a97900",
+                        margin: "0 20px",
+                        textAlign: "center",
+                      }}
+                    >
+                      Seçilen gün: {selectedDay} {selectedMonthtext} {selectedYear}
+                    </p>
                     <p
                       style={{
                         borderBottom: "1px solid #a97900",
@@ -360,6 +432,12 @@ const SearchDate = ({ lawyer }) => {
                         background: "#A97900 0% 0% no-repeat padding-box",
                         color: "#F5F5F5",
                       }}
+
+                      onClick={() => submitHandler(
+                        day,
+                        selectedHour,
+                        description,
+                      )}
                     >
                       Randevu Oluştur
                     </button>

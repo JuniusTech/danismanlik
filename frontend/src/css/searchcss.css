@@ -154,4 +154,5 @@
   color: gray;
   text-decoration: line-through;
   border: 1px solid gray;
+  cursor: none;
 }

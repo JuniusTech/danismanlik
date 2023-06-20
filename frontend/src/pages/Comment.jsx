@@ -39,7 +39,8 @@ const Comment = ({
           comment: comment,
           rating: stars,
           token: jwtToken
-        }
+        },
+        console.log(jwtToken)
       );
 
       console.log(data);
