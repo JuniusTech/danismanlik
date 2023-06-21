@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import User2 from "../assets/user2.png";
-import lawyerHomePageMıdLogo from "../assets/lawyerHomePageMıdLogo.png";
-import Users from "../assets/users.png";
-import tl from "../assets/TL.png";
-import tik from "../assets/fiyatlandırmaTik.png";
-import X from "../assets/fiyatlandırmaX.png";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import OdemeSayfası from "../components/OdemeSayfası";
-const FiyatlandırmaSayfası = () => {
+import User2 from "../../assets/user2.png";
+import lawyerHomePageMıdLogo from "../../assets/lawyerHomePageMıdLogo.png";
+import Users from "../../assets/users.png";
+import tl from "../../assets/TL.png";
+import tik from "../../assets/fiyatlandırmaTik.png";
+import X from "../../assets/fiyatlandırmaX.png";
+import Ucretlendirme2 from "./Ucretlendirme2";
+
+const Ucretlendirme1 = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleButtonClick = () => {
     setIsButtonClicked(true);
   };
   return (
-    <div>
-      <Navbar />
-
+    <>
       {isButtonClicked ? (
-        <OdemeSayfası />
+        <Ucretlendirme2 />
       ) : (
         <>
           <p
@@ -857,9 +854,8 @@ const FiyatlandırmaSayfası = () => {
           </div>
         </>
       )}
-      <Footer />
-    </div>
+    </>
   );
 };
 
-export default FiyatlandırmaSayfası;
+export default Ucretlendirme1;

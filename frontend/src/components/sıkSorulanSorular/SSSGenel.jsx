@@ -1,91 +1,35 @@
 import React, { useState } from "react";
 import { Nav, NavItem, TabPane, TabContent } from "react-bootstrap";
-import background from "../assets/sıksorulansorularbackground.png";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import YeniSifreBelirle from "./şifre yenileme/YeniSifreBelirle";
-import SıkSorulanSorularDetay from "./SıkSorulanSorularDetay";
+import SSSDetay from "./SSSDetay";
 
-const SıkSorulanSorular = () => {
+const SSSGenel = () => {
+  const [activeTab, setActiveTab] = useState("#first");
+  const handleTabChange = (tabName) => {
+    setActiveTab(tabName);
+  };
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-
+  const [info, setInfo] = useState("");
+  const [info2, setInfo2] = useState("");
+  const [info3, setInfo3] = useState("");
   const handleButtonClick = () => {
     setIsButtonClicked(true);
   };
 
-  const [activeTab, setActiveTab] = useState("#first");
-
-  const handleTabChange = (tabName) => {
-    setActiveTab(tabName);
+  const handleClick = (event) => {
+    setInfo(event.target.innerText);
+    setInfo3(event.target.parentElement.parentElement.innerText);
+    setInfo2(event.target.parentElement.firstElementChild.innerText);
+    if (event.target.tagName === "P") {
+      handleButtonClick();
+    }
   };
 
   return (
-    <>
+    <div>
       {" "}
-      <Navbar />
-      <div
-        style={{
-          width: "1300px",
-          height: "420px",
-          margin: "100px auto",
-          backgroundImage: `url(${background})`,
-          paddingTop: "150px",
-          filter: "drop-shadow(0px 8px 8px rgba(0, 0, 0, 0.25))",
-          borderRadius: "20px",
-        }}
-      >
-        <p
-          style={{
-            height: "38px",
-            fontFamily: "'SF Pro Text'",
-            fontStyle: "normal",
-            fontWeight: "400",
-            fontSize: "45px",
-            lineHeight: "66px",
-            color: "#00242E",
-            textAlign: "center",
-          }}
-        >
-          Hangi konuda sorun yaşıyorsunuz?
-        </p>
-        <form
-          className="search-bar"
-          style={{
-            position: "relative",
-            width: "630px",
-            margin: "auto",
-            height: "50px",
-          }}
-        >
-          <i
-            className="search-icon fa fa-search "
-            aria-hidden="true"
-            style={{
-              top: "39px",
-              left: "18px",
-              position: "absolute",
-              fontSize: "24px",
-              opacity: "0.5",
-            }}
-          ></i>
-          <input
-            type="text"
-            placeholder="Sorununuzu anlatacak bir kelime giriniz"
-            style={{
-              paddingLeft: "50px",
-              width: "630px",
-              height: "50px",
-              borderRadius: "8px",
-              marginTop: "25px",
-              border: "none",
-            }}
-          ></input>
-        </form>
-      </div>
       {isButtonClicked ? (
-        <SıkSorulanSorularDetay />
+        <SSSDetay info={info} info2={info2} info3={activeTab} />
       ) : (
         <div>
           <Card
@@ -94,25 +38,38 @@ const SıkSorulanSorular = () => {
               margin: "50px auto",
               paddingBottom: "60px",
             }}
+            onClick={handleClick}
           >
             <Card.Header>
               <Nav variant="tabs" defaultActiveKey="#first">
                 <Nav.Item style={{ width: "50%" }}>
                   <Nav.Link
-                    href="#first"
+                    style={{
+                      color: "#A97900",
+                      fontSize: "24px",
+                      fontWeight: "500",
+                      textAlign: "center",
+                    }}
+                    href=""
                     active={activeTab === "#first"}
                     onClick={() => handleTabChange("#first")}
                   >
-                    Avukat
+                    AVUKAT / SIKÇA SORULAN SORULAR
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item style={{ width: "50%" }}>
                   <Nav.Link
-                    href="#link"
+                    style={{
+                      color: "#A97900",
+                      fontSize: "24px",
+                      fontWeight: "500",
+                      textAlign: "center",
+                    }}
+                    href=""
                     active={activeTab === "#link"}
                     onClick={() => handleTabChange("#link")}
                   >
-                    Müvekkil
+                    MÜVEKKİL / SIKÇA SORULAN SORULAR
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
@@ -127,12 +84,9 @@ const SıkSorulanSorular = () => {
                   >
                     <div style={{ marginLeft: "40px", marginTop: "10px" }}>
                       <div style={{ width: "550px", marginTop: "90px" }}>
-                        <p
-                          style={{ fontSize: "24px", color: "#A97900" }}
-                          onClick={handleButtonClick}
-                        >
+                        <h4 style={{ fontSize: "24px", color: "#A97900" }}>
                           Genel (Avukat){" "}
-                        </p>
+                        </h4>
                         <p style={{ fontSize: "16px", color: "#00242E" }}>
                           Bu siteyi nasıl kullanabilirim?
                         </p>
@@ -760,86 +714,10 @@ const SıkSorulanSorular = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-          <div
-            style={{
-              width: "494px",
-              height: "280px",
-              background: "#00242E",
-              boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.25)",
-              borderRadius: "8px",
-              margin: "80px 500px 40px 500px",
-              paddingTop: "10px ",
-            }}
-          >
-            <p
-              style={{
-                width: "416px",
-                height: "58px",
-                fontFamily: "'SF Pro Text'",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "29px",
-                textAlign: "center",
-                color: "#FFFFFF",
-                margin: "auto",
-              }}
-            >
-              Aradığınızı cevapları bulamadınız mı? Bizimle iletişime geçin.
-            </p>
-            <input
-              type="text"
-              style={{
-                width: "450px",
-                height: "100px",
-                margin: "0px 23px",
-                borderRadius: "10px",
-              }}
-            />
-            <div
-              style={{
-                width: "450px",
-                height: "50px",
-                borderRadius: "8px",
-                background: "#FFFFFF",
-                margin: "24px auto",
-                display: "flex",
-              }}
-            >
-              <input
-                type="text"
-                style={{
-                  width: "350px",
-                  height: "50px",
-                  paddingLeft: "15px",
-                  borderRadius: "8px 0px 0px 8px",
-                }}
-                placeholder="Email adresiniz"
-              />{" "}
-              <button
-                style={{
-                  width: "100px",
-                  height: "50px",
-                  background: "#A97900",
-                  borderRadius: "0px 8px 8px 0px",
-                  fontFamily: "'SF Pro Text'",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  fontSize: "20px",
-                  lineHeight: "24px",
-                  textAlign: "center",
-                  color: "#FFFFFF",
-                }}
-              >
-                Gönder
-              </button>
-            </div>
-          </div>
         </div>
       )}
-      <Footer />
-    </>
+    </div>
   );
 };
 
-export default SıkSorulanSorular;
+export default SSSGenel;
