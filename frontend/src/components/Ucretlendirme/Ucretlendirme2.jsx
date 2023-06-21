@@ -6,6 +6,7 @@ import Ucretlendirme1 from "./Ucretlendirme1";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import Form from "react-bootstrap/Form";
+import KartLogo from "../../assets/ödemeKredicardLogo.png";
 
 const Ucretlendirme2 = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -76,7 +77,7 @@ const Ucretlendirme2 = () => {
           <Container
             style={{
               width: "1120px",
-              height: "750px",
+              height: "820px",
               border: "1px solid #A97900",
               borderRadius: "10px",
               marginBottom: "40px",
@@ -280,7 +281,7 @@ const Ucretlendirme2 = () => {
                     }}
                     type="text"
                     name="name"
-                    placeholder="Cardholder Name"
+                    placeholder="Kart sahibinin adı ve soyadı"
                     value={name}
                     onChange={handleInputChange}
                     onFocus={handleInputFocus}
@@ -325,9 +326,9 @@ const Ucretlendirme2 = () => {
                     </div>{" "}
                     <br />
                   </div>
-                  <div style={{ display: "flex", margin: "40px 0" }}>
+                  <div style={{ display: "flex", margin: "40px 0 20px 20px" }}>
                     <Form.Check />
-                    <p className="ml-3">
+                    <p style={{ marginLeft: "8px" }}>
                       <span style={{ color: "#979000" }}>
                         Ön bilgilendirme formunu
                       </span>
@@ -338,14 +339,66 @@ const Ucretlendirme2 = () => {
                       Mesafeli onaylıyorum.
                     </p>
                   </div>
+                  <div style={{ display: "flex", marginLeft: "20px" }}>
+                    <Form.Check />
+                    <p style={{ marginLeft: "8px" }}>
+                      Kart bilgilerimin Mastercard altyapısı ile kaydedilmesini
+                      onaylıyorum
+                    </p>
+                  </div>
                 </form>
-                <Cards
-                  cvc={cvc}
-                  expiry={expiry}
-                  focused={focus}
-                  name={name}
-                  number={number}
-                />
+                <div style={{ marginTop: "30px", marginLeft: "150px" }}>
+                  <Cards
+                    cvc={cvc}
+                    expiry={expiry}
+                    focused={focus}
+                    name={name}
+                    number={number}
+                  />
+                  <img
+                    src={KartLogo}
+                    width={"200px"}
+                    style={{ margin: "40px 30px" }}
+                    alt=""
+                  />
+                  <p
+                    style={{
+                      borderTop: "1px solid #A97900",
+                      paddingTop: "10px",
+                      fontSize: "24px",
+                    }}
+                  >
+                    ÖDENECEK TUTAR:
+                    <span style={{ marginLeft: "40px", fontSize: "24px" }}>
+                      4449{" "}
+                      <img
+                        src={TL}
+                        style={{
+                          width: "11px",
+                          height: "14px",
+                          marginLeft: "-3px",
+                          marginTop: "-2px",
+                        }}
+                        alt=""
+                      />
+                    </span>
+                  </p>
+                  <button
+                    style={{
+                      width: "150px",
+                      height: "50px",
+                      background: "#A97900",
+                      borderRadius: "10px",
+                      fontSize: "20px",
+                      border: "none",
+                      color: "#FFFFFFFF",
+                      marginTop: "30px",
+                      marginLeft: "86px",
+                    }}
+                  >
+                    SATIN AL
+                  </button>
+                </div>
               </div>
             </div>
           </Container>
