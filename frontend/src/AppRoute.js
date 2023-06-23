@@ -15,7 +15,6 @@ import HesapDoğrulamaEkranı from "./components/şifre yenileme/HesapDoğrulama
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
 import SSSMain from "./components/sıkSorulanSorular/SSSMain.jsx";
-import Ucretlendirme from "./components/Ucretlendirme/UcretlendirmeMain.jsx";
 import SifreSıfırlama from "./pages/SifreSıfırlama";
 import YeniSifreBelirle from "./components/şifre yenileme/YeniSifreBelirle";
 
@@ -36,7 +35,7 @@ const AppRoute = () => {
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
       <Route path="/sıksorulansorular" element={<SSSMain />} />
-      <Route path="/ücretlendirme" element={<Ucretlendirme />} />
+
 
       <Route
         path="/reset-password-law/:id/:token"
