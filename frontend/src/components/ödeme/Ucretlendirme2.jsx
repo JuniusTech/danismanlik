@@ -3,7 +3,7 @@ import LeftSimge2 from "../../assets/LeftSimge2.png";
 import { Container } from "react-bootstrap";
 import TL from "../../assets/TL.png";
 import Ucretlendirme1 from "./Ucretlendirme1";
-import Cards from "react-credit-cards-2";
+// import Cards from "react-credit-cards-2";
 
 const Ucretlendirme2 = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -230,27 +230,111 @@ const Ucretlendirme2 = () => {
                 </div>
               </div>
             </div>
-            /*kredi kartı ödeme */
-            <div>
-              <Cards
-                number={state.number}
-                expiry={state.expiry}
-                cvc={state.cvc}
-                name={state.name}
-                focused={state.focus}
-              />
-              <form>
+
+            <div className="d-flex">
+              <div >
+                <div style={{ width: "450px", height: "80px", margin: "0px" }}>
+                  <label className="lawyerdashboard-registerLabel" style={{ width: "129px", height: "24px" }} htmlFor="">
+                    Kart numarası
+                  </label>
+                  <input
+                    className="lawyerdashboard-registerFormControl"
+                    style={{ width: "450px", height: "60px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
+                    type="password"
+                    value={""}
+                    placeholder="•••• •••• •••• ••••"
+
+                  />
+                </div>
+
+                <div style={{ width: "450px", height: "94px", marginTop: "45px" }}>
+                  <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                    Kart Üzerindeki İsim
+                  </label>
+                  <input
+                    className="lawyerdashboard-registerFormControl"
+                    style={{ width: "450px", height: "60px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
+                    type="text"
+                    value={""}
+                    placeholder="Kart sahibinin adı ve soyadı"
+
+                  />
+                </div>
+                <div style={{ width: "450px", height: "80px", marginTop: "45px" }}>
+                  <div className="d-flex">
+                    <div style={{ width: "220px", height: "94px" }}>
+                      <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                        Son kullanma tarihi
+                      </label>
+                      <input
+                        className="lawyerdashboard-registerFormControl"
+                        style={{ width: "220px", height: "60px", background: "#ebebeb", fontSize: "20px" }}
+                        type="text"
+                        value={""}
+                        placeholder="Ay/Yıl"
+
+                      />
+                    </div>
+                    <div style={{ width: "220px", height: "94px", marginLeft: "10px" }}>
+                      <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                        Güvenlik Kodu
+                      </label>
+                      <input
+                        className="lawyerdashboard-registerFormControl"
+                        style={{ width: "220px", height: "60px", background: "#ebebeb", fontSize: "20px" }}
+                        type="text"
+                        value={""}
+                        placeholder="CVC / CVV"
+
+                      />
+                    </div>
+
+                  </div>
+                  <div className="d-flex align-items-center" style={{ marginTop: "50px" }}>
+                    <input
+                      style={{ width: "24px", height: "24px", borderRadius: "8px" }}
+                      type="check-box"
+                      aria-label="Radio button for following text input"
+                    />
+                    <label style={{ fontSize: "14px", marginLeft: "10px" }} htmlFor="">
+                      <span>Ön bilgilendirme formunu</span> ve <span>Mesafeli satış sözleşmesini</span> onaylıyorum.
+                    </label>
+
+                  </div>
+                  <div className="d-flex align-items-center" style={{ marginTop: "10px" }}>
+                    <input
+                      style={{ width: "24px", height: "24px", borderRadius: "8px" }}
+                      type="check-box"
+                      aria-label="Radio button for following text input"
+                    />
+                    <label style={{ fontSize: "14px", marginLeft: "10px" }} htmlFor="">
+                      Kart bilgilerimin Mastercard altyapısıyla kaydedilmesini onaylıyorum.
+                    </label>
+
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                  Bu kısım değişecek
+                </label>
                 <input
-                  type="number"
-                  name="number"
-                  placeholder="Card Number"
-                  value={state.number}
-                  onChange={handleInputChange}
-                  onFocus={handleInputFocus}
+                  className="lawyerdashboard-registerFormControl"
+                  style={{ width: "450px", height: "60px", borderRadius: "10px" }}
+                  type="text"
+                  value={""}
+                  placeholder="Kart Üzerindeki İsim"
+
                 />
-                ...
-              </form>
+
+              </div>
+
             </div>
+
+
+
+
+
           </Container>
         </div>
       )}

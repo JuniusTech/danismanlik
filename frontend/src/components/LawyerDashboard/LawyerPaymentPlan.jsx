@@ -227,7 +227,7 @@ const LawyerPaymentPlan = () => {
                             margin: "55px 42px 6px 42px ",
                             cursor: "pointer"
                         }}
-                            onClick={() => navigate("/fiyatlandırma")}
+                            onClick={() => navigate("/ödeme")}
                         >Diğer Planları Gör</p>
                     </div>
                     <div style={{ width: "341px", height: "24px", margin: "50px 60px 30px -70px" }}>
