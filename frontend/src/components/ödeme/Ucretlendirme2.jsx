@@ -7,6 +7,46 @@ import Ucretlendirme1 from "./Ucretlendirme1";
 // import Cards from "react-credit-cards-2";
 
 const Ucretlendirme2 = () => {
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardHolderName, setCardHolderName] = useState('');
+  const [expirationDate, setExpirationDate] = useState("");
+
+  const handleCardNumberChange = (e) => {
+    const input = e.target.value;
+
+    const cleanedInput = input.replace(/\D/g, '');
+
+    const truncatedInput = cleanedInput.slice(0, 16);
+
+    const formattedInput = truncatedInput.replace(/(\d{4})/g, '$1 ');
+    setCardNumber(formattedInput);
+  };
+
+  const handleCardHolderNameChange = (event) => {
+    const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, ""); // Sadece harfleri tutar
+    setCardHolderName(input);
+  };
+
+  const handleExpirationDateChange = (event) => {
+    setExpirationDate(event.target.value);
+  };
+
+  const formatExpirationDate = (input) => {
+    // Remove any non-digit characters from the input
+    const cleanedInput = input.replace(/\D/g, "");
+
+    // Check if the input has reached the maximum length of 4 characters
+    if (cleanedInput.length > 4) {
+      return cleanedInput.slice(0, 4);
+    }
+
+    // Format the input with "/" separator after the second character
+    if (cleanedInput.length > 2) {
+      return cleanedInput.slice(0, 2) + "/" + cleanedInput.slice(2);
+    }
+
+    return cleanedInput;
+  };
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleButtonClick = () => {
@@ -240,10 +280,11 @@ const Ucretlendirme2 = () => {
                   </label>
                   <input
                     className="lawyerdashboard-registerFormControl"
-                    style={{ width: "450px", height: "60px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
+                    style={{ width: "450px", height: "60px", paddingLeft: "20px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
                     type="password"
-                    value={""}
+                    value={cardNumber}
                     placeholder="•••• •••• •••• ••••"
+                    onChange={handleCardNumberChange}
 
                   />
                 </div>
@@ -254,10 +295,11 @@ const Ucretlendirme2 = () => {
                   </label>
                   <input
                     className="lawyerdashboard-registerFormControl"
-                    style={{ width: "450px", height: "60px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
+                    style={{ width: "450px", height: "60px", paddingLeft: "20px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
                     type="text"
-                    value={""}
+                    value={cardHolderName}
                     placeholder="Kart sahibinin adı ve soyadı"
+                    onChange={handleCardHolderNameChange}
 
                   />
                 </div>
@@ -269,12 +311,13 @@ const Ucretlendirme2 = () => {
                       </label>
                       <input
                         className="lawyerdashboard-registerFormControl"
-                        style={{ width: "220px", height: "60px", background: "#ebebeb", fontSize: "20px" }}
+                        style={{ width: "220px", height: "60px", paddingLeft: "20px", borderRadius: "10px", background: "#ebebeb", fontSize: "20px" }}
                         type="text"
-                        value={""}
-                        placeholder="Ay/Yıl"
-
+                        value={formatExpirationDate(expirationDate)}
+                        placeholder="Ay / Yıl"
+                        onChange={handleExpirationDateChange}
                       />
+
                     </div>
                     <div style={{ width: "220px", height: "94px", marginLeft: "10px" }}>
                       <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px", fontSize: "20px" }} htmlFor="">
@@ -282,7 +325,7 @@ const Ucretlendirme2 = () => {
                       </label>
                       <input
                         className="lawyerdashboard-registerFormControl"
-                        style={{ width: "220px", height: "60px", background: "#ebebeb", fontSize: "20px" }}
+                        style={{ width: "220px", height: "60px", paddingLeft: "20px", background: "#ebebeb", fontSize: "20px" }}
                         type="text"
                         value={""}
                         placeholder="CVC / CVV"
@@ -316,18 +359,22 @@ const Ucretlendirme2 = () => {
                 </div>
               </div>
               <div style={{ margin: "auto", marginLeft: "185px" }}>
-                <div style={{ width: "400px", height: "250px", borderRadius: "10px", color: "#FFFFFF", marginTop: "50px", border: "1px solid black", boxShadow: "50px", blur: "%20" }}>
+                <div style={{ width: "400px", height: "250px", borderRadius: "10px", color: "#FFFFFF", marginTop: "50px", border: "0.1px solid white", boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.25)", blur: "%20" }}>
+                  <div style={{ color: "black", marginTop: "140px", marginLeft: "35px", fontSize: "20px" }}>{cardNumber || "0000 0000 0000 0000"}</div>
+                  <div style={{ color: "black", marginLeft: "35px", fontSize: "20px" }}>{cardHolderName || "Kart Sahibi"}</div>
+                  <div style={{ color: "black", marginLeft: "35px", fontSize: "20px" }}>{expirationDate || "AA/YY"}</div>
+
                 </div>
 
                 <img src={logo} alt="" width={260} height={51} style={{ marginTop: "28px", marginLeft: "70px" }} />
                 <div style={{ borderBottom: "2px solid #A97900", marginTop: "60px" }}></div>
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between" style={{ marginTop: "10px" }}>
                   <p style={{ fontSize: "24px" }}>ÖDENECEK TUTAR :</p>
                   <p style={{ fontSize: "24px" }}>4.449 TL</p>
 
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <button style={{ width: "150px", height: "50px", background: "#A97900", color: "white", fontSize: "20px", borderRadius: "10px" }} width="150px" height="50px"> SATIN AL</button>
+                  <button style={{ width: "150px", height: "50px", marginTop: "5px", background: "#A97900", color: "white", fontSize: "20px", borderRadius: "10px" }} width="150px" height="50px"> SATIN AL</button>
                 </div>
 
               </div>
