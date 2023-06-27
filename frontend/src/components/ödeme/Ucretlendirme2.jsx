@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LeftSimge2 from "../../assets/LeftSimge2.png";
 import { Container } from "react-bootstrap";
 import TL from "../../assets/TL.png";
+import logo from "../../assets/Logolar.png";
 import Ucretlendirme1 from "./Ucretlendirme1";
 // import Cards from "react-credit-cards-2";
 
@@ -42,7 +43,7 @@ const Ucretlendirme2 = () => {
               height: "19px",
               fontSize: "16px",
               fontWeight: "500",
-              margin: "26px 0 20px 208px",
+              margin: "26px 0 20px 158px",
             }}
             onClick={handleButtonClick}
           >
@@ -60,8 +61,8 @@ const Ucretlendirme2 = () => {
           </p>
           <Container
             style={{
-              width: "1120px",
-              height: "820px",
+              width: "1309px",
+              height: "800px",
               border: "1px solid #A97900",
               borderRadius: "10px",
               marginBottom: "40px",
@@ -231,10 +232,10 @@ const Ucretlendirme2 = () => {
               </div>
             </div>
 
-            <div className="d-flex">
+            <div className="d-flex" >
               <div >
                 <div style={{ width: "450px", height: "80px", margin: "0px" }}>
-                  <label className="lawyerdashboard-registerLabel" style={{ width: "129px", height: "24px" }} htmlFor="">
+                  <label className="lawyerdashboard-registerLabel" style={{ width: "199px", height: "24px", fontSize: "20px" }} htmlFor="">
                     Kart numarası
                   </label>
                   <input
@@ -248,7 +249,7 @@ const Ucretlendirme2 = () => {
                 </div>
 
                 <div style={{ width: "450px", height: "94px", marginTop: "45px" }}>
-                  <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                  <label className="lawyerdashboard-registerLabel" style={{ width: "199px", height: "24px", fontSize: "20px" }} htmlFor="">
                     Kart Üzerindeki İsim
                   </label>
                   <input
@@ -263,7 +264,7 @@ const Ucretlendirme2 = () => {
                 <div style={{ width: "450px", height: "80px", marginTop: "45px" }}>
                   <div className="d-flex">
                     <div style={{ width: "220px", height: "94px" }}>
-                      <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                      <label className="lawyerdashboard-registerLabel" style={{ width: "199px", height: "24px", fontSize: "20px" }} htmlFor="">
                         Son kullanma tarihi
                       </label>
                       <input
@@ -276,7 +277,7 @@ const Ucretlendirme2 = () => {
                       />
                     </div>
                     <div style={{ width: "220px", height: "94px", marginLeft: "10px" }}>
-                      <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
+                      <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px", fontSize: "20px" }} htmlFor="">
                         Güvenlik Kodu
                       </label>
                       <input
@@ -297,7 +298,7 @@ const Ucretlendirme2 = () => {
                       aria-label="Radio button for following text input"
                     />
                     <label style={{ fontSize: "14px", marginLeft: "10px" }} htmlFor="">
-                      <span>Ön bilgilendirme formunu</span> ve <span>Mesafeli satış sözleşmesini</span> onaylıyorum.
+                      <span style={{ color: "#A97900" }}>Ön bilgilendirme formunu</span> ve <span style={{ color: "#A97900" }}>Mesafeli satış sözleşmesini</span> onaylıyorum.
                     </label>
 
                   </div>
@@ -314,18 +315,20 @@ const Ucretlendirme2 = () => {
                   </div>
                 </div>
               </div>
-              <div>
-                <label className="lawyerdashboard-registerLabel" style={{ width: "183px", height: "24px" }} htmlFor="">
-                  Bu kısım değişecek
-                </label>
-                <input
-                  className="lawyerdashboard-registerFormControl"
-                  style={{ width: "450px", height: "60px", borderRadius: "10px" }}
-                  type="text"
-                  value={""}
-                  placeholder="Kart Üzerindeki İsim"
+              <div style={{ margin: "auto", marginLeft: "185px" }}>
+                <div style={{ width: "400px", height: "250px", borderRadius: "10px", color: "#FFFFFF", marginTop: "50px", border: "1px solid black", boxShadow: "50px", blur: "%20" }}>
+                </div>
 
-                />
+                <img src={logo} alt="" width={260} height={51} style={{ marginTop: "28px", marginLeft: "70px" }} />
+                <div style={{ borderBottom: "2px solid #A97900", marginTop: "60px" }}></div>
+                <div className="d-flex justify-content-between">
+                  <p style={{ fontSize: "24px" }}>ÖDENECEK TUTAR :</p>
+                  <p style={{ fontSize: "24px" }}>4.449 TL</p>
+
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button style={{ width: "150px", height: "50px", background: "#A97900", color: "white", fontSize: "20px", borderRadius: "10px" }} width="150px" height="50px"> SATIN AL</button>
+                </div>
 
               </div>
 
