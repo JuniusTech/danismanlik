@@ -4,7 +4,6 @@ import { Container } from "react-bootstrap";
 import TL from "../../assets/TL.png";
 import logo from "../../assets/Logolar.png";
 import Ucretlendirme1 from "./Ucretlendirme1";
-// import Cards from "react-credit-cards-2";
 
 const Ucretlendirme2 = () => {
   const [cardNumber, setCardNumber] = useState('');
@@ -32,15 +31,12 @@ const Ucretlendirme2 = () => {
   };
 
   const formatExpirationDate = (input) => {
-    // Remove any non-digit characters from the input
     const cleanedInput = input.replace(/\D/g, "");
 
-    // Check if the input has reached the maximum length of 4 characters
     if (cleanedInput.length > 4) {
       return cleanedInput.slice(0, 4);
     }
 
-    // Format the input with "/" separator after the second character
     if (cleanedInput.length > 2) {
       return cleanedInput.slice(0, 2) + "/" + cleanedInput.slice(2);
     }
