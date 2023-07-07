@@ -9,6 +9,9 @@ const Ucretlendirme2 = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
   const [expirationDate, setExpirationDate] = useState("");
+  const [cvc, setCvc] = useState("");
+
+  const [infoText, setInfoText] = useState(false);
 
   const handleCardNumberChange = (e) => {
     const input = e.target.value;
@@ -28,6 +31,9 @@ const Ucretlendirme2 = () => {
 
   const handleExpirationDateChange = (event) => {
     setExpirationDate(event.target.value);
+  };
+  const handleCvcChange = (event) => {
+    setCvc(event.target.value);
   };
 
   const formatExpirationDate = (input) => {
@@ -323,8 +329,9 @@ const Ucretlendirme2 = () => {
                         className="lawyerdashboard-registerFormControl"
                         style={{ width: "220px", height: "60px", paddingLeft: "20px", background: "#ebebeb", fontSize: "20px" }}
                         type="text"
-                        value={""}
+                        value={cvc}
                         placeholder="CVC / CVV"
+                        onChange={handleCvcChange}
 
                       />
                     </div>
@@ -333,8 +340,9 @@ const Ucretlendirme2 = () => {
                   <div className="d-flex align-items-center" style={{ marginTop: "50px" }}>
                     <input
                       style={{ width: "24px", height: "24px", borderRadius: "8px" }}
-                      type="check-box"
+                      type="checkbox"
                       aria-label="Radio button for following text input"
+                      onClick={() => setInfoText(!infoText)}
                     />
                     <label style={{ fontSize: "14px", marginLeft: "10px" }} htmlFor="">
                       <span style={{ color: "#A97900" }}>Ön bilgilendirme formunu</span> ve <span style={{ color: "#A97900" }}>Mesafeli satış sözleşmesini</span> onaylıyorum.
@@ -344,8 +352,9 @@ const Ucretlendirme2 = () => {
                   <div className="d-flex align-items-center" style={{ marginTop: "10px" }}>
                     <input
                       style={{ width: "24px", height: "24px", borderRadius: "8px" }}
-                      type="check-box"
+                      type="checkbox"
                       aria-label="Radio button for following text input"
+                      onClick={() => setInfoText(!infoText)}
                     />
                     <label style={{ fontSize: "14px", marginLeft: "10px" }} htmlFor="">
                       Kart bilgilerimin Mastercard altyapısıyla kaydedilmesini onaylıyorum.
