@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import eye from "../../assets/eye.svg"
-import { useNavigate } from "react-router-dom";
 import LawyerPaymentPlan from "./LawyerPaymentPlan";
 import InvoiceDetails from "./InvoiceDetails";
 
@@ -14,8 +13,6 @@ import InvoiceDetails from "./InvoiceDetails";
 const LawyerPaymentSetting = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
     const [loading, setLoading] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
 
@@ -42,7 +39,7 @@ const LawyerPaymentSetting = () => {
             setLoading(false);
         }
     };
-    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
+
 
     const [showLawyerPaymentPlan, setShowLawyerPaymentPlan] = useState(true)
     const [showInvoiceDetails, setShowInvoiceDetails] = useState(true)

@@ -266,7 +266,8 @@ const LawyerAccountSettings = ({
                     </div>
                     <div className="search-left-border"></div>
                     <div className="d-flex" style={{ width: "274px" }}>
-                        <label className="align-items-center" style={{ color: "#a97900", marginLeft: "5px", marginTop: "28px", backgroundColor: "transparent", border: "none" }} >
+                        <label className="align-items-center" style={{ color: "#a97900", marginLeft: "5px", marginTop: "28px", backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+                            onClick={() => navigate("/odeme")}>
                             Üyelik Planını Yükselt
                         </label>
                     </div>
