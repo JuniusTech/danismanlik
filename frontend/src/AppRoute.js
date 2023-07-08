@@ -17,6 +17,7 @@ import LawyerHomePage from "./pages/LawyerHomePage";
 import SSSMain from "./components/sıkSorulanSorular/SSSMain.jsx";
 import SifreSıfırlama from "./pages/SifreSıfırlama";
 import YeniSifreBelirle from "./components/şifre yenileme/YeniSifreBelirle";
+import UyeliginizAktifEdildi from "./pages/UyeliginizAktifEdildi";
 
 const AppRoute = () => {
   return (
@@ -36,6 +37,11 @@ const AppRoute = () => {
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
       <Route path="/sıksorulansorular" element={<SSSMain />} />
       <Route path="/odeme" element={<Odeme />} />
+      <Route
+        path="/üyeliğiniz-aktif-edildi"
+        element={<UyeliginizAktifEdildi />}
+      />
+
 
       <Route
         path="/reset-password-law/:id/:token"
