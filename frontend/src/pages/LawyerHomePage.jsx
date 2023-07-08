@@ -19,7 +19,7 @@ const LawyerHomePage = () => {
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate("/fiyatlandırma");
+    navigate("/odeme");
   };
   return (
     <>

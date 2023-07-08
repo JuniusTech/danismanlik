@@ -36,11 +36,12 @@ const AppRoute = () => {
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
       <Route path="/sıksorulansorular" element={<SSSMain />} />
-      <Route path="/ödeme" element={<Odeme />} />
+      <Route path="/odeme" element={<Odeme />} />
       <Route
         path="/üyeliğiniz-aktif-edildi"
         element={<UyeliginizAktifEdildi />}
       />
+
 
       <Route
         path="/reset-password-law/:id/:token"
