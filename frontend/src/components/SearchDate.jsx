@@ -128,7 +128,7 @@ const SearchDate = ({ lawyer }) => {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
-          day: "0" + selectedDay + "-" + "0" + selectedMonth + "-" + selectedYear,
+          day: selectedDay + "-" + selectedMonth + "-" + selectedYear,
           hour: selectedHour,
           description: "randevu",
           token: jwtToken

@@ -194,7 +194,7 @@ const Ucretlendirme2 = () => {
                         marginTop: "-5px",
                       }}
                     >
-                      4499{" "}
+                      4.499{" "}
                       <span>
                         <svg
                           style={{ margin: "-20px 0 0 -5px" }}
@@ -219,7 +219,7 @@ const Ucretlendirme2 = () => {
                         marginTop: "-15px",
                       }}
                     >
-                      Aylık Abonelik / KDV Dahil
+                      Yıllık Abonelik / KDV Dahil
                     </p>
                   </div>
                   <div
