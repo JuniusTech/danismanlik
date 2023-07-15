@@ -18,7 +18,8 @@ const LawyerDashboard = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const items = ["Randevularım", "Kişisel Bilgiler", "Hesap Ayarları", "Ödeme Ayarları", "Yardım ve Destek"]
     const [selectedDate, setSelectedDate] = useState(null);
-    const [selectedRow, setSelectedRow] = useState(null)
+    const [selectedRow, setSelectedRow] = useState(null);
+
     const showComponent = (item) => {
         if (item === "Randevularım") {
             return <LawyerDates handleDateClick={handleDateClick} />;
@@ -37,6 +38,8 @@ const LawyerDashboard = () => {
     const handleDateClick = (date, index) => {
         setSelectedRow(index);
         setSelectedDate(date);
+        setShowDates(true);
+        setSelectedItem("Randevularım");
     };
 
     const [showDates, setShowDates] = useState(false);
@@ -50,8 +53,9 @@ const LawyerDashboard = () => {
 
     const onItemClick = (item) => {
         setSelectedItem(item);
-        showDatesDetails(item)
+        setShowDates(false);
     };
+
     return (
         <>
             <Navbar />

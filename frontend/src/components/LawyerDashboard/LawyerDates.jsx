@@ -67,20 +67,17 @@ const LawyerDates = ({ handleDateClick, index }) => {
                 </thead>
                 <tbody style={{ font: "normal small normal 14px/16px SF Pro Text" }}>
                     {getDisplayedDates()
-                        .map((item) => (
-
-
+                        .map((item, index) => (
                             <tr
                                 key={item._id}
                                 onClick={() => handleDateClick(item, index)}
-
 
                                 style={{
                                     borderBottom: "1px solid #A97900",
                                     paddingTop: "10px",
                                     paddingBottom: "10px",
                                     font: "normal normal normal 14px/16px SF Pro Text",
-                                    backgroundColor: selectedRow === index ? "#a97900" : "transparent",
+                                    backgroundColor: selectedRow === index ? "#e9ddbf" : "transparent",
                                 }}
                             >
                                 <td
