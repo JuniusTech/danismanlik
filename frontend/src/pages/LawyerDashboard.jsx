@@ -56,6 +56,14 @@ const LawyerDashboard = () => {
         setShowDates(false);
     };
 
+    const handlePhotoChange = (e) => {
+        const selectedPhoto = e.target.files[0];
+        setPreviewPhoto(selectedPhoto);
+    };
+
+
+    const [previewPhoto, setPreviewPhoto] = useState(null);
+
     return (
         <>
             <Navbar />
@@ -65,13 +73,31 @@ const LawyerDashboard = () => {
                         <div className="d-flex justify-content-center ">
                             <div className="lawyerdashboard-photo">
                                 {/* //! Bu kısım  lawyerInfo.image varsa olarak değişecek. */}
-                                <img width="23.69px" height="21.63px" src={lawyerInfo.surname ?
-                                    image
-                                    :
-                                    photo
-                                } alt="" />
+                                {previewPhoto ? (
+                                    <img
+                                        src={URL.createObjectURL(previewPhoto)}
+                                        alt="Selected Photo"
+                                        width="100"
+                                        height="100"
+                                    />
+                                ) : (
+
+                                    <img
+                                        width="23.69px"
+                                        height="21.63px"
+                                        src={lawyerInfo.name ? image : photo}
+                                        alt=""
+                                    />
+                                )}
                             </div>
                         </div>
+                        <input
+                            style={{ width: "200px", height: "31.63px" }}
+                            type="file"
+                            accept="image/*"
+                            onChange={handlePhotoChange}
+                            aria-label="Fotoğraf Seç"
+                        />
                         <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
                             {lawyerInfo.name} {lawyerInfo.surname}
                         </div>
