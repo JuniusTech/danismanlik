@@ -10,9 +10,11 @@ const UserDashboard = () => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [selectedItem, setSelectedItem] = useState(null);
   const items = ["Randevularım", "Kişisel Bilgiler", "Favori Avukatlarım"];
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
   const showComponent = (item) => {
     if (item === "Randevularım") {
-      return <UserRandevularım />;
+      return <UserRandevularım handleDateClick={handleDateClick} />;
     } else if (item === "Kişisel Bilgiler") {
       return <UserKişiselBilgiler />;
     } else if (item === "Favori Avukatlarım") {
@@ -22,6 +24,11 @@ const UserDashboard = () => {
 
   const onItemClick = (item) => {
     setSelectedItem(item);
+  };
+
+  const handleDateClick = (date, index) => {
+    setSelectedRow(index);
+    setSelectedDate(date);
   };
   return (
     <>
