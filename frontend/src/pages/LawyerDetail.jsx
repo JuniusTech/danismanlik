@@ -276,11 +276,6 @@ const LawyerDetail = () => {
             <div id="Adres" className='w-75'>
               <h3>Adres</h3>
               <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
-              <p>En Yakın Uygunluk
-                <button className="rounded-3 mt-3 search-hoursbutton">13 Mayıs</button>
-                <button className="rounded-3 mt-3 search-hoursbutton">13 Mayıs</button>
-                <button className="rounded-3 mt-3 search-hoursbutton">13 Mayıs</button>
-              </p>
             </div>
           </div>
           <div id='Hizmetler' className="lawyer-card rounded-4 mt-5 ">
@@ -307,7 +302,7 @@ const LawyerDetail = () => {
                 <div className='w-10'>
                   <button className='lawyer-rating-button'>{lawyer.reviews?.length === 0 ? "0" : lawyer.rating?.toFixed(1)}</button>
                 </div>
-                <div className=' p-0 w-25'>
+                <div className=' p-0 w-100'>
                   <p className="m-2 star">
                     <span>
                       <i
@@ -365,11 +360,11 @@ const LawyerDetail = () => {
                       />
                     </span><br />
                   </p>
-                  <p>Genel Skor</p>
-                  <span>{lawyer.reviews?.length} yorum </span>
+                  <p className='mx-2'> Genel Skor</p>
+                  <span className='mx-2'>{lawyer.reviews?.length} yorum </span>
                 </div>
                 <div className=' mx-5'>
-                  <p className='lawyer-card-comments-box mx-5 d-flex align-items-center w-100 rounded-4 m-auto '>
+                  <p className='lawyer-card-comments-box mx-4 d-flex align-items-center w-100 rounded-4 m-auto '>
                     <i className="fa-solid fa-circle-check mx-2 text-warning"></i>
                     <p>
                       Tüm yorumlar moderatörlerden oluşan profesyonel bir ekip tarafından incelenir ve adil, kurallara uygun bir şekilde yayınlanır.
