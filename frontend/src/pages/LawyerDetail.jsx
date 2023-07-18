@@ -1,43 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SearchDate from '../components/SearchDate'
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg"
 import "../css/lawyercard.css"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Link } from "react-scroll";
 import Footer from '../components/Footer';
 import telephone from "../assets/telephone.svg"
 import web from "../assets/web.svg"
-// import axios from 'axios';
-// import { toast } from 'react-toastify';
-// import { getError } from "../getError";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { getError } from "../getError";
 import ltrght from "../assets/little-right-arrow.svg"
 import Comment from './Comment';
 
 
-
 const LawyerDetail = () => {
-  // const [lawyer, setLawyer] = useState("");
-
-
-  // const params = useParams()
-  // const { lawyerid } = params
+  const [lawyer, setLawyer] = useState("");
+  const params = useParams()
+  const { lawyerid } = params
   // console.log(lawyerid)
   // console.log(user)
 
-  const { state: lawyer } = useLocation();
+  // const { state: lawyer } = useLocation();
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
-  //     .then((response) => {
-  //       setLawyer(response.data);
-  //     })
-  //     .catch((error) => {
-  //       toast.error(getError(error));
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerid}`)
+      .then((response) => {
+        setLawyer(response.data);
+      })
+      .catch((error) => {
+        toast.error(getError(error));
+      });
+  }, []);
 
   const getStarReting = (reting) => {
     let filledStars = "";
@@ -51,10 +48,6 @@ const LawyerDetail = () => {
     return filledStars + emptyStars;
   };
 
-
-  // const user = "Ahmet"
-
-
   const [readMore] = useState(false);
 
   const extraContent = <p className="extra-content"></p>;
@@ -66,7 +59,6 @@ const LawyerDetail = () => {
       [lawyerId]: !prevStates[lawyerId],
     }));
   };
-  // console.log(lawyer)
 
   function formatDate(dateString) {
     const formattedDate = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateString));
@@ -182,9 +174,6 @@ const LawyerDetail = () => {
                 </button>
               </div>
               <div className="mt-2 ">
-
-
-
                 <div className="p-2 d-flex justify-content-start star">
                   <div className="p-2 d-flex justify-content-start align-items-center star">
                     <div className='lawyer-card-phone'>
@@ -229,8 +218,6 @@ const LawyerDetail = () => {
                 </ul>
               </div>
             </div>
-
-
           </div>
           <div id='Özgeçmiş' className="lawyer-card rounded-4 mt-5 ">
             <h3 >Hakkımda</h3>
@@ -295,15 +282,9 @@ const LawyerDetail = () => {
                 <button className="rounded-3 mt-3 search-hoursbutton">13 Mayıs</button>
               </p>
             </div>
-            <div className='w-25'>
-              <p >Harita</p>
-            </div>
-
           </div>
           <div id='Hizmetler' className="lawyer-card rounded-4 mt-5 ">
             <h3 >Hizmetler</h3>
-
-
             <ul >
               <li >
                 İcra takibi
@@ -424,27 +405,6 @@ const LawyerDetail = () => {
               </div>
             </div>
             <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center" onClick={() => setShowComment(true)}>Yorum Ekle</button>
-            {/* <div className='lawyer-card-user-comment-each d-flex justify-content-between w-100'>
-              <form action="" method="post" className='d-flex w-75 justify-content-center '>
-                <div className=' justify-content-around w-10'>
-                  <button className="lawyer-rating-button rounded-circle">{user.charAt(0).toUpperCase()}</button>
-                </div>
-                <div className='justify-content-around w-75' >
-                  <textarea className='mx-3 ' name="comment" placeholder='Lütfen yorum giriniz' id="" cols="70" rows="2"></textarea>
-
-                </div>
-
-
-              </form>
-              <i className="d-flex align-items-center fa-solid fa-square-caret-right fa-2xl"></i>
-              <div className='d-flex justify-content-around w-10'>
-                <p className='m-2'>Puan:</p>
-                <p className="m-2 star">
-                  ☆☆☆☆☆
-
-                </p>
-              </div>
-            </div> */}
             <button className="rounded-3 mt-3 lawyer-comment-button d-flex justify-content-center">Tüm Yorumları Göster</button>
           </div>
 
