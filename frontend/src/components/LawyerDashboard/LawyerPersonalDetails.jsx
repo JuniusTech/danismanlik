@@ -13,7 +13,8 @@ const LawyerPersonalDetails = () => {
     const phone = `${phoneRegion} + ${phoneNo}`;
     const [loading, setLoading] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
-    const [name, setName] = useState("")
+    const [name, setName] = useState("");
+    const picture = ("");
 
 
 
@@ -25,9 +26,7 @@ const LawyerPersonalDetails = () => {
             const { data } = await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
                 {
-                    name,
-                    email,
-                    phone,
+                    picture
                 }
             );
             setLoading(false);

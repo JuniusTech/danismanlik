@@ -124,7 +124,7 @@ const LawyerAccountSettings = ({
                             type="text"
                             value={""}
                         />
-                        <label className="lawyeraccountsetting-input "
+                        {/* <label className="lawyeraccountsetting-input "
                             style={{ display: "flex", justifyContent: "start", marginTop: "15px" }} htmlFor="">
                             Branş 2
                             <label style={{ color: "#a97900", backgroundColor: "transparent", border: "none" }} >
@@ -149,7 +149,7 @@ const LawyerAccountSettings = ({
                                         {item.title}
                                     </option>
                                 ))}
-                        </select>
+                        </select> */}
 
 
                     </div>
@@ -171,7 +171,7 @@ const LawyerAccountSettings = ({
                         </div>
 
                         <label className="lawyeraccountsetting-input" style={{ widht: "20px", display: "flex", marginTop: "15px" }} htmlFor="">
-                            Branş 1
+                            Branş
                         </label>
 
 
@@ -193,14 +193,15 @@ const LawyerAccountSettings = ({
                                     </option>
                                 ))}
                         </select>
-                        {showAddButton ? (
+                        {/* {showAddButton ? (
                             <div className="d-flex justify-content-start align-items-center"
                                 style={{ marginTop: "15px" }}>
                                 <br /><br /> <br /> <br />
                                 <div className="d-flex justify-content-start align-items-center star mt-3" style={{ cursor: "pointer" }} onClick={handleAddBranch}>
                                     <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <h5 className=" d-flex align-items-center pt-2">Branş Ekle</h5>
                                 </div>
-                            </div>) : (
+                            </div>) : 
+                            (
                             <div >
                                 <div
                                     style={{ marginTop: "15px" }}>
@@ -231,7 +232,7 @@ const LawyerAccountSettings = ({
                                             ))}
                                     </select>
                                 </div>
-                            </div>)}
+                            </div>)} */}
 
 
                     </div>

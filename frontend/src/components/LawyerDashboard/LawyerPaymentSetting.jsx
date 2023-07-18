@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
-import eye from "../../assets/eye.svg"
 import LawyerPaymentPlan from "./LawyerPaymentPlan";
 import InvoiceDetails from "./InvoiceDetails";
 
@@ -23,7 +22,7 @@ const LawyerPaymentSetting = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await axios.post(
+            await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
                 {
                     email,

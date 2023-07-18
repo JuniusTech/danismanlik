@@ -61,7 +61,8 @@ const SearchDate = ({ lawyer }) => {
     setSelectedYear(year)
     setModalOpen(true);
 
-    console.log(dayOfMonth, month, selectedHour);
+    console.log(dayOfMonth, month, hour)
+    console.log(selectedDay + "." + selectedMonth + "." + selectedYear);
   };
 
 
@@ -106,9 +107,10 @@ const SearchDate = ({ lawyer }) => {
   const datesDate = [0, 1, 2, 3].map((day, index) => {
     const currentDate = new Date(dateRange[0]);
     currentDate.setDate(dateRange[0].getDate() + index);
-    return `0${currentDate.getDate()}-0${currentDate.getMonth() + 1
-      }-${currentDate.getFullYear()}`;
+    return `${currentDate.getDate()}.${currentDate.getMonth() + 1
+      }.${currentDate.getFullYear()}`;
   });
+  console.log(datesDate);
 
 
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -128,12 +130,12 @@ const SearchDate = ({ lawyer }) => {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
-          day: "0" + selectedDay + "-" + "0" + selectedMonth + "-" + selectedYear,
+          day: selectedDay + "." + selectedMonth + "." + selectedYear,
           hour: selectedHour,
           description: "randevu",
           token: jwtToken
         },
-        console.log(selectedDay + "-" + selectedMonth + "-" + selectedYear),
+        console.log(selectedDay + "." + selectedMonth + "." + selectedYear),
         console.log(jwtToken)
       );
       console.log(data);
@@ -284,8 +286,6 @@ const SearchDate = ({ lawyer }) => {
                     padding: "2rem",
                     boxShadow: "0px 0px 30px #0000004D",
                     borderRadius: "25px",
-
-                    /* Diğer gerekli stil özelliklerini inline olarak ekleyebilirsiniz */
                   }}
                 >
                   <div
