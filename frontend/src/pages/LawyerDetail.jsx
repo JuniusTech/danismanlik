@@ -454,14 +454,6 @@ const LawyerDetail = () => {
           <h1 className='lawyer-card-dates-top'>Randevu Al</h1>
           <div className='d-flex justify-content-between m-4'>
             <h2>Adres</h2>
-            <h2
-              id={lawyer._id}
-              className="more"
-              onClick={() => handleReadMoreClick(lawyer._id)}
-            >
-              Haritada Gör
-            </h2>
-
           </div>
           <p className='mx-4'> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
           <SearchDate lawyer={lawyer} />
