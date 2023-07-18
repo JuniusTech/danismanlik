@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const UserKişiselBilgiler = () => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   return (
     <div
       className="userDashboardRight"
@@ -18,19 +19,23 @@ const UserKişiselBilgiler = () => {
       </p>
       <Form>
         <Form.Group>
-          <Form.Label>Ad*</Form.Label>
-          <Form.Control placeholder="Ad" />
+          <Form.Label>Ad</Form.Label>
+          <Form.Control placeholder="Ad" value={userInfo.name} />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Soyad*</Form.Label>
-          <Form.Control placeholder="Soyad" />
+          <Form.Label>Soyad</Form.Label>
+          <Form.Control placeholder="Soyad" value={userInfo.surname} />
         </Form.Group>
         <Form.Group>
           <Form.Label>
-            E-Posta*{" "}
+            Eposta
             <span style={{ color: "#A97900" }}>(E-Posta Değiştir)</span>
           </Form.Label>
-          <Form.Control placeholder="E-Posta" type="email" />
+          <Form.Control
+            placeholder="E-Posta"
+            value={userInfo.email}
+            type="email"
+          />
         </Form.Group>
         <Form.Group>
           <Form.Label>
@@ -39,7 +44,7 @@ const UserKişiselBilgiler = () => {
           <Form.Control placeholder="Şifre" type="password" />
         </Form.Group>
         <Form.Label>
-          Tel. Numarası*{" "}
+          Telefon
           <span style={{ color: "#A97900" }}>(Tel. Numarası Değiştir)</span>
         </Form.Label>
         <Form.Group style={{ display: "flex" }}>
@@ -48,7 +53,7 @@ const UserKişiselBilgiler = () => {
             placeholder="+90"
           />
 
-          <Form.Control placeholder="555 444 33 22" />
+          <Form.Control value={userInfo.phone} placeholder="555 444 33 22" />
         </Form.Group>
         <div
           className="userdashboardButtons"
