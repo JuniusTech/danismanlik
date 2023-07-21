@@ -110,6 +110,7 @@ const updateLawyer = expressAsyncHandler(async (req, res) => {
     lawyer.barNo = req.body.barNo || lawyer.barNo;
     lawyer.email = req.body.email || lawyer.email;
     lawyer.branch = req.body.branch || lawyer.branch;
+    lawyer.address = req.body.address || lawyer.address;
     lawyer.memberAg = Boolean(req.body.memberAg);
     lawyer.infoText = Boolean(req.body.infoText);
     lawyer.perData = Boolean(req.body.perData);
@@ -185,6 +186,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     branch: lawyer.branch,
     phone: lawyer.phone,
     isAdmin: lawyer.isAdmin,
+    address: lawyer.address,
     token: token,
   });
   return;
@@ -201,6 +203,7 @@ const signup = expressAsyncHandler(async (req, res) => {
     barNo: req.body.barNo,
     branch: req.body.branch,
     password: bcrypt.hashSync(req.body.password),
+    address: req.body.address,
     memberAg: req.body.memberAg,
     infoText: req.body.infoText,
     perData: req.body.perData,
@@ -276,10 +279,10 @@ const createReview = expressAsyncHandler(async (req, res) => {
     lawyer.numReviews = lawyer.reviews.length;
     lawyer.rating =
       lawyer.reviews.reduce((a, c) => c.rating + a, 0) / lawyer.reviews.length;
-    const updatedProduct = await lawyer.save();
+    const updatedLawyer = await lawyer.save();
     res.status(201).send({
       message: "Review Created",
-      review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+      review: updatedLawyer.reviews[updatedLawyer.reviews.length - 1],
       numReviews: lawyer.numReviews,
       rating: lawyer.rating,
     });
