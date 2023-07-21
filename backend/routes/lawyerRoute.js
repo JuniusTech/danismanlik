@@ -17,7 +17,7 @@ const lawyerRouter = express.Router();
 lawyerRouter.get("/", getLawyers);
 lawyerRouter.get("/search", searchLawyers);
 lawyerRouter.get("/:id", getLawyer);
-lawyerRouter.put("/:id", updateLawyer);
+lawyerRouter.put("/:id", isLawyer, updateLawyer);
 lawyerRouter.delete("/:id", isLawyer, isLawyerAdmin, deleteLawyer);
 lawyerRouter.post("/signin", signin);
 lawyerRouter.post("/signup", signup);
