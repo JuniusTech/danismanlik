@@ -56,13 +56,17 @@ const LawyerDashboard = () => {
         setShowDates(false);
     };
 
+
+    const [previewPhoto, setPreviewPhoto] = useState(null);
+    const [isPhotoSelected, setIsPhotoSelected] = useState(false)
+
     const handlePhotoChange = (e) => {
         const selectedPhoto = e.target.files[0];
         setPreviewPhoto(selectedPhoto);
+        setIsPhotoSelected(true);
     };
 
 
-    const [previewPhoto, setPreviewPhoto] = useState(null);
 
     return (
         <>
@@ -79,6 +83,7 @@ const LawyerDashboard = () => {
                                         alt="Selected Photo"
                                         width="100"
                                         height="100"
+                                        style={{ borderRadius: "100%" }}
                                     />
                                 ) : (
 
@@ -92,11 +97,11 @@ const LawyerDashboard = () => {
                             </div>
                         </div>
                         <input
-                            style={{ width: "200px", height: "31.63px" }}
+                            style={{ width: "200px", height: "31.63px", marginLeft: "auto", display: isPhotoSelected ? "none" : "block" }}
                             type="file"
                             accept="image/*"
                             onChange={handlePhotoChange}
-                            aria-label="Fotoğraf Seç"
+                            title="Fotoğraf Seç"
                         />
                         <div className="d-flex justify-content-center m-auto" style={{ width: "82px", fontSize: "14px" }} >
                             {lawyerInfo.name} {lawyerInfo.surname}

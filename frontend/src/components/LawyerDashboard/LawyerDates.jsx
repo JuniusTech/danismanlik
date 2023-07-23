@@ -147,7 +147,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
 
                 </tbody>
             </table>
-            <div style={{ marginTop: "10px", display: "flex", justifyContent: "end" }}>
+            <div style={{ marginTop: "10px", display: "flex", justifyContent: "end", alignContent: "flex-end" }}>
                 {Array(Math.ceil(lawyerDates.length / 15))
                     .fill(0)
                     .map((_, i) => (

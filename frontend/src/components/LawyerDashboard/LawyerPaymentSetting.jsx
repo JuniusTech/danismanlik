@@ -57,7 +57,7 @@ const LawyerPaymentSetting = () => {
                                 <label className="lawyerdashboard-registerLabel" style={{ width: "105px" }} htmlFor="">
                                     Üyelik Planım {" "}
                                 </label>
-                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }}
+                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px", cursor: "pointer" }}
                                     onClick={() => setShowLawyerPaymentPlan(false)} >
 
                                     (Değiştir)
@@ -75,7 +75,7 @@ const LawyerPaymentSetting = () => {
                                 <label className="lawyerdashboard-registerLabel" style={{ width: "90px" }} htmlFor="">
                                     Fatura Özeti
                                 </label>
-                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px" }}
+                                <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px", cursor: "pointer" }}
                                     onClick={() => setShowInvoiceDetails(false)} >
 
                                     (Detayları Gör)

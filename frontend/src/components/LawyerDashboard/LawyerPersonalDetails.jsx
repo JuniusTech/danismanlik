@@ -3,7 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
-import data from "./data/data.json"
+import data from "./data/data.json";
+import { getCookie, removeCookie, setCookie } from "../../cookies";
 
 
 const LawyerPersonalDetails = () => {
@@ -14,30 +15,38 @@ const LawyerPersonalDetails = () => {
     const [loading, setLoading] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
     const [name, setName] = useState("");
+    const [addressDescription, setAddressDescription] = useState("");
+    const [postalCode, setPostalCode] = useState("");
     const picture = ("");
 
-
+    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await axios.post(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/signup`,
+            const { data } = await axios.put(
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
                 {
-                    picture
+                    address: {
+                        description: addressDescription,
+                        city: seciliIl,
+                        town: seciliIlce,
+                        district: seciliMahalle,
+                        code: postalCode,
+                    },
                 }
             );
             setLoading(false);
-
-            setShowLawyerRegister(false);
+            toast.success("Adres Güncellendi!");
+            setCookie("jwt", data.token);
         } catch (error) {
             toast.error(getError(error));
             setLoading(false);
         }
     };
-    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
+
 
     const [seciliIl, setSeciliIl] = useState("");
     const [seciliIlce, setSeciliIlce] = useState("");
@@ -155,8 +164,8 @@ const LawyerPersonalDetails = () => {
                         className="mx-2 pt-2 "
                         name="comment"
                         placeholder="Tam adres belirtiniz"
-                        id=""
-                        resiz
+                        value={addressDescription}
+                        onChange={(e) => setAddressDescription(e.target.value)}
 
 
                     ></textarea>
@@ -235,6 +244,8 @@ const LawyerPersonalDetails = () => {
                             type="text"
                             className="lawyerdashboard-registerFormControl"
                             placeholder="Posta Kodu"
+                            value={postalCode}
+                            onChange={(e) => setPostalCode(e.target.value)}
                         />
 
 
