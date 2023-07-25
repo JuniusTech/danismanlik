@@ -3,7 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
-import data from "./data/data.json";
+import data from "./data/data.json"
+
 
 const LawyerPersonalDetails = () => {
     const [email, setEmail] = useState("");
@@ -11,18 +12,15 @@ const LawyerPersonalDetails = () => {
     const [phoneNo, setPhoneNo] = useState("");
     const phone = `${phoneRegion} + ${phoneNo}`;
     const [loading, setLoading] = useState(false);
+    const [showLawyerRegister, setShowLawyerRegister] = useState(false);
     const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [address, setAddress] = useState({
-        description: "",
-        city: "",
-        town: "",
-        district: "",
-        code: "",
-    });
-    const [picture, setPicture] = useState("");
+    const picture = ("");
+    const [addressDescription, setAddressDescription] = useState("");
+    const [postalCode, setPostalCode] = useState("");
 
-    const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
+    const lawyerInfo = JSON.parse(localStorage.getItem('lawyerInfo'));
+
+
     const submitHandler = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -30,21 +28,22 @@ const LawyerPersonalDetails = () => {
             const { data } = await axios.put(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
                 {
-                    name,
-                    surname,
-                    phone,
-                    email,
-                    address,
-                    picture,
+                    description: addressDescription,
+                    city: seciliIl,
+                    town: seciliIlce,
+                    district: seciliMahalle,
+                    code: postalCode,
                 }
             );
             setLoading(false);
-            toast.success("Bilgileriniz Güncellendi.");
+
+            setShowLawyerRegister(false);
         } catch (error) {
             toast.error(getError(error));
             setLoading(false);
         }
     };
+
 
     const [seciliIl, setSeciliIl] = useState("");
     const [seciliIlce, setSeciliIlce] = useState("");
@@ -55,37 +54,29 @@ const LawyerPersonalDetails = () => {
         setSeciliIl(data[ilIndex].name);
         setSeciliIlce("İlçe Seçiniz");
         setSeciliMahalle("");
+        console.log(seciliIl)
     };
 
     const handleIlceChange = (e) => {
         const ilceIndex = e.target.value;
-        setSeciliIlce(
-            data.find((il) => il.name === seciliIl).towns[ilceIndex].name
-        );
-
+        setSeciliIlce(data.find(il => il.name === seciliIl).towns[ilceIndex].name);
         setSeciliMahalle("");
     };
 
     const handleMahalleChange = (e) => {
         const mahalleIndex = e.target.value;
-        setSeciliMahalle(
-            data
-                .find((il) => il.name === seciliIl)
-                .towns.find((t) => t.name === seciliIlce).districts[mahalleIndex]
-        );
-        setAddress({ city: seciliIl, town: seciliIlce, district: seciliMahalle });
+        setSeciliMahalle(data.find(il => il.name === seciliIl).towns.find(t => t.name === seciliIlce).districts[mahalleIndex]);
     };
 
+
+
     return (
+
         <div style={{ widht: "650px" }}>
             <div className="lawyerdashboardregisterBaslık">
                 <h1>Kişisel Bilgiler</h1>
             </div>
-            <form
-                className="lawyerpersonaldetailFormDiv"
-                style={{ widht: "650px" }}
-                onSubmit={submitHandler}
-            >
+            <form className="lawyerpersonaldetailFormDiv" style={{ widht: "650px" }} onSubmit={submitHandler}>
                 <div className="row" id="registerRowDiv">
                     <div className="col">
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -104,43 +95,31 @@ const LawyerPersonalDetails = () => {
                             className="lawyerdashboard-registerFormControl"
                             type="text"
                             value={lawyerInfo.surname}
-                            onChange={() => setSurname(lawyerInfo.surname)}
                         />
                     </div>
                     <div className="col">
                         <div className="d-flex justify-content-start">
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ width: "55px" }}
-                                htmlFor=""
-                            >
-                                E-posta{" "}
+                            <label className="lawyerdashboard-registerLabel" style={{ width: "55px" }} htmlFor="">
+                                E-posta {" "}
                             </label>
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ color: "#a97900", width: "125px" }}
-                            >
+                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "125px" }} >
+
                                 (E-posta değiştir)
                             </label>
                         </div>
                         <input
                             className="lawyerdashboard-registerFormControl"
                             type="email"
-                            value={lawyerInfo.email}
+                            value={email}
+                            placeholder={lawyerInfo.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <div className="d-flex justify-content-start">
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ width: "100px" }}
-                                htmlFor=""
-                            >
+                            <label className="lawyerdashboard-registerLabel" style={{ width: "100px" }} htmlFor="">
                                 Tel. Numarası
                             </label>
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ color: "#a97900", width: "130px" }}
-                            >
+                            <label className="lawyerdashboard-registerLabel" style={{ color: "#a97900", width: "130px" }} >
+
                                 (Numara değiştir)
                             </label>
                         </div>
@@ -167,41 +146,35 @@ const LawyerPersonalDetails = () => {
                             />
                         </div>
 
+
                         <br />
+
                     </div>
                 </div>
                 <div className="d-flex row" style={{ width: "588px" }}>
-                    <label htmlFor="">Büro Adresi</label>
+                    <label htmlFor="">
+                        Büro Adresi
+                    </label>
 
                     <textarea
-                        style={{
-                            width: "588px",
-                            height: "40px",
-                            fontSize: "17px",
-                            borderRadius: "5px",
-                            opacity: "1",
-                            resize: "none",
-                        }}
+                        style={{ width: "588px", height: "40px", fontSize: "17px", borderRadius: "5px", opacity: "1", resize: "none" }}
                         className="mx-2 pt-2 "
                         name="comment"
-                        placeholder={lawyerInfo.address.description}
+                        placeholder="Tam adres belirtiniz"
                         id=""
-                        value={lawyerInfo.address.description}
-                        onChange={(e) => setAddress({ description: e.target.value })}
                         resiz
+
+
                     ></textarea>
                 </div>
                 <div className="d-flex">
                     <div style={{ width: "364px" }}>
-                        <label
-                            style={{ width: "60px" }}
-                            className="lawyerdashboard-registerLabel"
-                            htmlFor=""
-                        >
+                        <label style={{ width: "60px" }} className="lawyerdashboard-registerLabel" htmlFor="">
                             İl
                         </label>
                         <select
                             className="lawyerdashboard-registerFormControl"
+
                             value={data.name}
                             name="il"
                             onChange={handleIlChange}
@@ -210,7 +183,7 @@ const LawyerPersonalDetails = () => {
                         >
                             <option defaultValue="all">İl Seçiniz</option>
                             {data
-                                ?.sort((a, b) => a.name.localeCompare(b.name, "tr"))
+                                ?.sort((a, b) => a.name.localeCompare(b.name, 'tr'))
                                 .map((il, index) => (
                                     <option key={index} value={index}>
                                         {il.name}
@@ -220,8 +193,7 @@ const LawyerPersonalDetails = () => {
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Mahalle
                         </label>
-                        <select
-                            className="lawyerdashboard-registerFormControl"
+                        <select className="lawyerdashboard-registerFormControl"
                             id="mahalle"
                             value={data.name}
                             onChange={handleMahalleChange}
@@ -229,15 +201,12 @@ const LawyerPersonalDetails = () => {
                             title="Mahalle Seçiniz"
                         >
                             <option defaultValue="all">Mahalle Seçiniz</option>
-                            {data
-                                .find((il) => il.name === seciliIl)
-                                ?.towns.find((t) => t.name === seciliIlce)
-                                ?.districts.flatMap((mahalle) => mahalle.quarters)
+                            {data.find(il => il.name === seciliIl)?.towns.find(t => t.name === seciliIlce)?.districts
+                                .flatMap(mahalle => mahalle.quarters)
                                 .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((quarter, index) => (
-                                    <option value={index} key={index}>
-                                        {quarter.name}
-                                    </option>
+                                    <option value={index} key={index}>{quarter.name}</option>
+
                                 ))}
                         </select>
                     </div>
@@ -245,26 +214,25 @@ const LawyerPersonalDetails = () => {
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
                             İlçe
                         </label>
-                        {
+                        {(
                             <div>
-                                <select
-                                    className="lawyerdashboard-registerFormControl"
+
+                                <select className="lawyerdashboard-registerFormControl"
                                     id="ilce"
                                     value={data.name}
                                     onChange={handleIlceChange}
                                     name="ilçe"
                                     title="İl Seçiniz"
+
                                 >
                                     <option value="">İlçe Seçiniz</option>
-                                    {data
-                                        .find((i) => i.name === seciliIl)
-                                        ?.towns.map((ilce, index) => (
-                                            <option value={index} key={index}>
-                                                {ilce.name}
-                                            </option>
-                                        ))}
+                                    {data.find(i => i.name === seciliIl)?.towns.map((ilce, index) => (
+                                        <option value={index} key={index}>{ilce.name}</option>
+                                    ))}
                                 </select>
-                            </div>
+
+                            </div>)
+
                         }
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Posta Kodu
@@ -273,15 +241,24 @@ const LawyerPersonalDetails = () => {
                             type="text"
                             className="lawyerdashboard-registerFormControl"
                             placeholder="Posta Kodu"
-                            value={lawyerInfo.address.code}
-                            onChange={(e) => setAddress({ code: e.target.value })}
+                            value={postalCode}
+                            onChange={(e) => setPostalCode(e.target.value)}
                         />
+
+
                     </div>
+
+
                 </div>
                 <br />
                 <br />
                 <div className="lawyerdashboard-buttons">
-                    <button className="lawyerdashboard-button-vazgec">Vazgeç</button>
+                    <button
+                        className="lawyerdashboard-button-vazgec"
+                        onClick={() => setShowLawyerRegister()}
+                    >
+                        Vazgeç
+                    </button>
                     <button className="lawyerdashboard-button-kaydet" type="submit">
                         {loading ? (
                             <>
@@ -294,9 +271,12 @@ const LawyerPersonalDetails = () => {
                 </div>
                 <br />
                 <br />
-            </form>
-        </div>
-    );
-};
 
-export default LawyerPersonalDetails;
+
+            </form>
+
+        </div>
+    )
+}
+
+export default LawyerPersonalDetails

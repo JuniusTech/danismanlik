@@ -30,6 +30,13 @@ const lawyerSchema = new mongoose.Schema(
     verified: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
     isTick: { type: Boolean, default: false },
+    address: {
+      description: { type: String },
+      city: { type: String },
+      town: { type: String },
+      district: { type: String },
+      code: { type: String },
+    },
     rating: { type: Number },
     numReviews: { type: Number },
     reviews: [reviewSchema],
