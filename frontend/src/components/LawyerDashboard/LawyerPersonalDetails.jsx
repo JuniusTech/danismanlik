@@ -36,7 +36,7 @@ const LawyerPersonalDetails = () => {
                 }
             );
             setLoading(false);
-
+            console.log(seciliIl, "-", seciliIlce, "-", seciliMahalle, "-", addressDescription, "-", postalCode);
             setShowLawyerRegister(false);
         } catch (error) {
             toast.error(getError(error));
@@ -65,7 +65,7 @@ const LawyerPersonalDetails = () => {
 
     const handleMahalleChange = (e) => {
         const mahalleIndex = e.target.value;
-        setSeciliMahalle(data.find(il => il.name === seciliIl).towns.find(t => t.name === seciliIlce).districts[mahalleIndex]);
+        setSeciliMahalle(data.find(il => il.name === seciliIl).towns.find(t => t.name === seciliIlce).districts[mahalleIndex].name);
     };
 
 
@@ -156,16 +156,14 @@ const LawyerPersonalDetails = () => {
                         Büro Adresi
                     </label>
 
-                    <textarea
+                    <input
                         style={{ width: "588px", height: "40px", fontSize: "17px", borderRadius: "5px", opacity: "1", resize: "none" }}
-                        className="mx-2 pt-2 "
-                        name="comment"
+                        type="text"
+                        className="lawyerdashboard-registerFormControl mx-2 mt-2"
                         placeholder="Tam adres belirtiniz"
-                        id=""
-                        resiz
-
-
-                    ></textarea>
+                        value={addressDescription}
+                        onChange={(e) => setAddressDescription(e.target.value)}
+                    />
                 </div>
                 <div className="d-flex">
                     <div style={{ width: "364px" }}>
