@@ -11,6 +11,7 @@ const lawPassResetRouter = require("./routes/lawPassResetRoute");
 const session = require("express-session");
 const cors = require("cors");
 const dateRouter = require("./routes/dateRoute");
+const uploadRouter = require("./routes/upLoadRoute");
 
 dotenv.config();
 
@@ -54,7 +55,7 @@ app.use(
     replaceWith: "_",
   })
 );
-
+app.use("/api/upload", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/branchs", branchRouter);
 app.use("/api/lawyers", lawyerRouter);

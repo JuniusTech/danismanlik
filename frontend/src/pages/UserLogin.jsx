@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../css/LoginPages.css";
 import axios from "axios";
-import { removeCookie, setCookie } from "../cookies";
+// import { removeCookie, setCookie } from "../cookies";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
@@ -34,11 +34,8 @@ const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
         }
       );
       setLoading(false);
-      removeCookie("jwt");
-      setCookie("jwt", data.token);
       toast.success("Hoşgeldiniz");
       dispatch({ type: "USER_SIGNIN", payload: data });
-      localStorage.setItem("userInfo", JSON.stringify(data));
       setShowUserLogin(false);
     } catch (err) {
       toast.error(getError(err));

@@ -91,10 +91,10 @@ const signin = expressAsyncHandler(async (req, res) => {
     });
   }
   const token = generateToken(user);
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24,
-  });
+  // res.cookie("jwt", token, {
+  //   httpOnly: true,
+  //   maxAge: 1000 * 60 * 60 * 24,
+  // });
   res.send({
     _id: user._id,
     name: user.name,

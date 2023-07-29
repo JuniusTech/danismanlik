@@ -16,10 +16,9 @@ const generateToken = (user) => {
 };
 
 const isAuth = (req, res, next) => {
-
-  const token = req.body.token;
-
-  if (token) {
+  const authorization = req.headers.authorization;
+  if (authorization) {
+    const token = authorization.slice(7, authorization.length);
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(401).send({ message: "Invalid Token" });
@@ -34,8 +33,9 @@ const isAuth = (req, res, next) => {
   }
 };
 const isLawyer = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
+  const authorization = req.headers.authorization;
+  if (authorization) {
+    const token = authorization.slice(7, authorization.length);
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(401).send({ message: "Invalid Token" });

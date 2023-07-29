@@ -17,21 +17,23 @@ const SearchDate = ({ lawyer }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("")
-  const [selectedMonthtext, setSelectedMonthtext] = useState("")
-  const [selectedYear, setSelectedYear] = useState("")
-  const [dates, setDates] = useState([])
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedMonthtext, setSelectedMonthtext] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [dates, setDates] = useState([]);
   const [lawyerHours, setLawyerHours] = useState({});
-
 
   useEffect(() => {
     const fetchDates = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URI}/lawyers`, {
-          params: {
-            lawyerId: lawyer._id,
-          },
-        });
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URI}/lawyers`,
+          {
+            params: {
+              lawyerId: lawyer._id,
+            },
+          }
+        );
         setDates(response.data);
       } catch (error) {
         console.log(error);
@@ -44,27 +46,24 @@ const SearchDate = ({ lawyer }) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
     selectedDate.setDate(dateRange[0].getDate() + index); // index değeriyle seçilen günü hesaplıyoruz
 
-
     const dayOfMonth = selectedDate.getDate();
     const monthIndex = selectedDate.getMonth();
     const month = monthIndex + 1;
     const monthText = selectedDate.toLocaleString("default", {
       month: "long",
     });
-    const year = selectedDate.getFullYear()
-
+    const year = selectedDate.getFullYear();
 
     setSelectedHour(hour);
     setSelectedDay(dayOfMonth);
     setSelectedMonth(month);
     setSelectedMonthtext(monthText);
-    setSelectedYear(year)
+    setSelectedYear(year);
     setModalOpen(true);
 
-    console.log(dayOfMonth, month, hour)
+    console.log(dayOfMonth, month, hour);
     console.log(selectedDay + "." + selectedMonth + "." + selectedYear);
   };
-
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -107,45 +106,47 @@ const SearchDate = ({ lawyer }) => {
   const datesDate = [0, 1, 2, 3].map((day, index) => {
     const currentDate = new Date(dateRange[0]);
     currentDate.setDate(dateRange[0].getDate() + index);
-    return `${currentDate.getDate()}.${currentDate.getMonth() + 1
-      }.${currentDate.getFullYear()}`;
+    return `${currentDate.getDate()}.${
+      currentDate.getMonth() + 1
+    }.${currentDate.getFullYear()}`;
   });
   console.log(datesDate);
 
-
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [loading, setLoading] = useState(false);
-  const [day, setDay] = useState("")
-  const [description, setDescription] = useState("")
+  const [day, setDay] = useState("");
+  const [description, setDescription] = useState("");
 
-
-  const submitHandler = async (dayOfMonth, selectedHour, description, jwtToken) => {
-
+  const submitHandler = async (
+    dayOfMonth,
+    selectedHour,
+    description,
+    jwtToken
+  ) => {
     setLoading(true);
     try {
       const jwtToken = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('jwt='))
-        .split('=')[1]
+        .split("; ")
+        .find((row) => row.startsWith("jwt="))
+        .split("=")[1];
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
           day: selectedDay + "." + selectedMonth + "." + selectedYear,
           hour: selectedHour,
           description: "randevu",
-          token: jwtToken
-        },
-        console.log(selectedDay + "." + selectedMonth + "." + selectedYear),
-        console.log(jwtToken)
+          token: jwtToken,
+        }
+        // console.log(selectedDay + "." + selectedMonth + "." + selectedYear),
+        // console.log(jwtToken)
       );
-      console.log(data);
-      setDates([...dates, data])
+      // console.log(data);
+      setDates([...dates, data]);
       setLoading(false);
       toast.success("Randevunuz oluşturuldu.");
     } catch (error) {
       toast.error(getError(error));
       setLoading(false);
-
     }
   };
 
@@ -178,7 +179,6 @@ const SearchDate = ({ lawyer }) => {
     );
   }
 
-
   return (
     <>
       <div className="search-card-lawyer-rightbox">
@@ -210,17 +210,17 @@ const SearchDate = ({ lawyer }) => {
                   if (
                     dayOfMonth === today.getDate() &&
                     month ===
-                    today.toLocaleString("default", {
-                      month: "short",
-                    })
+                      today.toLocaleString("default", {
+                        month: "short",
+                      })
                   ) {
                     label = "Bugün";
                   } else if (
                     dayOfMonth === today.getDate() + 1 &&
                     month ===
-                    today.toLocaleString("default", {
-                      month: "short",
-                    })
+                      today.toLocaleString("default", {
+                        month: "short",
+                      })
                   ) {
                     label = "Yarın";
                   } else {
@@ -252,8 +252,6 @@ const SearchDate = ({ lawyer }) => {
                   {datesDate.map((day, index) => (
                     <td>
                       <button
-
-
                         key={index}
                         className={
                           isAvailable(lawyer, day, toggleHours)
@@ -310,7 +308,8 @@ const SearchDate = ({ lawyer }) => {
                         textAlign: "center",
                       }}
                     >
-                      Seçilen gün: {selectedDay} {selectedMonthtext} {selectedYear}
+                      Seçilen gün: {selectedDay} {selectedMonthtext}{" "}
+                      {selectedYear}
                     </p>
                     <p
                       style={{
@@ -432,12 +431,9 @@ const SearchDate = ({ lawyer }) => {
                         background: "#A97900 0% 0% no-repeat padding-box",
                         color: "#F5F5F5",
                       }}
-
-                      onClick={() => submitHandler(
-                        day,
-                        selectedHour,
-                        description,
-                      )}
+                      onClick={() =>
+                        submitHandler(day, selectedHour, description)
+                      }
                     >
                       Randevu Oluştur
                     </button>

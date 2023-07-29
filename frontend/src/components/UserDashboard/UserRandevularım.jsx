@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Store } from "../../Store";
 
 const UserRandevularım = ({ handleDateClick, index }) => {
   const [userDates, setUserDates] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}`)

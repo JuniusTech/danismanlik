@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Store } from "../../Store";
 
 const UserKişiselBilgiler = () => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   return (
     <div
       className="userDashboardRight"

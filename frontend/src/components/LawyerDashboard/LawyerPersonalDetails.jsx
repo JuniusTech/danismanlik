@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import data from "./data/data.json";
+import { Store } from "../../Store";
 
 const LawyerPersonalDetails = () => {
   const [email, setEmail] = useState("");
@@ -20,9 +21,10 @@ const LawyerPersonalDetails = () => {
     district: "",
     code: "",
   });
-  const [picture, setPicture] = useState("");
 
-  const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
+  const { state } = useContext(Store);
+  const { lawyerInfo } = state;
+  // const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,7 +37,9 @@ const LawyerPersonalDetails = () => {
           phone,
           email,
           address,
-          picture,
+        },
+        {
+          headers: { Authorization: `Bearer ${lawyerInfo.token}` },
         }
       );
       setLoading(false);

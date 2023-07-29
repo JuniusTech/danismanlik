@@ -108,6 +108,7 @@ const updateLawyer = expressAsyncHandler(async (req, res) => {
     lawyer.surname = req.body.surname || lawyer.surname;
     lawyer.phone = req.body.phone || lawyer.phone;
     lawyer.barNo = req.body.barNo || lawyer.barNo;
+    lawyer.picture = req.body.picture || lawyer.picture;
     lawyer.email = req.body.email || lawyer.email;
     lawyer.branch = req.body.branch || lawyer.branch;
     lawyer.address = req.body.address || lawyer.address;
@@ -174,10 +175,10 @@ const signin = expressAsyncHandler(async (req, res) => {
   }
 
   const token = generateToken(lawyer);
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24,
-  });
+  // res.cookie("jwt", token, {
+  //   httpOnly: true,
+  //   maxAge: 1000 * 60 * 60 * 24,
+  // });
   res.send({
     _id: lawyer._id,
     name: lawyer.name,
@@ -187,6 +188,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     phone: lawyer.phone,
     isAdmin: lawyer.isAdmin,
     address: lawyer.address,
+    picture: lawyer.picture,
     token: token,
   });
   return;

@@ -13,9 +13,11 @@ import box3 from "../assets/box3.png";
 import box4 from "../assets/box4.png";
 import secondImg from "../assets/lawyerHomePageImg.png";
 import thirdImg from "../assets/lawyerHomeImg2.png";
+import { Store } from "../Store";
 
 const LawyerHomePage = () => {
-  const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
+  const { state } = useContext(Store);
+  const { lawyerInfo } = state;
 
   const navigate = useNavigate();
   const handleButtonClick = () => {

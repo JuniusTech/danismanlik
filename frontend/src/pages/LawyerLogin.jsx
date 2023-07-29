@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import "../css/LoginPages.css";
 import axios from "axios";
 import { Store } from "../Store";
-import { removeCookie, setCookie } from "../cookies";
+// import { removeCookie, setCookie } from "../cookies";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 import { useNavigate } from "react-router-dom";
@@ -38,14 +38,14 @@ const AvukatSignPage = ({
         }
       );
       setLoading(false);
-      removeCookie("jwt");
-      setCookie("jwt", data.token);
+      // removeCookie("jwt");
+      // setCookie("jwt", data.token);
       toast.success("Hoşgeldiniz");
       dispatch({ type: "LAWYER_SIGNIN", payload: data });
-      localStorage.setItem("lawyerInfo", JSON.stringify(data));
+      // localStorage.setItem("lawyerInfo", JSON.stringify(data));
       setShowLawyerLogin(false);
       navigate(`/lawyer/${lawyer._id}`, { state: lawyer });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (

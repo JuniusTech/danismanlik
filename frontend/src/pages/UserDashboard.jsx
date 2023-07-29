@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import photo from "../assets/photo.svg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UserRandevularım from "../components/UserDashboard/UserRandevularım";
 import UserKişiselBilgiler from "../components/UserDashboard/UserKişiselBilgiler";
 import UserFavoriAvukatlarım from "../components/UserDashboard/UserFavoriAvukatlarım";
+import { Store } from "../Store";
 
 const UserDashboard = () => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   const [selectedItem, setSelectedItem] = useState(null);
   const items = ["Randevularım", "Kişisel Bilgiler", "Favori Avukatlarım"];
   const [selectedDate, setSelectedDate] = useState(null);
