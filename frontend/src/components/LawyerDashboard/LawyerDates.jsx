@@ -215,5 +215,3 @@ const LawyerDates = ({ handleDateClick, index }) => {
     </div>
   );
 };
-
-export default LawyerDates;
