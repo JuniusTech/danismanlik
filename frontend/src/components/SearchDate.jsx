@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import image from "../assets/bg.jpg";
@@ -6,6 +6,7 @@ import avatar from "../assets/avatar.jpg";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../getError";
+import { Store } from "../Store";
 
 const SearchDate = ({ lawyer }) => {
   const [moreHour, setMoreHour] = useState(false);
@@ -61,8 +62,8 @@ const SearchDate = ({ lawyer }) => {
     setSelectedYear(year);
     setModalOpen(true);
 
-    console.log(dayOfMonth, month, hour);
-    console.log(selectedDay + "." + selectedMonth + "." + selectedYear);
+    // console.log(dayOfMonth, month, hour);
+    // console.log(selectedDay + "." + selectedMonth + "." + selectedYear);
   };
 
   const handleCloseModal = () => {
@@ -110,9 +111,9 @@ const SearchDate = ({ lawyer }) => {
       currentDate.getMonth() + 1
     }.${currentDate.getFullYear()}`;
   });
-  console.log(datesDate);
-
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  // console.log(datesDate);
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   const [loading, setLoading] = useState(false);
   const [day, setDay] = useState("");
   const [description, setDescription] = useState("");
@@ -125,20 +126,16 @@ const SearchDate = ({ lawyer }) => {
   ) => {
     setLoading(true);
     try {
-      const jwtToken = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("jwt="))
-        .split("=")[1];
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URI}/api/dates/${userInfo._id}/${lawyer._id}`,
         {
           day: selectedDay + "." + selectedMonth + "." + selectedYear,
           hour: selectedHour,
           description: "randevu",
-          token: jwtToken,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         }
-        // console.log(selectedDay + "." + selectedMonth + "." + selectedYear),
-        // console.log(jwtToken)
       );
       // console.log(data);
       setDates([...dates, data]);
@@ -149,6 +146,7 @@ const SearchDate = ({ lawyer }) => {
       setLoading(false);
     }
   };
+  console.log(lawyer);
 
   const handlePrevWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[0]);
