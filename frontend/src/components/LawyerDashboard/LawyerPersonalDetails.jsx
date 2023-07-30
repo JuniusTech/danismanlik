@@ -17,10 +17,10 @@ const LawyerPersonalDetails = () => {
     const [postalCode, setPostalCode] = useState("");
     const [surname, setSurname] = useState("");
     const [address, setAddress] = useState({
-        description: "",
         city: "",
         town: "",
         district: "",
+        description: "",
         code: "",
     });
 
@@ -34,13 +34,11 @@ const LawyerPersonalDetails = () => {
             const { data } = await axios.put(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
                 {
-                    address: {
-                        description: addressDescription.description,
-                        city: seciliIl,
-                        town: seciliIlce,
-                        district: seciliMahalle,
-                        code: postalCode.code,
-                    }
+                    name,
+                    surname,
+                    email,
+                    phone,
+                    address
                 },
                 {
                     headers: { Authorization: `Bearer ${lawyerInfo.token}` },
@@ -84,6 +82,10 @@ const LawyerPersonalDetails = () => {
         setAddress({ city: seciliIl, town: seciliIlce, district: seciliMahalle });
     };
 
+
+
+
+
     return (
         <div style={{ widht: "650px" }}>
             <div className="lawyerdashboardregisterBaslık">
@@ -102,8 +104,9 @@ const LawyerPersonalDetails = () => {
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
-                            value={lawyerInfo.name}
-                            onChange={() => setName(lawyerInfo.name)}
+                            defaultValue={lawyerInfo.name}
+                            onChange={(e) => setName(e.target.value)}
+
                         />
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
                             Soyad
@@ -111,8 +114,8 @@ const LawyerPersonalDetails = () => {
                         <input
                             className="lawyerdashboard-registerFormControl"
                             type="text"
-                            value={lawyerInfo.surname}
-                            onChange={() => setSurname(lawyerInfo.surname)}
+                            defaultValue={lawyerInfo.surname}
+                            onChange={(e) => setSurname(e.target.value)}
                         />
                     </div>
                     <div className="col">
@@ -169,7 +172,7 @@ const LawyerPersonalDetails = () => {
                                 className="lawyerdashboard-registerFormControl-phone"
                                 style={{ paddingLeft: "5px" }}
                                 type="text"
-                                value={lawyerInfo.phone}
+                                defaultValue={lawyerInfo.phone}
                                 placeholder=""
                                 onChange={(e) => setPhoneNo(e.target.value)}
                             />
@@ -195,7 +198,7 @@ const LawyerPersonalDetails = () => {
                         placeholder={lawyerInfo.address.description || "Adresi buraya girin..."}
                         id=""
                         defaultValue={lawyerInfo.address.description}
-                        onChange={(e) => setAddressDescription({ description: e.target.value })}
+                        onChange={(e) => setAddress({ ...address, description: e.target.value })}
 
                     ></textarea>
                 </div>
@@ -282,7 +285,7 @@ const LawyerPersonalDetails = () => {
                             className="lawyerdashboard-registerFormControl"
                             placeholder={lawyerInfo.address.code || "Posta Kodu"}
                             defaultValue={lawyerInfo.address.code}
-                            onChange={(e) => setPostalCode({ code: e.target.value })}
+                            onChange={(e) => setAddress({ ...address, code: e.target.value })}
                         />
                     </div>
                 </div>
