@@ -8,7 +8,7 @@ const upload = multer();
 
 const uploadRouter = express.Router();
 
-uploadRouter.post("/", isLawyer, upload.single("file"), async (req, res) => {
+uploadRouter.post("/", upload.single("file"), async (req, res) => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
