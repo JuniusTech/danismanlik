@@ -9,7 +9,9 @@ const UserRandevularım = ({ handleDateClick, index }) => {
   const { userInfo } = state;
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}`)
+      .get(`${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}`, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      })
       .then((response) => {
         console.log(response.data.dates);
         setUserDates(response.data.dates);
