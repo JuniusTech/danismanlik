@@ -116,32 +116,36 @@ function LawyerDashboard() {
           <div className="lawyerdashbord-leftcard">
             <div className="d-flex justify-content-center ">
               <div className="lawyerdashboard-photo">
-                (
+
                 <img
-                  width="100rem"
+                  width="100px"
+                  height="90px"
                   className=" rounded-circle"
                   src={lawyerInfo.picture ? lawyerInfo.picture : image}
                   alt=""
                 />
-                )
+
               </div>
             </div>
 
             <Form.Group className="mb-5 fs-5" controlId="imageFile">
               <Form.Control type="file" onChange={uploadFileHandler} />
             </Form.Group>
-            <button
-              className="lawyerdashboard-button-kaydet "
-              onClick={savePicture}
-            >
-              {loading ? (
-                <>
-                  <LoadingBox />
-                </>
-              ) : (
-                "Kaydet"
-              )}
-            </button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                className="lawyerdashboard-button-kaydet "
+                onClick={savePicture}
+
+              >
+                {loading ? (
+                  <>
+                    <LoadingBox />
+                  </>
+                ) : (
+                  "Kaydet"
+                )}
+              </button>
+            </div>
 
             <div
               className="d-flex justify-content-center m-auto"
@@ -184,7 +188,7 @@ function LawyerDashboard() {
             <LawyerDatesDetail date={selectedDate} />
           )}
         </div>
-      </div>
+      </div >
       <Footer />
     </>
   );
