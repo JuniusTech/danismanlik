@@ -202,7 +202,28 @@ const LawyerPersonalDetails = () => {
 
                     ></textarea>
                 </div>
+                <div className="d-flex row" style={{ width: "588px", marginTop: "10px" }}>
+                    <label htmlFor="">
+                        Posta Kodu
+                    </label>
+                    <input
+                        type="number"
+                        style={{
+                            width: "588px",
+                            height: "40px",
+                            fontSize: "17px",
+                            borderRadius: "5px",
+                            opacity: "1",
+                            resize: "none",
+                        }}
+                        className="mx-2 pt-2 "
+                        placeholder={lawyerInfo.address.code || "Posta Kodu"}
+                        defaultValue={lawyerInfo.address.code}
+                        onChange={(e) => setAddress({ ...address, code: e.target.value })}
+                    />
+                </div>
                 <div className="d-flex">
+
                     <div style={{ width: "364px" }}>
                         <label
                             style={{ width: "60px" }}
@@ -228,29 +249,7 @@ const LawyerPersonalDetails = () => {
                                     </option>
                                 ))}
                         </select>
-                        <label className="lawyerdashboard-registerLabel" htmlFor="">
-                            Mahalle
-                        </label>
-                        <select
-                            className="lawyerdashboard-registerFormControl"
-                            id="mahalle"
-                            value={data.name}
-                            onChange={handleMahalleChange}
-                            name="mahalle"
-                            title="Mahalle Seçiniz"
-                        >
-                            <option defaultValue="all">Mahalle Seçiniz</option>
-                            {data
-                                .find((il) => il.name === seciliIl)
-                                ?.towns.find((t) => t.name === seciliIlce)
-                                ?.districts.flatMap((mahalle) => mahalle.quarters)
-                                .sort((a, b) => a.name.localeCompare(b.name))
-                                .map((quarter, index) => (
-                                    <option value={index} key={index}>
-                                        {quarter.name}
-                                    </option>
-                                ))}
-                        </select>
+
                     </div>
                     <div style={{ paddingLeft: "7px" }}>
                         <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -277,16 +276,7 @@ const LawyerPersonalDetails = () => {
                                 </select>
                             </div>
                         }
-                        <label className="lawyerdashboard-registerLabel" htmlFor="">
-                            Posta Kodu
-                        </label>
-                        <input
-                            type="number"
-                            className="lawyerdashboard-registerFormControl"
-                            placeholder={lawyerInfo.address.code || "Posta Kodu"}
-                            defaultValue={lawyerInfo.address.code}
-                            onChange={(e) => setAddress({ ...address, code: e.target.value })}
-                        />
+
                     </div>
                 </div>
                 <br />
