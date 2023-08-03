@@ -1,11 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Store } from "../../Store";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../getError";
 
 const UserKişiselBilgiler = () => {
+  const [phoneRegion, setPhoneRegion] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const phone = `${phoneRegion} + ${phoneNo}`;
+  const [loading, setLoading] = useState(false);
+
   const { state } = useContext(Store);
   const { userInfo } = state;
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}`,
+        {
+          name,
+          surname,
+          phone,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      setLoading(false);
+      toast.success("Bilgileriniz Güncellendi.");
+    } catch (error) {
+      toast.error(getError(error));
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       className="userDashboardRight"
@@ -22,40 +57,47 @@ const UserKişiselBilgiler = () => {
       <Form>
         <Form.Group>
           <Form.Label>Ad</Form.Label>
-          <Form.Control placeholder="Ad" value={userInfo.name} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Soyad</Form.Label>
-          <Form.Control placeholder="Soyad" value={userInfo.surname} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>
-            Eposta
-            <span style={{ color: "#A97900" }}>(E-Posta Değiştir)</span>
-          </Form.Label>
           <Form.Control
-            placeholder="E-Posta"
-            value={userInfo.email}
-            type="email"
+            placeholder="Ad"
+            defaultValue={userInfo?.name}
+            onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>
-            Şifre* <span style={{ color: "#A97900" }}>(Şifre Değiştir)</span>
-          </Form.Label>
+          <Form.Label>Soyad</Form.Label>
+          <Form.Control
+            placeholder="Soyad"
+            defaultValue={userInfo?.surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Eposta</Form.Label>
+          <Form.Control
+            placeholder="E-Posta"
+            defaultValue={userInfo?.email}
+            type="email"
+            //! onChange={(e) => setEmail(e.target.value)} email değişecek mi?
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Şifre*</Form.Label>
           <Form.Control placeholder="Şifre" type="password" />
         </Form.Group>
-        <Form.Label>
-          Telefon
-          <span style={{ color: "#A97900" }}>(Tel. Numarası Değiştir)</span>
-        </Form.Label>
+        <Form.Label>Telefon</Form.Label>
         <Form.Group style={{ display: "flex" }}>
           <Form.Control
             style={{ width: "15%", marginRight: "2%" }}
             placeholder="+90"
+            defaultValue={phoneRegion}
+            onChange={(e) => setPhoneRegion(e.target.value)}
           />
 
-          <Form.Control value={userInfo.phone} placeholder="555 444 33 22" />
+          <Form.Control
+            defaultValue={userInfo?.phone}
+            onChange={(e) => setPhoneNo(e.target.value)}
+            placeholder="555 444 33 22"
+          />
         </Form.Group>
         <div
           className="userdashboardButtons"
@@ -86,6 +128,7 @@ const UserKişiselBilgiler = () => {
               height: "35px",
               borderRadius: "8px",
             }}
+            onClick={submitHandler}
           >
             Kaydet
           </Button>
