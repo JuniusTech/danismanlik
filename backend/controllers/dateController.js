@@ -53,7 +53,13 @@ const canceledDate = expressAsyncHandler(async (req, res) => {
   }
 });
 
+const getDates = expressAsyncHandler(async (req, res) => {
+  const dates = await Date.find({}).sort({ createdAt: -1 });
+  res.send(dates);
+});
+
 module.exports = {
   createDate,
   canceledDate,
+  getDates,
 };
