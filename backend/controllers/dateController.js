@@ -38,9 +38,22 @@ const createDate = expressAsyncHandler(async (req, res) => {
     lawyeremail: date.lawyeremail,
     branch: date.branch,
     description: date.description,
+    status: date.status,
   });
+});
+
+const canceledDate = expressAsyncHandler(async (req, res) => {
+  const date = await Date.findById(req.params.id);
+  if (date) {
+    date.status = "cancelled";
+    const updatedDate = await date.save();
+    res.send({ message: "Date cancelled", updatedDate });
+  } else {
+    res.status(404).send({ message: "Date Not Found" });
+  }
 });
 
 module.exports = {
   createDate,
+  canceledDate,
 };
