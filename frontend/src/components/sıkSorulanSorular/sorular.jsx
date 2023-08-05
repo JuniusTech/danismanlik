@@ -5,53 +5,35 @@
 
 // -//?Avukatımol Nedir
 
-//     Türkiye’nin en büyük online hizmet platformuyuz. Kaliteli ve güvenilir hizmet verenleri, hizmet almak isteyenlerle buluşturuyoruz. Bilgisayarın veya akıllı telefonunun üzerinden birkaç dokunuşla kaliteli hizmete kolayca ulaşmanı sağlıyoruz. Eskiden tanıdıklarına sorarak, sarı sayfalara bakarak veya telefonda uzun konuşmalarla bulduğun boyacı, fotoğrafçı ya da nakliyeci gibi profesyonelleri en kolay şekilde bulmanı sağlıyoruz.
-
-// Android / IOS mobil uygulamarımız ya da Armut.com üzerinden kolayca talep formunu doldurabilir, ücretsiz teklif almaya başlayabilirsin.
-
-//  Android mobil uygulama için: https://goo.gl/rYREQK
-
-//  IOS mobil uygulaması için: https://goo.gl/U7ZSTw
+//     Türkiye’nin en büyük online danışmanlık platformuyuz. Kaliteli ve güvenilir hukuk hizmeti verenleri ve bu hizmeti almak isteyenlerle buluşturuyoruz. Uygulama üzerinden birkaç dokunuşla kaliteli danışmanlara kolayca ulaşmanı sağlıyoruz. Eskiden tanıdıklarına sorarak, sarı sayfalara bakarak veya telefonda uzun konuşmalarla aradığın danışmanları en kolay şekilde bulmanı sağlıyoruz.
 
 // -//?Avukatımol  nasıl çalışıyor?
 
-//     1. Armut mobil uygulamalarında ve internet sitesinde yer alan arama kutucuğunu kullanarak birkaç saniye içinde kısa talep formunu doldurup ihtiyacını bizimle paylaşabilirsin
+//     1. Avukatımol uygulamasında ve internet sitesinde yer alan arama kutucuğunu kullanarak birkaç saniye içinde ihtiyacın olan konuda branşında uzman olan danışmanları görüntüleyebilirsin.
 
-// 2. Armut oluşturduğun hizmet talebini, sana en uygun olan hizmet verenlerle paylaşır ve ğunlukla birkaç saat içerisinde, hizmet verenlerin tekliflerini iletmeye başlar. Teklif gelme süresi en fazla 3 gündür. Karar vermeden önce teklif sahiplerinin geçmişte tamamladığı işleri ve referanslarını inceleyebilir, soruların olduğu takdirde sistem üzerinden hizmet verenlerle mesajlaşabilir veya telefon yoluyla iletişime geçebilirsin.
+// 2. Avukatımol listelediğin avukatlara bir tıkla on-line randevu olusşturmanı sağlar. Randevunun onaylanmasını müteakip seçtiğin gün ve saatte danışmanınla istediğin konuda danışmanlık hizmeti alabilirsin. Randevuya karar vermeden önce danışmanlar hakkında daha önceden yapışlmış yorum ve değerlendirmelere göre istediğin danışmanı seçebilir, randevuyu istediğin zaman iptal edebilirsin.
 
-// 3. Hangi hizmet verenle çalışacağına karar verdiğin zaman 'Teklif Seç' butonunu kullanarak seçimini yapabilirsin.Hizmeti aldıktan sonra da hizmet veren için olumlu veya olumsuz yorumlarını yazarak hizmet kaliteni garanti altına alabilirsin.
+// 3. Hangi danışmanla çalışacağına karar verdiğin zaman 'Randevu Oluştur' butonunu kullanarak randevunu olluturabilirsin.Danışmanlık hizmeti aldıktan sonra da danışman için olumlu veya olumsuz yorumlarını yazarak hizmet kaliteni garanti altına alabilirsin.
 
-// -//?Avukatımol garantisi nedir ?
 
-//     Tüm hizmet verenlerimizin en iyi hizmeti verdiklerinden emin olmak istiyoruz. Gönül rahatlığıyla hizmet alman için, Armut üzerinden teklif seçtiğin işler 2.000 TL’ye kadar korumamız altında. https://armut.com/garanti sayfasından daha detaylı bilgiye ulaşabilirsiniz.
+// -//?Avukatımol’dan hangi danışmanlık hizmetleri talep edebilirim?
 
-// -//?Avukatımol’dan hangi hizmetleri talep edebilirim?
+//     Avukatımol'da ayıplı mal hizmetinden AYM-AIHM basvurusuna, nafaka hizmetinden miras hizmetine kadar onlarca kategoride binlerce danışmalndan görüşme talep edebilirsiniz. Almak istediğin danışmanlılk hizmetinee ait talebini, avukatımol internet sitesi veya mobil uygulamaları üzerinde yer alan arama kutucuğu bölümüne yazmaya başladığında karşınıza binlerce danışman çıkacak. Randevunu senin için en uygun olan tarih ve saati seçerek oluşturabilirsin.
 
-//     Armut temizlikten nakliyata, tadilattan organizasyona yüzlerce kategoride binlerce hizmet veren ile çalışmakta. Almak istediğin hizmete ait talebini, Armut internet sitesi veya mobil uygulamaları üzerinde yer alan arama kutucuğu bölümüne yazmaya başladığında karşına öneriler çıkacak. Talebini senin için en uygun olan kategoriyi seçerek oluşturabilirsin.
-
-// Talep formu doldurmak için; https://armut.com/teklif/hizmet-bul
-
-// buraya videoda eklenmiş
 
 // -//?Avukatımol’u kullanmak için kayıt olmalı mıyım?
 
-//     Armut'taki hizmet talep formunu doldururken sadece gerekli bilgileri istiyoruz. İlk talebini yaratırken email adresi ve telefonunu girdiğinde üyelik bilgilerini de oluşturmuş olacaksın. Böylece, sisteme tekrar giriş yaptığında talebinle ilgili teklifleri görüntüleyebilir, Daha sonraki taleplerini yaratırken aynı üyelik bilgilerini kullanabilirsin.
+//     Avukatımol'daki danışmanları görüntüleyebilmek için kayıt olmaya gerek yoktur. Fakat randevu oluşturmak için kayıt olmak gerekmektedir. Kayıt formunu doldururken sadece gerekli bilgileri istiyoruz.
 
-// -//?Avukatımol'a nasıl ulaşırım?
-
-//     Destek hattımızın çalışma saatleri haftanın 7 günü sabah 09:00 - 12:00 ve 13:00-14:00 arasındadır. destek@armut.com üzerinden ise  bize her zaman ulaşabilirsiniz, destek@armut.com adresine gönderilen e-postalara 24 saat içinde geri dönüş yapılacaktır.
 
 // -//?Avukatlar sizin çalışanınız mı?
 
-//     Platformumuzdaki üyeler Armut'a bağlı çalışanlar değildir. Armut seni doğru hizmet verenlerle buluşturur. Armut üzerinden hizmet verenlerin profillerini inceleyebilir, tamamlanan işleri ile ilgili değerlendirmeleri okuyabilir ve hizmet veren ile görüşüp senin için en uygun teklifi seçebilirsin.
+//     Platformumuzdaki danışmanlar avukatımol'a bağlı çalışanlar değildir. Avukatımol seni doğru danışmanla buluşturur. Avukatımol üzerinden danışmanların profillerini inceleyebilir, daha önceki görüşmeler ile ilgili değerlendirmeleri okuyabilir ve randevunu oluşturabilirsiniz.
 
-// -//?Hizmet veren listeniz / Avukat rehberiniz var mı?
 
-//     Armut bir firma rehberinden çok daha fazlası. Tek yapman gereken ihtiyacını bize iletmek. Kısa sürede talep ettiğiniz hizmet ile ilgili ortalama 4 teklifi seninle paylaşıyoruz. Bu hizmet verenlerin daha önce yaptıkları işlerden yorumları görüp karşılaştırma yapmanı sağlıyoruz. İşini yapacak doğru insanı saatlerce araştırmadan, Armut'u kullanarak hızlıca hizmet verenlere ulaşmana olanak tanıyoruz.
+// -//?Avukatımol'un ücret politikası nasıl belirlenir?
 
-// -//?Avukatımol'un teklif rekabeti nasıl çalışır?
-
-//     Armut.com, sana birden fazla hizmet verenden teklif alma fırsatı verir, bu da tek hizmet verene bağlı kalmamanı sağlar. Teklif rekabeti sayesinde daha çok seçenek ve uygun fiyat elde edersin. Ayrıca müşteri yorumlarını gözden geçirerek en iyi hizmet vereni kolaylıkla seçebilirsin. Üstelik bunların hepsi ücretsiz.
+//     Avukatımol.com, sana birden fazla danışmandan teklif alma fırsatı verir, bu da tek danışmana bağlı kalmamanı sağlar. Teklif rekabeti sayesinde daha çok seçenek ve uygun fiyat elde edersin. Ayrıca müşteri yorumlarını gözden geçirerek en danışmanı kolaylıkla seçebilirsin. Üstelik bunların hepsi ücretsiz.
 
 //  ---------------------------ÖDEME SORULARI-------------------------
 

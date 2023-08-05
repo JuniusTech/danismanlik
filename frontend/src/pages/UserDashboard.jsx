@@ -47,7 +47,7 @@ const UserDashboard = () => {
             </div>
           </div>
           <div className="d-flex justify-content-center m-auto">
-            {userInfo.name} {userInfo.surname}
+            {userInfo?.name} {userInfo?.surname}
           </div>
           <div className="border-bottom"></div>
           <div className="m-4 ">
