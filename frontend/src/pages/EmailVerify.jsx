@@ -2,8 +2,10 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ladyJustice from "../assets/Lady Justice.png";
+import { useNavigate } from "react-router-dom";
 
 const EmailVerify = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -33,6 +35,7 @@ const EmailVerify = () => {
           E-mailiniz doğrulandı{" "}
         </p>
         <button
+          onClick={() => navigate("/")}
           style={{
             background: "#A97900",
             color: "white",

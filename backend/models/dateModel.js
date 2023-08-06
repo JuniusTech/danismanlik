@@ -9,11 +9,32 @@ const dateSchema = new mongoose.Schema(
     lawyeremail: { type: String, required: true },
     branch: { type: String, required: true },
     description: { type: String, required: true },
+    status: {
+      type: String,
+      enum: ["completed", "cancelled", "planned"],
+      default: "planned",
+    },
   },
   {
     timestamps: true,
   }
 );
+const DateModel = mongoose.model("Date", dateSchema);
+async function updateStatusOfDates() {
+  const now = new Date();
+  const dates = await DateModel.find();
+  dates.forEach((date) => {
+    const [dayNumber, month, year] = date.day.split(".");
+    const [hourNumber, minute] = date.hour.split(":");
+    const eventDate = new Date(year, month - 1, dayNumber, hourNumber, minute);
 
-const Date = mongoose.model("Date", dateSchema);
-module.exports = Date;
+    if (eventDate < now && date.status !== "cancelled") {
+      date.status = "completed";
+    }
+
+    date.save();
+  });
+}
+setInterval(updateStatusOfDates, 60 * 1000);
+
+module.exports = DateModel;
