@@ -131,7 +131,7 @@ function LawyerDashboard() {
             <Form.Group className="mb-5 fs-5" controlId="imageFile">
               <Form.Control type="file" onChange={uploadFileHandler} />
             </Form.Group>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "-10px" }}>
               <button
                 className="lawyerdashboard-button-kaydet "
                 onClick={savePicture}
@@ -149,7 +149,7 @@ function LawyerDashboard() {
 
             <div
               className="d-flex justify-content-center m-auto"
-              style={{ width: "82px", fontSize: "14px" }}
+              style={{ width: "152px", fontSize: "14px" }}
             >
               {lawyerInfo.name} {lawyerInfo.surname}
             </div>
@@ -169,6 +169,7 @@ function LawyerDashboard() {
                       listStyle: "none",
                       marginBottom: "20px",
                       fontSize: "16px",
+                      cursor: "pointer"
                     }}
                   >
                     {item}

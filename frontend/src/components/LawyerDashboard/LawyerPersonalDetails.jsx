@@ -42,24 +42,25 @@ const LawyerPersonalDetails = () => {
         {
           headers: { Authorization: `Bearer ${lawyerInfo.token}` },
         }
-      );
-      setLoading(false);
-      toast.success("Bilgileriniz Güncellendi.");
-    } catch (error) {
-      toast.error(getError(error));
-      setLoading(false);
-    }
-    console.log(
-      addressDescription.description,
-      postalCode.code,
-      seciliIl,
-      seciliIlce,
-      seciliMahalle.name
-    );
-  };
-  const [seciliIl, setSeciliIl] = useState("");
-  const [seciliIlce, setSeciliIlce] = useState("");
-  const [seciliMahalle, setSeciliMahalle] = useState("");
+
+        console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
+    };
+    const [seciliIl, setSeciliIl] = useState("");
+    const [seciliIlce, setSeciliIlce] = useState("");
+
+    const handleIlChange = (e) => {
+        const ilIndex = e.target.value;
+        setSeciliIl(data[ilIndex].name);
+        setSeciliIlce("İlçe Seçiniz");
+    };
+
+    const handleIlceChange = (e) => {
+        const ilceIndex = e.target.value;
+        setSeciliIlce(
+            data.find((il) => il.name === seciliIl).towns[ilceIndex].name
+        );
+    };
+
 
   const handleIlChange = (e) => {
     const ilIndex = e.target.value;
@@ -68,23 +69,16 @@ const LawyerPersonalDetails = () => {
     setSeciliMahalle("");
   };
 
+
+    return (
+        <div style={{ widht: "650px" }}>
+            <div className="lawyerdashboardregisterBaslık">
+                <h1>Kişisel Bilgiler</h1>
   const handleIlceChange = (e) => {
     const ilceIndex = e.target.value;
     setSeciliIlce(
       data.find((il) => il.name === seciliIl).towns[ilceIndex].name
     );
-
-    setSeciliMahalle("");
-  };
-
-  const handleMahalleChange = (e) => {
-    const mahalleIndex = e.target.value;
-    setSeciliMahalle(
-      data
-        .find((il) => il.name === seciliIl)
-        .towns.find((t) => t.name === seciliIlce).districts[mahalleIndex]
-    );
-    setAddress({ city: seciliIl, town: seciliIlce, district: seciliMahalle });
   };
 
   return (
