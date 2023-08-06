@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/userRoute");
 const branchRouter = require("./routes/branchRoute");
 const lawyerRouter = require("./routes/lawyerRoute");
+const supportRouter = require("./routes/supportRoute");
 const mongoSanitize = require("express-mongo-sanitize");
 const passwordResetRouter = require("./routes/passwordResetRoute");
 const lawPassResetRouter = require("./routes/lawPassResetRoute");
@@ -60,6 +61,7 @@ app.use("/api/users", userRouter);
 app.use("/api/branchs", branchRouter);
 app.use("/api/lawyers", lawyerRouter);
 app.use("/api/dates", dateRouter);
+app.use("/api/support", supportRouter);
 app.use("/api/password-reset", passwordResetRouter);
 app.use("/api/law-password-reset", lawPassResetRouter);
 
