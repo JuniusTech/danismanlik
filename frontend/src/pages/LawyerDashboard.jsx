@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { getError } from "../getError";
 import Form from "react-bootstrap/Form";
 import { Store } from "../Store";
+import { Navigate } from 'react-router-dom';
 
 function LawyerDashboard() {
   const { state } = useContext(Store);
@@ -42,7 +43,7 @@ function LawyerDashboard() {
     } else if (item === "Ödeme Ayarları") {
       return <LawyerPaymentSetting />;
     } else if (item === "Yardım ve Destek") {
-      return <HelpAndSupport />;
+      return <Navigate to="/sıksorulansorular" />;
     } else return <LawyerPersonalDetails picture={picture} />;
   };
 
@@ -128,7 +129,7 @@ function LawyerDashboard() {
               </div>
             </div>
 
-            <Form.Group className="mb-5 fs-5" controlId="imageFile">
+            <Form.Group className="mb-5 ms-5 fs-5" controlId="imageFile">
               <Form.Control type="file" onChange={uploadFileHandler} />
             </Form.Group>
             <div style={{ display: "flex", justifyContent: "center", marginTop: "-10px" }}>

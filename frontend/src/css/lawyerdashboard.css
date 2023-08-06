@@ -3,7 +3,7 @@
   display: flex;
   margin-bottom: 169px;
   width: 68%;
-  height: 810px;
+  height: 820px;
   border-radius: 10px;
   opacity: 1;
 }
@@ -18,8 +18,8 @@
 }
 
 .lawyerdashbord-rightcard {
-  height: 77%;
-  padding-top: -10px;
+  /* height: 77%; */
+  padding-top: -100px;
   margin: auto;
 }
 
