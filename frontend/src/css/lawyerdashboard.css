@@ -2,14 +2,14 @@
   border: 1px solid #a97900;
   display: flex;
   margin-bottom: 169px;
-  width: 1086px;
-  height: fit-content;
+  width: 68%;
+  height: 810px;
   border-radius: 10px;
   opacity: 1;
 }
 
 .lawyerdashbord-leftcard {
-  width: 234px;
+  width: 23%;
 }
 .lawyerpersonaldetailFormDiv {
   width: 600px;
@@ -18,7 +18,9 @@
 }
 
 .lawyerdashbord-rightcard {
-  height: 730px;
+  height: 77%;
+  padding-top: -10px;
+  margin: auto;
 }
 
 .lawyerdashboard-datedetail {
