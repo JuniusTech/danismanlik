@@ -7,9 +7,9 @@ import SSSGenel from "./SSSGenel";
 const SıkSorulanSorular = () => {
   const [soru, setSoru] = useState("");
   const [email, setEmail] = useState("");
-  const iletişimeGeçin = () => {
+
+  const iletisimeGecin = () => {
     console.log(soru, email);
-    /* post işlemi */
   };
   return (
     <>
@@ -109,9 +109,18 @@ const SıkSorulanSorular = () => {
             height: "100px",
             margin: "0px 23px",
             borderRadius: "10px",
+            paddingLeft: "15px",
           }}
-          onChange={(e) => setSoru(e.target.value)}
+          minLength={100} // Minimum karakter sayısı
+          maxLength={250} // Maksimum karakter sayısı
+          value={soru} // State'teki değeri buraya eklemeyi unutmayın
+          onChange={(e) => {
+            if (e.target.value.length <= 250) {
+              setSoru(e.target.value);
+            }
+          }}
         />
+        {/* //! max ve min karakter uzunlukları için alertmi verelim ? */}
         <div
           style={{
             width: "450px",
@@ -123,7 +132,7 @@ const SıkSorulanSorular = () => {
           }}
         >
           <input
-            type="text"
+            type="email"
             style={{
               width: "350px",
               height: "50px",
@@ -147,7 +156,7 @@ const SıkSorulanSorular = () => {
               textAlign: "center",
               color: "#FFFFFF",
             }}
-            onClick={iletişimeGeçin}
+            onClick={iletisimeGecin}
           >
             Gönder
           </button>
