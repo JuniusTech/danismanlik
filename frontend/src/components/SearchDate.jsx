@@ -107,9 +107,8 @@ const SearchDate = ({ lawyer }) => {
   const datesDate = [0, 1, 2, 3].map((day, index) => {
     const currentDate = new Date(dateRange[0]);
     currentDate.setDate(dateRange[0].getDate() + index);
-    return `${currentDate.getDate()}.${
-      currentDate.getMonth() + 1
-    }.${currentDate.getFullYear()}`;
+    return `${currentDate.getDate()}.${currentDate.getMonth() + 1
+      }.${currentDate.getFullYear()}`;
   });
   // console.log(datesDate);
   const { state } = useContext(Store);
@@ -146,7 +145,6 @@ const SearchDate = ({ lawyer }) => {
       setLoading(false);
     }
   };
-  console.log(lawyer);
 
   const handlePrevWeek = (lawyerId) => {
     const firstDay = new Date(dateRange[0]);
@@ -208,17 +206,17 @@ const SearchDate = ({ lawyer }) => {
                   if (
                     dayOfMonth === today.getDate() &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Bugün";
                   } else if (
                     dayOfMonth === today.getDate() + 1 &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Yarın";
                   } else {
