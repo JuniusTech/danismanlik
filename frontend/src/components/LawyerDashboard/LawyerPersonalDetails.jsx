@@ -36,50 +36,38 @@ const LawyerPersonalDetails = () => {
         {
           name,
           surname,
+          email,
           phone,
-          address,
+          address
         },
         {
           headers: { Authorization: `Bearer ${lawyerInfo.token}` },
         }
-
-        console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
-    };
-    const [seciliIl, setSeciliIl] = useState("");
-    const [seciliIlce, setSeciliIlce] = useState("");
-
-    const handleIlChange = (e) => {
-        const ilIndex = e.target.value;
-        setSeciliIl(data[ilIndex].name);
-        setSeciliIlce("İlçe Seçiniz");
-    };
-
-    const handleIlceChange = (e) => {
-        const ilceIndex = e.target.value;
-        setSeciliIlce(
-            data.find((il) => il.name === seciliIl).towns[ilceIndex].name
-        );
-    };
-
+      );
+      setLoading(false);
+      toast.success("Bilgileriniz Güncellendi.");
+    } catch (error) {
+      toast.error(getError(error));
+      setLoading(false);
+    }
+    console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
+  };
+  const [seciliIl, setSeciliIl] = useState("");
+  const [seciliIlce, setSeciliIlce] = useState("");
 
   const handleIlChange = (e) => {
     const ilIndex = e.target.value;
     setSeciliIl(data[ilIndex].name);
     setSeciliIlce("İlçe Seçiniz");
-    setSeciliMahalle("");
   };
 
-
-    return (
-        <div style={{ widht: "650px" }}>
-            <div className="lawyerdashboardregisterBaslık">
-                <h1>Kişisel Bilgiler</h1>
   const handleIlceChange = (e) => {
     const ilceIndex = e.target.value;
     setSeciliIlce(
       data.find((il) => il.name === seciliIl).towns[ilceIndex].name
     );
   };
+
 
   return (
     <div style={{ widht: "650px" }}>
@@ -101,6 +89,7 @@ const LawyerPersonalDetails = () => {
               className="lawyerdashboard-registerFormControl"
               defaultValue={lawyerInfo.name}
               onChange={(e) => setName(e.target.value)}
+
             />
             <label className="lawyerdashboard-registerLabel" htmlFor="">
               Soyad
@@ -189,21 +178,17 @@ const LawyerPersonalDetails = () => {
             }}
             className="mx-2 pt-2 "
             name="comment"
-            placeholder={
-              lawyerInfo.address.description || "Adresi buraya girin..."
-            }
+            placeholder={lawyerInfo.address.description || "Adresi buraya girin..."}
             id=""
             defaultValue={lawyerInfo.address.description}
-            onChange={(e) =>
-              setAddress({ ...address, description: e.target.value })
-            }
+            onChange={(e) => setAddress({ ...address, description: e.target.value })}
+
           ></textarea>
         </div>
-        <div
-          className="d-flex row"
-          style={{ width: "588px", marginTop: "10px" }}
-        >
-          <label htmlFor="">Posta Kodu</label>
+        <div className="d-flex row" style={{ width: "588px", marginTop: "10px" }}>
+          <label htmlFor="">
+            Posta Kodu
+          </label>
           <input
             type="number"
             style={{
@@ -221,6 +206,7 @@ const LawyerPersonalDetails = () => {
           />
         </div>
         <div className="d-flex">
+
           <div style={{ width: "364px" }}>
             <label
               style={{ width: "60px" }}
@@ -246,6 +232,7 @@ const LawyerPersonalDetails = () => {
                   </option>
                 ))}
             </select>
+
           </div>
           <div style={{ paddingLeft: "7px" }}>
             <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -272,6 +259,7 @@ const LawyerPersonalDetails = () => {
                 </select>
               </div>
             }
+
           </div>
         </div>
         <br />

@@ -6,7 +6,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
     const [lawyerDates, setLawyerDates] = useState([]);
     const { state } = useContext(Store);
     const { lawyerInfo } = state;
-    const [selectedRow, setSelectedRow] = useState(null);
+    const selectedRow = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);
     const getDisplayedDates = () => {
@@ -19,13 +19,12 @@ const LawyerDates = ({ handleDateClick, index }) => {
         axios
             .get(`${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`)
             .then((response) => {
-                console.log(response.data.dates);
                 setLawyerDates(response.data.dates);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    });
 
     return (
         <div style={{ padding: "20px", color: " #00242E" }}>
@@ -85,7 +84,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
                                         paddingLeft: "7px",
                                     }}
                                 >
-                                    Yer
+                                    Saat
                                 </th>
                                 <th
                                     style={{
@@ -174,18 +173,48 @@ const LawyerDates = ({ handleDateClick, index }) => {
                                             paddingLeft: "15px",
                                         }}
                                     >
-                                        <button
-                                            style={{
-                                                background: "#82B0FF 0% 0% no-repeat padding-box",
-                                                borderRadius: "9px",
-                                                font: "normal normal normal 14px/16px SF Pro Text",
-                                                padding: "2px 9px",
-                                                color: "#FFFFFF",
-                                                marginLeft: "5px",
-                                            }}
-                                        >
-                                            Planlandı
-                                        </button>
+                                        {item.status === 'planned' && (
+                                            <button
+                                                style={{
+                                                    background: '#82B0FF 0% 0% no-repeat padding-box',
+                                                    borderRadius: '9px',
+                                                    font: 'normal normal normal 14px/16px SF Pro Text',
+                                                    padding: '2px 9px',
+                                                    color: '#FFFFFF',
+                                                    marginLeft: '5px',
+                                                }}
+                                            >
+                                                Planlandı
+                                            </button>
+                                        )}
+                                        {item.status === 'cancelled' && (
+                                            <button
+                                                style={{
+                                                    background: 'red',
+                                                    borderRadius: '9px',
+                                                    font: 'normal normal normal 14px/16px SF Pro Text',
+                                                    padding: '2px 9px',
+                                                    color: '#FFFFFF',
+                                                    marginLeft: '5px',
+                                                }}
+                                            >
+                                                İptal Edildi
+                                            </button>
+                                        )}
+                                        {item.status === 'completed' && (
+                                            <button
+                                                style={{
+                                                    background: 'green',
+                                                    borderRadius: '9px',
+                                                    font: 'normal normal normal 14px/16px SF Pro Text',
+                                                    padding: '2px 9px',
+                                                    color: '#FFFFFF',
+                                                    marginLeft: '5px',
+                                                }}
+                                            >
+                                                Tamamlandı
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
