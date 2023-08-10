@@ -63,11 +63,20 @@ const UserDashboard = () => {
                   style={{
                     fontWeight: selectedItem === item ? "bold" : "normal",
                     listStyle: "none",
+                    cursor: "pointer",
                   }}
                 >
                   {item}
                 </li>
               ))}
+              <li style={{ listStyle: "none" }}>
+                <a
+                  href="/sıksorulansorular"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  Yardım ve Sorular
+                </a>
+              </li>
             </ul>
           </div>
         </div>
