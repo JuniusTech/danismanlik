@@ -40,7 +40,7 @@ const lawyerSchema = new mongoose.Schema(
     rating: { type: Number },
     numReviews: { type: Number },
     reviews: [reviewSchema],
-    dates: [Object],
+    dates: [{ type: mongoose.Schema.Types.ObjectId, ref: "Date" }],
     token: { type: String },
   },
   {

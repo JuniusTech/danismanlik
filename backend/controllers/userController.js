@@ -12,7 +12,10 @@ const getUsers = expressAsyncHandler(async (req, res) => {
 });
 
 const getUser = expressAsyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).populate(
+    "dates",
+    "_id day hour  lawyername lawyeremail branch description status"
+  );
   if (user) {
     res.send(user);
   } else {

@@ -93,7 +93,10 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
 });
 
 const getLawyer = expressAsyncHandler(async (req, res) => {
-  const lawyer = await Lawyer.findById(req.params.id);
+  const lawyer = await Lawyer.findById(req.params.id).populate(
+    "dates",
+    "_id day hour username useremail  branch description status"
+  );
   if (lawyer) {
     res.send(lawyer);
   } else {

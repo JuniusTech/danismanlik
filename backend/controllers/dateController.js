@@ -19,12 +19,12 @@ const createDate = expressAsyncHandler(async (req, res) => {
   const date = await newDate.save();
   await User.findByIdAndUpdate(req.params.userId, {
     $push: {
-      dates: date,
+      dates: date._id,
     },
   });
   await Lawyer.findByIdAndUpdate(req.params.lawyerId, {
     $push: {
-      dates: date,
+      dates: date._id,
     },
   });
 
@@ -42,12 +42,16 @@ const createDate = expressAsyncHandler(async (req, res) => {
   });
 });
 
-const canceledDate = expressAsyncHandler(async (req, res) => {
+const cancelledDate = expressAsyncHandler(async (req, res) => {
   const date = await Date.findById(req.params.id);
   if (date) {
-    date.status = "cancelled";
-    const updatedDate = await date.save();
-    res.send({ message: "Date cancelled", updatedDate });
+    if (date.status === "planned") {
+      date.status = "cancelled";
+      const updatedDate = await date.save();
+      res.send({ message: "Date cancelled", updatedDate });
+    } else {
+      res.status(404).send({ message: "Date can not be cancelled" });
+    }
   } else {
     res.status(404).send({ message: "Date Not Found" });
   }
@@ -60,6 +64,6 @@ const getDates = expressAsyncHandler(async (req, res) => {
 
 module.exports = {
   createDate,
-  canceledDate,
+  cancelledDate,
   getDates,
 };

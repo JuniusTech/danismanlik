@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     verified: { type: Boolean, default: false },
-    dates: [Object],
+    dates: [{ type: mongoose.Schema.Types.ObjectId, ref: "Date" }],
     token: { type: String },
   },
   {

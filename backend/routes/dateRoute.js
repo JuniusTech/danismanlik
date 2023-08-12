@@ -1,16 +1,16 @@
 const express = require("express");
 
-const { isAuth, isAdmin } = require("../util.js");
+const { isAuth, isAdmin, isLawyer } = require("../util.js");
 const {
   createDate,
-  canceledDate,
+  cancelledDate,
   getDates,
 } = require("../controllers/dateController.js");
 
 const dateRouter = express.Router();
 
 dateRouter.post("/:userId/:lawyerId", isAuth, createDate);
-dateRouter.put("/:id", isAuth, canceledDate);
+dateRouter.put("/:id", isLawyer, cancelledDate);
 dateRouter.get("/", isAuth, isAdmin, getDates);
 
 module.exports = dateRouter;

@@ -9,7 +9,6 @@ const UserRandevularım = ({ handleDateClick, index }) => {
   const { userInfo } = state;
 
   useEffect(() => {
-    console.log(userInfo);
     axios
       .get(`${process.env.REACT_APP_BASE_URI}/api/users/${userInfo?._id}`, {
         headers: { Authorization: `Bearer ${userInfo?.token}` },
@@ -978,7 +977,7 @@ const UserRandevularım = ({ handleDateClick, index }) => {
                   paddingBottom: "7px",
                 }}
               >
-                {item.username}
+                {item.lawyername}
               </td>
               <td
                 style={{
