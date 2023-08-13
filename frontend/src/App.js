@@ -6,7 +6,7 @@ import AppRoute from "./AppRoute";
 function App() {
   return (
     <div className="App">
-      <ToastContainer position="top-right" limit={1} />
+      <ToastContainer position="top-right" limit={1} autoClose= "1000" />
       <AppRoute />
     </div>
   );

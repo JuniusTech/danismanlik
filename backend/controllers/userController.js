@@ -5,6 +5,7 @@ const { User, validate } = require("../models/userModel.js");
 const { generateToken } = require("../util.js");
 const sendEmail = require("../sendEmail");
 const crypto = require("crypto");
+const { Lawyer} = require("../models/lawyerModel.js");
 
 const getUsers = expressAsyncHandler(async (req, res) => {
   const users = await User.find({});
@@ -18,6 +19,26 @@ const getUser = expressAsyncHandler(async (req, res) => {
   );
   if (user) {
     res.send(user);
+  } else {
+    res.status(404).send({ message: "User Not Found" });
+  }
+});
+
+const getUserWithoutSensitiveInfo = expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).populate(
+    "dates",
+    "_id day hour  lawyername lawyeremail branch description status"
+  );
+  if (user) {
+    res.send({
+      _id: user._id,
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      phone: user.phone,
+      isAdmin: user.isAdmin,
+      favoriteLawyers: user.favoriteLawyers,
+    });
   } else {
     res.status(404).send({ message: "User Not Found" });
   }
@@ -106,6 +127,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     phone: user.phone,
     isAdmin: user.isAdmin,
     token: token,
+    favoriteLawyers: user.favoriteLawyers,
   });
   return;
 });
@@ -169,12 +191,56 @@ const verifyUserAccount = expressAsyncHandler(async (req, res) => {
   );
 });
 
+//add lawyer to fovorite lawyers list in user model
+const addFavoriteLawyer = expressAsyncHandler(async (req, res) => {
+ 
+ 
+  const user = await User.findById(req.params.userId);
+   
+  if (!user) {
+    return res.status(400).json({ message: "invalid user" });
+  }
+  const lawyer = await Lawyer.findById(req.params.lawyerId);
+  if (!lawyer) {
+    return res.status(400).json({ message: "invalid lawyer" });
+  }
+  if (user.favoriteLawyers.includes(lawyer._id)) {
+    return res.status(400).json({ message: "lawyer already in favorite list" });
+  }
+  user.favoriteLawyers.push(req.params.lawyerId);
+  //user.dates = [];
+  await user.save(); 
+  res.status(200).json({ message: "lawyer added to favorite list",favoriteLawyers:user.favoriteLawyers });
+});
+//remove lawyer from fovorite lawyers list in user model
+const removeFavoriteLawyer = expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    return res.status(400).json({ message: "invalid user" });
+  }
+  const lawyer = await Lawyer.findById(req.params.lawyerId);
+  if (!lawyer) {
+    return res.status(400).json({ message: "invalid lawyer" });
+  }
+  if (!user.favoriteLawyers.includes(lawyer._id)) {
+    return res.status(400).json({ message: "lawyer not in favorite list" });
+  }
+  user.favoriteLawyers.pull(req.params.lawyerId);
+  await user.save();
+  res.status(200).json({ message: "lawyer removed from favorite list",favoriteLawyers:user.favoriteLawyers });
+});
+
+
+
 module.exports = {
   signup,
   signin,
   deleteUser,
   updateUser,
   getUser,
+  getUserWithoutSensitiveInfo,
   getUsers,
   verifyUserAccount,
+  addFavoriteLawyer,
+  removeFavoriteLawyer,
 };

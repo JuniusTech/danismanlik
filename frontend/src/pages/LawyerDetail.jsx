@@ -19,8 +19,8 @@ const LawyerDetail = () => {
   const [lawyer, setLawyer] = useState("");
   const params = useParams();
   const { lawyerid } = params;
-
-  const { state } = useContext(Store);
+  const [loading, setLoading] = useState(false);
+  const { state,dispatch  } = useContext(Store);
   const { userInfo } = state;
   // console.log(lawyerid)
   // console.log(user)
@@ -80,6 +80,65 @@ const LawyerDetail = () => {
     const dateB = new Date(b.createdAt);
     return dateB - dateA;
   };
+
+
+  const handleAddLawyerToFavorite = async (lawyerId) => {
+    
+    if (!userInfo) {
+     // navigate to login page
+    } else {
+      try {
+        setLoading(true);
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}/favorite/${lawyerId}`,
+          {},
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+         
+        //toast.success(data.message);
+        //state ve local storage güncelle
+
+        const updatedUserInfo = {
+          favoriteLawyers: data.favoriteLawyers,
+          token: userInfo.token
+        };
+        await dispatch({ type: "UPDATE_USER_INFO",fields: updatedUserInfo}); 
+        setLoading(false);
+      } catch (error) {
+        toast.error(getError(error));
+        setLoading(false);
+      }
+    }
+  };
+  const handleRemoveLawyerFromFavorite = async (lawyerId) => {
+      try {
+        setLoading(true);
+        const { data } = await axios.delete(
+          `${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}/favorite/${lawyerId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        
+        //toast.success(data.message);
+        //state ve localstorage güncelle
+
+        const updatedUserInfo = {
+          favoriteLawyers: data.favoriteLawyers,
+          token: userInfo.token
+        };
+        await dispatch({ type: "UPDATE_USER_INFO",fields: updatedUserInfo}); 
+        setLoading(false);
+      } catch (error) {
+        toast.error(getError(error));
+        setLoading(false);
+      }
+    
+  };
+
+   
 
   return (
     <>
@@ -187,9 +246,21 @@ const LawyerDetail = () => {
                     <span>{lawyer.reviews?.length} yorum</span>
                   </p>
                 </div>
-                <button className="like">
-                  <i className="fa-regular fa-heart fa-2xl"></i>
-                </button>
+                <button className="like" onClick={
+                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+                        () => handleRemoveLawyerFromFavorite(lawyer._id)
+                        :
+                        () => handleAddLawyerToFavorite(lawyer._id)
+                        } disabled={loading} cursor= "progress">{loading ?  <>
+                          <span className="spinner-border text-primary mr-2" role="status" aria-hidden="true"></span>
+                        </> : 
+                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+                        
+                        <i className="fa-solid fa-heart fa-2xl"  style={{color: "#ff0000",}}></i>
+                        :
+                        <i className="fa-regular fa-heart fa-2xl"></i>
+                        }
+                      </button>
               </div>
               <div className="mt-2 ">
                 <div className="p-2 d-flex justify-content-start star">
