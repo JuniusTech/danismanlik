@@ -3,14 +3,32 @@ import background from "../../assets/sıksorulansorularbackground.png";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import SSSGenel from "./SSSGenel";
+import axios from "axios";
+import { getError } from "../../getError";
+import { toast } from "react-toastify";
 
 const SıkSorulanSorular = () => {
-  const [soru, setSoru] = useState("");
+  const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
 
-  const iletisimeGecin = () => {
-    // console.log(soru, email);
+  const iletisimeGecin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URI}/api/support`,
+        {
+          email,
+          description,
+        }
+      );
+
+      toast.success("Sorunuz Gönderildi");
+    } catch (error) {
+      toast.error(getError(error));
+    }
   };
+
   return (
     <>
       {" "}
@@ -113,10 +131,10 @@ const SıkSorulanSorular = () => {
           }}
           minLength={100} // Minimum karakter sayısı
           maxLength={250} // Maksimum karakter sayısı
-          value={soru} // State'teki değeri buraya eklemeyi unutmayın
+          value={description} // State'teki değeri buraya eklemeyi unutmayın
           onChange={(e) => {
             if (e.target.value.length <= 250) {
-              setSoru(e.target.value);
+              setDescription(e.target.value);
             }
           }}
         />
