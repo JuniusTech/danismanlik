@@ -38,7 +38,7 @@ const LawyerPersonalDetails = () => {
           surname,
           email,
           phone,
-          address
+          address,
         },
         {
           headers: { Authorization: `Bearer ${lawyerInfo.token}` },
@@ -50,7 +50,7 @@ const LawyerPersonalDetails = () => {
       toast.error(getError(error));
       setLoading(false);
     }
-    console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
+    // console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
   };
   const [seciliIl, setSeciliIl] = useState("");
   const [seciliIlce, setSeciliIlce] = useState("");
@@ -67,7 +67,6 @@ const LawyerPersonalDetails = () => {
       data.find((il) => il.name === seciliIl).towns[ilceIndex].name
     );
   };
-
 
   return (
     <div style={{ widht: "650px" }}>
@@ -89,7 +88,6 @@ const LawyerPersonalDetails = () => {
               className="lawyerdashboard-registerFormControl"
               defaultValue={lawyerInfo.name}
               onChange={(e) => setName(e.target.value)}
-
             />
             <label className="lawyerdashboard-registerLabel" htmlFor="">
               Soyad
@@ -178,17 +176,21 @@ const LawyerPersonalDetails = () => {
             }}
             className="mx-2 pt-2 "
             name="comment"
-            placeholder={lawyerInfo.address.description || "Adresi buraya girin..."}
+            placeholder={
+              lawyerInfo.address.description || "Adresi buraya girin..."
+            }
             id=""
             defaultValue={lawyerInfo.address.description}
-            onChange={(e) => setAddress({ ...address, description: e.target.value })}
-
+            onChange={(e) =>
+              setAddress({ ...address, description: e.target.value })
+            }
           ></textarea>
         </div>
-        <div className="d-flex row" style={{ width: "588px", marginTop: "10px" }}>
-          <label htmlFor="">
-            Posta Kodu
-          </label>
+        <div
+          className="d-flex row"
+          style={{ width: "588px", marginTop: "10px" }}
+        >
+          <label htmlFor="">Posta Kodu</label>
           <input
             type="number"
             style={{
@@ -206,7 +208,6 @@ const LawyerPersonalDetails = () => {
           />
         </div>
         <div className="d-flex">
-
           <div style={{ width: "364px" }}>
             <label
               style={{ width: "60px" }}
@@ -232,7 +233,6 @@ const LawyerPersonalDetails = () => {
                   </option>
                 ))}
             </select>
-
           </div>
           <div style={{ paddingLeft: "7px" }}>
             <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -259,7 +259,6 @@ const LawyerPersonalDetails = () => {
                 </select>
               </div>
             }
-
           </div>
         </div>
         <br />

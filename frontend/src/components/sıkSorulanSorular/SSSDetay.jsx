@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SSSGenel from "./SSSGenel";
 
 const SıkSorulanSorularDetay = ({ info, info2, info3 }) => {
-  console.log(info);
+  // console.log(info);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [back, setBack] = useState("");
 

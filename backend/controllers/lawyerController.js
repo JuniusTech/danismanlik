@@ -7,7 +7,26 @@ const sendEmail = require("../sendEmail");
 const crypto = require("crypto");
 
 const getLawyers = expressAsyncHandler(async (req, res) => {
-  const lawyers = await Lawyer.find({});
+  const lawyers = await Lawyer.aggregate([
+    {
+      $unset: [
+        "barNo",
+        "password",
+        "memberAg",
+        "infoText",
+        "perData",
+        "verified",
+        "isAdmin",
+        "isTick",
+        "reviews",
+        "updatedAt",
+        "__v",
+        "dates",
+        "address",
+      ],
+    },
+  ]);
+
   res.send(lawyers);
 });
 

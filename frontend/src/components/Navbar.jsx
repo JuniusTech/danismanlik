@@ -22,17 +22,17 @@ const Navbar = () => {
   const navigate = useNavigate();
   const userSignOut = () => {
     dispatch({ type: "USER_SIGNOUT" });
-    // localStorage.removeItem("userInfo");
+    localStorage.removeItem("userInfo");
     toast.success("Çıkış Yaptınız.");
     // removeCookie("jwt");
     navigate("/");
   };
   const lawyerSignOut = () => {
     dispatch({ type: "LAWYER_SIGNOUT" });
-    // localStorage.removeItem("lawyerInfo");
+    localStorage.removeItem("lawyerInfo");
     toast.success("Çıkış Yaptınız.");
-    // setIsLawyer(false);
-    console.log(is_lawyer);
+    setIsLawyer(false);
+    // console.log(is_lawyer);
     // removeCookie("jwt");
     navigate("/");
   };

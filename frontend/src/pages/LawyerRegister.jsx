@@ -40,7 +40,7 @@ const AvukatLoginPage = ({
         setBranches(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(getError(error));
       });
   }, []);
 

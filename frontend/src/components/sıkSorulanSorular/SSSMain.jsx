@@ -9,7 +9,7 @@ const SıkSorulanSorular = () => {
   const [email, setEmail] = useState("");
 
   const iletisimeGecin = () => {
-    console.log(soru, email);
+    // console.log(soru, email);
   };
   return (
     <>

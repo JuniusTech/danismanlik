@@ -38,11 +38,9 @@ const AvukatSignPage = ({
         }
       );
       setLoading(false);
-      // removeCookie("jwt");
-      // setCookie("jwt", data.token);
       toast.success("Hoşgeldiniz");
       dispatch({ type: "LAWYER_SIGNIN", payload: data });
-      // localStorage.setItem("lawyerInfo", JSON.stringify(data));
+      localStorage.setItem("lawyerInfo", JSON.stringify(data));
       setShowLawyerLogin(false);
       navigate(`/lawyer/${lawyer._id}`, { state: lawyer });
     } catch (error) {}

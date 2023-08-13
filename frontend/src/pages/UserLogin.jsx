@@ -36,6 +36,7 @@ const UserLogin = ({ show, setShowUserRegister, setShowUserLogin }) => {
       setLoading(false);
       toast.success("Hoşgeldiniz");
       dispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
       setShowUserLogin(false);
     } catch (err) {
       toast.error(getError(err));

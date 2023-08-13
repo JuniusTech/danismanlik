@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Store } from "../../Store";
+import { toast } from "react-toastify";
+import { getError } from "../../getError";
 
 const UserRandevularım = ({ handleDateClick, index }) => {
   const [userDates, setUserDates] = useState([]);
@@ -14,11 +16,10 @@ const UserRandevularım = ({ handleDateClick, index }) => {
         headers: { Authorization: `Bearer ${userInfo?.token}` },
       })
       .then((response) => {
-        console.log(response.data.dates);
         setUserDates(response.data.dates);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(getError(error));
       });
   }, []);
 

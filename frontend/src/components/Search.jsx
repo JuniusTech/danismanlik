@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getError } from "../getError";
+import { toast } from "react-toastify";
 
 const Search = () => {
   const [branchs, setBranchs] = useState([]);
@@ -13,7 +15,7 @@ const Search = () => {
         setBranchs(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(getError(error));
       });
   }, [branch]);
 
