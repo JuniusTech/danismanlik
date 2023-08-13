@@ -126,7 +126,7 @@ const LawyerCard = ({ lawyers }) => {
                       </button>
                     </div>
                     <div className="mt-2 ">
-                      <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
+                      <p> Adres: {lawyer.address?.district} {lawyer.address?.description} {lawyer.address?.town} / {lawyer.address?.city}</p>
                       <h5 className="star">Bio</h5>
                       <p className="extra-content">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.

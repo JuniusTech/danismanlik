@@ -280,7 +280,7 @@ const LawyerDetail = () => {
           <div className="lawyer-card d-flex rounded-4 mt-5 ">
             <div id="Adres" className="w-75">
               <h3>Adres</h3>
-              <p> Adres: dad adsad adasd asdasd asdasd asd asd d</p>
+              <p> Adres: {lawyer.address?.district} {lawyer.address?.description} {lawyer.address?.town} / {lawyer.address?.city}</p>
             </div>
           </div>
           <div id="Hizmetler" className="lawyer-card rounded-4 mt-5 ">
@@ -422,7 +422,7 @@ const LawyerDetail = () => {
           </div>
           <p className="mx-4">
             {" "}
-            Adres: dad adsad adasd asdasd asdasd asd asd d
+            Adres: {lawyer.address?.district} {lawyer.address?.description} {lawyer.address?.town} / {lawyer.address?.city}
           </p>
           <SearchDate lawyer={lawyer} />
         </div>
