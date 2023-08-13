@@ -19,7 +19,6 @@ const LawyerPersonalDetails = () => {
   const [address, setAddress] = useState({
     city: "",
     town: "",
-    district: "",
     description: "",
     code: "",
   });
@@ -217,7 +216,7 @@ const LawyerPersonalDetails = () => {
             </label>
             <select
               className="lawyerdashboard-registerFormControl"
-              value={data.name}
+              value={lawyerInfo.address.city || "il seçiniz"}
               name="il"
               onChange={handleIlChange}
               title="İl Seçiniz"

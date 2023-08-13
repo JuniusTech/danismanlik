@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import SearchDate from "../components/SearchDate";
-import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import "../css/lawyercard.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-scroll";
 import Footer from "../components/Footer";
 import telephone from "../assets/telephone.svg";
@@ -90,7 +89,7 @@ const LawyerDetail = () => {
         <img className="ps-2" src={ltrght} alt="" />
         <div className="ps-3">{lawyer.branch} avukatı</div>
         <img className="ps-2" src={ltrght} alt="" />
-        <div className="ps-3">İstanbul</div>
+        <div className="ps-3">{lawyer.address?.city}</div>
         <img className="ps-2" src={ltrght} alt="" />
         <div className="ps-3">
           {lawyer.name} {lawyer.surname}{" "}
@@ -104,7 +103,7 @@ const LawyerDetail = () => {
                 <div className="h-100">
                   <img
                     width="150rem"
-                    src={lawyer.isTick ? image : avatar}
+                    src={lawyer.picture ? lawyer.picture : avatar}
                     alt="profilepict"
                   />
                 </div>
@@ -123,7 +122,7 @@ const LawyerDetail = () => {
                       ""
                     )}
                   </div>
-                  <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
+                  <p className="m-2">{lawyer.branch} avukatı, {lawyer.address?.city}</p>
                   <p className="mx-2">15 Yıllık Deneyim</p>
                   <p className="m-2 star">
                     <span>
@@ -132,8 +131,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 1
                             ? "fas fa-star"
                             : lawyer.rating >= 0.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -143,8 +142,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 2
                             ? "fas fa-star"
                             : lawyer.rating >= 1.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -154,8 +153,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 3
                             ? "fas fa-star"
                             : lawyer.rating >= 2.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -165,8 +164,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 4
                             ? "fas fa-star"
                             : lawyer.rating >= 3.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -176,8 +175,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 5
                             ? "fas fa-star"
                             : lawyer.rating >= 4.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -311,8 +310,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 1
                             ? "fas fa-star"
                             : lawyer.rating >= 0.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -322,8 +321,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 2
                             ? "fas fa-star"
                             : lawyer.rating >= 1.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -333,8 +332,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 3
                             ? "fas fa-star"
                             : lawyer.rating >= 2.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -344,8 +343,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 4
                             ? "fas fa-star"
                             : lawyer.rating >= 3.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -355,8 +354,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 5
                             ? "fas fa-star"
                             : lawyer.rating >= 4.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
