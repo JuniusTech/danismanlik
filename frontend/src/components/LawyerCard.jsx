@@ -58,7 +58,7 @@ const LawyerCard = ({ lawyers }) => {
                             ""
                           )}
                         </div>
-                        <p className="m-2">{lawyer.branch} avukatı, İstanbul</p>
+                        <p className="m-2">{lawyer.branch} avukatı, {lawyer.address?.city}</p>
                         <p className="mx-2">15 Yıllık Deneyim</p>
                         <p className="m-2 star">
                           <span>
@@ -67,8 +67,8 @@ const LawyerCard = ({ lawyers }) => {
                                 lawyer.rating >= 1
                                   ? "fas fa-star"
                                   : lawyer.rating >= 0.5
-                                  ? "fas fa-star-half-alt"
-                                  : "far fa-star"
+                                    ? "fas fa-star-half-alt"
+                                    : "far fa-star"
                               }
                             />
                           </span>
@@ -78,8 +78,8 @@ const LawyerCard = ({ lawyers }) => {
                                 lawyer.rating >= 2
                                   ? "fas fa-star"
                                   : lawyer.rating >= 1.5
-                                  ? "fas fa-star-half-alt"
-                                  : "far fa-star"
+                                    ? "fas fa-star-half-alt"
+                                    : "far fa-star"
                               }
                             />
                           </span>
@@ -89,8 +89,8 @@ const LawyerCard = ({ lawyers }) => {
                                 lawyer.rating >= 3
                                   ? "fas fa-star"
                                   : lawyer.rating >= 2.5
-                                  ? "fas fa-star-half-alt"
-                                  : "far fa-star"
+                                    ? "fas fa-star-half-alt"
+                                    : "far fa-star"
                               }
                             />
                           </span>
@@ -100,8 +100,8 @@ const LawyerCard = ({ lawyers }) => {
                                 lawyer.rating >= 4
                                   ? "fas fa-star"
                                   : lawyer.rating >= 3.5
-                                  ? "fas fa-star-half-alt"
-                                  : "far fa-star"
+                                    ? "fas fa-star-half-alt"
+                                    : "far fa-star"
                               }
                             />
                           </span>
@@ -111,8 +111,8 @@ const LawyerCard = ({ lawyers }) => {
                                 lawyer.rating >= 5
                                   ? "fas fa-star"
                                   : lawyer.rating >= 4.5
-                                  ? "fas fa-star-half-alt"
-                                  : "far fa-star"
+                                    ? "fas fa-star-half-alt"
+                                    : "far fa-star"
                               }
                             />
                           </span>
