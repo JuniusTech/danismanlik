@@ -22,6 +22,11 @@ const reducer = (state, action) => {
       return { ...state, lawyerInfo: null };
     case "SET_IS_LAWYER":
       return { ...state, is_lawyer: action.payload };
+    case "UPDATE_USER_INFO":
+        return { ...state, userInfo: {
+          ...state.userInfo,
+          ...action.fields,
+        }};  
     default:
       return state;
   }
@@ -30,11 +35,15 @@ const reducer = (state, action) => {
 export const StoreProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isLawyer, setIsLawyer] = useState(state.is_lawyer);
+   
 
   useEffect(() => {
     localStorage.setItem("is_lawyer", JSON.stringify(isLawyer));
   }, [isLawyer]);
 
+useEffect(() => {
+    localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+  }, [state.userInfo]);
   const value = {
     state: { ...state, is_lawyer: isLawyer },
     dispatch,

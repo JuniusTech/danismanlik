@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
     verified: { type: Boolean, default: false },
     dates: [{ type: mongoose.Schema.Types.ObjectId, ref: "Date" }],
     token: { type: String },
+    favoriteLawyers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Lawyer" }],
   },
   {
     timestamps: true,

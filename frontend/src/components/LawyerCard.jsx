@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import image from "../assets/bg.jpg";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
 import { useNavigate } from "react-router-dom";
 import telephone from "../assets/telephone.svg";
 import web from "../assets/web.svg";
-
+import { Store } from "../Store";
 const LawyerCard = ({ lawyers }) => {
   const navigate = useNavigate();
   const handleReadMoreClick = (lawyerId) => {
@@ -19,7 +19,8 @@ const LawyerCard = ({ lawyers }) => {
   const extraContent = <p className="extra-content"></p>;
   const [lawyerStates, setLawyerStates] = useState({});
   const [readMore] = useState(false);
-
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   return (
     <>
       <div className="w-100">
@@ -121,8 +122,14 @@ const LawyerCard = ({ lawyers }) => {
                           <span>{lawyer.reviews.length} yorum</span>
                         </p>
                       </div>
-                      <button className="like">
+                      <button className="like" >
+                        {
+                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+                        
+                        <i className="fa-solid fa-heart fa-2xl"  style={{color: "#ff0000",}}></i>
+                        :
                         <i className="fa-regular fa-heart fa-2xl"></i>
+                        }
                       </button>
                     </div>
                     <div className="mt-2 ">
