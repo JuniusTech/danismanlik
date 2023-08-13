@@ -24,24 +24,24 @@ const SearchDate = ({ lawyer }) => {
   const [dates, setDates] = useState([]);
   const [lawyerHours, setLawyerHours] = useState({});
 
-  useEffect(() => {
-    const fetchDates = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URI}/lawyers`,
-          {
-            params: {
-              lawyerId: lawyer._id,
-            },
-          }
-        );
-        setDates(response.data);
-      } catch (error) {
-        toast.error(getError(error));
-      }
-    };
-    fetchDates();
-  }, [lawyer]);
+  // useEffect(() => {
+  //   const fetchDates = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URI}/lawyers`,
+  //         {
+  //           params: {
+  //             lawyerId: lawyer._id,
+  //           },
+  //         }
+  //       );
+  //       setDates(response.data);
+  //     } catch (error) {
+  //       toast.error(getError(error));
+  //     }
+  //   };
+  //   fetchDates();
+  // }, [lawyer]);
 
   const handleButtonClick = (hour, index) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
@@ -243,8 +243,8 @@ const SearchDate = ({ lawyer }) => {
               </tr>
             </thead>
             <tbody>
-              {hours.map((toggleHours) => (
-                <tr>
+              {hours.map((toggleHours, index) => (
+                <tr key={index}>
                   <td></td>
                   {datesDate.map((day, index) => (
                     <td>
