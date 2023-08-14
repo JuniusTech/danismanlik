@@ -13,16 +13,34 @@ const getUsers = expressAsyncHandler(async (req, res) => {
 });
 
 const getUser = expressAsyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).populate(
-    "dates",
-    "_id day hour  lawyername lawyeremail branch description status"
-  );
+  const user = await User.findById(req.params.id).populate({
+    path: "dates",
+    select: "_id day hour branch description status",
+    populate: {
+      path: "lawyerId",
+      select: "name surname email", 
+      model: "Lawyer", 
+    },
+  }).lean();
   if (user) {
+    console.log("aaa",user.dates);
+    const transformedDates = user.dates.map((date) => {
+      const { lawyerId, ...rest } = date;
+      return {
+        ...rest,
+        lawyer:date.lawyerId ,
+      };
+    });
+    user.dates = transformedDates;
+    console.log("bbbbb",user.dates);
     res.send(user);
   } else {
     res.status(404).send({ message: "User Not Found" });
   }
 });
+
+ 
+
 
 const getUserWithoutSensitiveInfo = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).populate(
@@ -127,6 +145,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     phone: user.phone,
     isAdmin: user.isAdmin,
     token: token,
+    dates: user.dates,
     favoriteLawyers: user.favoriteLawyers,
   });
   return;

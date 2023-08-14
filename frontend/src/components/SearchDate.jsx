@@ -17,7 +17,9 @@ const SearchDate = ({ lawyer }) => {
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState("");
+  const [selectedHourIndex, setSelectedHourIndex] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
+  const [selectedDayIndex, setSelectedDayIndex] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedMonthtext, setSelectedMonthtext] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -43,20 +45,28 @@ const SearchDate = ({ lawyer }) => {
   //   fetchDates();
   // }, [lawyer]);
 
-  const handleButtonClick = (hour, index) => {
+  const handleButtonClick = (hour, dayIndex,hourIndex) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
-    selectedDate.setDate(dateRange[0].getDate() + index); // index değeriyle seçilen günü hesaplıyoruz
-
+    //console.log("selectedDate1", selectedDate);
+    selectedDate.setDate(dateRange[0].getDate() + dayIndex); // index değeriyle seçilen günü hesaplıyoruz
+    //console.log("selectedDate2", selectedDate);
     const dayOfMonth = selectedDate.getDate();
+    //console.log("dayOfMonth", dayOfMonth);
     const monthIndex = selectedDate.getMonth();
+    //console.log("monthIndex", monthIndex);
     const month = monthIndex + 1;
+    //console.log("month", month);
     const monthText = selectedDate.toLocaleString("default", {
       month: "long",
     });
+    //console.log("monthText", monthText);
     const year = selectedDate.getFullYear();
+    //console.log("year", year);
 
     setSelectedHour(hour);
+    setSelectedHourIndex(hourIndex);
     setSelectedDay(dayOfMonth);
+    setSelectedDayIndex(dayIndex);
     setSelectedMonth(month);
     setSelectedMonthtext(monthText);
     setSelectedYear(year);
@@ -137,9 +147,15 @@ const SearchDate = ({ lawyer }) => {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
-      // console.log(data);
+       //console.log("data", data);
       setDates([...dates, data]);
+     // console.log("dates", dates);
+      
       setLoading(false);
+      setModalOpen(false);
+     
+      window.location.reload();
+      
       toast.success("Randevunuz oluşturuldu.");
     } catch (error) {
       toast.error(getError(error));
@@ -170,12 +186,25 @@ const SearchDate = ({ lawyer }) => {
     lastDay.setDate(lastDay.getDate() + 3);
     setDateRange([firstDay, lastDay]);
   };
-  function isAvailable(lawyers, day, hour) {
-    return lawyers.dates?.some(
+  
+  function isAvailable(lawyer, day, hour) {
+  
+   
+    return lawyer.dates?.some(
       (date) => date.day === day && date.hour === hour
     );
+    
+     
   }
 
+// 
+const availabilityMap = datesDate.map((day) =>
+  hours.map((toggleHour) =>
+    isAvailable(lawyer, day, toggleHour)
+  )
+);
+//console.log("availabilityMap", availabilityMap);
+//console.log("dateRange",dateRange)
   return (
     <>
       <div className="search-card-lawyer-rightbox">
@@ -243,26 +272,30 @@ const SearchDate = ({ lawyer }) => {
               </tr>
             </thead>
             <tbody>
-              {hours.map((toggleHours, index) => (
-                <tr key={index}>
+              {hours.map((toggleHours, hourIndex) => (
+                <tr key={hourIndex}>
                   <td></td>
-                  {datesDate.map((day, index) => (
+                   
+                      {datesDate.map((day, dayIndex) => {
+                        const isLawyerAvailable = lawyer.dates && lawyer.dates.length > 0 && availabilityMap[dayIndex][hourIndex];
+                        //console.log("day", day);
+                        return (
                     <td>
                       <button
-                        key={index}
+                        key={dayIndex}
                         className={
-                          isAvailable(lawyer, day, toggleHours)
+                          isLawyerAvailable
                             ? "search-hoursbutton selected inactive-button rounded-2"
                             : "search-hoursbutton rounded-2"
                         }
                         size="sm"
-                        onClick={() => handleButtonClick(toggleHours, index)}
-                        disabled={isAvailable(lawyer, day, toggleHours)}
+                        onClick={() => handleButtonClick(toggleHours, dayIndex,hourIndex)}
+                        disabled={isLawyerAvailable}
                       >
                         {toggleHours}
                       </button>
                     </td>
-                  ))}
+                  )})}
                 </tr>
               ))}
 

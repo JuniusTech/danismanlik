@@ -88,15 +88,43 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
       ? { barNo: -1 }
       : { _id: -1 };
 
-  const lawyers = await Lawyer.find({
-    ...branchFilter,
-    ...tickFilter,
-    ...ratingFilter,
-    ...queryFilter,
-  })
-    .sort(sortOrder)
-    .limit(limit * 1)
-    .skip((page - 1) * limit);
+  // const lawyers = await Lawyer.find({
+  //   ...branchFilter,
+  //   ...tickFilter,
+  //   ...ratingFilter,
+  //   ...queryFilter,
+  // })
+  //   .sort(sortOrder)
+  //   .limit(limit * 1)
+  //   .skip((page - 1) * limit);
+
+  const lawyers = await Lawyer.aggregate([
+    {
+      $match: {
+        ...branchFilter,
+        ...tickFilter,
+        ...ratingFilter,
+        ...queryFilter,
+      },
+    },
+    {
+      $lookup: {
+        from: "dates", // 'dates' koleksiyonunun adı
+        localField: "_id", // Lawyer belgesindeki _id alanı
+        foreignField: "lawyerId", // Dates belgesindeki lawyerId alanı
+        as: "dates", // Doldurulmuş dates bilgisi
+      },
+    },
+    {
+      $sort: sortOrder,
+    },
+    {
+      $limit: limit * 1,
+    },
+    {
+      $skip: (page - 1) * limit,
+    },
+  ]);
   const countLawyers = await Lawyer.countDocuments({
     ...branchFilter,
     ...tickFilter,
@@ -211,6 +239,7 @@ const signin = expressAsyncHandler(async (req, res) => {
     isAdmin: lawyer.isAdmin,
     address: lawyer.address,
     picture: lawyer.picture,
+    dates: lawyer.dates,
     token: token,
   });
   return;
