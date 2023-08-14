@@ -505,7 +505,7 @@ const LawyerDetail = () => {
           <SearchDate lawyer={lawyer} />
         </div>
       </div>
-      <Comment show={showComment} onHide={handleClose} />
+      <Comment show={showComment} onHide={handleClose} lawyer={lawyer} setLawyer={setLawyer} />
       <Footer />
     </>
   );
