@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext,useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
@@ -9,16 +9,12 @@ import { Button } from "react-bootstrap";
 
 import "../css/comment.css";
 
-const Comment = ({ show, onHide, id }) => {
-  let reviewsRef = useRef();
+const Comment = ({ show, onHide,lawyer,setLawyer, id }) => {
+   
   const params = useParams();
   const { lawyerid } = params;
-
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState();
-  const navigate = useNavigate();
   const [stars, setStars] = useState(0);
-
   const { state } = useContext(Store);
   const { userInfo } = state;
 
@@ -36,13 +32,14 @@ const Comment = ({ show, onHide, id }) => {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
+      setLawyer((prevLawyer) => ({
+        ...prevLawyer,
+        reviews: [...prevLawyer.reviews, data.review],
+        rating: data.rating,
+      }));
+  
       toast.success("Yorum başarılı bir şekilde yapıldı");
-      navigate(`/lawyer/${lawyerid}`);
       onHide();
-      window.scrollTo({
-        behavior: "smooth",
-        top: reviewsRef.current.offsetTop,
-      });
     } catch (error) {
       toast.error("Bir hata oluştu. Yorum yapılamadı.");
     }
