@@ -17,6 +17,7 @@ const UserRandevularım = ({ handleDateClick, index }) => {
       })
       .then((response) => {
         setUserDates(response.data.dates);
+        //console.log("response.data.dates", response.data.dates);
       })
       .catch((error) => {
         toast.error(getError(error));
@@ -978,7 +979,7 @@ const UserRandevularım = ({ handleDateClick, index }) => {
                   paddingBottom: "7px",
                 }}
               >
-                {item.lawyername}
+                {item.lawyer.name}
               </td>
               <td
                 style={{
@@ -1018,18 +1019,31 @@ const UserRandevularım = ({ handleDateClick, index }) => {
                   paddingBottom: "7px",
                 }}
               >
-                <button
-                  style={{
-                    background: "#82B0FF 0% 0% no-repeat padding-box",
-                    borderRadius: "9px",
-                    font: "normal normal normal 14px/16px SF Pro Text",
-                    padding: "2px 9px",
-                    color: "#FFFFFF",
-                    marginLeft: "5px",
-                  }}
-                >
-                  Planlandı
-                </button>
+               <button
+  style={{
+    background:
+      item.status === "planned"
+        ? "#82B0FF"
+        : item.status === "completed"
+        ? "#32CD32"
+        : item.status === "cancelled"
+        ? "#FF4500"
+        : "#FFFFFF",
+    borderRadius: "9px",
+    font: "normal normal normal 14px/16px SF Pro Text",
+    padding: "2px 9px",
+    color: "#FFFFFF",
+    marginLeft: "5px",
+  }}
+>
+  {item.status === "planned"
+    ? "Planlandı"
+    : item.status === "completed"
+    ? "Tamamlandı"
+    : item.status === "cancelled"
+    ? "İptal Edildi"
+    : "Durum Belirtilmedi"}
+</button>
               </td>
             </tr>
           ))}

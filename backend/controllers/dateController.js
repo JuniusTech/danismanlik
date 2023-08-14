@@ -6,13 +6,12 @@ const { User } = require("../models/userModel");
 const createDate = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   const lawyer = await Lawyer.findById(req.params.lawyerId);
-  const newDate = new Date({
+  if (user || lawyer) {
+   const newDate = new Date({
     day: req.body.day,
     hour: req.body.hour,
-    username: user.name,
-    useremail: user.email,
-    lawyername: lawyer.name,
-    lawyeremail: lawyer.email,
+    userId: user._id,
+    lawyerId: lawyer._id,
     branch: lawyer.branch,
     description: req.body.description,
   });
@@ -32,15 +31,16 @@ const createDate = expressAsyncHandler(async (req, res) => {
     _id: date._id,
     day: date.day,
     hour: date.hour,
-    username: date.username,
-    useremail: date.useremail,
-    lawyername: date.lawyername,
-    lawyeremail: date.lawyeremail,
+    userId: date.userId,
+    lawyerId: date.lawyerId,
     branch: date.branch,
     description: date.description,
     status: date.status,
   });
-});
+  }
+  else {
+    res.status(404).send({ message: "User or Lawyer Not Found" });
+}});
 
 const cancelledDate = expressAsyncHandler(async (req, res) => {
   const date = await Date.findById(req.params.id);
