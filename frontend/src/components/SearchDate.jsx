@@ -26,42 +26,16 @@ const SearchDate = ({ lawyer }) => {
   const [dates, setDates] = useState([]);
   const [lawyerHours, setLawyerHours] = useState({});
 
-  // useEffect(() => {
-  //   const fetchDates = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URI}/lawyers`,
-  //         {
-  //           params: {
-  //             lawyerId: lawyer._id,
-  //           },
-  //         }
-  //       );
-  //       setDates(response.data);
-  //     } catch (error) {
-  //       toast.error(getError(error));
-  //     }
-  //   };
-  //   fetchDates();
-  // }, [lawyer]);
-
-  const handleButtonClick = (hour, dayIndex,hourIndex) => {
+  const handleButtonClick = (hour, dayIndex, hourIndex) => {
     const selectedDate = new Date(dateRange[0]); // dateRange'den seçilen tarihi alıyoruz
-    //console.log("selectedDate1", selectedDate);
     selectedDate.setDate(dateRange[0].getDate() + dayIndex); // index değeriyle seçilen günü hesaplıyoruz
-    //console.log("selectedDate2", selectedDate);
     const dayOfMonth = selectedDate.getDate();
-    //console.log("dayOfMonth", dayOfMonth);
     const monthIndex = selectedDate.getMonth();
-    //console.log("monthIndex", monthIndex);
     const month = monthIndex + 1;
-    //console.log("month", month);
     const monthText = selectedDate.toLocaleString("default", {
       month: "long",
     });
-    //console.log("monthText", monthText);
     const year = selectedDate.getFullYear();
-    //console.log("year", year);
 
     setSelectedHour(hour);
     setSelectedHourIndex(hourIndex);
@@ -72,8 +46,6 @@ const SearchDate = ({ lawyer }) => {
     setSelectedYear(year);
     setModalOpen(true);
 
-    // console.log(dayOfMonth, month, hour);
-    // console.log(selectedDay + "." + selectedMonth + "." + selectedYear);
   };
 
   const handleCloseModal = () => {
@@ -117,11 +89,9 @@ const SearchDate = ({ lawyer }) => {
   const datesDate = [0, 1, 2, 3].map((day, index) => {
     const currentDate = new Date(dateRange[0]);
     currentDate.setDate(dateRange[0].getDate() + index);
-    return `${currentDate.getDate()}.${
-      currentDate.getMonth() + 1
-    }.${currentDate.getFullYear()}`;
+    return `${currentDate.getDate()}.${currentDate.getMonth() + 1
+      }.${currentDate.getFullYear()}`;
   });
-  // console.log(datesDate);
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [loading, setLoading] = useState(false);
@@ -147,15 +117,12 @@ const SearchDate = ({ lawyer }) => {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
-       //console.log("data", data);
       setDates([...dates, data]);
-     // console.log("dates", dates);
-      
       setLoading(false);
       setModalOpen(false);
-     
+
       window.location.reload();
-      
+
       toast.success("Randevunuz oluşturuldu.");
     } catch (error) {
       toast.error(getError(error));
@@ -186,25 +153,24 @@ const SearchDate = ({ lawyer }) => {
     lastDay.setDate(lastDay.getDate() + 3);
     setDateRange([firstDay, lastDay]);
   };
-  
+
   function isAvailable(lawyer, day, hour) {
-  
-   
+
+
     return lawyer.dates?.some(
       (date) => date.day === day && date.hour === hour
     );
-    
-     
+
+
   }
 
-// 
-const availabilityMap = datesDate.map((day) =>
-  hours.map((toggleHour) =>
-    isAvailable(lawyer, day, toggleHour)
-  )
-);
-//console.log("availabilityMap", availabilityMap);
-//console.log("dateRange",dateRange)
+  // 
+  const availabilityMap = datesDate.map((day) =>
+    hours.map((toggleHour) =>
+      isAvailable(lawyer, day, toggleHour)
+    )
+  );
+
   return (
     <>
       <div className="search-card-lawyer-rightbox">
@@ -236,17 +202,17 @@ const availabilityMap = datesDate.map((day) =>
                   if (
                     dayOfMonth === today.getDate() &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Bugün";
                   } else if (
                     dayOfMonth === today.getDate() + 1 &&
                     month ===
-                      today.toLocaleString("default", {
-                        month: "short",
-                      })
+                    today.toLocaleString("default", {
+                      month: "short",
+                    })
                   ) {
                     label = "Yarın";
                   } else {
@@ -275,27 +241,27 @@ const availabilityMap = datesDate.map((day) =>
               {hours.map((toggleHours, hourIndex) => (
                 <tr key={hourIndex}>
                   <td></td>
-                   
-                      {datesDate.map((day, dayIndex) => {
-                        const isLawyerAvailable = lawyer.dates && lawyer.dates.length > 0 && availabilityMap[dayIndex][hourIndex];
-                        //console.log("day", day);
-                        return (
-                    <td>
-                      <button
-                        key={dayIndex}
-                        className={
-                          isLawyerAvailable
-                            ? "search-hoursbutton selected inactive-button rounded-2"
-                            : "search-hoursbutton rounded-2"
-                        }
-                        size="sm"
-                        onClick={() => handleButtonClick(toggleHours, dayIndex,hourIndex)}
-                        disabled={isLawyerAvailable}
-                      >
-                        {toggleHours}
-                      </button>
-                    </td>
-                  )})}
+
+                  {datesDate.map((day, dayIndex) => {
+                    const isLawyerAvailable = lawyer.dates && lawyer.dates.length > 0 && availabilityMap[dayIndex][hourIndex];
+                    return (
+                      <td>
+                        <button
+                          key={dayIndex}
+                          className={
+                            isLawyerAvailable
+                              ? "search-hoursbutton selected inactive-button rounded-2"
+                              : "search-hoursbutton rounded-2"
+                          }
+                          size="sm"
+                          onClick={() => handleButtonClick(toggleHours, dayIndex, hourIndex)}
+                          disabled={isLawyerAvailable}
+                        >
+                          {toggleHours}
+                        </button>
+                      </td>
+                    )
+                  })}
                 </tr>
               ))}
 
