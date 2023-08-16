@@ -25,7 +25,7 @@ const LawyerPersonalDetails = () => {
 
   const { state } = useContext(Store);
   const { lawyerInfo } = state;
-  // const lawyerInfo = JSON.parse(localStorage.getItem("lawyerInfo"));
+
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -49,7 +49,7 @@ const LawyerPersonalDetails = () => {
       toast.error(getError(error));
       setLoading(false);
     }
-    // console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
+    console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
   };
   const [seciliIl, setSeciliIl] = useState("");
   const [seciliIlce, setSeciliIlce] = useState("");

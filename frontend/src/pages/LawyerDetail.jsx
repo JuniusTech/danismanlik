@@ -20,12 +20,8 @@ const LawyerDetail = () => {
   const params = useParams();
   const { lawyerid } = params;
   const [loading, setLoading] = useState(false);
-  const { state,dispatch  } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
-  // console.log(lawyerid)
-  // console.log(user)
-
-  // const { state: lawyer } = useLocation();
 
   useEffect(() => {
     axios
@@ -83,9 +79,9 @@ const LawyerDetail = () => {
 
 
   const handleAddLawyerToFavorite = async (lawyerId) => {
-    
+
     if (!userInfo) {
-     // navigate to login page
+      // navigate to login page
     } else {
       try {
         setLoading(true);
@@ -96,7 +92,7 @@ const LawyerDetail = () => {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
         );
-         
+
         //toast.success(data.message);
         //state ve local storage güncelle
 
@@ -104,7 +100,7 @@ const LawyerDetail = () => {
           favoriteLawyers: data.favoriteLawyers,
           token: userInfo.token
         };
-        await dispatch({ type: "UPDATE_USER_INFO",fields: updatedUserInfo}); 
+        await dispatch({ type: "UPDATE_USER_INFO", fields: updatedUserInfo });
         setLoading(false);
       } catch (error) {
         toast.error(getError(error));
@@ -113,32 +109,32 @@ const LawyerDetail = () => {
     }
   };
   const handleRemoveLawyerFromFavorite = async (lawyerId) => {
-      try {
-        setLoading(true);
-        const { data } = await axios.delete(
-          `${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}/favorite/${lawyerId}`,
-          {
-            headers: { authorization: `Bearer ${userInfo.token}` },
-          }
-        );
-        
-        //toast.success(data.message);
-        //state ve localstorage güncelle
+    try {
+      setLoading(true);
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_BASE_URI}/api/users/${userInfo._id}/favorite/${lawyerId}`,
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
 
-        const updatedUserInfo = {
-          favoriteLawyers: data.favoriteLawyers,
-          token: userInfo.token
-        };
-        await dispatch({ type: "UPDATE_USER_INFO",fields: updatedUserInfo}); 
-        setLoading(false);
-      } catch (error) {
-        toast.error(getError(error));
-        setLoading(false);
-      }
-    
+      //toast.success(data.message);
+      //state ve localstorage güncelle
+
+      const updatedUserInfo = {
+        favoriteLawyers: data.favoriteLawyers,
+        token: userInfo.token
+      };
+      await dispatch({ type: "UPDATE_USER_INFO", fields: updatedUserInfo });
+      setLoading(false);
+    } catch (error) {
+      toast.error(getError(error));
+      setLoading(false);
+    }
+
   };
 
-   
+
 
   return (
     <>
@@ -192,8 +188,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 1
                             ? "fas fa-star"
                             : lawyer.rating >= 0.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -203,8 +199,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 2
                             ? "fas fa-star"
                             : lawyer.rating >= 1.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -214,8 +210,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 3
                             ? "fas fa-star"
                             : lawyer.rating >= 2.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -225,8 +221,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 4
                             ? "fas fa-star"
                             : lawyer.rating >= 3.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -236,8 +232,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 5
                             ? "fas fa-star"
                             : lawyer.rating >= 4.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -247,20 +243,20 @@ const LawyerDetail = () => {
                   </p>
                 </div>
                 <button className="like" onClick={
-                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
-                        () => handleRemoveLawyerFromFavorite(lawyer._id)
-                        :
-                        () => handleAddLawyerToFavorite(lawyer._id)
-                        } disabled={loading} cursor= "progress">{loading ?  <>
-                          <span className="spinner-border text-primary mr-2" role="status" aria-hidden="true"></span>
-                        </> : 
-                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
-                        
-                        <i className="fa-solid fa-heart fa-2xl"  style={{color: "#ff0000",}}></i>
-                        :
-                        <i className="fa-regular fa-heart fa-2xl"></i>
-                        }
-                      </button>
+                  userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+                    () => handleRemoveLawyerFromFavorite(lawyer._id)
+                    :
+                    () => handleAddLawyerToFavorite(lawyer._id)
+                } disabled={loading} cursor="progress">{loading ? <>
+                  <span className="spinner-border text-primary mr-2" role="status" aria-hidden="true"></span>
+                </> :
+                  userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+
+                    <i className="fa-solid fa-heart fa-2xl" style={{ color: "#ff0000", }}></i>
+                    :
+                    <i className="fa-regular fa-heart fa-2xl"></i>
+                  }
+                </button>
               </div>
               <div className="mt-2 ">
                 <div className="p-2 d-flex justify-content-start star">
@@ -387,8 +383,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 1
                             ? "fas fa-star"
                             : lawyer.rating >= 0.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -398,8 +394,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 2
                             ? "fas fa-star"
                             : lawyer.rating >= 1.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -409,8 +405,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 3
                             ? "fas fa-star"
                             : lawyer.rating >= 2.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -420,8 +416,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 4
                             ? "fas fa-star"
                             : lawyer.rating >= 3.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
@@ -431,8 +427,8 @@ const LawyerDetail = () => {
                           lawyer.rating >= 5
                             ? "fas fa-star"
                             : lawyer.rating >= 4.5
-                            ? "fas fa-star-half-alt"
-                            : "far fa-star"
+                              ? "fas fa-star-half-alt"
+                              : "far fa-star"
                         }
                       />
                     </span>
