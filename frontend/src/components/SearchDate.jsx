@@ -95,8 +95,8 @@ const SearchDate = ({ lawyer }) => {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [loading, setLoading] = useState(false);
-  const [day, setDay] = useState("");
-  const [description, setDescription] = useState("");
+  const day = useState("");
+  const description = useState("");
 
   const submitHandler = async (
     dayOfMonth,
@@ -138,7 +138,7 @@ const SearchDate = ({ lawyer }) => {
     if (firstDay < today + 1) {
       firstDay = firstDay.setDate(today.getDate());
     }
-    const lastDay = new Date(dateRange[0]);
+    let lastDay = new Date(dateRange[0]);
     lastDay.setDate(lastDay.getDate() - 1);
     if (lastDay < today) {
       lastDay = new Date(today.getTime() - 1);
