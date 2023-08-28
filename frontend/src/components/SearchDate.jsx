@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import image from "../assets/bg.jpg";
@@ -131,7 +131,7 @@ const SearchDate = ({ lawyer }) => {
   };
 
   const handlePrevWeek = (lawyerId) => {
-    const firstDay = new Date(dateRange[0]);
+    let firstDay = new Date(dateRange[0]);
     firstDay.setDate(firstDay.getDate() - 4);
 
     const today = new Date();
