@@ -5,7 +5,6 @@ import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import data from "./data/data.json";
 import { Store } from "../../Store";
-import { useParams } from "react-router-dom";
 
 const LawyerPersonalDetails = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +13,8 @@ const LawyerPersonalDetails = () => {
   const phone = `${phoneRegion} + ${phoneNo}`;
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [addressDescription, setAddressDescription] = useState("");
-  const [postalCode, setPostalCode] = useState("");
+  const addressDescription = useState("");
+  const [postalCode] = useState("");
   const [surname, setSurname] = useState("");
   const [address, setAddress] = useState({
     city: "",
@@ -26,11 +25,11 @@ const LawyerPersonalDetails = () => {
 
   const { state } = useContext(Store);
   const { lawyerInfo } = state;
-  const { id } = useParams();
+
 
   useEffect(() => {
     fetchLawyerData();
-  }, []);
+  });
 
   const fetchLawyerData = async () => {
     try {
@@ -61,7 +60,7 @@ const LawyerPersonalDetails = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put(
+      await axios.put(
         `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
         {
           name,
@@ -248,7 +247,7 @@ const LawyerPersonalDetails = () => {
             </label>
             <select
               className="lawyerdashboard-registerFormControl"
-              value={address.city || "il seçiniz"}
+              value={data.findIndex(il => il.name === seciliIl)}
               name="il"
               onChange={handleIlChange}
               title="İl Seçiniz"
