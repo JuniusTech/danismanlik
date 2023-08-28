@@ -5,6 +5,7 @@ import { getError } from "../../getError";
 import LoadingBox from "../LoadingBox";
 import data from "./data/data.json";
 import { Store } from "../../Store";
+import { useParams } from "react-router-dom";
 
 const LawyerPersonalDetails = () => {
   const [email, setEmail] = useState("");
@@ -25,6 +26,36 @@ const LawyerPersonalDetails = () => {
 
   const { state } = useContext(Store);
   const { lawyerInfo } = state;
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetchLawyerData();
+  }, []);
+
+  const fetchLawyerData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
+        {
+          headers: { Authorization: `Bearer ${lawyerInfo.token}` },
+        }
+      );
+      const lawyerDataFromAPI = response.data;
+      setName(lawyerDataFromAPI.name);
+      setSurname(lawyerDataFromAPI.surname);
+      setEmail(lawyerDataFromAPI.email);
+      setPhoneRegion(lawyerDataFromAPI.phoneRegion);
+      setPhoneNo(lawyerDataFromAPI.phoneNo);
+      setAddress({
+        city: lawyerDataFromAPI.address.city,
+        town: lawyerDataFromAPI.address.town,
+        description: lawyerDataFromAPI.address.description,
+        code: lawyerDataFromAPI.address.code,
+      });
+    } catch (error) {
+
+    }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -85,7 +116,7 @@ const LawyerPersonalDetails = () => {
             <input
               type="text"
               className="lawyerdashboard-registerFormControl"
-              defaultValue={lawyerInfo.name}
+              defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             />
             <label className="lawyerdashboard-registerLabel" htmlFor="">
@@ -94,7 +125,7 @@ const LawyerPersonalDetails = () => {
             <input
               className="lawyerdashboard-registerFormControl"
               type="text"
-              defaultValue={lawyerInfo.surname}
+              defaultValue={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
           </div>
@@ -117,7 +148,7 @@ const LawyerPersonalDetails = () => {
             <input
               className="lawyerdashboard-registerFormControl"
               type="email"
-              value={lawyerInfo.email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <div className="d-flex justify-content-start">
@@ -152,7 +183,7 @@ const LawyerPersonalDetails = () => {
                 className="lawyerdashboard-registerFormControl-phone"
                 style={{ paddingLeft: "5px" }}
                 type="text"
-                defaultValue={lawyerInfo.phone}
+                defaultValue={phone}
                 placeholder=""
                 onChange={(e) => setPhoneNo(e.target.value)}
               />
@@ -176,10 +207,10 @@ const LawyerPersonalDetails = () => {
             className="mx-2 pt-2 "
             name="comment"
             placeholder={
-              lawyerInfo.address.description || "Adresi buraya girin..."
+              address.description || "Adresi buraya girin..."
             }
             id=""
-            defaultValue={lawyerInfo.address.description}
+            defaultValue={address.description}
             onChange={(e) =>
               setAddress({ ...address, description: e.target.value })
             }
@@ -201,8 +232,8 @@ const LawyerPersonalDetails = () => {
               resize: "none",
             }}
             className="mx-2 pt-2 "
-            placeholder={lawyerInfo.address.code || "Posta Kodu"}
-            defaultValue={lawyerInfo.address.code}
+            placeholder={address.code || "Posta Kodu"}
+            defaultValue={address.code}
             onChange={(e) => setAddress({ ...address, code: e.target.value })}
           />
         </div>
@@ -217,7 +248,7 @@ const LawyerPersonalDetails = () => {
             </label>
             <select
               className="lawyerdashboard-registerFormControl"
-              value={lawyerInfo.address.city || "il seçiniz"}
+              value={address.city || "il seçiniz"}
               name="il"
               onChange={handleIlChange}
               title="İl Seçiniz"
