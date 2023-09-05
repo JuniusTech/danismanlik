@@ -3,7 +3,7 @@ import photo from "../assets/photo.svg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UserRandevularım from "../components/UserDashboard/UserRandevularım";
-import UserKişiselBilgiler from "../components/UserDashboard/UserKişiselBilgiler";
+import UserKişiselBilgiler from "../components/UserDashboard/UserPersonalDetail";
 import FavouriteLawyers from "../components/UserDashboard/FavouriteLawyers";
 import { Store } from "../Store";
 

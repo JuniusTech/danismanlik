@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../getError";
 
-const UserKişiselBilgiler = () => {
+const UserPersonalDetail = () => {
   const [phoneRegion, setPhoneRegion] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [name, setName] = useState("");
@@ -77,7 +77,7 @@ const UserKişiselBilgiler = () => {
             placeholder="E-Posta"
             defaultValue={userInfo?.email}
             type="email"
-            //! onChange={(e) => setEmail(e.target.value)} email değişecek mi?
+          //! onChange={(e) => setEmail(e.target.value)} email değişecek mi?
           />
         </Form.Group>
         <Form.Group>
@@ -151,4 +151,4 @@ const UserKişiselBilgiler = () => {
   );
 };
 
-export default UserKişiselBilgiler;
+export default UserPersonalDetail;
