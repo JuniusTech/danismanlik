@@ -24,9 +24,9 @@ const FavouriteLawyers = () => {
   return (
     <>
 
-    // burda kaldım favorite lawyerı çekemedim tam olarak
-      {favoriteLawyers?.map((favoriteLawyer) =>
-        (<div>{favoriteLawyer[0]}</div>))}
+    //! burda kaldım favorite lawyerı çekemedim tam olarak
+      {favoriteLawyers?.map((favoriteLawyer, index) =>
+        <div key={favoriteLawyer.id}></div>)}
       <div
         className="userDashboardRight2"
         style={{
