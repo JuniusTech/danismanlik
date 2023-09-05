@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UserRandevularım from "../components/UserDashboard/UserRandevularım";
 import UserKişiselBilgiler from "../components/UserDashboard/UserKişiselBilgiler";
-import UserFavoriAvukatlarım from "../components/UserDashboard/UserFavoriAvukatlarım";
+import FavouriteLawyers from "../components/UserDashboard/FavouriteLawyers";
 import { Store } from "../Store";
 
 const UserDashboard = () => {
@@ -20,7 +20,7 @@ const UserDashboard = () => {
     } else if (item === "Kişisel Bilgiler") {
       return <UserKişiselBilgiler />;
     } else if (item === "Favori Avukatlarım") {
-      return <UserFavoriAvukatlarım />;
+      return <FavouriteLawyers />;
     } else return <UserKişiselBilgiler />;
   };
 

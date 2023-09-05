@@ -1,8 +1,32 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { Store } from "../../Store";
+import { toast } from "react-toastify";
+import { getError } from "../../getError";
 
-const UserFavoriAvukatlarım = () => {
+const FavouriteLawyers = () => {
+  const [favoriteLawyers, setFavoriteLawyers] = useState([]);
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URI}/api/users/${userInfo?._id}`, {
+        headers: { Authorization: `Bearer ${userInfo?.token}` },
+      })
+      .then((response) => {
+        setFavoriteLawyers(response.data.dates);
+        console.log("response.data.dates", response.data.favoriteLawyers);
+      })
+      .catch((error) => {
+        toast.error(getError(error));
+      });
+  }, []);
   return (
     <>
+
+    // burda kaldım favorite lawyerı çekemedim tam olarak
+      {favoriteLawyers?.map((favoriteLawyer) =>
+        (<div>{favoriteLawyer[0]}</div>))}
       <div
         className="userDashboardRight2"
         style={{
@@ -995,4 +1019,4 @@ const UserFavoriAvukatlarım = () => {
   );
 };
 
-export default UserFavoriAvukatlarım;
+export default FavouriteLawyers;
