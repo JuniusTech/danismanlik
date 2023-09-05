@@ -6,9 +6,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Carousel, CarouselItem } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import "../css/HomeCarousel.css";
-import image from "../assets/bg.jpg";
+import image from "../assets/avatar.jpg"
 import { useNavigate } from "react-router-dom";
 import { getError } from "../getError";
 import { toast } from "react-toastify";
@@ -117,7 +117,7 @@ const HomeCarousel = () => {
                             <div className="d-flex  ">
                               <img
                                 width="100rem"
-                                src={image}
+                                src={lawyer.picture ? lawyer.picture : image}
                                 alt="profilepict"
                               />
                             </div>
