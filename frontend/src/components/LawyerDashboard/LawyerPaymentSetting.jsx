@@ -14,9 +14,28 @@ const LawyerPaymentSetting = () => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [showLawyerRegister, setShowLawyerRegister] = useState(false);
+    const [cardName, setCardName] = useState("");
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardHolderName, setCardHolderName] = useState('');
+    const [cardMonth, setCardMonth] = useState("");
+    const [cardYear, setCardYear] = useState("");
+    const [cardCVC, setCardCVC] = useState("");
 
+    const handleCardNumberChange = (e) => {
+        const input = e.target.value;
 
+        const cleanedInput = input.replace(/\D/g, '');
 
+        const truncatedInput = cleanedInput.slice(0, 16);
+
+        const formattedInput = truncatedInput.replace(/(\d{4})/g, '$1 ');
+        setCardNumber(formattedInput);
+    };
+
+    const handleCardHolderNameChange = (event) => {
+        const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, ""); // Sadece harfleri tutar
+        setCardHolderName(input);
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -101,63 +120,60 @@ const LawyerPaymentSetting = () => {
 
                                 />
                             </div>
-                            <div className="d-flex justify-content-start" style={{ width: "345px", }}>
+
+                            <div className="d-flex justify-content-start" style={{ width: "345px" }}>
                                 <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
                                     Kart Üzerindeki İsim
                                 </label>
-
                             </div>
                             <div className="registerTelDiv " style={{ width: "345px", marginBottom: "-25px" }}>
-
                                 <input
                                     className="lawyerdashboard-registerFormControl"
                                     style={{ width: "341px", paddingLeft: "28px", marginTop: "10px", marginBottom: "-10px" }}
                                     type="text"
-                                    value={""}
-                                    placeholder="Kart Üzerindeki İsim"
-
+                                    value={cardHolderName}
+                                    placeholder="Kart sahibinin adı ve soyadı"
+                                    onChange={handleCardHolderNameChange}
                                 />
                             </div>
                             <div style={{ width: "345px" }}>
                                 <label className="lawyerdashboard-registerLabel" style={{ width: "190px" }} htmlFor="">
                                     Kart Numarası
                                 </label>
-
                             </div>
-                            <div className="registerTelDiv " style={{ width: "345px  " }}>
-
+                            <div className="registerTelDiv " style={{ width: "345px" }}>
                                 <input
                                     className="lawyerdashboard-registerFormControl"
                                     style={{ width: "341px", paddingLeft: "28px", marginBottom: "20px" }}
-                                    type="text"
-                                    value={""}
-                                    placeholder="1234 1234 1234 1234"
-
+                                    type="password"
+                                    value={cardNumber}
+                                    placeholder="•••• •••• •••• ••••"
+                                    onChange={handleCardNumberChange}
                                 />
                                 <div>
                                     <input
                                         className="lawyerdashboard-registerFormControl"
                                         style={{ width: "79px", paddingLeft: "28px" }}
                                         type="text"
-                                        value={""}
+                                        value={cardMonth}
                                         placeholder="Ay"
-
+                                        onChange={(e) => setCardMonth(e.target.value)}
                                     />
                                     <input
                                         className="lawyerdashboard-registerFormControl"
                                         style={{ width: "79px", paddingLeft: "28px", marginLeft: "20px" }}
                                         type="text"
-                                        value={""}
+                                        value={cardYear}
                                         placeholder="Yıl"
-
+                                        onChange={(e) => setCardYear(e.target.value)}
                                     />
                                     <input
                                         className="lawyerdashboard-registerFormControl"
                                         style={{ width: "143px", paddingLeft: "28px", marginLeft: "20px" }}
                                         type="text"
-                                        value={""}
+                                        value={cardCVC}
                                         placeholder="CVC"
-
+                                        onChange={(e) => setCardCVC(e.target.value)}
                                     />
                                 </div>
                             </div>
