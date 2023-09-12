@@ -19,6 +19,13 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Define a pre-save middleware to capitalize the first letter of name and surname
+userSchema.pre("save", function (next) {
+  this.name = capitalizeFirstLetter(this.name);
+  this.surname = capitalizeFirstLetter(this.surname);
+  next();
+});
+
 const User = mongoose.model("User", userSchema);
 
 const validate = (data) => {
@@ -31,5 +38,10 @@ const validate = (data) => {
   });
   return schema.validate(data);
 };
+
+// Function to capitalize the first letter of a string
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 module.exports = { User, validate };
