@@ -25,7 +25,7 @@ const Ucretlendirme2 = () => {
   };
 
   const handleCardHolderNameChange = (event) => {
-    const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, ""); // Sadece harfleri tutar
+    const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, "");
     setCardHolderName(input);
   };
 
@@ -331,7 +331,14 @@ const Ucretlendirme2 = () => {
                         type="text"
                         value={cvc}
                         placeholder="CVC / CVV"
-                        onChange={handleCvcChange}
+                        onChange={(e) => {
+                          const inputText = e.target.value;
+                          const numericText = inputText.replace(/\D/g, '');
+                          const truncatedText = numericText.slice(0, 3);
+                          setCvc(truncatedText);
+                        }}
+                        maxLength={3}
+
 
                       />
                     </div>

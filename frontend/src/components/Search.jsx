@@ -35,7 +35,16 @@ const Search = () => {
             ?.sort((a, b) => a.title.localeCompare(b.title))
             .map((item) => (
               <option key={item._id} value={item.title}>
-                {item.title}
+                {item.title
+                  .split(' ')
+                  .map((word, index) => {
+                    if (index === 0) {
+                      return word.charAt(0).toUpperCase() + word.slice(1);
+                    } else {
+                      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                    }
+                  })
+                  .join(' ')}
               </option>
             ))}
         </select>

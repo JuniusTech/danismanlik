@@ -24,6 +24,7 @@ const LawyerAccountSettings = ({ show, setShowLawyerLogin }) => {
   const [branchCount, setBranchCount] = useState(1);
   const [branchOptions, setBranchOptions] = useState(["Branş 1"]);
   const [showAddButton, setShowAddButton] = useState(true);
+  const [website, setWebsite] = useState("")
 
   const handleLogin = () => {
     setShowLawyerLogin(true);
@@ -124,35 +125,11 @@ const LawyerAccountSettings = ({ show, setShowLawyerLogin }) => {
             <input
               placeholder="Bağlantı Ekle"
               className="lawyerdashboard-registerFormControl"
-              type="text"
-              value={""}
+              type="url"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
             />
-            {/* <label className="lawyeraccountsetting-input "
-                            style={{ display: "flex", justifyContent: "start", marginTop: "15px" }} htmlFor="">
-                            Branş 2
-                            <label style={{ color: "#a97900", backgroundColor: "transparent", border: "none" }} >
-                                { }
-                                (Sil)
-                            </label>
-                        </label>
 
-                        <select
-                            className="lawyerdashboard-registerFormControl"
-                            value={branch2}
-                            name="branch"
-                            onChange={(e) => setBranch2(e.target.value)}
-                            title="Branş Seç"
-                            id="navbarScrollingDropdown"
-                        >
-                            <option defaultValue="all">Branş Seç</option>
-                            {branches
-                                ?.sort((a, b) => a.title.localeCompare(b.title))
-                                .map((item) => (
-                                    <option key={item._id} value={item.title}>
-                                        {item.title}
-                                    </option>
-                                ))}
-                        </select> */}
           </div>
           <div style={{ marginLeft: "30px" }}>
             <label htmlFor="">
@@ -188,7 +165,7 @@ const LawyerAccountSettings = ({ show, setShowLawyerLogin }) => {
               className="lawyerdashboard-registerFormControl"
               value={lawyerInfo.branch}
               name="branch"
-              onChange={() => {}}
+              onChange={() => { }}
               title="Branş Seç"
               id="navbarScrollingDropdown"
             >
@@ -197,50 +174,19 @@ const LawyerAccountSettings = ({ show, setShowLawyerLogin }) => {
                 ?.sort((a, b) => a.title.localeCompare(b.title))
                 .map((item) => (
                   <option key={item._id} value={item.title}>
-                    {item.title}
+                    {item.title
+                      .split(' ')
+                      .map((word, index) => {
+                        if (index === 0) {
+                          return word.charAt(0).toUpperCase() + word.slice(1);
+                        } else {
+                          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                        }
+                      })
+                      .join(' ')}
                   </option>
                 ))}
             </select>
-            {/* {showAddButton ? (
-                            <div className="d-flex justify-content-start align-items-center"
-                                style={{ marginTop: "15px" }}>
-                                <br /><br /> <br /> <br />
-                                <div className="d-flex justify-content-start align-items-center star mt-3" style={{ cursor: "pointer" }} onClick={handleAddBranch}>
-                                    <i className="fa-solid fa-circle-plus fa-xl mx-3  "></i>  <h5 className=" d-flex align-items-center pt-2">Branş Ekle</h5>
-                                </div>
-                            </div>) : 
-                            (
-                            <div >
-                                <div
-                                    style={{ marginTop: "15px" }}>
-                                    <label className="lawyeraccountsetting-input d-flex justify-content-start" htmlFor="">
-                                        Branş 3
-                                        <label style={{ color: "#a97900", backgroundColor: "transparent", border: "none" }} >
-                                            { }
-                                            (Sil)
-                                        </label>
-                                    </label>
-                                </div>
-                                <div>
-                                    <select
-                                        className="lawyerdashboard-registerFormControl"
-                                        value={branch3}
-                                        name="branch"
-                                        onChange={(e) => setBranch3(e.target.value)}
-                                        title="Branş Seç"
-                                        id="navbarScrollingDropdown"
-                                    >
-                                        <option defaultValue="all">Branş Seç</option>
-                                        {branches
-                                            ?.sort((a, b) => a.title.localeCompare(b.title))
-                                            .map((item) => (
-                                                <option key={item._id} value={item.title}>
-                                                    {item.title}
-                                                </option>
-                                            ))}
-                                    </select>
-                                </div>
-                            </div>)} */}
           </div>
         </div>
 
