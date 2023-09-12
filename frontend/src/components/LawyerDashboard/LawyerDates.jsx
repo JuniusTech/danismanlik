@@ -26,7 +26,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
       .catch((error) => {
         toast.error(getError(error));
       });
-  });
+  }, []);
 
   return (
     <div style={{ padding: "20px", color: " #00242E" }}>
@@ -141,7 +141,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
                       paddingLeft: "10px",
                     }}
                   >
-                    {item.username}
+                    {(item.userId.name+" "+item.userId.surname)}
                   </td>
                   <td
                     style={{

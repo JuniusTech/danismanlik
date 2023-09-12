@@ -140,10 +140,15 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
 });
 
 const getLawyer = expressAsyncHandler(async (req, res) => {
-  const lawyer = await Lawyer.findById(req.params.id).populate(
-    "dates",
-    "_id day hour username useremail  branch description status"
-  );
+  const lawyer = await Lawyer.findById(req.params.id).populate({
+    path: 'dates',
+    select: '_id day hour branch description status',
+    populate: {
+      path: 'userId',
+      select: 'name surname email', // Select the fields you want from the User model
+    },
+  });
+
   if (lawyer) {
     res.send(lawyer);
   } else {
