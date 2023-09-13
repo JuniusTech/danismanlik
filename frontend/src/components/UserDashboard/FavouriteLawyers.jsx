@@ -78,7 +78,7 @@ const FavouriteLawyers = () => {
                 />
               </svg>
               <img
-                src=""
+                src={favoriteLawyer.picture}
                 alt=""
                 width={"105px"}
                 height={"100%"}
@@ -179,8 +179,8 @@ const FavouriteLawyers = () => {
               </div>
             </div>
             <p style={{ marginTop: "3%", opacity: "0.75" }}>
-              Adres: Hasanpaşa Mah, Altunel İş Merkezi, Kurbağalıdere Cd. D:51/17,
-              34730 Kadıköy/İstanbul, Türkiye
+              Adres: {favoriteLawyer.address?.description}
+              {favoriteLawyer.address?.code} {favoriteLawyer.address?.town} / {favoriteLawyer.address?.city}, Türkiye
             </p>
             <div
               style={{
@@ -258,7 +258,7 @@ const FavouriteLawyers = () => {
                       </g>
                     </g>
                   </svg>
-                  545 545 54 54
+                  {favoriteLawyer.phone}
                 </p>
               </div>
               <div

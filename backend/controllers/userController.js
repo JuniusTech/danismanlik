@@ -23,7 +23,7 @@ const getUser = expressAsyncHandler(async (req, res) => {
     },
   }).populate({
     path: "favoriteLawyers",
-    select: "name surname email picture branch address"
+    select: "name surname email picture branch address phone"
   }).lean();
   if (user) {
     console.log("aaa", user.dates);
