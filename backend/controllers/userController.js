@@ -5,7 +5,7 @@ const { User, validate } = require("../models/userModel.js");
 const { generateToken } = require("../util.js");
 const sendEmail = require("../sendEmail");
 const crypto = require("crypto");
-const { Lawyer} = require("../models/lawyerModel.js");
+const { Lawyer } = require("../models/lawyerModel.js");
 
 const getUsers = expressAsyncHandler(async (req, res) => {
   const users = await User.find({});
@@ -18,28 +18,31 @@ const getUser = expressAsyncHandler(async (req, res) => {
     select: "_id day hour branch description status",
     populate: {
       path: "lawyerId",
-      select: "name surname email", 
-      model: "Lawyer", 
+      select: "name surname email",
+
     },
+  }).populate({
+    path: "favoriteLawyers",
+    select: "name surname email picture branch address phone"
   }).lean();
   if (user) {
-    console.log("aaa",user.dates);
+    console.log("aaa", user.dates);
     const transformedDates = user.dates.map((date) => {
       const { lawyerId, ...rest } = date;
       return {
         ...rest,
-        lawyer:date.lawyerId ,
+        lawyer: date.lawyerId,
       };
     });
     user.dates = transformedDates;
-    console.log("bbbbb",user.dates);
+    console.log("bbbbb", user.dates);
     res.send(user);
   } else {
     res.status(404).send({ message: "User Not Found" });
   }
 });
 
- 
+
 
 
 const getUserWithoutSensitiveInfo = expressAsyncHandler(async (req, res) => {
@@ -212,10 +215,10 @@ const verifyUserAccount = expressAsyncHandler(async (req, res) => {
 
 //add lawyer to fovorite lawyers list in user model
 const addFavoriteLawyer = expressAsyncHandler(async (req, res) => {
- 
- 
+
+
   const user = await User.findById(req.params.userId);
-   
+
   if (!user) {
     return res.status(400).json({ message: "invalid user" });
   }
@@ -228,8 +231,8 @@ const addFavoriteLawyer = expressAsyncHandler(async (req, res) => {
   }
   user.favoriteLawyers.push(req.params.lawyerId);
   //user.dates = [];
-  await user.save(); 
-  res.status(200).json({ message: "lawyer added to favorite list",favoriteLawyers:user.favoriteLawyers });
+  await user.save();
+  res.status(200).json({ message: "lawyer added to favorite list", favoriteLawyers: user.favoriteLawyers });
 });
 //remove lawyer from fovorite lawyers list in user model
 const removeFavoriteLawyer = expressAsyncHandler(async (req, res) => {
@@ -246,7 +249,7 @@ const removeFavoriteLawyer = expressAsyncHandler(async (req, res) => {
   }
   user.favoriteLawyers.pull(req.params.lawyerId);
   await user.save();
-  res.status(200).json({ message: "lawyer removed from favorite list",favoriteLawyers:user.favoriteLawyers });
+  res.status(200).json({ message: "lawyer removed from favorite list", favoriteLawyers: user.favoriteLawyers });
 });
 
 

@@ -37,7 +37,7 @@ const UserDashboard = () => {
       <Navbar />
       <div
         className="d-flex border border-warning m-auto lawyerdashbord-container mb-5 rounded-3"
-        style={{ height: "678px", width: "1034px" }}
+        style={{ height: "fit-content", width: "1034px" }}
       >
         <div className="lawyerdashbord-leftcard">
           <div className="d-flex justify-content-center ">
