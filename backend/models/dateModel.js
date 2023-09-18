@@ -33,6 +33,6 @@ async function updateStatusOfDates() {
     date.save();
   });
 }
-setInterval(updateStatusOfDates, 60 * 1000);
+setInterval(updateStatusOfDates, 24 * 60 * 60 * 1000);
 
 module.exports = DateModel;

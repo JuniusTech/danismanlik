@@ -9,6 +9,7 @@ const {
   verifyLawyerAccount,
   createReview,
   searchLawyers,
+  createBio,
 } = require("../controllers/lawyerController");
 const { isLawyerAdmin, isLawyer, isAuth } = require("../util.js");
 
@@ -23,5 +24,6 @@ lawyerRouter.post("/signin", signin);
 lawyerRouter.post("/signup", signup);
 lawyerRouter.get("/:lawyerId/verify/:token", verifyLawyerAccount);
 lawyerRouter.post("/:id/reviews", isAuth, createReview);
+lawyerRouter.post("/:id/add-bio", isLawyer, createBio);
 
 module.exports = lawyerRouter;

@@ -141,11 +141,11 @@ const searchLawyers = expressAsyncHandler(async (req, res) => {
 
 const getLawyer = expressAsyncHandler(async (req, res) => {
   const lawyer = await Lawyer.findById(req.params.id).populate({
-    path: 'dates',
-    select: '_id day hour branch description status',
+    path: "dates",
+    select: "_id day hour branch description status",
     populate: {
-      path: 'userId',
-      select: 'name surname email', // Select the fields you want from the User model
+      path: "userId",
+      select: "name surname email", // Select the fields you want from the User model
     },
   });
 
@@ -344,6 +344,28 @@ const createReview = expressAsyncHandler(async (req, res) => {
   }
 });
 
+const createBio = expressAsyncHandler(async (req, res) => {
+  const lawyerId = req.params.id;
+  const lawyer = await Lawyer.findById(lawyerId);
+  if (!lawyer) {
+    res.status(404).send({ message: "Lawyer Not Found" });
+  }
+  (lawyer.about = req.body.about),
+    (lawyer.languages = req.body.languages),
+    (lawyer.education = req.body.education),
+    (lawyer.experience = req.body.experience);
+
+  const bioLawyer = await lawyer.save();
+
+  res.status(201).send({
+    _id: bioLawyer._id,
+    about: bioLawyer.about,
+    languages: bioLawyer.languages,
+    education: bioLawyer.education,
+    experience: bioLawyer.experience,
+  });
+});
+
 module.exports = {
   signup,
   signin,
@@ -354,4 +376,5 @@ module.exports = {
   searchLawyers,
   verifyLawyerAccount,
   createReview,
+  createBio,
 };
