@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/NasilCalisir.css";
 
-const NasilCalisiyor = () => {
+const HowItWorks = () => {
   return (
     <div className="nasilCalisir">
       <p className="nasilCalisirBaslik">Avukatımol, Nasıl Çalışıyor?</p>
@@ -111,4 +111,4 @@ const NasilCalisiyor = () => {
   );
 };
 
-export default NasilCalisiyor;
+export default HowItWorks;

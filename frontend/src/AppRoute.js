@@ -9,7 +9,7 @@ import UserResetPass from "./pages/UserResetPass";
 import LawyerForgetPass from "./pages/LawyerForgetPass";
 import LawyerResetPass from "./pages/LawyerResetPass";
 import LawyerDetail from "./pages/LawyerDetail";
-import Odeme from "./components/ödeme/UcretlendirmeMain";
+import Payment from "./components/payment/PaymentMain";
 import UserDashboard from "./pages/UserDashboard";
 import HesapDoğrulamaEkranı from "./components/şifre yenileme/HesapDoğrulamaEkrani.jsx";
 import LawyerDashboard from "./pages/LawyerDashboard";
@@ -36,7 +36,7 @@ const AppRoute = () => {
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
       <Route path="/sıksorulansorular" element={<SSSMain />} />
-      <Route path="/odeme" element={<Odeme />} />
+      <Route path="/payment" element={<Payment />} />
       <Route
         path="/üyeliğiniz-aktif-edildi"
         element={<UyeliginizAktifEdildi />}

@@ -21,7 +21,7 @@ const LawyerHomePage = () => {
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate("/odeme");
+    navigate("/payment");
   };
   return (
     <>

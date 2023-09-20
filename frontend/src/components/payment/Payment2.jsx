@@ -3,7 +3,7 @@ import LeftSimge2 from "../../assets/LeftSimge2.png";
 import { Container } from "react-bootstrap";
 import TL from "../../assets/TL.png";
 import logo from "../../assets/Logolar.png";
-import Ucretlendirme1 from "./Ucretlendirme1";
+import Ucretlendirme1 from "./Payment1";
 
 const Ucretlendirme2 = () => {
   const [cardNumber, setCardNumber] = useState('');

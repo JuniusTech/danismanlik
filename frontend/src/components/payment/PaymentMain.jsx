@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import Ucretlendirme1 from "./Ucretlendirme1";
+import Ucretlendirme1 from "./Payment1";
 
 const UcretlendirmeMain = () => {
   return (

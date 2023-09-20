@@ -3,14 +3,14 @@ import React from "react";
 import Header from "../../components/Header";
 
 import HomeCarousel from "../../components/HomeCarousel";
-import NasilCalisiyor from "../../components/NasilCalisiyor";
+import HowItWorks from "../HowItWorks";
 
 
 const UserHomePageBody = () => {
   return (
     <div>
       <Header />
-      <NasilCalisiyor />
+      <HowItWorks />
       <HomeCarousel />
     </div>
   );
