@@ -33,7 +33,7 @@ const LawyerPaymentSetting = () => {
     };
 
     const handleCardHolderNameChange = (event) => {
-        const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, ""); // Sadece harfleri tutar
+        const input = event.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, "");
         setCardHolderName(input);
     };
 
