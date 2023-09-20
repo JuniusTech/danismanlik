@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import SSSGenel from "./SSSGenel";
+import SSSGenel from "./FaqGeneral";
 
 const SıkSorulanSorularDetay = ({ info, info2, info3 }) => {
   // console.log(info);

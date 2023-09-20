@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Nav, NavItem, TabPane, TabContent } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import SSSDetay from "./SSSDetay";
+import SSSDetay from "./FaqDetail";
 
 const SSSGenel = () => {
   const [activeTab, setActiveTab] = useState("#first");
