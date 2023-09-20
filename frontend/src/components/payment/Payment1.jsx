@@ -5,7 +5,7 @@ import Users from "../../assets/users.png";
 import tl from "../../assets/TL.png";
 import tik from "../../assets/fiyatlandırmaTik.png";
 import X from "../../assets/fiyatlandırmaX.png";
-import Ucretlendirme2 from "./Ucretlendirme2";
+import Ucretlendirme2 from "./Payment2";
 
 const Ucretlendirme1 = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
