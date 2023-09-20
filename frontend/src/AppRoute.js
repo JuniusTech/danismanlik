@@ -14,8 +14,8 @@ import UserDashboard from "./pages/UserDashboard";
 import HesapDoğrulamaEkranı from "./components/şifre yenileme/HesapDoğrulamaEkrani.jsx";
 import LawyerDashboard from "./pages/LawyerDashboard";
 import LawyerHomePage from "./pages/LawyerHomePage";
-import SSSMain from "./components/sıkSorulanSorular/SSSMain.jsx";
-import SifreSıfırlama from "./pages/SifreSıfırlama";
+import FaqMain from "./components/frequently asking questions/FaqMain.jsx";
+import SifreSıfırlama from "./pages/ResetPassword";
 import YeniSifreBelirle from "./components/şifre yenileme/YeniSifreBelirle";
 import UyeliginizAktifEdildi from "./pages/UyeliginizAktifEdildi";
 
@@ -35,7 +35,7 @@ const AppRoute = () => {
       <Route path="/userDashboard" element={<UserDashboard />} />
       <Route path="/lawyerDashboard" element={<LawyerDashboard />} />
       <Route path="/lawyerhomepage" element={<LawyerHomePage />} />
-      <Route path="/sıksorulansorular" element={<SSSMain />} />
+      <Route path="/frequentlyaskingquestion" element={<FaqMain />} />
       <Route path="/payment" element={<Payment />} />
       <Route
         path="/üyeliğiniz-aktif-edildi"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import background from "../../assets/sıksorulansorularbackground.png";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import SSSGenel from "./SSSGenel";
+import SSSGenel from "./FaqGeneral";
 import axios from "axios";
 import { getError } from "../../getError";
 import { toast } from "react-toastify";

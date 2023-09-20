@@ -43,7 +43,7 @@ function LawyerDashboard() {
     } else if (item === "Ödeme Ayarları") {
       return <LawyerPaymentSetting />;
     } else if (item === "Yardım ve Destek") {
-      return <Navigate to="/sıksorulansorular" />;
+      return <Navigate to="/frequentlyaskingquestion" />;
     } else return <LawyerPersonalDetails picture={picture} />;
   };
 

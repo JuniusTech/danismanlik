@@ -71,7 +71,7 @@ const UserDashboard = () => {
               ))}
               <li style={{ listStyle: "none" }}>
                 <a
-                  href="/sıksorulansorular"
+                  href="/frequentlyaskingquestion"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   Yardım ve Sorular
