@@ -241,7 +241,7 @@ const LawyerAccountSettings = ({ show, setShowLawyerLogin }) => {
                 border: "none",
                 cursor: "pointer",
               }}
-              onClick={() => navigate("/odeme")}
+              onClick={() => navigate("/payment")}
             >
               Üyelik Planını Yükselt
             </label>
