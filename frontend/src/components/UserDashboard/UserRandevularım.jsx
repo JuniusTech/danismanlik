@@ -130,7 +130,7 @@ const UserRandevularım = ({ handleDateClick, index }) => {
                   paddingBottom: "7px",
                 }}
               >
-                {item.lawyer.name}
+                {item?.lawyer?.name} {console.log(item._id)}
               </td>
               <td
                 style={{

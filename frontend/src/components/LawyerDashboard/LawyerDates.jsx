@@ -141,7 +141,7 @@ const LawyerDates = ({ handleDateClick, index }) => {
                       paddingLeft: "10px",
                     }}
                   >
-                    {(item.userId.name+" "+item.userId.surname)}
+                    {(item.userId?.name + " " + item.userId?.surname)} {console.log(item)}
                   </td>
                   <td
                     style={{
