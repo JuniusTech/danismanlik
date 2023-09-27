@@ -17,6 +17,7 @@ import { getError } from "../getError";
 import Form from "react-bootstrap/Form";
 import { Store } from "../Store";
 import { Navigate } from 'react-router-dom';
+import LawyerAbout from "../components/LawyerDashboard/LawyerAbout";
 
 function LawyerDashboard() {
   const { state } = useContext(Store);
@@ -26,6 +27,7 @@ function LawyerDashboard() {
   const items = [
     "Randevularım",
     "Kişisel Bilgiler",
+    "Hakkımda",
     "Hesap Ayarları",
     "Ödeme Ayarları",
     "Yardım ve Destek",
@@ -38,6 +40,8 @@ function LawyerDashboard() {
       return <LawyerDates handleDateClick={handleDateClick} />;
     } else if (item === "Kişisel Bilgiler") {
       return <LawyerPersonalDetails />;
+    } else if (item === "Hakkımda") {
+      return <LawyerAbout />;
     } else if (item === "Hesap Ayarları") {
       return <LawyerAccountSettings />;
     } else if (item === "Ödeme Ayarları") {
