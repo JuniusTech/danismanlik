@@ -27,7 +27,7 @@ function LawyerDashboard() {
   const items = [
     "Randevularım",
     "Kişisel Bilgiler",
-    "Hakkında",
+    "Hakkımda",
     "Hesap Ayarları",
     "Ödeme Ayarları",
     "Yardım ve Destek",
@@ -40,7 +40,7 @@ function LawyerDashboard() {
       return <LawyerDates handleDateClick={handleDateClick} />;
     } else if (item === "Kişisel Bilgiler") {
       return <LawyerPersonalDetails />;
-    } else if (item === "Hakkında") {
+    } else if (item === "Hakkımda") {
       return <LawyerAbout />;
     } else if (item === "Hesap Ayarları") {
       return <LawyerAccountSettings />;

@@ -7,10 +7,14 @@ import data from "./data/data.json";
 import { Store } from "../../Store";
 
 const LawyerAbout = () => {
-    const [email, setEmail] = useState("");
-    const [phoneRegion, setPhoneRegion] = useState("");
+    const [about, setAbout] = useState("")
+    const [languages, setLanguages] = useState([]);
+    const [education, setEducation] = useState({
+        school: "",
+        start: "",
+        finish: "",
+    })
     const [phoneNo, setPhoneNo] = useState("");
-    const phone = `${phoneRegion} + ${phoneNo}`;
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState("");
     const addressDescription = useState("");
@@ -34,7 +38,7 @@ const LawyerAbout = () => {
     const fetchLawyerData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
                 {
                     headers: { Authorization: `Bearer ${lawyerInfo.token}` },
                 }
@@ -42,9 +46,6 @@ const LawyerAbout = () => {
             const lawyerDataFromAPI = response.data;
             setName(lawyerDataFromAPI.name);
             setSurname(lawyerDataFromAPI.surname);
-            setEmail(lawyerDataFromAPI.email);
-            setPhoneRegion(lawyerDataFromAPI.phoneRegion);
-            setPhoneNo(lawyerDataFromAPI.phoneNo);
             setAddress({
                 city: lawyerDataFromAPI.address.city,
                 town: lawyerDataFromAPI.address.town,
@@ -60,15 +61,29 @@ const LawyerAbout = () => {
         e.preventDefault();
         setLoading(true);
         try {
+            const bioData = {
+                about: "setAbout",
+                languages: [setLanguages],
+                education: [
+                    {
+                        school: "",
+                        start: "",
+                        finish: "",
+                    },
+
+                ],
+                experience: [
+                    {
+                        office: "",
+                        start: "",
+                        finish: "",
+                    },
+
+                ],
+            };
             await axios.put(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
-                {
-                    name,
-                    surname,
-                    email,
-                    phone,
-                    address,
-                },
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
+                bioData,
                 {
                     headers: { Authorization: `Bearer ${lawyerInfo.token}` },
                 }
@@ -86,7 +101,7 @@ const LawyerAbout = () => {
     return (
         <div style={{ widht: "650px" }}>
             <div className="lawyerdashboardregisterBaslık">
-                <h1>Hakkında</h1>
+                <h1>Hakkımda</h1>
             </div>
             <form
                 className="lawyerpersonaldetailFormDiv"
@@ -95,12 +110,12 @@ const LawyerAbout = () => {
             >
                 <div className="row" id="registerRowDiv">
                     <div className="d-flex row" style={{ width: "588px" }}>
-                        <label htmlFor="">Biografi</label>
+                        <label style={{ fontSize: "20px" }} htmlFor="">Biografi</label>
 
                         <textarea
                             style={{
                                 width: "588px",
-                                height: "40px",
+                                height: "85px",
                                 fontSize: "17px",
                                 borderRadius: "5px",
                                 opacity: "1",
@@ -109,100 +124,154 @@ const LawyerAbout = () => {
                             className="mx-2 pt-2 "
                             name="comment"
                             placeholder={
-                                address.description || "Adresi buraya girin..."
+                                "Özgeçmişinizi buraya girin..."
                             }
                             id=""
-                            defaultValue={address.description}
-                            onChange={(e) =>
-                                setAddress({ ...address, description: e.target.value })
+                            defaultValue=""
+                            onChange={(e) => setAbout(e.target.value)
                             }
                         ></textarea>
                     </div>
-                    <div className="col">
-                        <label className="lawyerdashboard-registerLabel" htmlFor="">
-                            Ad
-                        </label>
+                    <div className="d-flex row" style={{ width: "588px", marginTop: "20px" }}>
+                        <label style={{ fontSize: "20px" }} htmlFor="">Eğitimler</label>
+                        <div className="d-flex">
+                            <label style={{ width: "50%" }} htmlFor="">Okul</label>
+                            <label style={{ width: "25%" }} htmlFor="">Başlangıç</label>
+                            <label style={{ width: "25%", paddingLeft: "10px" }} htmlFor="">Bitiş</label>
+                        </div>
+                        <div className="d-flex">
+                            <input
+                                type="text"
+                                className="lawyerdashboard-registerFormControl"
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                        </div>
+                        <div className="d-flex">
+                            <label style={{ width: "50%" }} htmlFor="">Okul</label>
+                            <label style={{ width: "25%" }} htmlFor="">Başlangıç</label>
+                            <label style={{ width: "25%", paddingLeft: "10px" }} htmlFor="">Bitiş</label>
+                        </div>
+                        <div className="d-flex">
+                            <input
+                                type="text"
+                                className="lawyerdashboard-registerFormControl"
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setEducation(e.target.value)}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="d-flex row" style={{ width: "588px", marginTop: "20px" }}>
+                        <label style={{ fontSize: "20px" }} htmlFor="">Deneyimler</label>
+                        <div className="d-flex">
+                            <label style={{ width: "50%" }} htmlFor="">Firma</label>
+                            <label style={{ width: "25%" }} htmlFor="">Başlangıç</label>
+                            <label style={{ width: "25%", paddingLeft: "10px" }} htmlFor="">Bitiş</label>
+                        </div>
+                        <div className="d-flex">
+                            <input
+                                type="text"
+                                className="lawyerdashboard-registerFormControl"
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="d-flex">
+                            <label style={{ width: "50%" }} htmlFor="">Firma</label>
+                            <label style={{ width: "25%" }} htmlFor="">Başlangıç</label>
+                            <label style={{ width: "25%", paddingLeft: "10px" }} htmlFor="">Bitiş</label>
+                        </div>
+                        <div className="d-flex">
+                            <input
+                                type="text"
+                                className="lawyerdashboard-registerFormControl"
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input
+                                type="number"
+
+                                style={{ marginLeft: "15px", width: "25%" }}
+
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="d-flex row" style={{ width: "588px", marginTop: "20px" }}>
+                        <label style={{ fontSize: "20px" }} htmlFor="">Bildiğim Diller</label>
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
-                            defaultValue={name}
-                            onChange={(e) => setName(e.target.value)}
+
+                            onChange={(e) => setLanguages(e.target.value)}
                         />
-                        <label className="lawyerdashboard-registerLabel" htmlFor="">
-                            Soyad
-                        </label>
                         <input
-                            className="lawyerdashboard-registerFormControl"
                             type="text"
-                            defaultValue={surname}
-                            onChange={(e) => setSurname(e.target.value)}
+                            className="lawyerdashboard-registerFormControl"
+                            style={{ marginTop: "10px" }}
+
+                            onChange={(e) => setLanguages(e.target.value)}
                         />
                     </div>
                     <div className="col">
-                        <div className="d-flex justify-content-start">
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ width: "55px" }}
-                                htmlFor=""
-                            >
-                                E-posta{" "}
-                            </label>
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ color: "#a97900", width: "125px" }}
-                            >
-                                (E-posta değiştir)
-                            </label>
-                        </div>
-                        <input
-                            className="lawyerdashboard-registerFormControl"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <div className="d-flex justify-content-start">
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ width: "100px" }}
-                                htmlFor=""
-                            >
-                                Tel. Numarası
-                            </label>
-                            <label
-                                className="lawyerdashboard-registerLabel"
-                                style={{ color: "#a97900", width: "130px" }}
-                            >
-                                (Numara değiştir)
-                            </label>
-                        </div>
+
 
 
                         <br />
                     </div>
                 </div>
-
-                <div
-                    className="d-flex row"
-                    style={{ width: "588px", marginTop: "10px" }}
-                >
-                    <label htmlFor="">Posta Kodu</label>
-                    <input
-                        type="number"
-                        style={{
-                            width: "588px",
-                            height: "40px",
-                            fontSize: "17px",
-                            borderRadius: "5px",
-                            opacity: "1",
-                            resize: "none",
-                        }}
-                        className="mx-2 pt-2 "
-                        placeholder={address.code || "Posta Kodu"}
-                        defaultValue={address.code}
-                        onChange={(e) => setAddress({ ...address, code: e.target.value })}
-                    />
-                </div>
-
                 <br />
                 <br />
                 <div className="lawyerdashboard-buttons">
