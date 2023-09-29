@@ -8,7 +8,7 @@ import { Store } from "../../Store";
 
 const LawyerAbout = () => {
     const [about, setAbout] = useState("")
-    const [languages, setLanguages] = useState([]);
+    const [languages, setLanguages] = useState(["", ""]);
     const [education, setEducation] = useState({
         school: "",
         start: "",
@@ -29,6 +29,12 @@ const LawyerAbout = () => {
     const { state } = useContext(Store);
     const { lawyerInfo } = state;
 
+    const handleLanguageChange = (e, index) => {
+        const updatedLanguages = [...languages];
+        updatedLanguages[index] = e.target.value;
+        setLanguages(updatedLanguages);
+    };
+
 
     useEffect(() => {
         fetchLawyerData();
@@ -45,6 +51,12 @@ const LawyerAbout = () => {
             const lawyerDataFromAPI = response.data;
             setAbout(lawyerDataFromAPI.about);
             setLanguages(lawyerDataFromAPI.languages);
+            setEducation({
+                school: lawyerDataFromAPI.education.school,
+                start: lawyerDataFromAPI.education.start,
+                finish: lawyerDataFromAPI.education.finish,
+
+            });
             /* setAddress({
                 city: lawyerDataFromAPI.address.city,
                 town: lawyerDataFromAPI.address.town,
@@ -64,14 +76,7 @@ const LawyerAbout = () => {
                 about: about,
                 languages: languages,
                 education: education,
-                experience: [
-                    {
-                        office: "",
-                        start: "",
-                        finish: "",
-                    },
-
-                ],
+                experience: experience,
             };
             await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
@@ -246,23 +251,17 @@ const LawyerAbout = () => {
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
+                            placeholder="Dil 1"
                             value={languages[0]}
-                            onChange={(e) => {
-                                const updatedLanguages = [...languages]; // Mevcut diziyi kopyalayın
-                                updatedLanguages[0] = e.target.value; // İlk dil değerini güncelleyin
-                                setLanguages(updatedLanguages); // Güncellenmiş diziyi state'e atayın
-                            }}
+                            onChange={(e) => handleLanguageChange(e, 0)}
                         />
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
                             style={{ marginTop: "10px" }}
+                            placeholder="Dil 2"
                             value={languages[1]}
-                            onChange={(e) => {
-                                const updatedLanguages = [...languages]; // Mevcut diziyi kopyalayın
-                                updatedLanguages[1] = e.target.value; // İkinci dil değerini güncelleyin
-                                setLanguages(updatedLanguages); // Güncellenmiş diziyi state'e atayın
-                            }}
+                            onChange={(e) => handleLanguageChange(e, 1)}
                         />
                     </div>
 
