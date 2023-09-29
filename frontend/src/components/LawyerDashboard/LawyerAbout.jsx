@@ -8,27 +8,32 @@ import { Store } from "../../Store";
 
 const LawyerAbout = () => {
     const [about, setAbout] = useState("")
-    const [languages, setLanguages] = useState([]);
+    const [languages, setLanguages] = useState(["", ""]);
     const [education, setEducation] = useState({
         school: "",
         start: "",
         finish: "",
     })
-    const [phoneNo, setPhoneNo] = useState("");
+
+    const [experience, setExperience] = useState({
+        office: "",
+        start: "",
+        finish: "",
+    })
+
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState("");
-    const addressDescription = useState("");
-    const [postalCode] = useState("");
-    const [surname, setSurname] = useState("");
-    const [address, setAddress] = useState({
-        city: "",
-        town: "",
-        description: "",
-        code: "",
-    });
+
+
+
 
     const { state } = useContext(Store);
     const { lawyerInfo } = state;
+
+    const handleLanguageChange = (e, index) => {
+        const updatedLanguages = [...languages];
+        updatedLanguages[index] = e.target.value;
+        setLanguages(updatedLanguages);
+    };
 
 
     useEffect(() => {
@@ -38,20 +43,26 @@ const LawyerAbout = () => {
     const fetchLawyerData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
+                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
                 {
                     headers: { Authorization: `Bearer ${lawyerInfo.token}` },
                 }
             );
             const lawyerDataFromAPI = response.data;
-            setName(lawyerDataFromAPI.name);
-            setSurname(lawyerDataFromAPI.surname);
-            setAddress({
+            setAbout(lawyerDataFromAPI.about);
+            setLanguages(lawyerDataFromAPI.languages);
+            setEducation({
+                school: lawyerDataFromAPI.education.school,
+                start: lawyerDataFromAPI.education.start,
+                finish: lawyerDataFromAPI.education.finish,
+
+            });
+            /* setAddress({
                 city: lawyerDataFromAPI.address.city,
                 town: lawyerDataFromAPI.address.town,
                 description: lawyerDataFromAPI.address.description,
                 code: lawyerDataFromAPI.address.code,
-            });
+            }); */
         } catch (error) {
 
         }
@@ -62,26 +73,12 @@ const LawyerAbout = () => {
         setLoading(true);
         try {
             const bioData = {
-                about: "setAbout",
-                languages: [setLanguages],
-                education: [
-                    {
-                        school: "",
-                        start: "",
-                        finish: "",
-                    },
-
-                ],
-                experience: [
-                    {
-                        office: "",
-                        start: "",
-                        finish: "",
-                    },
-
-                ],
+                about: about,
+                languages: languages,
+                education: education,
+                experience: experience,
             };
-            await axios.put(
+            await axios.post(
                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
                 bioData,
                 {
@@ -110,7 +107,7 @@ const LawyerAbout = () => {
             >
                 <div className="row" id="registerRowDiv">
                     <div className="d-flex row" style={{ width: "588px" }}>
-                        <label style={{ fontSize: "20px" }} htmlFor="">Biografi</label>
+                        <label style={{ fontSize: "20px", marginTop: "10px" }} htmlFor="">Biografi</label>
 
                         <textarea
                             style={{
@@ -123,11 +120,11 @@ const LawyerAbout = () => {
                             }}
                             className="mx-2 pt-2 "
                             name="comment"
-                            placeholder={
+                            defaultValue={about}
+                            placeholder={about ||
                                 "Özgeçmişinizi buraya girin..."
                             }
                             id=""
-                            defaultValue=""
                             onChange={(e) => setAbout(e.target.value)
                             }
                         ></textarea>
@@ -143,22 +140,22 @@ const LawyerAbout = () => {
                             <input
                                 type="text"
                                 className="lawyerdashboard-registerFormControl"
-
-                                onChange={(e) => setEducation(e.target.value)}
+                                defaultValue={education[0]?.school}
+                                onChange={(e) => setEducation({ ...education[0], education: e.target.value })}
                             />
                             <input
                                 type="number"
-
+                                defaultValue={education[0]?.start}
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setEducation(e.target.value)}
+                                onChange={(e) => setEducation({ ...education[0], education: e.target.value })}
                             />
                             <input
                                 type="number"
-
+                                defaultValue={education[0]?.finish}
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setEducation(e.target.value)}
+                                onChange={(e) => setEducation({ ...education[0], education: e.target.value })}
                             />
                         </div>
                         <div className="d-flex">
@@ -202,21 +199,21 @@ const LawyerAbout = () => {
                                 type="text"
                                 className="lawyerdashboard-registerFormControl"
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                         </div>
 
@@ -230,21 +227,21 @@ const LawyerAbout = () => {
                                 type="text"
                                 className="lawyerdashboard-registerFormControl"
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                         </div>
 
@@ -254,23 +251,20 @@ const LawyerAbout = () => {
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
-
-                            onChange={(e) => setLanguages(e.target.value)}
+                            placeholder="Dil 1"
+                            value={languages[0]}
+                            onChange={(e) => handleLanguageChange(e, 0)}
                         />
                         <input
                             type="text"
                             className="lawyerdashboard-registerFormControl"
                             style={{ marginTop: "10px" }}
-
-                            onChange={(e) => setLanguages(e.target.value)}
+                            placeholder="Dil 2"
+                            value={languages[1]}
+                            onChange={(e) => handleLanguageChange(e, 1)}
                         />
                     </div>
-                    <div className="col">
 
-
-
-                        <br />
-                    </div>
                 </div>
                 <br />
                 <br />
