@@ -310,9 +310,7 @@ const LawyerDetail = () => {
           <div id="Özgeçmiş" className="lawyer-card rounded-4 mt-5 ">
             <h3>Hakkımda</h3>
             <p className="extra-content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-              consectetur nequeab porro quasi culpa nulla rerum quis minus
-              voluptatibus sed hic ad quo
+              {lawyer.about}
             </p>
             {readMore && extraContent}
             {lawyerStates[lawyer._id] && (
@@ -342,8 +340,8 @@ const LawyerDetail = () => {
             </ul>
             <ul className="mb-4">
               <h3>Bildiğim Diller</h3>
-              <li>Lorem ipsum dolor</li>
-              <li>Lorem ipsum dolor</li>
+              <li>{lawyer.languages[0]}</li>
+              <li>{lawyer.languages[1]}</li>
             </ul>
           </div>
           <div className="lawyer-card d-flex rounded-4 mt-5 ">
