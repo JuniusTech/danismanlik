@@ -14,48 +14,47 @@ const LawyerAbout = () => {
         start: "",
         finish: "",
     })
-    const [phoneNo, setPhoneNo] = useState("");
+
+    const [experience, setExperience] = useState({
+        office: "",
+        start: "",
+        finish: "",
+    })
+
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState("");
-    const addressDescription = useState("");
-    const [postalCode] = useState("");
-    const [surname, setSurname] = useState("");
-    const [address, setAddress] = useState({
-        city: "",
-        town: "",
-        description: "",
-        code: "",
-    });
+
+
+
 
     const { state } = useContext(Store);
     const { lawyerInfo } = state;
 
 
-    useEffect(() => {
-        fetchLawyerData();
-    });
-
-    const fetchLawyerData = async () => {
-        try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
-                {
-                    headers: { Authorization: `Bearer ${lawyerInfo.token}` },
-                }
-            );
-            const lawyerDataFromAPI = response.data;
-            setName(lawyerDataFromAPI.name);
-            setSurname(lawyerDataFromAPI.surname);
-            setAddress({
-                city: lawyerDataFromAPI.address.city,
-                town: lawyerDataFromAPI.address.town,
-                description: lawyerDataFromAPI.address.description,
-                code: lawyerDataFromAPI.address.code,
-            });
-        } catch (error) {
-
-        }
-    };
+    /*  useEffect(() => {
+         fetchLawyerData();
+     });
+ 
+     const fetchLawyerData = async () => {
+         try {
+             const response = await axios.get(
+                 `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}/add-bio`,
+                 {
+                     headers: { Authorization: `Bearer ${lawyerInfo.token}` },
+                 }
+             );
+             const lawyerDataFromAPI = response.data;
+             setName(lawyerDataFromAPI.name);
+             setSurname(lawyerDataFromAPI.surname);
+             setAddress({
+                 city: lawyerDataFromAPI.address.city,
+                 town: lawyerDataFromAPI.address.town,
+                 description: lawyerDataFromAPI.address.description,
+                 code: lawyerDataFromAPI.address.code,
+             });
+         } catch (error) {
+ 
+         }
+     }; */
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -202,21 +201,21 @@ const LawyerAbout = () => {
                                 type="text"
                                 className="lawyerdashboard-registerFormControl"
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                         </div>
 
@@ -230,21 +229,21 @@ const LawyerAbout = () => {
                                 type="text"
                                 className="lawyerdashboard-registerFormControl"
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                             <input
                                 type="number"
 
                                 style={{ marginLeft: "15px", width: "25%" }}
 
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setExperience(e.target.value)}
                             />
                         </div>
 
