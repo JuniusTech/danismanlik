@@ -1,0 +1,67 @@
+/* Loading bileşeni için özel CSS */
+
+.loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .scales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    margin-bottom: 2rem;
+  }
+  
+  .scale {
+    width: 50px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .scale-left {
+    margin-right: 1rem;
+  }
+  
+  .scale-right {
+    margin-left: 1rem;
+  }
+  
+  .pan {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    position: relative;
+    top: 10px;
+  }
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+  }
+  
+  .triangle-left {
+    border-width: 15px 15px 0 0;
+    border-color: #f0f0f0 transparent transparent transparent;
+    top: -15px;
+    left: 0;
+  }
+  
+  .triangle-right {
+    border-width: 15px 0 0 15px;
+    border-color: #f0f0f0 transparent transparent transparent;
+    top: -15px;
+    right: 0;
+  }
+  
