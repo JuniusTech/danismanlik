@@ -39,12 +39,12 @@ const LawyerPersonalDetails = () => {
       setName(lawyerDataFromAPI.name);
       setSurname(lawyerDataFromAPI.surname);
       setEmail(lawyerDataFromAPI.email);
-      
+
       // Ayırma işlemi burada yapılıyor
       const phoneParts = (lawyerDataFromAPI.phone || "").split(" ");
       setPhoneRegion(phoneParts[0] || "+90");
       setPhoneNo(phoneParts[1] || "");
-      
+
       setAddress({
         city: lawyerDataFromAPI.address.city,
         town: lawyerDataFromAPI.address.town,
@@ -59,11 +59,11 @@ const LawyerPersonalDetails = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     // Kullanıcının girdiği boşlukları sil
     const formattedPhoneNo = phoneNo.replace(/\s/g, "");
     setPhoneNo(formattedPhoneNo);
-    
+
     try {
       await axios.put(
         `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
@@ -98,7 +98,7 @@ const LawyerPersonalDetails = () => {
     const ilIndex = e.target.value;
     setSeciliIl(data[ilIndex].name);
     setSeciliIlce("İlçe Seçiniz");
-    
+
     setAddress({
       ...address,
       city: data[ilIndex].name,
@@ -186,27 +186,27 @@ const LawyerPersonalDetails = () => {
               </label>
             </div>
             <div className="registerTelDiv d-flex ">
-          <select
-            style={{ width: "52px", height: "40px" }}
-            className="lawyerdashboard-registerFormControl-phone"
-            value={phoneRegion}
-            id="inputGroupSelect02"
-            onChange={(e) => setPhoneRegion(e.target.value)}
-          >
-            <option value="+90">+90</option>
-            <option value="+91">+91</option>
-            <option value="+92">+92</option>
-            <option value="+93">+93</option>
-          </select>
-          <input
-            className="lawyerdashboard-registerFormControl-phone"
-            style={{ paddingLeft: "5px" }}
-            type="text"
-            value={phoneNo}
-            placeholder=""
-            onChange={(e) => setPhoneNo(e.target.value)}
-          />
-        </div>
+              <select
+                style={{ width: "52px", height: "40px" }}
+                className="lawyerdashboard-registerFormControl-phone"
+                value={phoneRegion}
+                id="inputGroupSelect02"
+                onChange={(e) => setPhoneRegion(e.target.value)}
+              >
+                <option value="+90">+90</option>
+                <option value="+91">+91</option>
+                <option value="+92">+92</option>
+                <option value="+93">+93</option>
+              </select>
+              <input
+                className="lawyerdashboard-registerFormControl-phone"
+                style={{ paddingLeft: "5px" }}
+                type="text"
+                value={phoneNo}
+                placeholder=""
+                onChange={(e) => setPhoneNo(e.target.value)}
+              />
+            </div>
             <br />
           </div>
         </div>
@@ -280,23 +280,23 @@ const LawyerPersonalDetails = () => {
             </label>
             {
               <div>
-               <select
-                className="lawyerdashboard-registerFormControl"
-                id="ilce"
-                value={data.find((il) => il.name === address.city)?.towns.findIndex((ilce) => ilce.name === address.town)}
-                onChange={handleIlceChange}
-                name="ilçe"
-                title="İl Seçiniz"
-              >
-                <option value="">İlçe Seçiniz</option>
-                {data
-                  .find((i) => i.name === address.city)
-                  ?.towns.map((ilce, index) => (
-                    <option value={index} key={index}>
-                      {ilce.name}
-                    </option>
-                  ))}
-              </select>
+                <select
+                  className="lawyerdashboard-registerFormControl"
+                  id="ilce"
+                  value={data.find((il) => il.name === address.city)?.towns.findIndex((ilce) => ilce.name === address.town)}
+                  onChange={handleIlceChange}
+                  name="ilçe"
+                  title="İl Seçiniz"
+                >
+                  <option value="">İlçe Seçiniz</option>
+                  {data
+                    .find((i) => i.name === address.city)
+                    ?.towns.map((ilce, index) => (
+                      <option value={index} key={index}>
+                        {ilce.name}
+                      </option>
+                    ))}
+                </select>
               </div>
             }
           </div>
