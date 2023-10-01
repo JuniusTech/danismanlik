@@ -1,24 +1,28 @@
-import React, { useState,useContext } from "react";
-import image from "../assets/bg.jpg";
+import React, { useState, useContext } from "react";
 import avatar from "../assets/avatar.jpg";
 import SearchDate from "../components/SearchDate";
 import { useNavigate } from "react-router-dom";
 import telephone from "../assets/telephone.svg";
 import web from "../assets/web.svg";
 import { Store } from "../Store";
-const LawyerCard = ({ lawyers }) => {
+const LawyerCard = ({ lawyers, lawyer }) => {
+  const [readMore, setReadMore] = useState(false);
   const navigate = useNavigate();
+  const [bioText, setBioText] = useState(lawyer?.about);
+
   const handleReadMoreClick = (lawyerId) => {
-    setLawyerStates((prevStates) => ({
-      ...prevStates,
-      [lawyerId]: !prevStates[lawyerId],
-    }));
+    setReadMore((prevReadMore) => !prevReadMore);
+    if (!readMore) {
+      setBioText(lawyer.about);
+    } else {
+      setBioText(lawyer.about.slice(0, 130));
+    }
   };
   // console.log(lawyers)
 
   const extraContent = <p className="extra-content"></p>;
   const [lawyerStates, setLawyerStates] = useState({});
-  const [readMore] = useState(false);
+  // const [readMore] = useState(false);
   const { state } = useContext(Store);
   const { userInfo } = state;
   return (
@@ -124,11 +128,11 @@ const LawyerCard = ({ lawyers }) => {
                       </div>
                       <button className="like" >
                         {
-                        userInfo?.favoriteLawyers?.includes(lawyer._id) ?
-                        
-                        <i className="fa-solid fa-heart fa-2xl"  style={{color: "#ff0000",}}></i>
-                        :
-                        <i className="fa-regular fa-heart fa-2xl"></i>
+                          userInfo?.favoriteLawyers?.includes(lawyer._id) ?
+
+                            <i className="fa-solid fa-heart fa-2xl" style={{ color: "#ff0000", }}></i>
+                            :
+                            <i className="fa-regular fa-heart fa-2xl"></i>
                         }
                       </button>
                     </div>
@@ -136,27 +140,14 @@ const LawyerCard = ({ lawyers }) => {
                       <p> Adres: {lawyer.address?.district} {lawyer.address?.description} {lawyer.address?.town} / {lawyer.address?.city}</p>
                       <h5 className="star">Bio</h5>
                       <p className="extra-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Qui, consectetur nequeab porro quasi culpa nulla rerum
-                        quis minus voluptatibus sed hic ad quo
+                        {readMore ? lawyer.about : lawyer.about?.slice(0, 143)}
                       </p>
-                      {readMore && extraContent}
-                      {lawyerStates[lawyer._id] && (
-                        <p className="extra-content">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Qui, consectetur nequeab porro quasi culpa nulla
-                          rerum quis minus voluptatibus sed hic ad quo sint,
-                          libero commodi officia aliquam! Maxime.
-                        </p>
-                      )}
                       <h2
                         id={lawyer._id}
                         className="more"
                         onClick={() => handleReadMoreClick(lawyer._id)}
                       >
-                        {lawyerStates[lawyer._id]
-                          ? "Daha Az Gör"
-                          : "Daha Fazla Gör"}
+                        {readMore ? "Daha Az Gör" : "Daha Fazla Gör"}
                       </h2>
 
                       <div className="p-2 d-flex justify-content-around star">
