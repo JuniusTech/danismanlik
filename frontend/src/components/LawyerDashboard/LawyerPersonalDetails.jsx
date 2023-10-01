@@ -8,13 +8,10 @@ import { Store } from "../../Store";
 
 const LawyerPersonalDetails = () => {
   const [email, setEmail] = useState("");
-  const [phoneRegion, setPhoneRegion] = useState("");
+  const [phoneRegion, setPhoneRegion] = useState("+90");
   const [phoneNo, setPhoneNo] = useState("");
-  const phone = `${phoneRegion} + ${phoneNo}`;
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const addressDescription = useState("");
-  const [postalCode] = useState("");
   const [surname, setSurname] = useState("");
   const [address, setAddress] = useState({
     city: "",
@@ -26,10 +23,9 @@ const LawyerPersonalDetails = () => {
   const { state } = useContext(Store);
   const { lawyerInfo } = state;
 
-
   useEffect(() => {
     fetchLawyerData();
-  });
+  }, []);
 
   const fetchLawyerData = async () => {
     try {
@@ -43,8 +39,12 @@ const LawyerPersonalDetails = () => {
       setName(lawyerDataFromAPI.name);
       setSurname(lawyerDataFromAPI.surname);
       setEmail(lawyerDataFromAPI.email);
-      setPhoneRegion(lawyerDataFromAPI.phoneRegion);
-      setPhoneNo(lawyerDataFromAPI.phoneNo);
+      
+      // Ayırma işlemi burada yapılıyor
+      const phoneParts = (lawyerDataFromAPI.phone || "").split(" ");
+      setPhoneRegion(phoneParts[0] || "+90");
+      setPhoneNo(phoneParts[1] || "");
+      
       setAddress({
         city: lawyerDataFromAPI.address.city,
         town: lawyerDataFromAPI.address.town,
@@ -52,13 +52,18 @@ const LawyerPersonalDetails = () => {
         code: lawyerDataFromAPI.address.code,
       });
     } catch (error) {
-
+      toast.error(getError(error));
     }
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
+    // Kullanıcının girdiği boşlukları sil
+    const formattedPhoneNo = phoneNo.replace(/\s/g, "");
+    setPhoneNo(formattedPhoneNo);
+    
     try {
       await axios.put(
         `${process.env.REACT_APP_BASE_URI}/api/lawyers/${lawyerInfo._id}`,
@@ -66,8 +71,13 @@ const LawyerPersonalDetails = () => {
           name,
           surname,
           email,
-          phone,
-          address,
+          phone: `${phoneRegion} ${formattedPhoneNo}`,
+          address: {
+            city: address.city,
+            town: address.town,
+            description: address.description,
+            code: address.code,
+          },
         },
         {
           headers: { Authorization: `Bearer ${lawyerInfo.token}` },
@@ -79,8 +89,8 @@ const LawyerPersonalDetails = () => {
       toast.error(getError(error));
       setLoading(false);
     }
-    console.log(addressDescription.description, postalCode.code, seciliIl, seciliIlce);
   };
+
   const [seciliIl, setSeciliIl] = useState("");
   const [seciliIlce, setSeciliIlce] = useState("");
 
@@ -88,6 +98,11 @@ const LawyerPersonalDetails = () => {
     const ilIndex = e.target.value;
     setSeciliIl(data[ilIndex].name);
     setSeciliIlce("İlçe Seçiniz");
+    
+    setAddress({
+      ...address,
+      city: data[ilIndex].name,
+    });
   };
 
   const handleIlceChange = (e) => {
@@ -95,16 +110,21 @@ const LawyerPersonalDetails = () => {
     setSeciliIlce(
       data.find((il) => il.name === seciliIl).towns[ilceIndex].name
     );
+
+    setAddress({
+      ...address,
+      town: data.find((il) => il.name === seciliIl).towns[ilceIndex].name,
+    });
   };
 
   return (
-    <div style={{ widht: "650px" }}>
+    <div style={{ width: "650px" }}>
       <div className="lawyerdashboardregisterBaslık">
         <h1>Kişisel Bilgiler</h1>
       </div>
       <form
         className="lawyerpersonaldetailFormDiv"
-        style={{ widht: "650px" }}
+        style={{ width: "650px" }}
         onSubmit={submitHandler}
       >
         <div className="row" id="registerRowDiv">
@@ -166,34 +186,32 @@ const LawyerPersonalDetails = () => {
               </label>
             </div>
             <div className="registerTelDiv d-flex ">
-              <select
-                style={{ width: "52px", height: "40px" }}
-                className="lawyerdashboard-registerFormControl-phone"
-                value={phoneRegion}
-                id="inputGroupSelect02"
-                onChange={(e) => setPhoneRegion(e.target.value)}
-              >
-                <option selected>+90</option>
-                <option value="1">+91</option>
-                <option value="2">+92</option>
-                <option value="3">+93</option>
-              </select>
-              <input
-                className="lawyerdashboard-registerFormControl-phone"
-                style={{ paddingLeft: "5px" }}
-                type="text"
-                defaultValue={phone}
-                placeholder=""
-                onChange={(e) => setPhoneNo(e.target.value)}
-              />
-            </div>
-
+          <select
+            style={{ width: "52px", height: "40px" }}
+            className="lawyerdashboard-registerFormControl-phone"
+            value={phoneRegion}
+            id="inputGroupSelect02"
+            onChange={(e) => setPhoneRegion(e.target.value)}
+          >
+            <option value="+90">+90</option>
+            <option value="+91">+91</option>
+            <option value="+92">+92</option>
+            <option value="+93">+93</option>
+          </select>
+          <input
+            className="lawyerdashboard-registerFormControl-phone"
+            style={{ paddingLeft: "5px" }}
+            type="text"
+            value={phoneNo}
+            placeholder=""
+            onChange={(e) => setPhoneNo(e.target.value)}
+          />
+        </div>
             <br />
           </div>
         </div>
         <div className="d-flex row" style={{ width: "588px" }}>
           <label htmlFor="">Büro Adresi</label>
-
           <textarea
             style={{
               width: "588px",
@@ -215,10 +233,7 @@ const LawyerPersonalDetails = () => {
             }
           ></textarea>
         </div>
-        <div
-          className="d-flex row"
-          style={{ width: "588px", marginTop: "10px" }}
-        >
+        <div className="d-flex row" style={{ width: "588px", marginTop: "10px" }}>
           <label htmlFor="">Posta Kodu</label>
           <input
             type="number"
@@ -232,22 +247,18 @@ const LawyerPersonalDetails = () => {
             }}
             className="mx-2 pt-2 "
             placeholder={address.code || "Posta Kodu"}
-            defaultValue={address.code}
+            value={address.code}
             onChange={(e) => setAddress({ ...address, code: e.target.value })}
           />
         </div>
-        <div className="d-flex">
-          <div style={{ width: "364px" }}>
-            <label
-              style={{ width: "60px" }}
-              className="lawyerdashboard-registerLabel"
-              htmlFor=""
-            >
+        <div className="d-flex row">
+          <div className="col">
+            <label style={{ width: "60px" }} className="lawyerdashboard-registerLabel" htmlFor="">
               İl
             </label>
             <select
               className="lawyerdashboard-registerFormControl"
-              value={data.findIndex(il => il.name === seciliIl)}
+              value={data.findIndex((il) => il.name === address.city)}
               name="il"
               onChange={handleIlChange}
               title="İl Seçiniz"
@@ -263,29 +274,29 @@ const LawyerPersonalDetails = () => {
                 ))}
             </select>
           </div>
-          <div style={{ paddingLeft: "7px" }}>
-            <label className="lawyerdashboard-registerLabel" htmlFor="">
+          <div className="col">
+            <label style={{ width: "60px" }} className="lawyerdashboard-registerLabel" htmlFor="">
               İlçe
             </label>
             {
               <div>
-                <select
-                  className="lawyerdashboard-registerFormControl"
-                  id="ilce"
-                  value={data.name}
-                  onChange={handleIlceChange}
-                  name="ilçe"
-                  title="İl Seçiniz"
-                >
-                  <option value="">İlçe Seçiniz</option>
-                  {data
-                    .find((i) => i.name === seciliIl)
-                    ?.towns.map((ilce, index) => (
-                      <option value={index} key={index}>
-                        {ilce.name}
-                      </option>
-                    ))}
-                </select>
+               <select
+                className="lawyerdashboard-registerFormControl"
+                id="ilce"
+                value={data.find((il) => il.name === address.city)?.towns.findIndex((ilce) => ilce.name === address.town)}
+                onChange={handleIlceChange}
+                name="ilçe"
+                title="İl Seçiniz"
+              >
+                <option value="">İlçe Seçiniz</option>
+                {data
+                  .find((i) => i.name === address.city)
+                  ?.towns.map((ilce, index) => (
+                    <option value={index} key={index}>
+                      {ilce.name}
+                    </option>
+                  ))}
+              </select>
               </div>
             }
           </div>
