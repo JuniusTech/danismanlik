@@ -344,26 +344,34 @@ const createReview = expressAsyncHandler(async (req, res) => {
   }
 });
 
+
 const createBio = expressAsyncHandler(async (req, res) => {
-  const lawyerId = req.params.id;
-  const lawyer = await Lawyer.findById(lawyerId);
-  if (!lawyer) {
-    res.status(404).send({ message: "Lawyer Not Found" });
+  try {
+    const lawyerId = req.params.id;
+    const lawyer = await Lawyer.findById(lawyerId);
+
+    if (!lawyer) {
+      return res.status(404).send({ message: "Lawyer Not Found" });
+    }
+console.log("req.body",req.body);
+    lawyer.about = req.body.about;
+    lawyer.languages = req.body.languages;
+    lawyer.education = req.body.education;
+    lawyer.experience = req.body.experience;
+
+    const bioLawyer = await lawyer.save();
+
+    res.status(201).send({
+      _id: bioLawyer._id,
+      about: bioLawyer.about,
+      languages: bioLawyer.languages,
+      education: bioLawyer.education,
+      experience: bioLawyer.experience,
+    });
+  } catch (error) {
+    console.error("Error updating lawyer bio:", error);
+    res.status(500).send({ message: "An error occurred while updating the lawyer bio. Please try again later." });
   }
-  (lawyer.about = req.body.about),
-    (lawyer.languages = req.body.languages),
-    (lawyer.education = req.body.education),
-    (lawyer.experience = req.body.experience);
-
-  const bioLawyer = await lawyer.save();
-
-  res.status(201).send({
-    _id: bioLawyer._id,
-    about: bioLawyer.about,
-    languages: bioLawyer.languages,
-    education: bioLawyer.education,
-    experience: bioLawyer.experience,
-  });
 });
 
 module.exports = {
