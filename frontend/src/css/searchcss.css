@@ -78,14 +78,13 @@
 }
 
 .search-card-lawyer-rightbox {
-  width: 100%;
-  /* margin:auto; */
+  width: 35%;
   margin-left: 1rem;
 }
 
 .search-card-lawyer-leftbox{
-  width: auto;
-  height: fit-content;
+  width: 55%;
+  
 }
 
 .search-left-border {
