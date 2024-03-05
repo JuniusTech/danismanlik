@@ -268,6 +268,7 @@ const SSSGenel = () => {
                         <hr />
                         <p style={{ color: "#A97900" }}>
                           17 makalenin tümünü görüntüle{" "}
+                          // !! burda bug var!!!
                           <span>
                             <svg
                               style={{ marginTop: "-3px", marginLeft: "5px" }}
