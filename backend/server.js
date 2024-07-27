@@ -32,7 +32,10 @@ app.use(
     secret: "somethingsecretgoeshere",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: {
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24, // Çerez ömrü (1 gün)
+    },
   })
 );
 app.use(
